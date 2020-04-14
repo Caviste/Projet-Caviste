@@ -1,0 +1,16 @@
+{
+  "name": "wine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@popperjs/core": "^2.3.2",
+    "animate-on-scroll": "^1.2.5",
+    "slick-carousel": "^1.8.1"
+  }
+}
