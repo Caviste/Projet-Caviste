@@ -1,178 +1,185 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-  <head>
-    <title>Millesime</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <header data-aos="fade-down" data-aos-delay="300">
-            <nav class="navbar navbar-expand-lg navbar-dark" >
-              <a class="navbar-brand" href="#">
-                <img id="logo" src="./img/logo-wine.png" alt="logo" height="100px" width="100px">
-                <img id="millesime" src="./img/millesime.png" alt="logo" height="150px" width="150px">
-              </a>
-              
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Dropdown link
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="#">Actions</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-            
-            <div class="alert alert-danger" role="alert" class="text-center" data-aos="fade-down" data-aos-delay="350">Un bloc pour les erreurs MDR </div> 
-          </header>
+<head>
+  <title>Millesime</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
+</head>
 
-          <div>
-            <form action="#" method="get" class="form-inline" data-aos="fade-down" data-aos-delay="400">
-              <input placeholder="Tappez un nom de vin" type="text" name="recherche" id="recherche" class="form-control mr-2">
-              <button id="recherche" name="recherche" type="button" class="btn btn-success mr-1">Rechercher</button>
-              <a href="#" id="vin" class="btn btn-dark">Ajouter</a>
-            </form>
-          </div>
-        </div>
-      </div>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <header data-aos="fade-down" data-aos-delay="300">
+          <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">
+              <img id="logo" src="./img/logo-wine.png" alt="logo" height="100px" width="100px">
+              <img id="millesime" src="./img/millesime.png" alt="logo" height="150px" width="150px">
+            </a>
 
-      <div class="row" data-aos="fade-down" data-aos-delay="500">
-        <div class="col-md-3 col-sm-12 mb-5 mt-3" >
-          <ul id="liste" class="list-group">
-            <li class="list-group-item">CHATEAU DE SAINT COSME</li>
-            <li class="list-group-item">LAN RIOJA CRIANZA</li>
-            <li class="list-group-item">LAN RIOJA CRIANZA</li>
-            <li class="list-group-item">OWEN ROE "EX UMBRIS"</li>
-            <li class="list-group-item">REX HILL</li>
-            <li class="list-group-item">VITICCIO CLASSICO RISERVA</li>
-            <li class="list-group-item">CHATEAU LE DOYENNE</li>
-            <li class="list-group-item">DOMAINE DU BOUSCAT</li>
-            <li class="list-group-item">BLOCK NINE</li>
-            <li class="list-group-item">DOMAINE SERENE</li>
-            <li class="list-group-item">BODEGA LURTON</li>
-            <li class="list-group-item">LES MORIZOTTES</li>
-          </ul>
-        </div>
-
-        <div class="col">
-          <form id="" action="#" method="">
-            <div class="row">
-              <div id="stylediv" class="col">
-
-                <!-- id -->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="id">ID :</label>
-                  <div class="col-md-3">
-                    <input id="vin" name="vin" type="text" placeholder="ID" class="form-control input-md">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Dropdown link
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Actions</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
                   </div>
-                </div>
-
-                <!-- noms -->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="nom">Nom :</label>
-                  <div class="col-md-10">
-                    <input id="nom" name="nom" type="text" placeholder="Nom" class="form-control input-md">
-                  </div>
-                </div>
-
-                <!-- raisins -->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="raisins">Raisins :</label>
-                  <div class="col-md-10">
-                    <input id="raisins" name="raisins" type="text" placeholder="Raisins" class="form-control input-md">
-                  </div>
-                </div>
-
-                <!-- pays -->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="pays">Pays :</label>
-                  <div class="col-md-10">
-                    <input id="pays" name="pays" type="text" placeholder="Pays" class="form-control input-md">
-                  </div>
-                </div>
-
-                <!-- region -->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="region">Region :</label>
-                  <div class="col-md-10">
-                    <input id="region" name="region" type="text" placeholder="Region" class="form-control input-md">
-                  </div>
-                </div>
-
-                <!-- annee -->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="annee">Année :</label>
-                  <div class="col-md-10">
-                    <input id="year" name="annee" type="number" placeholder="Année" class="form-control input-md">
-                  </div>
-                </div>
-
-                <!-- Bouton sauvegarder et supprimer -->
-                <div class="form-group" id="bouton">
-                  <div class="col-md-10 ">
-                    <button id="sauvegarder" name="sauvegarder" type="button" class="btn btn-primary">Sauvegarder</button>
-                    <button id="supprimer" name="supprimer" type="button" class="btn btn-danger">Supprimer</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col">
-                <!-- image échantillon-->
-                <img class="styled" src="./pics/block_nine.jpg" alt="wine">
-
-              </div>
+                </li>
+              </ul>
             </div>
+          </nav>
+
+          <div class="alert alert-danger" role="alert" class="text-center" data-aos="fade-down" data-aos-delay="350">Un
+            bloc pour les erreurs MDR </div>
+        </header>
+
+        <div>
+          <form action="#" method="get" class="form-inline" data-aos="fade-down" data-aos-delay="400">
+            <input placeholder="Tappez un nom de vin" type="text" name="recherche" id="recherche"
+              class="form-control mr-2">
+            <button id="recherche" name="recherche" type="button" class="btn btn-success mr-1">Rechercher</button>
+            <a href="#" id="vin" class="btn btn-dark">Ajouter</a>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="">Trier
+          </form>
         </div>
-        </form>
       </div>
-      <footer>&copy; Amine, Belkacem, Nathan, Radad</footer>
     </div>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"></script>
+    <div class="row" data-aos="fade-down" data-aos-delay="500">
+      <div class="col-md-3 col-sm-12 mb-5 mt-3">
+        <ul id="liste" class="list-group">
+          <li class="list-group-item">CHATEAU DE SAINT COSME</li>
+          <li class="list-group-item">LAN RIOJA CRIANZA</li>
+          <li class="list-group-item">LAN RIOJA CRIANZA</li>
+          <li class="list-group-item">OWEN ROE "EX UMBRIS"</li>
+          <li class="list-group-item">REX HILL</li>
+          <li class="list-group-item">VITICCIO CLASSICO RISERVA</li>
+          <li class="list-group-item">CHATEAU LE DOYENNE</li>
+          <li class="list-group-item">DOMAINE DU BOUSCAT</li>
+          <li class="list-group-item">BLOCK NINE</li>
+          <li class="list-group-item">DOMAINE SERENE</li>
+          <li class="list-group-item">BODEGA LURTON</li>
+          <li class="list-group-item">LES MORIZOTTES</li>
+        </ul>
+      </div>
 
-    <!-- Bootstrap -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"></script>
+      <div class="col">
+        <form id="" action="#" method="">
+          <div class="row">
+            <div id="stylediv" class="col">
 
-    <!-- Aos animation -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+              <!-- id -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="id">ID :</label>
+                <div class="col-md-3">
+                  <input id="vin" name="vin" type="text" placeholder="ID" class="form-control input-md">
+                </div>
+              </div>
 
-    <script>
-      AOS.init({
-        once: true,
-      });
-    </script>
-  </body>
+              <!-- noms -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="nom">Nom :</label>
+                <div class="col-md-10">
+                  <input id="nom" name="nom" type="text" placeholder="Nom" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- raisins -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="raisins">Raisins :</label>
+                <div class="col-md-10">
+                  <input id="raisins" name="raisins" type="text" placeholder="Raisins" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- pays -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="pays">Pays :</label>
+                <div class="col-md-10">
+                  <input id="pays" name="pays" type="text" placeholder="Pays" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- region -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="region">Region :</label>
+                <div class="col-md-10">
+                  <input id="region" name="region" type="text" placeholder="Region" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- annee -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="annee">Année :</label>
+                <div class="col-md-10">
+                  <input id="year" name="annee" type="number" placeholder="Année" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- Bouton sauvegarder et supprimer -->
+              <div class="form-group" id="bouton">
+                <div class="col-md-10 ">
+                  <button id="sauvegarder" name="sauvegarder" type="button" class="btn btn-primary">Sauvegarder</button>
+                  <button id="supprimer" name="supprimer" type="button" class="btn btn-danger">Supprimer</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <!-- image échantillon-->
+              <img class="styled" src="./pics/block_nine.jpg" alt="wine">
+
+            </div>
+          </div>
+      </div>
+      </form>
+    </div>
+    <footer>&copy; Amine, Belkacem, Nathan, Radad</footer>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+
+  <!-- Bootstrap -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- Aos animation -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({
+      once: true,
+    });
+  </script>
+</body>
+
 </html>
