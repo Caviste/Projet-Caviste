@@ -9,14 +9,15 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="container">
       <div class="row">
         <div class="col">
-          <header>
-            <nav class="navbar navbar-expand-lg navbar-dark ">
+          <header data-aos="fade-down" data-aos-delay="300">
+            <nav class="navbar navbar-expand-lg navbar-dark" >
               <a class="navbar-brand" href="#">
                 <img id="logo" src="./img/logo-wine.png" alt="logo" height="100px" width="100px">
                 <img id="millesime" src="./img/millesime.png" alt="logo" height="150px" width="150px">
@@ -41,7 +42,7 @@
                       Dropdown link
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Actions</a>
                       <a class="dropdown-item" href="#">Another action</a>
                       <a class="dropdown-item" href="#">Something else here</a>
                     </div>
@@ -50,11 +51,11 @@
               </div>
             </nav>
             
-            <div class="alert alert-danger" role="alert" class="text-center" data-aos="fade-right" data-aos-delay="250">Un bloc pour les erreurs MDR </div> 
+            <div class="alert alert-danger" role="alert" class="text-center" data-aos="fade-down" data-aos-delay="350">Un bloc pour les erreurs MDR </div> 
           </header>
 
           <div>
-            <form action="#" method="get" class="form-inline">
+            <form action="#" method="get" class="form-inline" data-aos="fade-down" data-aos-delay="400">
               <input placeholder="Tappez un nom de vin" type="text" name="recherche" id="recherche" class="form-control mr-2">
               <button id="recherche" name="recherche" type="button" class="btn btn-success mr-1">Rechercher</button>
               <a href="#" id="vin" class="btn btn-dark">Ajouter</a>
@@ -63,8 +64,8 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-3 col-sm-12 mb-5 mt-3">
+      <div class="row" data-aos="fade-down" data-aos-delay="500">
+        <div class="col-md-3 col-sm-12 mb-5 mt-3" >
           <ul id="liste" class="list-group">
             <li class="list-group-item">CHATEAU DE SAINT COSME</li>
             <li class="list-group-item">LAN RIOJA CRIANZA</li>
@@ -73,7 +74,6 @@
             <li class="list-group-item">REX HILL</li>
             <li class="list-group-item">VITICCIO CLASSICO RISERVA</li>
             <li class="list-group-item">CHATEAU LE DOYENNE</li>
-            <li class="list-group-item">LE AROUF GANG</li>
             <li class="list-group-item">DOMAINE DU BOUSCAT</li>
             <li class="list-group-item">BLOCK NINE</li>
             <li class="list-group-item">DOMAINE SERENE</li>
@@ -88,7 +88,7 @@
               <div id="stylediv" class="col">
 
                 <!-- id -->
-                <div class="form-group" data-aos="fade-right" data-aos-delay="250">
+                <div class="form-group">
                   <label class="col-md-4 control-label" for="id">ID :</label>
                   <div class="col-md-3">
                     <input id="vin" name="vin" type="text" placeholder="ID" class="form-control input-md">
@@ -96,7 +96,7 @@
                 </div>
 
                 <!-- noms -->
-                <div class="form-group" data-aos="fade-left" data-aos-delay="280">
+                <div class="form-group">
                   <label class="col-md-4 control-label" for="nom">Nom :</label>
                   <div class="col-md-10">
                     <input id="nom" name="nom" type="text" placeholder="Nom" class="form-control input-md">
@@ -104,7 +104,7 @@
                 </div>
 
                 <!-- raisins -->
-                <div class="form-group" data-aos="fade-right" data-aos-delay="300">
+                <div class="form-group">
                   <label class="col-md-4 control-label" for="raisins">Raisins :</label>
                   <div class="col-md-10">
                     <input id="raisins" name="raisins" type="text" placeholder="Raisins" class="form-control input-md">
@@ -112,7 +112,7 @@
                 </div>
 
                 <!-- pays -->
-                <div class="form-group" data-aos="fade-right" data-aos-delay="310">
+                <div class="form-group">
                   <label class="col-md-4 control-label" for="pays">Pays :</label>
                   <div class="col-md-10">
                     <input id="pays" name="pays" type="text" placeholder="Pays" class="form-control input-md">
@@ -120,7 +120,7 @@
                 </div>
 
                 <!-- region -->
-                <div class="form-group"data-aos="fade-left" data-aos-delay="320">
+                <div class="form-group">
                   <label class="col-md-4 control-label" for="region">Region :</label>
                   <div class="col-md-10">
                     <input id="region" name="region" type="text" placeholder="Region" class="form-control input-md">
@@ -128,7 +128,7 @@
                 </div>
 
                 <!-- annee -->
-                <div class="form-group" data-aos="fade-right" data-aos-delay="340">
+                <div class="form-group">
                   <label class="col-md-4 control-label" for="annee">Année :</label>
                   <div class="col-md-10">
                     <input id="year" name="annee" type="number" placeholder="Année" class="form-control input-md">
@@ -136,7 +136,7 @@
                 </div>
 
                 <!-- Bouton sauvegarder et supprimer -->
-                <div class="form-group" id="bouton" data-aos="fade-down" data-aos-delay="350">
+                <div class="form-group" id="bouton">
                   <div class="col-md-10 ">
                     <button id="sauvegarder" name="sauvegarder" type="button" class="btn btn-primary">Sauvegarder</button>
                     <button id="supprimer" name="supprimer" type="button" class="btn btn-danger">Supprimer</button>
