@@ -1,4 +1,5 @@
-/* LISTE VIN */ 
+/* LISTE VIN */
+
 let json = [
   {
     id: "1",
@@ -134,3 +135,11 @@ let json = [
   },
 ];
 console.log(json);
+
+let str = "";
+
+json.forEach(function (vin) {
+  str += '<li class="list-group-item">' + vin.name + "</li>";
+});
+
+document.getElementById("liste").innerHTML = str;
