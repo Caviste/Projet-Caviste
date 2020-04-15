@@ -1,11 +1,10 @@
 /* LISTE VIN */
-
-let json = [
-  {
+let arr = [
+  { 
     id: "1",
     name: "CHATEAU DE SAINT COSME",
     year: "2009",
-    grapes: "Grenache / Syrah",
+    grapes: "Grenache / Syrah", 
     country: "France",
     region: "Southern Rhone / Gigondas",
     description:
@@ -123,7 +122,7 @@ let json = [
     picture: "bodega_lurton.jpg",
   },
   {
-    id: "12",
+    id: "12", 
     name: "LES MORIZOTTES",
     year: "2009",
     grapes: "Chardonnay",
@@ -134,12 +133,28 @@ let json = [
     picture: "morizottes.jpg",
   },
 ];
-console.log(json);
 
 let str = "";
 
-json.forEach(function (vin) {
-  str += '<li class="list-group-item">' + vin.name + "</li>";
-});
+
+
+//For loop 
+for (let i = 0; i < arr.length; i++) { 
+  
+  str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + arr[i].name + "</li>"; //Index = i-1 
+}
 
 document.getElementById("liste").innerHTML = str;
+
+
+function showDetails(index) {
+  //get id = i -1 
+  document.getElementById('idVin').value = index + 1 ; // id 
+  document.getElementById('nomVin').value = arr[index].name;
+  document.getElementById('raisins').value = arr[index].grapes;
+  document.getElementById('pays').value = arr[index].country;
+  document.getElementById('region').value = arr[index].region;
+  document.getElementById('year').value = arr[index].year;
+
+  
+}

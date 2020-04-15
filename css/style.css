@@ -60,3 +60,10 @@ footer {
 #liste li {
     min-width: 100px;
 }
+
+/* Changement de couleur Vin cliqué */
+ 
+#liste li:active {
+    background-color: silver;
+    transition: 1s;
+} 
