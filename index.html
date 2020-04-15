@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
+  <link href="fontawesome-free-5.13.0-web/css/all.min.css" rel="stylesheet">
   <script src="js/main.js"></script>
 </head>
 
@@ -36,13 +37,13 @@
               <ul class="navbar-nav">
                 <!-- Liens menu header -->
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>//
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Features</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Pricing</a>
+                  <a class="nav-link" href="#">Pricing </a>
                 </li>
 
                 <!-- Menu d�roulant -->
@@ -62,8 +63,8 @@
             </div>
           </nav>
 
-        <!-- Bloc Erreur -->  
-        <div class="alert alert-danger" role="alert" class="text-center" data-aos="fade-down" data-aos-delay="350">Un
+          <!-- Bloc Erreur -->
+          <div class="alert alert-danger" role="alert" class="text-center" data-aos="fade-down" data-aos-delay="350">Un
             bloc pour les erreurs MDR </div>
         </header>
 
@@ -72,9 +73,10 @@
           <form action="#" method="get" class="form-inline" data-aos="fade-down" data-aos-delay="400">
             <input placeholder="Tappez un nom de vin" type="text" name="recherche" id="recherche"
               class="form-control mr-2">
-            <button id="recherche" name="recherche" type="button" class="btn btn-success mr-1">Rechercher</button>
-            <a href="#" id="vin" class="btn btn-dark">Ajouter</a>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="">Trier
+            <button id="recherche" name="recherche" type="button" class="btn btn-success mr-1"><i
+                class="fas fa-search"></i> Rechercher</button>
+            <a href="#" id="vin" class="btn btn-dark"> <i class="fas fa-plus-circle"></i> Ajouter</a>
+            <button type="button" class="btn btn-secondary btn-sm" onclick=""><i class="fas fa-sort"></i> Trier 
           </form>
         </div>
 
@@ -157,8 +159,10 @@
               <!-- Bouton sauvegarder et supprimer -->
               <div class="form-group" id="bouton">
                 <div class="col-md-10 ">
-                  <button id="sauvegarder" name="sauvegarder" type="button" class="btn btn-primary">Sauvegarder</button>
-                  <button id="supprimer" name="supprimer" type="button" class="btn btn-danger">Supprimer</button>
+                  <button id="sauvegarder" name="sauvegarder" type="button" class="btn btn-primary"> <i
+                    class="fas fa-save"></i> Sauvegarder </button>
+                  <button id="supprimer" name="supprimer" type="button" class="btn btn-danger"> <i
+                    class="fas fa-trash-alt"></i> Supprimer</button>
                 </div>
               </div>
             </div>
