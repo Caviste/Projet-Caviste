@@ -67,3 +67,14 @@ footer {
     background-color: silver;
     transition: 1s;
 } 
+#description{
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow-y: auto;
+}
+#trier{
+    margin-left:5px;
+}
+#supprimer,#sauvegarder{
+    display:inline-block;
+}

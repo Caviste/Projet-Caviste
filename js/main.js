@@ -155,6 +155,6 @@ function showDetails(index) {
   document.getElementById('pays').value = arr[index].country;
   document.getElementById('region').value = arr[index].region;
   document.getElementById('year').value = arr[index].year;
-
+  document.getElementById('description').value =arr[index].description;
   
 }
