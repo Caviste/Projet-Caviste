@@ -49,3 +49,14 @@ footer {
 #stylediv label {
     color: white;
 }
+
+/* Liste de vins */
+#liste {
+    max-height: 620px;
+    overflow-y: auto;
+}
+
+/* Vin individuel */
+#liste li {
+    min-width: 100px;
+}
