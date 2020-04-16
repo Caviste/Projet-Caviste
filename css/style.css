@@ -67,12 +67,13 @@ footer {
     transition: 1s;
 } 
 #description{
-    border-radius: 5px;
+    max-width: 255px;
     margin-top: 10px;
     overflow-y: auto;
     border-color: black;
+    border-width: 2px;
     border-style: solid;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 #trier{
     margin-left:5px;
@@ -80,4 +81,8 @@ footer {
 #supprimer,#sauvegarder{
     display:inline-block;
 }
-li:hover {background: rgb(149, 149, 149);}
+
+li:hover {
+    background: rgb(202, 200, 200);
+    transition: 0.5s;
+}
