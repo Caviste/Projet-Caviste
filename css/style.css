@@ -80,3 +80,4 @@ footer {
 #supprimer,#sauvegarder{
     display:inline-block;
 }
+li:hover {background: rgb(149, 149, 149);}
