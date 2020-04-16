@@ -1,5 +1,5 @@
 /* LISTE VIN */
-let arr = [
+let arrVins = [
   { 
     id: "1",
     name: "CHATEAU DE SAINT COSME",
@@ -134,27 +134,22 @@ let arr = [
   },
 ];
 
+// Affichage dynamique de la liste de vin
 let str = "";
-
-
-
-//For loop 
-for (let i = 0; i < arr.length; i++) { 
-  
-  str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')><a href="#">' + arr[i].name + "</a></li>"; //Index = i-1 
+for (let i = 0; i < arrVins.length; i++) { 
+  str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')><a href="#">' + arrVins[i].name + "</a></li>"; //Index = i-1 
 }
 
 document.getElementById("liste").innerHTML = str;
 
 
 function showDetails(index) {
-  //get id = i -1 
+  // Affiche les détails du vin cliqué
   document.getElementById('idVin').value = index + 1 ; // id 
-  document.getElementById('nomVin').value = arr[index].name;
-  document.getElementById('raisins').value = arr[index].grapes;
-  document.getElementById('pays').value = arr[index].country;
-  document.getElementById('region').value = arr[index].region;
-  document.getElementById('year').value = arr[index].year;
-  document.getElementById('description').value =arr[index].description;
-  
+  document.getElementById('nomVin').value = arrVins[index].name;
+  document.getElementById('raisins').value = arrVins[index].grapes;
+  document.getElementById('pays').value = arrVins[index].country;
+  document.getElementById('region').value = arrVins[index].region;
+  document.getElementById('year').value = arrVins[index].year;
+  document.getElementById('description').value =arrVins[index].description;
 }
