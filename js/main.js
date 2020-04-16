@@ -154,3 +154,19 @@ function showDetails(index) {
   document.getElementById('description').value = arrVins[index].description;
 }
 
+function searchWine() {
+  /** La fonction se charge de trouver et afficher les noms de vins à partir d'une chaîne de caractères
+   *  La fonction récupère le texte entré par l'user dans l'input text "strSearch"
+   *  La fonction cherche s'il y a une chaîne de caractères correspondante dans arrVins
+   *  Si oui, elle affiche le ou les résultats
+   */
+  let str = "";
+  let strSearch = document.getElementById('strSearch').value;
+
+  for (let i = 0; i < arrVins.length; i++) { 
+    if (arrVins[i].name.indexOf(strSearch.toUpperCase()) != -1) {
+      str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + arrVins[i].name + "</li>"; //Index = i-1
+    }
+  }
+  document.getElementById("liste").innerHTML = str;
+}
