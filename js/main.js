@@ -136,8 +136,8 @@ let arrVins = [
 
 // Affichage dynamique de la liste de vin
 let str = "";
-for (let i = 0; i < arrVins.length; i++) {
-  str += '<li class="list-group-item" id=' + i + ' onclick=showDetails(' + i + ')><a href="#">' + arrVins[i].name + "</a></li>"; //Index = i-1 
+for (let i = 0; i < arrVins.length; i++) { 
+  str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + arrVins[i].name + "</li>"; //Index = i-1 
 }
 
 document.getElementById("liste").innerHTML = str;
@@ -152,9 +152,21 @@ function showDetails(index) {
   document.getElementById('region').value = arrVins[index].region;
   document.getElementById('year').value = arrVins[index].year;
   document.getElementById('description').value = arrVins[index].description;
-  document.getElementById('image').src = "./pics/"+arrVins[index].picture+"";
-
 }
 
+function searchWine() {
+  /** La fonction se charge de trouver et afficher les noms de vins � partir d'une cha�ne de caract�res
+   *  La fonction r�cup�re le texte entr� par l'user dans l'input text "strSearch"
+   *  La fonction cherche s'il y a une cha�ne de caract�res correspondante dans arrVins
+   *  Si oui, elle affiche le ou les r�sultats
+   */
+  let str = "";
+  let strSearch = document.getElementById('strSearch').value;
 
-
+  for (let i = 0; i < arrVins.length; i++) { 
+    if (arrVins[i].name.indexOf(strSearch.toUpperCase()) != -1) {
+      str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + arrVins[i].name + "</li>"; //Index = i-1
+    }
+  }
+  document.getElementById("liste").innerHTML = str;
+}
