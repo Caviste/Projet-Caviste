@@ -141,7 +141,7 @@ let str = "";
 //For loop 
 for (let i = 0; i < arr.length; i++) { 
   
-  str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + arr[i].name + "</li>"; //Index = i-1 
+  str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')><a href="#">' + arr[i].name + "</a></li>"; //Index = i-1 
 }
 
 document.getElementById("liste").innerHTML = str;
