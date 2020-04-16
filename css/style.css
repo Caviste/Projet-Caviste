@@ -34,11 +34,11 @@ footer {
 
 /* Formulaire info vin + img */
 #stylediv {
-    margin-left: 20px;  
+    margin-left: 20px;
     padding-top: 10px;
     margin-top: 20px;
     border-radius: 10px;
-    background-color: rgba(94, 23, 23, 0.877);
+    background-color: rgba(114,47,55, 0.9);
     -webkit-box-shadow: 0px 0px 40px 6px rgba(0, 0, 0, 0.93);
     -moz-box-shadow: 0px 0px 40px 6px rgba(0, 0, 0, 0.93);
     box-shadow: 0px 0px 40px 6px rgba(0, 0, 0, 0.93);
@@ -51,8 +51,16 @@ footer {
 
 /* Liste de vins */
 #liste {
-    max-height: 620px;
+    max-height: 600px;
     overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Bouton Reset liste */
+#reset {
+    margin-top: 5px;
+    align-content: center;
+    width: 255px;
 }
 
 /* Vin individuel */
@@ -61,12 +69,15 @@ footer {
 }
 
 /* Changement de couleur Vin cliqué */
- 
-#liste li:active {
-    background-color: silver;
-    transition: 1s;
-} 
-#description{
+
+#liste li:hover {
+    background: rgb(219, 217, 217);
+    transition: 0.1s;
+    cursor: default;
+}
+
+/* Textarea */
+#description {
     max-width: 255px;
     margin-top: 10px;
     overflow-y: auto;
@@ -75,14 +86,15 @@ footer {
     border-style: solid;
     border-radius: 8px;
 }
-#trier{
-    margin-left:5px;
-}
-#supprimer,#sauvegarder{
-    display:inline-block;
+
+/* Bouton Trier */
+#trier {
+    margin-left: 5px;
 }
 
-li:hover {
-    background: rgb(202, 200, 200);
-    transition: 0.5s;
+/* Boutons supprimer/sauvegarder */
+#supprimer,
+#sauvegarder {
+    display: inline-block;
 }
+
