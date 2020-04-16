@@ -134,23 +134,17 @@ let arrVins = [
   },
 ];
 
+// Affichage dynamique de la liste de vin
 let str = "";
-
-
-
-//For loop 
 for (let i = 0; i < arrVins.length; i++) { 
-  
-  str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + arrVins[i].name + "</li>"; //Index = i-1 
+  str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')><a href="#">' + arrVins[i].name + "</a></li>"; //Index = i-1 
 }
 
 document.getElementById("liste").innerHTML = str;
 
 
 function showDetails(index) {
-  /* Affiche les détails du vin cliqué 
-  *  @param1 l'index du vin dans le tableau JSON arrVins
-  */
+  // Affiche les détails du vin cliqué
   document.getElementById('idVin').value = index + 1 ; // id 
   document.getElementById('nomVin').value = arrVins[index].name;
   document.getElementById('raisins').value = arrVins[index].grapes;
@@ -158,5 +152,4 @@ function showDetails(index) {
   document.getElementById('region').value = arrVins[index].region;
   document.getElementById('year').value = arrVins[index].year;
   document.getElementById('description').value =arrVins[index].description;
-  
 }
