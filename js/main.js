@@ -137,7 +137,7 @@ let arrVins = [
 // Affichage dynamique de la liste de vin
 let str = "";
 for (let i = 0; i < arrVins.length; i++) { 
-  str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')><a href="#">' + arrVins[i].name + "</a></li>"; //Index = i-1 
+  str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + arrVins[i].name + "</li>"; //Index = i-1 
 }
 
 document.getElementById("liste").innerHTML = str;
