@@ -1,5 +1,5 @@
 /* LISTE VIN */
-let arrVins = [
+/* let arrVins = [
   {
     id: "1",
     name: "CHATEAU DE SAINT COSME",
@@ -132,48 +132,58 @@ let arrVins = [
       "Breaking the mold of the classics, this offering will surprise and undoubtedly get tongues wagging with the hints of coffee and tobacco in\nperfect alignment with more traditional notes. Breaking the mold of the classics, this offering will surprise and\nundoubtedly get tongues wagging with the hints of coffee and tobacco in\nperfect alignment with more traditional notes. Sure to please the late-night crowd with the slight jolt of adrenaline it brings.",
     picture: "morizottes.jpg",
   },
-];
+]; */
 
-window.onload = showListWine();
+//R�cuperation des infos de l'API
+let vinData = [];
+let request = new XMLHttpRequest();
+let url = "http://cruth.phpnet.org/epfc/caviste/api/wines";
 
-// Affichage dynamique de la liste de vin
-
-function showListWine() {
-  let str = "";
-  for (let i = 0; i < arrVins.length; i++) { 
-    str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + arrVins[i].name + "</li>"; //Index = i-1 
+request.open("GET", url, true);
+request.onload = function () {
+  let data = JSON.parse(this.response);
+  if (request.status >= 200 && request.status < 400) {
+    data.forEach((vin) => {
+      vinData.push(vin);
+    });
+    // Affichage dynamique de la liste de vin
+    let str = "";
+    for (let i = 0; i < vinData.length; i++) {
+      str += '<li class="list-group-item" id=' + i + " onclick=showDetails(" + i + ")>" + vinData[i].name + "</li>"; //Index = i-1
+    }
+    document.getElementById("liste").innerHTML = str;
+  } else {
+    console.log("error");
   }
-  document.getElementById("liste").innerHTML = str;
-}
-
-
+};
+request.send();
 
 function showDetails(index) {
   // Affiche les détails du vin cliqué
   document.getElementById('idVin').value = index + 1; // id 
-  document.getElementById('nomVin').value = arrVins[index].name;
-  document.getElementById('raisins').value = arrVins[index].grapes;
-  document.getElementById('pays').value = arrVins[index].country;
-  document.getElementById('region').value = arrVins[index].region;
-  document.getElementById('year').value = arrVins[index].year;
-  document.getElementById('description').value = arrVins[index].description;
-  document.getElementById('image').src = "./pics/"+arrVins[index].picture+"";
+  document.getElementById('nomVin').value = vinData[index].name;
+  document.getElementById('raisins').value = vinData[index].grapes;
+  document.getElementById('pays').value = vinData[index].country;
+  document.getElementById('region').value = vinData[index].region;
+  document.getElementById('year').value = vinData[index].year;
+  document.getElementById('description').value = vinData[index].description;
+  document.getElementById('image').src = "./pics/"+vinData[index].picture+"";
 }
 
 function searchWine() {
   /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres
    *  La fonction recupere le texte entre par l'user dans l'input text "strSearch"
-   *  La fonction cherche s'il y a une chaine de caracteres correspondante dans arrVins
-   *  Si oui, elle affiche le ou les resultats
+   *  La fonction cherche s'il y a une chaine de caracteres correspondante dans vinData
+   *  S'il y en a au moins une, elle affiche le ou les resultats
    */
-  let str = "";
+ let str = "";
   let strSearch = document.getElementById('strSearch').value;
 
-  for (let i = 0; i < arrVins.length; i++) { 
-    if (arrVins[i].name.indexOf(strSearch.toUpperCase()) != -1) {
-      str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + arrVins[i].name + "</li>"; //Index = i-1
+  for (let i = 0; i < vinData.length; i++) { 
+    if (vinData[i].name.indexOf(strSearch.toUpperCase()) != -1) {
+      str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + vinData[i].name + "</li>"; //Index = i-1
     }
   }
-  str += '<button id="reset" type="button" class="btn btn-danger" onclick=showListWine()>Réinitialiser la liste</button>';
+  str += '<button id="reset" type="button" class="btn btn-danger" onclick=showListWine()>R&eacute;initialiser la liste</button>';
   document.getElementById("liste").innerHTML = str;
 }
