@@ -1,30 +1,36 @@
 //Récuperation des infos de l'API
 let vinData = [];
 let request = new XMLHttpRequest();
-let url = "http://cruth.phpnet.org/epfc/caviste/api/wines";
+let url = "http://cruth.phpnet.org/epfc/caviste/api/wines"; // URL de l'API
 
 request.open("GET", url, true);
+
 request.onload = function () {
   let data = JSON.parse(this.response);
   if (request.status >= 200 && request.status < 400) {
     data.forEach((vin) => {
       vinData.push(vin);
     });
-    // Affichage dynamique de la liste de vin
-    let str = "";
-    for (let i = 0; i < vinData.length; i++) {
-      str += '<li class="list-group-item" id=' + i + " onclick=showDetails(" + i + ")>" + vinData[i].name + "</li>"; //Index = i-1
-    }
-    document.getElementById("liste").innerHTML = str;
+    showListWine(); // Affiche la liste de vin
   } else {
     console.log("error");
   }
 };
+
 request.send();
 
+// Affichage dynamique de la liste de vin
+function showListWine() {
+  let str = "";
+  for (let i = 0; i < vinData.length; i++) {
+    str += '<li class="list-group-item" id=' + i + " onclick=showDetails(" + i + ")>" + vinData[i].name + "</li>"; //Index = i-1
+  }
+  document.getElementById("liste").innerHTML = str;
+}
+
+// Affiche les détails du vin cliqué
 function showDetails(index) {
-  // Affiche les dÃ©tails du vin cliquÃ©
-  document.getElementById('idVin').value = index + 1; // id 
+  document.getElementById('idVin').value = index + 1;
   document.getElementById('nomVin').value = vinData[index].name;
   document.getElementById('raisins').value = vinData[index].grapes;
   document.getElementById('pays').value = vinData[index].country;
@@ -40,7 +46,7 @@ function searchWine() {
    *  La fonction cherche s'il y a une chaine de caracteres correspondante dans vinData
    *  S'il y en a au moins une, elle affiche le ou les resultats
    */
- let str = "";
+  let str = "";
   let strSearch = document.getElementById('strSearch').value;
 
   for (let i = 0; i < vinData.length; i++) { 
