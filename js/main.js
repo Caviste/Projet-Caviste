@@ -1,7 +1,5 @@
 let vinData = [];
-
 const url = "http://cruth.phpnet.org/epfc/caviste/api/wines"; // URL de l'API
-const btnReset = document.getElementById('reset');
 
 // Récupération des données de l'API Caviste
 let request = new XMLHttpRequest();
@@ -23,6 +21,13 @@ request.onload = function () {
 
 request.send();
 
+var options = document.querySelectorAll('#trier option');
+for (let i = 0, l = options.length; i < l; i++) {
+    options[i].selected = options[i].defaultSelected;
+}
+
+
+
 // Ajoute une majuscule au début de la string
 function ucFirst(str) {
   if (!str) return str;
@@ -42,6 +47,27 @@ function showListWine() {
     str += '<li class="list-group-item" id=' + i + " onclick=showDetails(" + i + ")>" + vinData[i].name + "</li>"; //Index = i-1
   }
   document.getElementById("liste").innerHTML = str;
+}
+
+function alphaSort() {
+  vinData.sort(function(a,b) {
+    return a["name"].localeCompare(b["name"]);
+  });
+  showListWine();
+} 
+
+function invertSort() {
+  vinData.sort(function(a,b) {
+    return b["name"].localeCompare(a["name"]);
+  });
+  showListWine();
+}
+
+function cepageSort() {
+  vinData.sort(function(a,b) {
+    return a["grapes"].localeCompare(b["grapes"]);
+  });
+  showListWine();
 }
 
 // Affiche les détails du vin cliqué
@@ -92,7 +118,7 @@ function searchWine() {
   }
   str += '<button id="reset" type="button" class="btn btn-danger" onclick=showListWine()>R&eacute;initialiser la liste</button>';
   document.getElementById("liste").innerHTML = str;
-
+  const btnReset = document.getElementById('reset');
   btnReset.addEventListener('click', resetSearch);
 
 }

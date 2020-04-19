@@ -55,14 +55,13 @@
             <button id="recherche" name="recherche" type="button" class="btn btn-success mr-1" onclick=searchWine()><i
                 class="fas fa-search"></i> Rechercher</button>
             <button id="ajouter" class="btn btn-info"><i class="fas fa-plus-circle"></i> Ajouter</button>
-            <button id="trier" type="button" class="btn btn-dark" onclick=""><i class="fas fa-sort"></i> Trier
-              <div class="select_option_tri">
-                <select>
-                  <option value="1">Par ordre Alphabétique</option>
-                  <option value="2">Par Ordre Alphabétique inversée</option>
-                  <option value="3">Par cépage</option>
-                </select>
-              </div></button>
+
+            <select id="trier" class="btn">
+              <option selected disabled value="0" class="list-group-item">Trier</option>
+              <option value="1" class="list-group-item" onclick="alphaSort()">A-Z</option>
+              <option value="2" class="list-group-item" onclick="invertSort()">Z-A</option>
+              <option value="3" class="list-group-item" onclick="cepageSort()">C&eacute;pages</option>
+            </select>
 
           </form>
         </div>
