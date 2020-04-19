@@ -11,7 +11,6 @@ header nav {
     background-color: rgba(29, 27, 27, 0.8);
     border-radius: 10px;
     margin-bottom: 10px;
-    height: 130px;
 }
 
 /* Logo Millesime */
@@ -56,7 +55,7 @@ header nav {
     width: 270px;
 }
 
-/* Changement de couleur Vin cliqué */
+/* Changement de couleur Vin cliquï¿½ */
 #liste li:hover {
     background: rgb(219, 217, 217);
     transition: 0.1s;
@@ -72,7 +71,7 @@ header nav {
     margin-left: 20px;
     padding-top: 25px;
     border-radius: 10px;
-    background-color: rgba(114, 47, 55, 0.75);
+    background-color: rgba(95, 25, 32, 0.787);
     -webkit-box-shadow: 0px 0px 40px 6px rgba(41, 41, 41, 0.93);
     -moz-box-shadow: 0px 0px 40px 6px rgba(29, 29, 29, 0.93);
     box-shadow: 0px 0px 40px 6px rgba(34, 34, 34, 0.93);
@@ -133,4 +132,12 @@ header nav {
 footer {
     color: white;
     font-size: 13px;
+}
+#strSearch{
+    border-style:solid;
+    border-color:  rgb(145, 53, 64);;
+    border-width:2px;
+}
+#mdp,#login{
+    border-radius:5px;
 }

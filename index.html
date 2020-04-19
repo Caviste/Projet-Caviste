@@ -22,52 +22,31 @@
     <div class="row">
       <div class="col">
         <header data-aos="fade-down" data-aos-delay="300">
-          <nav class="navbar navbar-expand-lg navbar-dark">
-            <!-- Logos -->
+          <nav class="navbar navbar-dark">
             <a class="navbar-brand" href="#">
-              <img id="logo" src="./img/logo-wine.png" alt="logo" height="100px" width="100px">
-              <img id="millesime" src="./img/millesime.png" alt="logo" height="150px" width="150px">
+                <img id="logo" src="./img/logo-wine.png" alt="logo" height="100px" width="100px">
+                <img id="millesime" src="./img/millesime.png" alt="logo" height="80px" width="180px">
             </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav">
-                <!-- Liens menu header -->
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+            <form name="login">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <input placeholder="Login" type="text" name="login" id="login"
+                  class="input-group input-group-sm mb-3">
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Features</a>
+                  <input placeholder="Mot de passe" type="password" name="mdp" id="mdp" class="input-group input-group-sm mb-3" >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Pricing </a>
+                  <button type="button" class="btn btn-secondary">S'inscrire</button>
+                  <button type="button" class="btn btn-secondary">Login</button>
                 </li>
-
-                <!-- Menu d�roulant -->
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Menu D&eacute;roulant
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Actions</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li>
-
               </ul>
-            </div>
+            </form>
           </nav>
-
-          <!-- Bloc Erreur -->
-          <div class="alert alert-danger" role="alert" class="text-center" data-aos="fade-down" data-aos-delay="300">Un
-            bloc pour les erreurs</div>
         </header>
-
+        <!-- Bloc Erreur -->
+        <div class="alert alert-danger" role="alert" class="text-center" data-aos="fade-down" data-aos-delay="300">Un
+          bloc pour les erreurs</div>
         <!-- Boutons Rechercher / Ajouter / Trier -->
         <div id="SearchAddSort">
           <form action="#" method="get" class="form-inline" data-aos="fade-down" data-aos-delay="300">
