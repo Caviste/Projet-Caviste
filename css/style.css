@@ -35,7 +35,7 @@ header nav {
 /* Input LogIn et Mot de passe */
 #mdp,
 #login{
-    border-radius:5px;
+    border-radius:3px;
     border-style:none;
 }
 
