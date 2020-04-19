@@ -30,22 +30,23 @@
             <form name="login">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <input placeholder="  Login" type="text" name="login" id="login"
+                  <input placeholder="Login" type="text" name="login" id="login"
                   class="input-group input-group-sm mb-3">
                 </li>
                 <li class="nav-item">
-                  <input placeholder="  Mot de passe" type="password" name="mdp" id="mdp" class="input-group input-group-sm mb-3" >
+                  <input placeholder="Mot de passe" type="password" name="mdp" id="mdp" class="input-group input-group-sm mb-3" >
                 </li>
                 <li class="nav-item">
-                  <button type="button" id="BtnSignUp" class="btn btn-secondary">S'inscrire</button>
-                  <button type="button" id="BtnLogIn" class="btn">Login</button>
+                  <button type="button" class="btn btn-secondary">S'inscrire</button>
+                  <button type="button" class="btn btn-secondary">Login</button>
                 </li>
               </ul>
             </form>
           </nav>
         </header>
-       
-
+        <!-- Bloc Erreur -->
+        <div class="alert alert-danger" role="alert" class="text-center" data-aos="fade-down" data-aos-delay="300">Un
+          bloc pour les erreurs</div>
         <!-- Boutons Rechercher / Ajouter / Trier -->
         <div id="SearchAddSort">
           <form action="#" method="get" class="form-inline" data-aos="fade-down" data-aos-delay="300">
@@ -53,8 +54,16 @@
               class="form-control mr-2">
             <button id="recherche" name="recherche" type="button" class="btn btn-success mr-1" onclick=searchWine()><i
                 class="fas fa-search"></i> Rechercher</button>
-            <button id="ajouter" class="btn btn-info"><i class="fas fa-plus-circle"></i> Ajouter</button>
-            <button id="trier" type="button" class="btn btn-dark" onclick=""><i class="fas fa-sort"></i> Trier</button>
+            <button id="ajouter" class="btn btn-info" onclick=""><i class="fas fa-plus-circle"></i> Ajouter</button>
+            <button id="trier" type="button" class="btn btn-dark" onclick=""><i class="fas fa-sort"></i> Trier
+              <div class="select_option_tri">
+                <select>
+                  <option value="1">Par ordre Alphabétique</option>
+                  <option value="2">Par Ordre Alphabétique inversée</option>
+                  <option value="3">Par cépage</option>
+                </select>
+              </div>
+            </button>
           </form>
         </div>
       </div>
@@ -63,7 +72,7 @@
     <!-- Liste Vins -->
     <div class="row" data-aos="fade-down" data-aos-delay="300">
       <div class="col-md-3 col-sm-12 mb-5 mt-3" id="liste">
-        <ul id="listeVin" class="list-group"> 
+        <ul id="listeVin" class="list-group">
         </ul>
       </div>
 
@@ -76,7 +85,7 @@
               <!-- id -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="id">ID :</label>
-                <div class="col-md-3"> 
+                <div class="col-md-3">
                   <input id="idVin" name="vin" type="text" placeholder="ID" class="form-control input-md">
                 </div>
               </div>
@@ -136,7 +145,7 @@
               <!-- Img Vin-->
               <img class="styled" src="./pics/block_nine.jpg" id="image" alt="wine">
               <textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
-              
+
             </div>
           </div>
       </div>
@@ -161,7 +170,13 @@
       once: true,
     });
   </script>
-  <script type="text/javascript" src="./js/main.js"></script>
+
+  <script type="text/javascript" src="./js/main.js">
+
+  </script>
+
+
+
 
 </body>
 
