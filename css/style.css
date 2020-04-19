@@ -13,6 +13,20 @@ header nav {
     margin-bottom: 10px;
 }
 
+/* Inputs texte login & password */ 
+#mdp,#login{
+    border-radius:5px;
+}
+
+/* Boutons S'inscrire & Login */ 
+#BtnSignUp,
+#BtnLogIn{
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    border-style:none;
+}
+
 /* Logo Millesime */
 #millesime {
     margin-right: 50px;
@@ -156,4 +170,3 @@ footer {
     color: white;
     font-size: 13px;
 }
-
