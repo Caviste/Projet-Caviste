@@ -15,7 +15,9 @@ request.onload = function () {
     });
     showListWine(); // Affiche la liste de vin
   } else {
-    console.log("error");
+     if (request.status >= 400) {
+      alert("Erreur du client web");
+    }
   }
 };
 
