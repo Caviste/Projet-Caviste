@@ -1,19 +1,18 @@
 let vinData = [];
-
+let showReset = false;
 const url = "http://cruth.phpnet.org/epfc/caviste/api/wines"; // URL de l'API
-const btnReset = document.getElementById('reset');
 
-// Récupération des données de l'API Caviste
+// Rï¿½cupï¿½ration des donnï¿½es de l'API Caviste
 let request = new XMLHttpRequest();
 request.open("GET", url, true);
 
 request.onload = function () {
-  let data = JSON.parse(this.response);
-  if (request.status >= 200 && request.status < 400) {
-    data.forEach((vin) => {
+  let dataResp = JSON.parse(this.response);
+  if (request.status == 200 && request.readyState == 4) {
+    dataResp.forEach((vin) => {
       vinData.push(vin);
     });
-    showListWine(); // Affiche la liste de vin
+    showListWine(vinData); // Affiche la liste de vin
   } else {
      if (request.status >= 400) {
       alert("Erreur du client web");
@@ -23,10 +22,14 @@ request.onload = function () {
 
 request.send();
 
-// Ajoute une majuscule au début de la string
+var options = document.querySelectorAll('#trier option');
+for (let i = 0, l = options.length; i < l; i++) {
+    options[i].selected = options[i].defaultSelected;
+}
+
+// Ajoute une majuscule au dï¿½but de la string
 function ucFirst(str) {
   if (!str) return str;
-
   return str[0].toUpperCase() + str.slice(1);
 }
 
@@ -36,24 +39,54 @@ function resetSearch() {
 }
 
 // Affichage de la liste de vin
-function showListWine() {
+function showListWine(arr) {
   let str = "";
-  for (let i = 0; i < vinData.length; i++) {
-    str += '<li class="list-group-item" id=' + i + " onclick=showDetails(" + i + ")>" + vinData[i].name + "</li>"; //Index = i-1
+  for (let i = 0; i < arr.length; i++) {
+    str += '<li class="list-group-item" id=' + arr[i].id + " onclick=showDetails(" + arr[i].id  + ")>" + arr[i].name + "</li>"; //Index = i-1
+  }
+  if (showReset) {
+    // Affiche un bouton de Reset
+    str += '<button id="reset" type="button" class="btn btn-danger" onclick=showListWine(vinData)>R&eacute;initialiser la liste</button>';
+    document.getElementById("liste").innerHTML = str;
+    const btnReset = document.getElementById('reset');
+    btnReset.addEventListener('click', resetSearch);
   }
   document.getElementById("liste").innerHTML = str;
+  showReset = false;
 }
 
-// Affiche les détails du vin cliqué
+function alphaSort() {
+  vinData.sort(function(a,b) {
+    return a["name"].localeCompare(b["name"]);
+  });
+  showListWine(vinData);
+} 
+
+function invertSort() {
+  vinData.sort(function(a,b) {
+    return b["name"].localeCompare(a["name"]);
+  });
+  showListWine(vinData);
+}
+
+function cepageSort() {
+  vinData.sort(function(a,b) {
+    return a["grapes"].localeCompare(b["grapes"]);
+  });
+  showListWine(vinData);
+}
+
+// Affiche les dï¿½tails du vin cliquï¿½
 function showDetails(index) {
-  document.getElementById('idVin').value = index + 1;
-  document.getElementById('nomVin').value = vinData[index].name;
-  document.getElementById('raisins').value = vinData[index].grapes;
-  document.getElementById('pays').value = vinData[index].country;
-  document.getElementById('region').value = vinData[index].region;
-  document.getElementById('year').value = vinData[index].year;
-  document.getElementById('description').value = vinData[index].description;
-  document.getElementById('image').src = "./pics/"+vinData[index].picture+"";
+  let realId = index - 1;
+  document.getElementById('idVin').value = vinData[realId].id;
+  document.getElementById('nomVin').value = vinData[realId].name;
+  document.getElementById('raisins').value = vinData[realId].grapes;
+  document.getElementById('pays').value = vinData[realId].country;
+  document.getElementById('region').value = vinData[realId].region;
+  document.getElementById('year').value = vinData[realId].year;
+  document.getElementById('description').value = vinData[realId].description;
+  document.getElementById('image').src = "./pics/"+vinData[realId].picture+"";
 }
 
 function searchWine() {
@@ -61,38 +94,24 @@ function searchWine() {
    *  La fonction recupere le texte entre par l'user dans l'input text "strSearch"
    *  La fonction cherche s'il y a une chaine de caracteres correspondante dans vinData
    *  S'il y en a au moins une, elle affiche le ou les resultats
+   *  Si l'user clique sur "Rechercher", showReset devient true, ce qui affichera un bouton pour reset la liste
    */
+  let queryArr = [];
+  showReset = true;
   let str = "";
   let strSearch = document.getElementById('strSearch').value.trim();
-  
-  for (let i = 0; i < vinData.length; i++) { 
-    if ( strSearch == parseInt(strSearch, 10)) {
-      if (strSearch  < 1970) { // On recherche l'ID
-        if (vinData[i].id.indexOf(strSearch) != -1) {
-          str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + vinData[i].name + "</li>";
-        }
-      } else { // On recherche l'année
-        if (vinData[i].year.indexOf(strSearch) != -1) {
-          str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + vinData[i].name + "</li>";
-        }
+  if (strSearch == parseInt(strSearch)) {
+    let request = new XMLHttpRequest();
+    request.open("GET", url + "/" + "10", true);
+    request.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        let reply = JSON.parse(this.response);
+        queryArr.push(reply);
+        showListWine(queryArr);
       }
-    } else {
-      if (vinData[i].name.indexOf(strSearch.toUpperCase()) != -1) {
-        str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + vinData[i].name + "</li>";
-      } else if (vinData[i].grapes.indexOf(ucFirst(strSearch)) != -1) {
-        str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + vinData[i].name + "</li>";
-      } else if ((vinData[i].country.indexOf(ucFirst(strSearch)) != -1) || (vinData[i].country.indexOf(strSearch.toUpperCase()) != -1)) {
-        str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + vinData[i].name + "</li>";
-      } else {
-        if (vinData[i].region.indexOf(ucFirst(strSearch)) != -1) {
-          str += '<li class="list-group-item" id='+i+' onclick=showDetails('+i+')>' + vinData[i].name + "</li>";
-        }
-      } 
     }
+    request.send();
   }
-  str += '<button id="reset" type="button" class="btn btn-danger" onclick=showListWine()>R&eacute;initialiser la liste</button>';
-  document.getElementById("liste").innerHTML = str;
-
-  btnReset.addEventListener('click', resetSearch);
+  
 
 }

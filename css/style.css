@@ -13,18 +13,19 @@ header nav {
     margin-bottom: 10px;
 }
 
-/* Inputs texte login & password */ 
-#mdp,#login{
-    border-radius:5px;
+/* Inputs texte login & password */
+#mdp,
+#login {
+    border-radius: 5px;
 }
 
-/* Boutons S'inscrire & Login */ 
+/* Boutons S'inscrire & Login */
 #BtnSignUp,
-#BtnLogIn{
+#BtnLogIn {
     color: #fff;
     background-color: #6c757d;
     border-color: #6c757d;
-    border-style:none;
+    border-style: none;
 }
 
 /* Logo Millesime */
@@ -33,31 +34,33 @@ header nav {
 }
 
 /* Input LogIn et Mot de passe */
-#mdp,
-#login{
-    border-radius:3px;
-    border-style:none;
+#login,
+#mdp {
+    border-radius: 3px;
+    border-style: none;
 }
 
 /* Boutons LogIn et SignUp */
 #BtnSignUp,
-#BtnLogIn{
+#BtnLogIn {
     color: #fff;
     background-color: #6c757d;
     border-color: #6c757d;
-    border-style:none;
+    border-style: none;
 }
+
 /* Bouton LogIn margin left space */
-#BtnLogIn{
-    margin-left:30px;
+#BtnLogIn {
+    margin-left: 30px;
 }
 
 /* Input texte Vin */
 #strSearch {
     min-width: 270px;
-    border-style:solid;
-    border-color:  rgb(145, 53, 64);;
-    border-width:2px;
+    border-style: solid;
+    border-color: rgb(145, 53, 64);
+    background-color: white;
+    border-width: 2px;
 }
 
 /* Boutons Rechercher, Ajouter */
@@ -66,10 +69,16 @@ header nav {
     padding: 5px, 3px, 5px, 0px;
     margin-left: 10px;
 }
-
 /* Bouton Trier */
 #trier {
     margin-left: 15px;
+    border-style: none;
+    appearance: none;
+    background: #F9F9F9;
+    background-image: none;
+    box-shadow: none;
+    font-size: 16px;
+    background-color: mintcream;
 }
 
 
