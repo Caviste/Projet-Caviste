@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <title>Millesime</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
+  <link href="fontawesome-free-5.13.0-web/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <header data-aos="fade-down" data-aos-delay="300">
+          <nav class="navbar navbar-dark">
+            <a class="navbar-brand" href="#">
+              <img id="logo" src="./img/logo-wine.png" alt="logo" height="100px" width="100px">
+              <img id="millesime" src="./img/millesime.png" alt="logo" height="80px" width="180px">
+            </a>
+            <form name="login">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <input placeholder="Login" type="text" name="login" id="login"
+                    class="input-group input-group-sm mb-3">
+                </li>
+                <li class="nav-item">
+                  <input placeholder="Mot de passe" type="password" name="mdp" id="mdp"
+                    class="input-group input-group-sm mb-3">
+                </li>
+                <li class="nav-item">
+                  <button type="button" id="BtnSignUp" class="btn btn-secondary">S'inscrire</button>
+                  <button type="button" id="BtnLogIn" class="btn btn-secondary">Login</button>
+                </li>
+              </ul>
+            </form>
+          </nav>
+        </header>
+
+
+        <!-- Boutons Rechercher / Ajouter / Trier -->
+        <div id="SearchAddSort">
+          <form action="#" method="get" class="form-inline" data-aos="fade-down" data-aos-delay="300">
+            <input placeholder="Tappez un nom de vin" type="text" name="recherche" id="strSearch"
+              class="form-control mr-2">
+            <button id="recherche" name="recherche" type="button" class="btn btn-success mr-1" onclick=searchWine()><i
+                class="fas fa-search"></i> Rechercher</button>
+            <button id="ajouter" class="btn btn-info"><i class="fas fa-plus-circle"></i> Ajouter</button>
+
+            <select id="trier" class="btn">
+              <option selected disabled value="0" class="list-group-item">Trier</option>
+              <option value="1" class="list-group-item" onclick="alphaSort()">A-Z</option>
+              <option value="2" class="list-group-item" onclick="invertSort()">Z-A</option>
+              <option value="3" class="list-group-item" onclick="cepageSort()">C&eacute;pages</option>
+            </select>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Liste Vins -->
+    <div class="row" data-aos="fade-down" data-aos-delay="300">
+      <div class="col-md-3 col-sm-12 mb-5 mt-3" id="liste">
+        <ul id="listeVin" class="list-group">
+        </ul>
+      </div>
+
+      <!-- Formulaire Vin + Img -->
+      <div class="col">
+        <form id="" action="#" method="">
+          <div class="row">
+            <div id="stylediv" class="col">
+
+              <!-- id -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="id">ID :</label>
+                <div class="col-md-3">
+                  <input id="idVin" name="vin" type="text" placeholder="ID" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- Nom Vin -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="nom">Nom :</label>
+                <div class="col-md-10">
+                  <input id="nomVin" name="nom" type="text" placeholder="nom" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- Raisins -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="raisins">Raisins :</label>
+                <div class="col-md-10">
+                  <input id="raisins" name="raisins" type="text" placeholder="Raisins" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- Pays -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="pays">Pays :</label>
+                <div class="col-md-10">
+                  <input id="pays" name="pays" type="text" placeholder="Pays" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- Region -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="region">R&eacute;gion :</label>
+                <div class="col-md-10">
+                  <input id="region" name="region" type="text" placeholder="Region" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- Annee -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="annee">Ann&eacute;e :</label>
+                <div class="col-md-10">
+                  <input id="year" name="annee" type="number" placeholder="Ann&eacute;e" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- Bouton sauvegarder et supprimer -->
+              <div class="form-group" id="bouton">
+                <div class="col-md-10 ">
+                  <button id="sauvegarder" name="sauvegarder" type="button" class="btn btn-primary"><i
+                      class="fas fa-save"></i> Sauvegarder</button>
+                  <button id="supprimer" name="supprimer" type="button" class="btn btn-danger"><i
+                      class="fas fa-trash-alt"></i> Supprimer</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <!-- Img Vin-->
+              <img class="styled" src="./pics/block_nine.jpg" id="image" alt="wine">
+              <textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
+
+            </div>
+          </div>
+      </div>
+      </form>
+    </div>
+    <footer>&copy; Amine, Nathan, Radad</footer>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- AOS animation -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({
+      once: true,
+    });
+  </script>
+  <script type="text/javascript" src="./js/main.js"></script>
+
+</body>
+
+</html>
