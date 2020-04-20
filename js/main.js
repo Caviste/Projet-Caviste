@@ -102,7 +102,7 @@ function searchWine() {
   let strSearch = document.getElementById('strSearch').value.trim();
   if (strSearch == parseInt(strSearch)) {
     let request = new XMLHttpRequest();
-    request.open("GET", url + "/" + "10", true);
+    request.open("GET", url + "/" + parseInt(strSearch), true);
     request.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         let reply = JSON.parse(this.response);
