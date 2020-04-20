@@ -111,6 +111,26 @@ function searchWine() {
       }
     }
     request.send();
+  } else {
+    //Ecrire requête GET
+
+
+    // récup noms des vins
+    // -> vinData a tous les vins
+    //créer un nouvel array
+    let newVins = []
+
+    // push nouvel array
+    vinData.forEach((vin) => {
+      newVins.push(vin);
+    }); // Ok
+
+    // check input == nom array
+    // Si dans l'array newVins il y a strSearch dans les noms
+    if(newVins.name.indexOf(strSearch) != -1) {
+      
+    }  
+      
   }
   
 
