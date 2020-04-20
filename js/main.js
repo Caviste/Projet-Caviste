@@ -97,6 +97,8 @@ function searchWine() {
    *  Si l'user clique sur "Rechercher", showReset devient true, ce qui affichera un bouton pour reset la liste
    */
   let queryArr = [];
+  let arrReply = [];
+  let newVins = [];
   showReset = true;
   let str = "";
   let strSearch = document.getElementById('strSearch').value.trim();
@@ -111,27 +113,19 @@ function searchWine() {
       }
     }
     request.send();
-  } else {
-    //Ecrire requête GET
+  } else { // Ã§a rentre pas dans la boucle dans le else
+    if( typeof document.getElementById('strSearch').value === 'string' ) { // true
+    let ajaxReq = new XMLHttpRequest();
 
+    ajaxReq.open("GET", url + "/search/" + "Chateau", true); // /api/wines/search/Chateau
+    let reply = JSON.parse(this.response);
+    queryArr.push(reply);
+    showListWine(queryArr);
 
-    // récup noms des vins
-    // -> vinData a tous les vins
-    //créer un nouvel array
-    let newVins = []
-
-    // push nouvel array
-    vinData.forEach((vin) => {
-      newVins.push(vin);
-    }); // Ok
-
-    // check input == nom array
-    // Si dans l'array newVins il y a strSearch dans les noms
-    if(newVins.name.indexOf(strSearch) != -1) {
-      
-    }  
-      
+    ajaxReq.send();
   }
+}
+    
+}
   
 
-}
