@@ -115,17 +115,59 @@ function searchWine() {
     request.send();
   } else { // ça rentre pas dans la boucle dans le else
     if( typeof document.getElementById('strSearch').value === 'string' ) { // true
-    let ajaxReq = new XMLHttpRequest();
+    let request = new XMLHttpRequest();
 
-    ajaxReq.open("GET", url + "/search/" + "Chateau", true); // /api/wines/search/Chateau
+    request.open("GET", url + "/search/" + "Chateau", true);
     let reply = JSON.parse(this.response);
     queryArr.push(reply);
     showListWine(queryArr);
 
-    ajaxReq.send();
+    request.send();
   }
 }
     
+}
+
+function signIn() {
+  console.log("SignIn");
+  let username = document.getElementById('login').value.trim();
+  let pwd = document.getElementById('mdp').value.trim();
+  if (typeof(Storage) !== 'undefined') {
+    if (username.length === 0) {
+      alert('Veuillez entrer un login valide!');
+    } else if (typeof username !== "string") {
+      alert('Le login doit être une chaîne de caractères!');
+    } else {
+      localStorage.username  = username;
+    }
+
+    if (pwd.length === 0) {
+      alert('Veuillez entrer un mot de passe valide!');
+    } else if (typeof pwd !== "string") {
+      alert('Le mot de passe doit être une chaîne de caractères!');
+    } else {
+      localStorage.password  = pwd;
+    }
+
+    if ((typeof localStorage.username !== "undefined") && (typeof localStorage.password !== "undefined")) {
+      if (!localStorage.isLoggedIn) {
+        alert('Bienvenue sur Millésime, ' + username + " !");
+        localStorage.isLoggedIn = true;
+      } else {
+        alert('Vous êtes déjà inscrit !');
+      }
+    }
+  } else {
+    console.log("L'information n'a pas pu être sauvegardée");
+  }
+}
+
+function logIn() {
+  console.log("LogIn");
+  let username = document.getElementById('login').value.trim();
+  let pwd = document.getElementById('mdp').value.trim();
+
+
 }
   
 
