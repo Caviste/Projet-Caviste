@@ -92,16 +92,15 @@ function showDetails(index) {
 function searchWine() {
   /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres
    *  La fonction recupere le texte entre par l'user dans l'input text "strSearch"
-   *  La fonction cherche s'il y a une chaine de caracteres correspondante dans vinData
+   *  La fonction cherche le vin correspondant a l'input dans l'API
    *  S'il y en a au moins une, elle affiche le ou les resultats
    *  Si l'user clique sur "Rechercher", showReset devient true, ce qui affichera un bouton pour reset la liste
    */
   let queryArr = [];
-  let arrReply = [];
-  let newVins = [];
   showReset = true;
   let str = "";
   let strSearch = document.getElementById('strSearch').value.trim();
+
   if (strSearch == parseInt(strSearch)) {
     let request = new XMLHttpRequest();
     request.open("GET", url + "/" + parseInt(strSearch), true);
@@ -113,15 +112,13 @@ function searchWine() {
       }
     }
     request.send();
-  } else { // ça rentre pas dans la boucle dans le else
-    if( typeof document.getElementById('strSearch').value === 'string' ) { // true
+  } else {
+    if( typeof document.getElementById('strSearch').value === 'string' ) {
     let request = new XMLHttpRequest();
-
     request.open("GET", url + "/search/" + "Chateau", true);
     let reply = JSON.parse(this.response);
     queryArr.push(reply);
     showListWine(queryArr);
-
     request.send();
   }
 }
@@ -132,6 +129,7 @@ function signIn() {
   console.log("SignIn");
   let username = document.getElementById('login').value.trim();
   let pwd = document.getElementById('mdp').value.trim();
+
   if (typeof(Storage) !== 'undefined') {
     if (username.length === 0) {
       alert('Veuillez entrer un login valide!');
@@ -152,7 +150,7 @@ function signIn() {
     if ((typeof localStorage.username !== "undefined") && (typeof localStorage.password !== "undefined")) {
       if (!localStorage.isLoggedIn) {
         alert('Bienvenue sur Millésime, ' + username + " !");
-        localStorage.isLoggedIn = true;
+        console.log(localStorage);
       } else {
         alert('Vous êtes déjà inscrit !');
       }
@@ -167,7 +165,21 @@ function logIn() {
   let username = document.getElementById('login').value.trim();
   let pwd = document.getElementById('mdp').value.trim();
 
+  if (username === localStorage.username) {
+    if (pwd === localStorage.password ) {
+      sessionStorage.username = username;
+      sessionStorage.password = pwd;
+      sessionStorage.isLoggedIn = true;
+    } else {
+      alert('Mot de passe incorrect !');
+    }
+  } else {
+    alert('Le login ne correspond pas !');
+  }
 
+  if ((sessionStorage.username !== "undefined") && (sessionStorage.password !== "undefined") && (sessionStorage.isLoggedIn)) {
+    console.log("Logged in ? " + sessionStorage.isLoggedIn);
+  }
 }
   
 
