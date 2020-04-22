@@ -114,12 +114,15 @@ function searchWine() {
     request.send();
   } else {
     if( typeof document.getElementById('strSearch').value === 'string' ) {
-    let request = new XMLHttpRequest();
-    request.open("GET", url + "/search/" + "Chateau", true);
-    let reply = JSON.parse(this.response);
-    queryArr.push(reply);
-    showListWine(queryArr);
-    request.send();
+    let strSearch = document.getElementById('strSearch').value.trim();
+    fetch(url + "/search/" + strSearch)
+    .then((resp) => resp.json())
+    .then(function(data) {
+      data.forEach((vin) => {
+        queryArr.push(vin);
+      });
+      showListWine(queryArr);
+    });
   }
 }
     
