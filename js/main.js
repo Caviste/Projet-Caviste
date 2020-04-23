@@ -1,3 +1,12 @@
+//Remplace onreadystatechange par onload
+//ajouter les champs promo, bio, prix, etc
+//trier par couleur, bio & prix ascendant/descendant
+// plus de onclick
+// fonction anonyme si on appelle fonction + attribut
+// photos pas en local -> ajouter à l'url de l'api -> http://cruth.phpnet.org/epfc/caviste/pics/pic.jpg
+// Wiki
+// mit // cc // open-source license
+
 let vinData = [];
 let showReset = false;
 const url = "http://cruth.phpnet.org/epfc/caviste/api/wines"; // URL de l'API
@@ -54,6 +63,13 @@ function showListWine(arr) {
   document.getElementById("liste").innerHTML = str;
   showReset = false;
 }
+
+let selectAlpha = document.getElementById('trier').options[1];
+selectAlpha.addEventListener('click', alphaSort);
+let selectInvert = document.getElementById('trier').options[2];
+selectInvert.addEventListener('click', invertSort);
+let selectCepage = document.getElementById('trier').options[3];
+selectCepage.addEventListener('click', cepageSort);
 
 function alphaSort() {
   vinData.sort(function(a,b) {
