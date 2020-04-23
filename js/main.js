@@ -1,8 +1,5 @@
-//Remplace onreadystatechange par onload
 //ajouter les champs promo, bio, prix, etc
-//trier par couleur, bio & prix ascendant/descendant
-// plus de onclick
-// fonction anonyme si on appelle fonction + attribut
+// trier par couleur, bio & prix ascendant/descendant
 // photos pas en local -> ajouter à l'url de l'api -> http://cruth.phpnet.org/epfc/caviste/pics/pic.jpg
 // Wiki
 // mit // cc // open-source license
@@ -76,20 +73,31 @@ function showListWine(arr) {
   }
 }
 
-let selectOpt = document.getElementById('trier').options;
+/* let selectOpt = document.getElementById('trier').options;
 let selectAlpha = selectOpt[1];
 selectAlpha.addEventListener('click', alphaSort);
 let selectInvert = selectOpt[2];
 selectInvert.addEventListener('click', invertSort);
 let selectCepage = selectOpt[3];
-selectCepage.addEventListener('click', cepageSort);
+selectCepage.addEventListener('click', cepageSort); */
+
+function sortMethods(selected) {
+  let valueOpt = selected.value;
+  if (valueOpt == 1) {
+    alphaSort();
+  } else if (valueOpt == 2) {
+    invertSort();
+  } else {
+    cepageSort();
+  }
+}
 
 function alphaSort() {
   vinData.sort(function(a,b) {
     return a["name"].localeCompare(b["name"]);
   });
   showListWine(vinData);
-} 
+}
 
 function invertSort() {
   vinData.sort(function(a,b) {
@@ -135,7 +143,7 @@ function searchWine() {
   if (strSearch == parseInt(strSearch)) {
     let request = new XMLHttpRequest();
     request.open("GET", url + "/" + parseInt(strSearch), true);
-    request.onreadystatechange = function () {
+    request.onload = function () {
       if (this.readyState == 4 && this.status == 200) {
         let reply = JSON.parse(this.response);
         queryArr.push(reply);
@@ -163,6 +171,8 @@ function searchWine() {
 }
 document.getElementById('btnSignUp').addEventListener('click', signUp);
 document.getElementById('btnLogIn').addEventListener('click', logIn);
+
+//USE: Bearer
 
 function signUp() {
   console.log("SignIn");

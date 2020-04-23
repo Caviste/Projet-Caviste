@@ -56,9 +56,9 @@
                 class="fas fa-search"></i> Rechercher</button>
             <button id="ajouter" class="btn btn-info"><i class="fas fa-plus-circle"></i> Ajouter</button>
 
-            <select id="trier" class="btn">
+            <select id="trier" class="btn" onchange="sortMethods(this)">
               <option selected disabled value="0" class="list-group-item">Trier</option>
-              <option value="1" class="list-group-item">A-Z</option>
+              <option value="1" class="list-group-item" >A-Z</option>
               <option value="2" class="list-group-item">Z-A</option>
               <option value="3" class="list-group-item">C&eacute;pages</option>
             </select>
