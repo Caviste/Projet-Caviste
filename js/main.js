@@ -1,6 +1,5 @@
 //ajouter les champs promo, bio, prix, etc
 // trier par couleur, bio & prix ascendant/descendant
-// photos pas en local -> ajouter à l'url de l'api -> http://cruth.phpnet.org/epfc/caviste/pics/pic.jpg
 // Wiki
 // mit // cc // open-source license
 
@@ -73,19 +72,12 @@ function showListWine(arr) {
   }
 }
 
-/* let selectOpt = document.getElementById('trier').options;
-let selectAlpha = selectOpt[1];
-selectAlpha.addEventListener('click', alphaSort);
-let selectInvert = selectOpt[2];
-selectInvert.addEventListener('click', invertSort);
-let selectCepage = selectOpt[3];
-selectCepage.addEventListener('click', cepageSort); */
-
 function sortMethods(selected) {
-  let valueOpt = selected.value;
-  if (valueOpt == 1) {
+  let selectOpt = selected.value;
+  if (selectOpt == 1) {
     alphaSort();
-  } else if (valueOpt == 2) {
+    showListWine(vinData); 
+  } else if (selectOpt == 2) {
     invertSort();
   } else {
     cepageSort();
@@ -94,14 +86,25 @@ function sortMethods(selected) {
 
 function alphaSort() {
   vinData.sort(function(a,b) {
-    return a["name"].localeCompare(b["name"]);
+    if (a.name > b.name ) {
+      return 1;
+    } 
+    if ( b.name > a.name ) {
+      return -1;
+    }
+    return 0;
   });
-  showListWine(vinData);
 }
 
 function invertSort() {
   vinData.sort(function(a,b) {
-    return b["name"].localeCompare(a["name"]);
+    if (b.name < a.name ) {
+      return -1;
+    } 
+    if ( a.name < b.name ) {
+      return 1; 
+    }
+    return 0;
   });
   showListWine(vinData);
 }
@@ -122,10 +125,20 @@ function showDetails(index) {
   document.getElementById('pays').value = vinData[realId].country;
   document.getElementById('region').value = vinData[realId].region;
   document.getElementById('year').value = vinData[realId].year;
-  document.getElementById('description').value = vinData[realId].description;
-
   document.getElementById('image').src = "http://cruth.phpnet.org/epfc/caviste/pics/"+vinData[realId].picture;
-  
+  document.getElementById('description').value = vinData[realId].description;
+  document.getElementById('couleur').value = vinData[realId].color;
+  document.getElementById('capacite').value = vinData[realId].capacity;
+  if (vinData[realId].extra !== undefined) {
+    if (vinData[realId].extra["bio"] == true) {
+      document.getElementById("bioTrue").checked = true;
+    } else {
+      document.getElementById("bioFalse").checked = true;
+    }
+  } else {
+    document.getElementById("bioFalse").checked = true;
+  }
+  document.getElementById('prix').value = vinData[realId].price + " €";
 }
 
 document.getElementById('recherche').addEventListener('click', searchWine);

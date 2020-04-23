@@ -20,12 +20,16 @@ header nav {
 }
 
 /* Boutons S'inscrire & Login */
-#BtnSignUp,
-#BtnLogIn {
+#btnSignUp,
+#btnLogIn {
     color: #fff;
     background-color: #6c757d;
     border-color: #6c757d;
     border-style: none;
+}
+
+#btnLogIn {
+    margin-left : 25px;
 }
 
 /* Logo Millesime */
@@ -113,7 +117,7 @@ header nav {
 #stylediv {
     z-index: 1;
     position: relative;
-    max-height: 590px;
+    max-height: 600px;
     margin-top: 17px;
     margin-right: 20px;
     margin-bottom: 2px;
@@ -124,7 +128,7 @@ header nav {
     -webkit-box-shadow: 0px 0px 40px 6px rgba(41, 41, 41, 0.93);
     -moz-box-shadow: 0px 0px 40px 6px rgba(29, 29, 29, 0.93);
     box-shadow: 0px 0px 40px 6px rgba(34, 34, 34, 0.93);
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
 }
 
@@ -161,7 +165,7 @@ header nav {
     border-style: solid;
     border-radius: 10px;
     width: 255px;
-    height: 300px;
+    height: 315px;
 }
 
 /* Textarea */
