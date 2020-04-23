@@ -130,13 +130,14 @@ function showDetails(index) {
   document.getElementById('couleur').value = vinData[realId].color;
   document.getElementById('capacite').value = vinData[realId].capacity;
   if (vinData[realId].extra !== undefined) {
+    document.getElementById("extras").className = 'show';
     if (vinData[realId].extra["bio"] == true) {
       document.getElementById("bioTrue").checked = true;
     } else {
       document.getElementById("bioFalse").checked = true;
     }
   } else {
-    document.getElementById("bioFalse").checked = true;
+    document.getElementById("extras").className ='hide';
   }
   document.getElementById('prix').value = vinData[realId].price + " €";
 }

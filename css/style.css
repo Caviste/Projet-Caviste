@@ -138,6 +138,17 @@ header nav {
     color: white;
     margin: 0px;
 }
+/* visibilité */
+.hide{
+    visibility: hidden;
+    height: 0px;
+}
+.show{
+    visibility: visible;
+    height: 23px;
+    margin-bottom: 1rem;
+}
+/*radio style */
 #bioFalse{
     margin-left: 50px;
 }
