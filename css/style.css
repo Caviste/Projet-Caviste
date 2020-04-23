@@ -124,6 +124,8 @@ header nav {
     -webkit-box-shadow: 0px 0px 40px 6px rgba(41, 41, 41, 0.93);
     -moz-box-shadow: 0px 0px 40px 6px rgba(29, 29, 29, 0.93);
     box-shadow: 0px 0px 40px 6px rgba(34, 34, 34, 0.93);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* Labels info vin */
@@ -143,7 +145,6 @@ header nav {
 
 /* Bouton sauvegarder */
 #sauvegarder {
-    margin-right: 15px;
     max-width: 140px;
 }
 
