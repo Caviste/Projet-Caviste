@@ -159,6 +159,8 @@ header nav {
     border-color: rgb(145, 53, 64);
     border-style: solid;
     border-radius: 10px;
+    width: 255px;
+    height: 300px;
 }
 
 /* Textarea */

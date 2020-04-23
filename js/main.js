@@ -115,7 +115,9 @@ function showDetails(index) {
   document.getElementById('region').value = vinData[realId].region;
   document.getElementById('year').value = vinData[realId].year;
   document.getElementById('description').value = vinData[realId].description;
-  document.getElementById('image').src = "./pics/"+vinData[realId].picture+"";
+
+  document.getElementById('image').src = "http://cruth.phpnet.org/epfc/caviste/pics/"+vinData[realId].picture;
+  
 }
 
 document.getElementById('recherche').addEventListener('click', searchWine);
