@@ -56,6 +56,7 @@ function showListWine(arr) {
     // Affiche un bouton de Reset
     str += '<button id="reset" type="button" class="btn btn-danger">R&eacute;initialiser la liste</button>';
     document.getElementById("liste").innerHTML = str;
+
     const btnReset = document.getElementById('reset');
     btnReset.addEventListener('click', function() {
       resetSearch();
@@ -73,10 +74,11 @@ function showListWine(arr) {
 }
 
 function sortMethods(selected) {
+  
   let selectOpt = selected.value;
   if (selectOpt == 1) {
     alphaSort();
-    showListWine(vinData); 
+
   } else if (selectOpt == 2) {
     invertSort();
   } else {
@@ -85,7 +87,12 @@ function sortMethods(selected) {
 }
 
 function alphaSort() {
-  vinData.sort(function(a,b) {
+  let newArr = [];
+  vinData.forEach((vin) => {
+    newArr.push(vin);
+  });
+
+  newArr.sort(function(a,b) {
     if (a.name > b.name ) {
       return 1;
     } 
@@ -94,10 +101,16 @@ function alphaSort() {
     }
     return 0;
   });
+  showListWine(newArr); 
 }
 
 function invertSort() {
-  vinData.sort(function(a,b) {
+  let newArr = [];
+  vinData.forEach((vin) => {
+    newArr.push(vin);
+  });
+
+  newArr.sort(function(a,b) {
     if (b.name < a.name ) {
       return -1;
     } 
@@ -106,14 +119,25 @@ function invertSort() {
     }
     return 0;
   });
-  showListWine(vinData);
+  showListWine(newArr);
 }
 
 function cepageSort() {
-  vinData.sort(function(a,b) {
-    return a["grapes"].localeCompare(b["grapes"]);
+  let newArr = [];
+  vinData.forEach((vin) => {
+    newArr.push(vin);
   });
-  showListWine(vinData);
+
+  newArr.sort(function(a,b) {
+    if (a.grapes > b.grapes) {
+      return 1;
+    }
+    if ( b.grapes > a.grapes ) {
+      return -1;
+    }
+    return 0;
+  });
+  showListWine(newArr);
 }
 
 // Affiche les d�tails du vin cliqu�
