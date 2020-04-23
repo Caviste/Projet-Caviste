@@ -51,8 +51,9 @@ function resetSearch() {
 function showListWine(arr) {
   let str = "";
   for (let i = 0; i < arr.length; i++) {
-    str += '<li class="list-group-item" id=' + arr[i].id + " onclick=showDetails(" + arr[i].id  + ")>" + arr[i].name + "</li>"; //Index = i-1
+    str += '<li class="list-group-item" id=' + arr[i].id + ">" + arr[i].name + "</li>"; //Index = i-1
   }
+  
   if (showReset) {
     // Affiche un bouton de Reset
     str += '<button id="reset" type="button" class="btn btn-danger" onclick=showListWine(vinData)>R&eacute;initialiser la liste</button>';
@@ -62,6 +63,12 @@ function showListWine(arr) {
   }
   document.getElementById("liste").innerHTML = str;
   showReset = false;
+  
+  for (let i = 0; i < arr.length; i++) {
+    document.getElementById('liste').getElementsByTagName("li")[i].addEventListener('click', function() {
+      showDetails(arr[i].id);
+    });
+  }
 }
 
 let selectAlpha = document.getElementById('trier').options[1];
