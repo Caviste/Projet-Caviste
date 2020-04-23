@@ -53,17 +53,22 @@ function showListWine(arr) {
   for (let i = 0; i < arr.length; i++) {
     str += '<li class="list-group-item" id=' + arr[i].id + ">" + arr[i].name + "</li>"; //Index = i-1
   }
-  
+
+  document.getElementById("liste").innerHTML = str;
+
   if (showReset) {
     // Affiche un bouton de Reset
-    str += '<button id="reset" type="button" class="btn btn-danger" onclick=showListWine(vinData)>R&eacute;initialiser la liste</button>';
+    str += '<button id="reset" type="button" class="btn btn-danger">R&eacute;initialiser la liste</button>';
     document.getElementById("liste").innerHTML = str;
     const btnReset = document.getElementById('reset');
-    btnReset.addEventListener('click', resetSearch);
+    btnReset.addEventListener('click', function() {
+      resetSearch();
+      showListWine(vinData);
+    });
   }
-  document.getElementById("liste").innerHTML = str;
-  showReset = false;
-  
+
+  showReset = false; // Réinitialisation à false pour ne plus afficher le bouton
+
   for (let i = 0; i < arr.length; i++) {
     document.getElementById('liste').getElementsByTagName("li")[i].addEventListener('click', function() {
       showDetails(arr[i].id);
@@ -71,11 +76,12 @@ function showListWine(arr) {
   }
 }
 
-let selectAlpha = document.getElementById('trier').options[1];
+let selectOpt = document.getElementById('trier').options;
+let selectAlpha = selectOpt[1];
 selectAlpha.addEventListener('click', alphaSort);
-let selectInvert = document.getElementById('trier').options[2];
+let selectInvert = selectOpt[2];
 selectInvert.addEventListener('click', invertSort);
-let selectCepage = document.getElementById('trier').options[3];
+let selectCepage = selectOpt[3];
 selectCepage.addEventListener('click', cepageSort);
 
 function alphaSort() {
@@ -112,6 +118,8 @@ function showDetails(index) {
   document.getElementById('image').src = "./pics/"+vinData[realId].picture+"";
 }
 
+document.getElementById('recherche').addEventListener('click', searchWine);
+
 function searchWine() {
   /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres
    *  La fonction recupere le texte entre par l'user dans l'input text "strSearch"
@@ -136,22 +144,27 @@ function searchWine() {
     }
     request.send();
   } else {
-    if( typeof document.getElementById('strSearch').value === 'string' ) {
-    let strSearch = document.getElementById('strSearch').value.trim();
-    fetch(url + "/search/" + strSearch)
-    .then((resp) => resp.json())
-    .then(function(data) {
-      data.forEach((vin) => {
-        queryArr.push(vin);
-      });
-      showListWine(queryArr);
-    });
-  }
+    if (document.getElementById('strSearch').value !== "") {
+      if( typeof document.getElementById('strSearch').value === 'string' ) {
+        let strSearch = document.getElementById('strSearch').value.trim();
+        fetch(url + "/search/" + strSearch)
+        .then((resp) => resp.json())
+        .then(function(data) {
+          data.forEach((vin) => {
+            queryArr.push(vin);
+          });
+          showListWine(queryArr);
+        });
+      } 
+    } else {
+      alert('Veuillez écrire quelque chose dans la zone de recherche !');
+    }
+}   
 }
-    
-}
+document.getElementById('btnSignUp').addEventListener('click', signUp);
+document.getElementById('btnLogIn').addEventListener('click', logIn);
 
-function signIn() {
+function signUp() {
   console.log("SignIn");
   let username = document.getElementById('login').value.trim();
   let pwd = document.getElementById('mdp').value.trim();
@@ -176,6 +189,7 @@ function signIn() {
     if ((typeof localStorage.username !== "undefined") && (typeof localStorage.password !== "undefined")) {
       if (!localStorage.isLoggedIn) {
         alert('Bienvenue sur Millésime, ' + username + " !");
+        localStorage.isLoggedIn = true;
         console.log(localStorage);
       } else {
         alert('Vous êtes déjà inscrit !');
@@ -205,6 +219,7 @@ function logIn() {
 
   if ((sessionStorage.username !== "undefined") && (sessionStorage.password !== "undefined") && (sessionStorage.isLoggedIn)) {
     console.log("Logged in ? " + sessionStorage.isLoggedIn);
+    alert('Vous êtes connecté(e) !');
   }
 }
   
