@@ -1,3 +1,12 @@
+//Remplace onreadystatechange par onload
+//ajouter les champs promo, bio, prix, etc
+//trier par couleur, bio & prix ascendant/descendant
+// plus de onclick
+// fonction anonyme si on appelle fonction + attribut
+// photos pas en local -> ajouter à l'url de l'api -> http://cruth.phpnet.org/epfc/caviste/pics/pic.jpg
+// Wiki
+
+
 let vinData = [];
 let showReset = false;
 const url = "http://cruth.phpnet.org/epfc/caviste/api/wines"; // URL de l'API
@@ -92,7 +101,7 @@ function showDetails(index) {
 function searchWine() {
   /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres
    *  La fonction recupere le texte entre par l'user dans l'input text "strSearch"
-   *  La fonction cherche s'il y a une chaine de caracteres correspondante dans vinData
+   *  La fonction cherche le vin correspondant a l'input dans l'API
    *  S'il y en a au moins une, elle affiche le ou les resultats
    *  Si l'user clique sur "Rechercher", showReset devient true, ce qui affichera un bouton pour reset la liste
    */
@@ -100,6 +109,7 @@ function searchWine() {
   showReset = true;
   let str = "";
   let strSearch = document.getElementById('strSearch').value.trim();
+
   if (strSearch == parseInt(strSearch)) {
     let request = new XMLHttpRequest();
     request.open("GET", url + "/" + parseInt(strSearch), true);
@@ -112,26 +122,76 @@ function searchWine() {
     }
     request.send();
   } else {
-    //Ecrire requ�te GET
-
-
-    // r�cup noms des vins
-    // -> vinData a tous les vins
-    //cr�er un nouvel array
-    let newVins = []
-
-    // push nouvel array
-    vinData.forEach((vin) => {
-      newVins.push(vin);
-    }); // Ok
-
-    // check input == nom array
-    // Si dans l'array newVins il y a strSearch dans les noms
-    if(newVins.name.indexOf(strSearch) != -1) {
-      
-    }  
-      
+    if( typeof document.getElementById('strSearch').value === 'string' ) {
+    let strSearch = document.getElementById('strSearch').value.trim();
+    fetch(url + "/search/" + strSearch)
+    .then((resp) => resp.json())
+    .then(function(data) {
+      data.forEach((vin) => {
+        queryArr.push(vin);
+      });
+      showListWine(queryArr);
+    });
   }
+}
+    
+}
+
+function signIn() {
+  console.log("SignIn");
+  let username = document.getElementById('login').value.trim();
+  let pwd = document.getElementById('mdp').value.trim();
+
+  if (typeof(Storage) !== 'undefined') {
+    if (username.length === 0) {
+      alert('Veuillez entrer un login valide!');
+    } else if (typeof username !== "string") {
+      alert('Le login doit être une chaîne de caractères!');
+    } else {
+      localStorage.username  = username;
+    }
+
+    if (pwd.length === 0) {
+      alert('Veuillez entrer un mot de passe valide!');
+    } else if (typeof pwd !== "string") {
+      alert('Le mot de passe doit être une chaîne de caractères!');
+    } else {
+      localStorage.password  = pwd;
+    }
+
+    if ((typeof localStorage.username !== "undefined") && (typeof localStorage.password !== "undefined")) {
+      if (!localStorage.isLoggedIn) {
+        alert('Bienvenue sur Millésime, ' + username + " !");
+        console.log(localStorage);
+      } else {
+        alert('Vous êtes déjà inscrit !');
+      }
+    }
+  } else {
+    console.log("L'information n'a pas pu être sauvegardée");
+  }
+}
+
+function logIn() {
+  console.log("LogIn");
+  let username = document.getElementById('login').value.trim();
+  let pwd = document.getElementById('mdp').value.trim();
+
+  if (username === localStorage.username) {
+    if (pwd === localStorage.password ) {
+      sessionStorage.username = username;
+      sessionStorage.password = pwd;
+      sessionStorage.isLoggedIn = true;
+    } else {
+      alert('Mot de passe incorrect !');
+    }
+  } else {
+    alert('Le login ne correspond pas !');
+  }
+
+  if ((sessionStorage.username !== "undefined") && (sessionStorage.password !== "undefined") && (sessionStorage.isLoggedIn)) {
+    console.log("Logged in ? " + sessionStorage.isLoggedIn);
+  }
+}
   
 
-}
