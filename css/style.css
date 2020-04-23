@@ -118,6 +118,7 @@ header nav {
     z-index: 1;
     position: relative;
     max-height: 600px;
+    min-width: 100px;
     margin-top: 17px;
     margin-right: 20px;
     margin-bottom: 2px;
@@ -136,6 +137,9 @@ header nav {
 #stylediv label {
     color: white;
     margin: 0px;
+}
+#bioFalse{
+    margin-left: 50px;
 }
 
 /* Boutons supprimer/sauvegarder */
