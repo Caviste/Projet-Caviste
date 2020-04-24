@@ -5,7 +5,7 @@
 
 let vinData = [];
 let showReset = false;
-const url = "http://cruth.phpnet.org/epfc/caviste/api/wines"; // URL de l'API
+const url = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines"; // URL de l'API
 
 // R�cup�ration des donn�es de l'API Caviste
 let request = new XMLHttpRequest();
@@ -149,7 +149,7 @@ function showDetails(index) {
   document.getElementById('pays').value = vinData[realId].country;
   document.getElementById('region').value = vinData[realId].region;
   document.getElementById('year').value = vinData[realId].year;
-  document.getElementById('image').src = "http://cruth.phpnet.org/epfc/caviste/pics/"+vinData[realId].picture;
+  document.getElementById('image').src = "http://cruth.phpnet.org/epfc/caviste/public/pics/"+vinData[realId].picture;
   document.getElementById('description').value = vinData[realId].description;
   document.getElementById('couleur').value = vinData[realId].color;
   document.getElementById('capacite').value = vinData[realId].capacity;
