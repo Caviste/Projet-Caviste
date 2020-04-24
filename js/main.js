@@ -141,8 +141,7 @@ function cepageSort() {
 }
 
 // Affiche les d�tails du vin cliqu�
-function showDetails(index) {
-  let realId = index - 1;
+function showDetails(index) { 
   document.getElementById('idVin').value = vinData[realId].id;
   document.getElementById('nomVin').value = vinData[realId].name;
   document.getElementById('raisins').value = vinData[realId].grapes;
