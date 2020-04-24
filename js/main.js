@@ -19,7 +19,7 @@ request.onload = function () {
     });
     showListWine(vinData); // Affiche la liste de vin
   } else {
-     if (request.status >= 400) {
+    if (request.status >= 400) {
       alert("Erreur du client web");
     }
   }
@@ -27,9 +27,9 @@ request.onload = function () {
 
 request.send();
 
-var options = document.querySelectorAll('#trier option');
+var options = document.querySelectorAll("#trier option");
 for (let i = 0, l = options.length; i < l; i++) {
-    options[i].selected = options[i].defaultSelected;
+  options[i].selected = options[i].defaultSelected;
 }
 
 // Ajoute une majuscule au d�but de la string
@@ -40,25 +40,25 @@ function ucFirst(str) {
 
 // Efface toute valeur dans l'input strSearch
 function resetSearch() {
-  document.getElementById('strSearch').value = "";
+  document.getElementById("strSearch").value = "";
 }
 
 // Affichage de la liste de vin
 function showListWine(arr) {
   let str = "";
   for (let i = 0; i < arr.length; i++) {
-    str += '<li class="list-group-item" id=' + arr[i].id + ">" + arr[i].name + "</li>"; //Index = i-1
+    str += '<li class="list-group-item" id=' + arr[i].id + ">" + arr[i].name + "</li>";
   }
 
   document.getElementById("liste").innerHTML = str;
 
+  // Affiche un bouton de Reset
   if (showReset) {
-    // Affiche un bouton de Reset
     str += '<button id="reset" type="button" class="btn btn-danger">R&eacute;initialiser la liste</button>';
     document.getElementById("liste").innerHTML = str;
 
-    const btnReset = document.getElementById('reset');
-    btnReset.addEventListener('click', function() {
+    const btnReset = document.getElementById("reset");
+    btnReset.addEventListener("click", function () {
       resetSearch();
       showListWine(vinData);
     });
@@ -67,18 +67,27 @@ function showListWine(arr) {
   showReset = false; // Réinitialisation à false pour ne plus afficher le bouton
 
   for (let i = 0; i < arr.length; i++) {
-    document.getElementById('liste').getElementsByTagName("li")[i].addEventListener('click', function() {
-      showDetails(arr[i].id);
-    });
+    document
+      .getElementById("liste")
+      .getElementsByTagName("li")
+      [i].addEventListener("click", function () {
+        showDetails(i); //0
+      });
   }
 }
 
+// Reset array
+function resetArr(arr, tmpArr) {
+  arr = [];
+  arr = tmpArr;
+  return arr;
+}
+
+// Mode de tri suivant l'option cliquée
 function sortMethods(selected) {
-  
   let selectOpt = selected.value;
   if (selectOpt == 1) {
     alphaSort();
-
   } else if (selectOpt == 2) {
     invertSort();
   } else {
@@ -86,86 +95,77 @@ function sortMethods(selected) {
   }
 }
 
+// Tri alphabétique A-Z
 function alphaSort() {
-  let newArr = [];
-  vinData.forEach((vin) => {
-    newArr.push(vin);
+  let tmp = vinData;
+  vinData = [];
+
+  tmp.forEach((vin) => {
+    vinData.push(vin);
   });
 
-  newArr.sort(function(a,b) {
-    if (a.name > b.name ) {
-      return 1;
-    } 
-    if ( b.name > a.name ) {
-      return -1;
-    }
-    return 0;
+  vinData.sort(function (a, b) {
+    return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
   });
-  showListWine(newArr); 
+  showListWine(vinData);
 }
 
+// Tri Inversé Z-A
 function invertSort() {
-  let newArr = [];
-  vinData.forEach((vin) => {
-    newArr.push(vin);
+  let tmp = vinData;
+  vinData = [];
+
+  tmp.forEach((vin) => {
+    vinData.push(vin);
   });
 
-  newArr.sort(function(a,b) {
-    if (b.name < a.name ) {
-      return -1;
-    } 
-    if ( a.name < b.name ) {
-      return 1; 
-    }
-    return 0;
+  vinData.sort(function (a, b) {
+    return b.name > a.name ? 1 : b.name < a.name ? -1 : 0;
   });
-  showListWine(newArr);
+  showListWine(vinData);
 }
 
+// Tri par raisin
 function cepageSort() {
-  let newArr = [];
-  vinData.forEach((vin) => {
-    newArr.push(vin);
+  let tmp = vinData;
+  vinData = [];
+
+  tmp.forEach((vin) => {
+    vinData.push(vin);
   });
 
-  newArr.sort(function(a,b) {
-    if (a.grapes > b.grapes) {
-      return 1;
-    }
-    if ( b.grapes > a.grapes ) {
-      return -1;
-    }
-    return 0;
+  vinData.sort(function (a, b) {
+    return a.grapes > b.grapes ? 1 : a.grapes < b.grapes ? -1 : 0;
   });
-  showListWine(newArr);
+  showListWine(vinData);
 }
 
 // Affiche les d�tails du vin cliqu�
-function showDetails(index) { 
-  document.getElementById('idVin').value = vinData[realId].id;
-  document.getElementById('nomVin').value = vinData[realId].name;
-  document.getElementById('raisins').value = vinData[realId].grapes;
-  document.getElementById('pays').value = vinData[realId].country;
-  document.getElementById('region').value = vinData[realId].region;
-  document.getElementById('year').value = vinData[realId].year;
-  document.getElementById('image').src = "http://cruth.phpnet.org/epfc/caviste/public/pics/"+vinData[realId].picture;
-  document.getElementById('description').value = vinData[realId].description;
-  document.getElementById('couleur').value = vinData[realId].color;
-  document.getElementById('capacite').value = vinData[realId].capacity;
-  if (vinData[realId].extra !== undefined) {
-    document.getElementById("extras").className = 'show';
-    if (vinData[realId].extra["bio"] == true) {
-      document.getElementById("bioTrue").checked = true;
+function showDetails(index) {
+  document.getElementById("idVin").value = vinData[index].id;
+  document.getElementById("nomVin").value = vinData[index].name;
+  document.getElementById("raisins").value = vinData[index].grapes;
+  document.getElementById("pays").value = vinData[index].country;
+  document.getElementById("region").value = vinData[index].region;
+  document.getElementById("year").value = vinData[index].year;
+  document.getElementById("image").src = "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vinData[index].picture;
+  document.getElementById("description").value = vinData[index].description;
+  document.getElementById("couleur").value = vinData[index].color;
+  document.getElementById("capacite").value = vinData[index].capacity;
+  /* if (vinData[index].extra !== undefined) {
+      document.getElementById("extras").className = 'show';
+      if (vinData[index].extra["bio"] == true) {
+        document.getElementById("bioTrue").checked = true;
+      } else {
+        document.getElementById("bioFalse").checked = true;
+      }
     } else {
-      document.getElementById("bioFalse").checked = true;
-    }
-  } else {
-    document.getElementById("extras").className ='hide';
-  }
-  document.getElementById('prix').value = vinData[realId].price + " €";
+      document.getElementById("extras").className ='hide';
+    } */
+  document.getElementById("prix").value = vinData[index].price + " €";
 }
 
-document.getElementById('recherche').addEventListener('click', searchWine);
+document.getElementById("recherche").addEventListener("click", searchWine);
 
 function searchWine() {
   /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres
@@ -177,7 +177,7 @@ function searchWine() {
   let queryArr = [];
   showReset = true;
   let str = "";
-  let strSearch = document.getElementById('strSearch').value.trim();
+  let strSearch = document.getElementById("strSearch").value.trim();
 
   if (strSearch == parseInt(strSearch)) {
     let request = new XMLHttpRequest();
@@ -188,60 +188,63 @@ function searchWine() {
         queryArr.push(reply);
         showListWine(queryArr);
       }
-    }
+    };
     request.send();
   } else {
-    if (document.getElementById('strSearch').value !== "") {
-      if( typeof document.getElementById('strSearch').value === 'string' ) {
-        let strSearch = document.getElementById('strSearch').value.trim();
+    if (document.getElementById("strSearch").value !== "") {
+      if (typeof document.getElementById("strSearch").value === "string") {
+        let strSearch = document.getElementById("strSearch").value.trim();
         fetch(url + "/search/" + strSearch)
-        .then((resp) => resp.json())
-        .then(function(data) {
-          data.forEach((vin) => {
-            queryArr.push(vin);
+          .then((resp) => resp.json())
+          .then(function (data) {
+            data.forEach((vin) => {
+              queryArr.push(vin);
+            });
+            showListWine(queryArr);
           });
-          showListWine(queryArr);
-        });
-      } 
+      }
     } else {
-      alert('Veuillez écrire quelque chose dans la zone de recherche !');
+      alert("Veuillez écrire quelque chose dans la zone de recherche !");
     }
-}   
+  }
 }
-document.getElementById('btnSignUp').addEventListener('click', signUp);
-document.getElementById('btnLogIn').addEventListener('click', logIn);
+
+document.getElementById("btnSignUp").addEventListener("click", signUp);
+document.getElementById("btnLogIn").addEventListener("click", logIn);
 
 //USE: Bearer
-
 function signUp() {
   console.log("SignIn");
-  let username = document.getElementById('login').value.trim();
-  let pwd = document.getElementById('mdp').value.trim();
+  let username = document.getElementById("login").value.trim();
+  let pwd = document.getElementById("mdp").value.trim();
 
-  if (typeof(Storage) !== 'undefined') {
+  if (typeof Storage !== "undefined") {
     if (username.length === 0) {
-      alert('Veuillez entrer un login valide!');
+      alert("Veuillez entrer un login valide!");
     } else if (typeof username !== "string") {
-      alert('Le login doit être une chaîne de caractères!');
+      alert("Le login doit être une chaîne de caractères!");
     } else {
-      localStorage.username  = username;
+      localStorage.username = username;
     }
 
     if (pwd.length === 0) {
-      alert('Veuillez entrer un mot de passe valide!');
+      alert("Veuillez entrer un mot de passe valide!");
     } else if (typeof pwd !== "string") {
-      alert('Le mot de passe doit être une chaîne de caractères!');
+      alert("Le mot de passe doit être une chaîne de caractères!");
     } else {
-      localStorage.password  = pwd;
+      localStorage.password = pwd;
     }
 
-    if ((typeof localStorage.username !== "undefined") && (typeof localStorage.password !== "undefined")) {
+    if (
+      typeof localStorage.username !== "undefined" &&
+      typeof localStorage.password !== "undefined"
+    ) {
       if (!localStorage.isLoggedIn) {
-        alert('Bienvenue sur Millésime, ' + username + " !");
+        alert("Bienvenue sur Millésime, " + username + " !");
         localStorage.isLoggedIn = true;
         console.log(localStorage);
       } else {
-        alert('Vous êtes déjà inscrit !');
+        alert("Vous êtes déjà inscrit !");
       }
     }
   } else {
@@ -251,25 +254,27 @@ function signUp() {
 
 function logIn() {
   console.log("LogIn");
-  let username = document.getElementById('login').value.trim();
-  let pwd = document.getElementById('mdp').value.trim();
+  let username = document.getElementById("login").value.trim();
+  let pwd = document.getElementById("mdp").value.trim();
 
   if (username === localStorage.username) {
-    if (pwd === localStorage.password ) {
+    if (pwd === localStorage.password) {
       sessionStorage.username = username;
       sessionStorage.password = pwd;
       sessionStorage.isLoggedIn = true;
     } else {
-      alert('Mot de passe incorrect !');
+      alert("Mot de passe incorrect !");
     }
   } else {
-    alert('Le login ne correspond pas !');
+    alert("Le login ne correspond pas !");
   }
 
-  if ((sessionStorage.username !== "undefined") && (sessionStorage.password !== "undefined") && (sessionStorage.isLoggedIn)) {
+  if (
+    sessionStorage.username !== "undefined" &&
+    sessionStorage.password !== "undefined" &&
+    sessionStorage.isLoggedIn
+  ) {
     console.log("Logged in ? " + sessionStorage.isLoggedIn);
-    alert('Vous êtes connecté(e) !');
+    alert("Vous êtes connecté(e) !");
   }
 }
-  
-
