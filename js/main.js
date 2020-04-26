@@ -1,4 +1,3 @@
-//ajouter les champs promo, bio, prix, etc
 // trier par couleur, bio & prix ascendant/descendant
 // Wiki
 // mit // cc // open-source license
@@ -19,18 +18,19 @@ request.onload = function () {
     showListWine(vinData); // Affiche la liste de vin
   } else {
     if (request.status >= 400) {
-      alert("Erreur du client web");
+      alert("Récupération des données de l'API");
     }
   }
 };
 request.send();
 
+// Reset le choix de tri
 var options = document.querySelectorAll("#trier option");
-for (let i = 0, l = options.length; i < l; i++) {
+for (let i = 0; i < options.length; i++) {
   options[i].selected = options[i].defaultSelected;
 }
 
-// Ajoute une majuscule au d�but de la string
+// Ajoute une majuscule au début de la string
 function ucFirst(str) {
   if (!str) return str;
   return str[0].toUpperCase() + str.slice(1);
@@ -45,12 +45,7 @@ function resetSearch() {
 function showListWine(arr) {
   let str = "";
   for (let i = 0; i < arr.length; i++) {
-    str +=
-      '<li class="list-group-item" id=' +
-      arr[i].id +
-      ">" +
-      arr[i].name +
-      "</li>";
+    str += '<li class="list-group-item" id=' + arr[i].id + ">" + arr[i].name + "</li>";
   }
 
   document.getElementById("liste").innerHTML = str;
@@ -74,67 +69,6 @@ function showListWine(arr) {
         showDetails(arr[i].id);
     });
   }
-}
-
-// Reset array
-function resetArr(arr, tmpArr) {
-  arr = [];
-  arr = tmpArr;
-  return arr;
-}
-
-// Mode de tri suivant l'option cliquée
-function sortMethods(selected) {
-  let selectOpt = selected.value;
-  if (selectOpt == 1) {
-    alphaSort();
-  } else if (selectOpt == 2) {
-    invertSort();
-  } else {
-    cepageSort();
-  }
-}
-
-// Tri alphabétique A-Z
-function alphaSort() {
-  let tmp = [];
-
-  vinData.forEach((vin) => {
-    tmp.push(vin);
-  });
-
-  tmp.sort(function (a, b) {
-    return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
-  });
-  showListWine(tmp);
-}
-
-// Tri Inversé Z-A
-function invertSort() {
-  let tmp = [];
-  vinData.forEach((vin) => {
-    tmp.push(vin);
-  });
-
-  tmp.sort(function (a, b) {
-    return b.name > a.name ? 1 : b.name < a.name ? -1 : 0;
-  });
-  
-  showListWine(tmp);
-}
-
-// Tri par raisin
-function cepageSort() {
-  let tmp = [];
-
-  vinData.forEach((vin) => {
-    tmp.push(vin);
-  });
-
-  tmp.sort(function (a, b) {
-    return a.grapes > b.grapes ? 1 : a.grapes < b.grapes ? -1 : 0;
-  });
-  showListWine(tmp);
 }
 
 // Affiche les détails du vin cliqué
@@ -165,13 +99,69 @@ function showDetails(index) {
 
 document.getElementById("recherche").addEventListener("click", searchWine);
 
+// Mode de tri suivant l'option cliquée
+function sortMethods(selected) {
+  let selectOpt = selected.value;
+  if (selectOpt == 1) {
+    alphaSort();
+  } else if (selectOpt == 2) {
+    invertSort();
+  } else {
+    cepageSort();
+  }
+}
+
+// Récupère les infos de l'array vinData
+function getData() {
+  let arr = [];
+
+  vinData.forEach((vin) => {
+    arr.push(vin);
+  });
+
+  return arr;
+}
+
+// Tri alphabétique A-Z
+function alphaSort() {
+  let tmp = getData();
+
+  tmp.sort(function (a, b) {
+    return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
+  });
+  showListWine(tmp);
+}
+
+// Tri Inversé Z-A
+function invertSort() {
+  let tmp = getData();
+
+  tmp.sort(function (a, b) {
+    return b.name > a.name ? 1 : b.name < a.name ? -1 : 0;
+  });
+  
+  showListWine(tmp);
+}
+
+// Tri par raisin
+function cepageSort() {
+  let tmp = getData();
+
+  tmp.sort(function (a, b) {
+    return a.grapes > b.grapes ? 1 : a.grapes < b.grapes ? -1 : 0;
+  });
+
+  showListWine(tmp);
+}
+
 function searchWine() {
-  /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres
-   *  La fonction recupere le texte entre par l'user dans l'input text "strSearch"
+  /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres, ou un nombre
+   *  La fonction recupere le texte entre par l'user dans l'input "strSearch"
    *  La fonction cherche le vin correspondant a l'input dans l'API
    *  S'il y en a au moins une, elle affiche le ou les resultats
    *  Si l'user clique sur "Rechercher", showReset devient true, ce qui affichera un bouton pour reset la liste
-   */
+   **/
+
   let queryArr = [];
   showReset = true;
   let str = "";
@@ -183,7 +173,6 @@ function searchWine() {
       request.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
           let reply = JSON.parse(this.response);
-          console.log(reply);
           showListWine(reply);
         }
       };
