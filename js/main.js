@@ -2,12 +2,11 @@
 // trier par couleur, bio & prix ascendant/descendant
 // Wiki
 // mit // cc // open-source license
-
-let vinData = [];
-let showReset = false;
 const url = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines"; // URL de l'API
+let showReset = false;
+let vinData = [];
 
-// R�cup�ration des donn�es de l'API Caviste
+// Récupération des données de l'API Caviste
 let request = new XMLHttpRequest();
 request.open("GET", url, true);
 
@@ -24,7 +23,6 @@ request.onload = function () {
     }
   }
 };
-
 request.send();
 
 var options = document.querySelectorAll("#trier option");
@@ -47,7 +45,12 @@ function resetSearch() {
 function showListWine(arr) {
   let str = "";
   for (let i = 0; i < arr.length; i++) {
-    str += '<li class="list-group-item" id=' + arr[i].id + ">" + arr[i].name + "</li>";
+    str +=
+      '<li class="list-group-item" id=' +
+      arr[i].id +
+      ">" +
+      arr[i].name +
+      "</li>";
   }
 
   document.getElementById("liste").innerHTML = str;
@@ -67,12 +70,9 @@ function showListWine(arr) {
   showReset = false; // Réinitialisation à false pour ne plus afficher le bouton
 
   for (let i = 0; i < arr.length; i++) {
-    document
-      .getElementById("liste")
-      .getElementsByTagName("li")
-      [i].addEventListener("click", function () {
-        showDetails(i); //0
-      });
+    document.getElementById("liste").getElementsByTagName("li")[i].addEventListener("click", function () {
+        showDetails(arr[i].id);
+    });
   }
 }
 
@@ -97,72 +97,70 @@ function sortMethods(selected) {
 
 // Tri alphabétique A-Z
 function alphaSort() {
-  let tmp = vinData;
-  vinData = [];
+  let tmp = [];
 
-  tmp.forEach((vin) => {
-    vinData.push(vin);
+  vinData.forEach((vin) => {
+    tmp.push(vin);
   });
 
-  vinData.sort(function (a, b) {
+  tmp.sort(function (a, b) {
     return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
   });
-  showListWine(vinData);
+  showListWine(tmp);
 }
 
 // Tri Inversé Z-A
 function invertSort() {
-  let tmp = vinData;
-  vinData = [];
-
-  tmp.forEach((vin) => {
-    vinData.push(vin);
+  let tmp = [];
+  vinData.forEach((vin) => {
+    tmp.push(vin);
   });
 
-  vinData.sort(function (a, b) {
+  tmp.sort(function (a, b) {
     return b.name > a.name ? 1 : b.name < a.name ? -1 : 0;
   });
-  showListWine(vinData);
+  
+  showListWine(tmp);
 }
 
 // Tri par raisin
 function cepageSort() {
-  let tmp = vinData;
-  vinData = [];
+  let tmp = [];
 
-  tmp.forEach((vin) => {
-    vinData.push(vin);
+  vinData.forEach((vin) => {
+    tmp.push(vin);
   });
 
-  vinData.sort(function (a, b) {
+  tmp.sort(function (a, b) {
     return a.grapes > b.grapes ? 1 : a.grapes < b.grapes ? -1 : 0;
   });
-  showListWine(vinData);
+  showListWine(tmp);
 }
 
-// Affiche les d�tails du vin cliqu�
+// Affiche les détails du vin cliqué
 function showDetails(index) {
-  document.getElementById("idVin").value = vinData[index].id;
-  document.getElementById("nomVin").value = vinData[index].name;
-  document.getElementById("raisins").value = vinData[index].grapes;
-  document.getElementById("pays").value = vinData[index].country;
-  document.getElementById("region").value = vinData[index].region;
-  document.getElementById("year").value = vinData[index].year;
-  document.getElementById("image").src = "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vinData[index].picture;
-  document.getElementById("description").value = vinData[index].description;
-  document.getElementById("couleur").value = vinData[index].color;
-  document.getElementById("capacite").value = vinData[index].capacity;
-  /* if (vinData[index].extra !== undefined) {
-      document.getElementById("extras").className = 'show';
-      if (vinData[index].extra["bio"] == true) {
-        document.getElementById("bioTrue").checked = true;
-      } else {
-        document.getElementById("bioFalse").checked = true;
-      }
+  let vin = vinData.find((element) => element.id == index);
+  document.getElementById("idVin").value = vin.id;
+  document.getElementById("nomVin").value = vin.name;
+  document.getElementById("raisins").value = vin.grapes;
+  document.getElementById("pays").value = vin.country;
+  document.getElementById("region").value = vin.region;
+  document.getElementById("year").value = vin.year;
+  document.getElementById("image").src = "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture;
+  document.getElementById("description").value = vin.description;
+  document.getElementById("couleur").value = vin.color;
+  document.getElementById("capacite").value = vin.capacity;
+  if (vin.extra !== null) {
+    document.getElementById("extras").className = 'show';
+    if (vin.extra["bio"] == true) {
+      document.getElementById("bioTrue").checked = true;
     } else {
-      document.getElementById("extras").className ='hide';
-    } */
-  document.getElementById("prix").value = vinData[index].price + " €";
+      document.getElementById("bioFalse").checked = true;
+    }
+  } else {
+    document.getElementById("extras").className ='hide';
+  }
+  document.getElementById("prix").value = vin.price + " €";
 }
 
 document.getElementById("recherche").addEventListener("click", searchWine);
@@ -178,22 +176,20 @@ function searchWine() {
   showReset = true;
   let str = "";
   let strSearch = document.getElementById("strSearch").value.trim();
-
-  if (strSearch == parseInt(strSearch)) {
-    let request = new XMLHttpRequest();
-    request.open("GET", url + "/" + parseInt(strSearch), true);
-    request.onload = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        let reply = JSON.parse(this.response);
-        queryArr.push(reply);
-        showListWine(queryArr);
-      }
-    };
-    request.send();
-  } else {
-    if (document.getElementById("strSearch").value !== "") {
+  if (document.getElementById("strSearch").value !== "") {
+    if (strSearch == parseInt(strSearch)) {
+      let request = new XMLHttpRequest();
+      request.open("GET", url + "/" + parseInt(strSearch), true);
+      request.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          let reply = JSON.parse(this.response);
+          console.log(reply);
+          showListWine(reply);
+        }
+      };
+      request.send();
+    } else {
       if (typeof document.getElementById("strSearch").value === "string") {
-        let strSearch = document.getElementById("strSearch").value.trim();
         fetch(url + "/search/" + strSearch)
           .then((resp) => resp.json())
           .then(function (data) {
@@ -203,9 +199,9 @@ function searchWine() {
             showListWine(queryArr);
           });
       }
-    } else {
-      alert("Veuillez écrire quelque chose dans la zone de recherche !");
     }
+  } else {
+    alert("Veuillez écrire quelque chose dans la zone de recherche !");
   }
 }
 
