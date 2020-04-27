@@ -62,6 +62,7 @@ header nav {
 }
 /* Bouton Trier */
 #trier {
+    max-width: 150px;
     margin-left: 15px;
     border-style: none;
     appearance: none;
@@ -69,7 +70,7 @@ header nav {
     background-image: none;
     box-shadow: none;
     font-size: 16px;
-    background-color: mintcream;
+    background-color: white;
 }
 
 /* Liste de vins */

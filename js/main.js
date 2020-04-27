@@ -42,20 +42,20 @@ function resetSearch() {
 }
 
 //Bouton ajouter -affichage des btn sauvegarder et supprimer
-document.getElementById("ajouter").addEventListener('click', function () {
-  document.getElementById('supprimer').style.display = "inline-block";
-  document.getElementById('sauvegarder').style.display = "inline-block";
-
+document.getElementById("ajouter").addEventListener("click", function () {
+  document.getElementById("supprimer").style.display = "inline-block";
+  document.getElementById("sauvegarder").style.display = "inline-block";
 });
-// Empêche la redirection en appuyant sur Enter
-$('#strSearch').keypress(
-  function (event) {
-    if (event.which == '13') { // 13 = keyPress Enter
-      event.preventDefault();
-    }
-  });
 
-$('#ajouter').click(function (event) {
+// Empêche la redirection en appuyant sur Enter
+$("#strSearch").keypress(function (event) {
+  // 13 = keyPress Enter
+  if (event.which == "13") {
+    event.preventDefault();
+  }
+});
+
+$("#ajouter").click(function (event) {
   event.preventDefault();
   // TODO call fct to enable details modif
 });
@@ -85,8 +85,8 @@ function showListWine(arr) {
 
   for (let i = 0; i < arr.length; i++) {
     document.getElementById("liste").getElementsByTagName("li")[i].addEventListener("click", function () {
-      showDetails(arr[i].id);
-    });
+        showDetails(arr[i].id);
+      });
   }
 }
 
@@ -99,12 +99,14 @@ function showDetails(index) {
   document.getElementById("pays").value = vin.country;
   document.getElementById("region").value = vin.region;
   document.getElementById("year").value = vin.year;
-  document.getElementById("image").src = "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture;
+  document.getElementById("image").src =
+    "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture;
   document.getElementById("description").value = vin.description;
   document.getElementById("couleur").value = vin.color;
   document.getElementById("capacite").value = vin.capacity + " CL";
+
   if (vin.extra !== null) {
-    document.getElementById("extras").className = 'show';
+    document.getElementById("extras").className = "show";
     if (vin.extra["bio"] == true) {
       document.getElementById("bioTrue").checked = true;
     } else {
@@ -115,35 +117,35 @@ function showDetails(index) {
 
     if (extra.promo !== null) {
       let promoVin = parseFloat(extra.promo);
-      document.getElementById("prix").value = parseFloat(vin.price) - (parseFloat(vin.price) * parseFloat(promoVin)) + " €";
+      document.getElementById("prix").value =
+        parseFloat(vin.price) -
+        parseFloat(vin.price) * parseFloat(promoVin) +
+        " €";
     } else {
       if (vin.price === "0") {
-        document.getElementById('prix').value = "Info indisponible";
+        document.getElementById("prix").value = "Info indisponible";
       } else {
         document.getElementById("prix").value = vin.price + " €";
       }
-
     }
-
   } else {
     document.getElementById("prix").value = vin.price + " €";
-    document.getElementById("extras").className = 'hide';
+    document.getElementById("extras").className = "hide";
 
     if (vin.color === "") {
-      document.getElementById('couleur').value = "Info indisponible";
+      document.getElementById("couleur").value = "Info indisponible";
     }
 
     if (vin.capacity === "0") {
-      document.getElementById('capacite').value = "Info indisponible";
+      document.getElementById("capacite").value = "Info indisponible";
     }
+
     if (vin.price === "0") {
-      document.getElementById('prix').value = "Info indisponible";
-    }else{
+      document.getElementById("prix").value = "Info indisponible";
+    } else {
       document.getElementById("prix").value = vin.price + " €";
     }
-
   }
-
 }
 
 document.getElementById("recherche").addEventListener("click", searchWine);
@@ -215,7 +217,7 @@ function cepageSort() {
   showListWine(tmp);
 }
 
-// Tri par année 
+// Tri par année
 function yearSort() {
   let tmp = getData();
 
@@ -230,7 +232,7 @@ function invertYearSort() {
   let tmp = getData();
 
   tmp.sort(function (a, b) {
-    return b.year > a.year ? 1 : b.year < a.year ? -1 : 0
+    return b.year > a.year ? 1 : b.year < a.year ? -1 : 0;
   });
   showListWine(tmp);
 }
@@ -262,7 +264,7 @@ function priceSort() {
   showListWine(tmp);
 }
 
-// Tri par prix inversée 
+// Tri par prix inversée
 function invertPriceSort() {
   let tmp = getData();
   tmp.sort(function (a, b) {
