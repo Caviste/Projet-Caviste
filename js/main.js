@@ -102,7 +102,7 @@ function showDetails(index) {
   document.getElementById("image").src = "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture;
   document.getElementById("description").value = vin.description;
   document.getElementById("couleur").value = vin.color;
-  document.getElementById("capacite").value = vin.capacity;
+  document.getElementById("capacite").value = vin.capacity + " CL";
   if (vin.extra !== null) {
     document.getElementById("extras").className = 'show';
     if (vin.extra["bio"] == true) {
@@ -111,7 +111,7 @@ function showDetails(index) {
       document.getElementById("bioFalse").checked = true;
     }
    JSON.parse(vin.extra);
-    if(vin.extra.promo !== undefined){
+    if(vin.extra.promo == undefined){
       console.log("Promo exists");
       let promoVin = JSON.parse(vin.extra);
       document.getElementById("prix").value = parseFloat(vin.price) - (parseFloat(vin.price) * parseFloat(promoVin.promo));
