@@ -84,7 +84,7 @@ function showListWine(arr) {
 
   for (let i = 0; i < arr.length; i++) {
     document.getElementById("liste").getElementsByTagName("li")[i].addEventListener("click", function () {
-      showDetails(arr[i].id);
+        showDetails(arr[i].id);
     });
   }
 }
@@ -110,7 +110,7 @@ function showDetails(index) {
       document.getElementById("bioFalse").checked = true;
     }
   } else {
-    document.getElementById("extras").className = 'hide';
+    document.getElementById("extras").className ='hide';
   }
   document.getElementById("prix").value = vin.price + " €";
 }
@@ -130,16 +130,15 @@ function sortMethods(selected) {
     yearSort();
   } else if (selectOpt == 5){
     invertYearSort();
-  }else if(selectOpt == 6 ) {
+  } else if(selectOpt == 6 ) {
     capacitySort();
-  }else if(selectOpt == 7) {
+  } else if(selectOpt == 7) {
     invertCapacitySort();
-  }else if (selectOpt == 8){
+  } else if (selectOpt == 8){
     priceSort();
-  }else{
+  } else{
     invertPriceSort();
   }
-  
 }
 
 // Récupère les infos de l'array vinData
@@ -170,7 +169,7 @@ function invertSort() {
   tmp.sort(function (a, b) {
     return b.name > a.name ? 1 : b.name < a.name ? -1 : 0;
   });
-
+  
   showListWine(tmp);
 }
 
