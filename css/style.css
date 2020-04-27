@@ -80,6 +80,7 @@ header nav {
     overflow-y: auto;
     overflow-x: hidden;
 }
+#trier :nth-child(0)
 
 /* Nom Vin individuel */
 #liste li {
