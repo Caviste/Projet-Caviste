@@ -41,6 +41,12 @@ function resetSearch() {
   document.getElementById("strSearch").value = "";
 }
 
+//Bouton ajouter -affichage des btn sauvegarder et supprimer
+document.getElementById("ajouter").addEventListener('click', function() {
+  document.getElementById('supprimer').style.display="inline-block";
+  document.getElementById('sauvegarder').style.display="inline-block";
+});
+
 // Affichage de la liste de vin
 function showListWine(arr) {
   let str = "";
