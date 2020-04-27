@@ -42,17 +42,18 @@ function resetSearch() {
 }
 
 //Bouton ajouter -affichage des btn sauvegarder et supprimer
-document.getElementById("ajouter").addEventListener('click', function() {
-  document.getElementById('supprimer').style.display="inline-block";
-  document.getElementById('sauvegarder').style.display="inline-block";
+document.getElementById("ajouter").addEventListener('click', function () {
+  document.getElementById('supprimer').style.display = "inline-block";
+  document.getElementById('sauvegarder').style.display = "inline-block";
+
 });
 // Empêche la redirection en appuyant sur Enter
 $('#strSearch').keypress(
-  function(event){
+  function (event) {
     if (event.which == '13') { // 13 = keyPress Enter
       event.preventDefault();
     }
-});
+  });
 
 $('#ajouter').click(function (event) {
   event.preventDefault();
@@ -109,23 +110,40 @@ function showDetails(index) {
     } else {
       document.getElementById("bioFalse").checked = true;
     }
+
+    let extra = JSON.parse(vin.extra);
+
+    if (extra.promo !== null) {
+      let promoVin = parseFloat(extra.promo);
+      document.getElementById("prix").value = parseFloat(vin.price) - (parseFloat(vin.price) * parseFloat(promoVin)) + " €";
+    } else {
+      if (vin.price === "0") {
+        document.getElementById('prix').value = "Info indisponible";
+      } else {
+        document.getElementById("prix").value = vin.price + " €";
+      }
+
+    }
+
   } else {
+    document.getElementById("prix").value = vin.price + " €";
     document.getElementById("extras").className = 'hide';
-  }
-  document.getElementById("prix").value = vin.price + " €";
 
-  if(document.getElementById('couleur').value === ""){
-    document.getElementById('couleur').value = "info indisponible";
+    if (vin.color === "") {
+      document.getElementById('couleur').value = "Info indisponible";
+    }
+
+    if (vin.capacity === "0") {
+      document.getElementById('capacite').value = "Info indisponible";
+    }
+    if (vin.price === "0") {
+      document.getElementById('prix').value = "Info indisponible";
+    }else{
+      document.getElementById("prix").value = vin.price + " €";
+    }
+
   }
 
-  if(document.getElementById('capacite').value === "0"){
-    document.getElementById('capacite').value = "info indisponible";
-  }
-  
-  if(document.getElementById('prix').value === "0"){
-    document.getElementById('prix').value = "info indisponible"; 
-  }
-  
 }
 
 document.getElementById("recherche").addEventListener("click", searchWine);
@@ -141,15 +159,15 @@ function sortMethods(selected) {
     cepageSort();
   } else if (selectOpt == 4) {
     yearSort();
-  } else if (selectOpt == 5){
+  } else if (selectOpt == 5) {
     invertYearSort();
-  }else if(selectOpt == 6 ) {
+  } else if (selectOpt == 6) {
     capacitySort();
-  }else if(selectOpt == 7) {
+  } else if (selectOpt == 7) {
     invertCapacitySort();
-  }else if (selectOpt == 8){
-    priceSort()
-  }else{
+  } else if (selectOpt == 8) {
+    priceSort();
+  } else {
     invertPriceSort();
   }
 }
@@ -197,59 +215,59 @@ function cepageSort() {
   showListWine(tmp);
 }
 
-//trie par année 
+// Tri par année 
 function yearSort() {
   let tmp = getData();
 
   tmp.sort(function (a, b) {
     return a.year > b.year ? 1 : a.year < b.year ? -1 : 0;
-  })
+  });
   showListWine(tmp);
 }
 
-//trie par année inversée
+// Tri par année inversée
 function invertYearSort() {
   let tmp = getData();
 
   tmp.sort(function (a, b) {
     return b.year > a.year ? 1 : b.year < a.year ? -1 : 0
-  })
+  });
   showListWine(tmp);
 }
 
-//trie par capacité
+// Tri par capacité
 function capacitySort() {
   let tmp = getData();
   tmp.sort(function (a, b) {
     return a.capacity > b.capacity ? 1 : a.capacity < b.capacity ? -1 : 0;
-  })
+  });
   showListWine(tmp);
 }
 
-//trie par capacité inversée
-function invertCapacitySort(){
+// Tri par capacité inversée
+function invertCapacitySort() {
   let tmp = getData();
-  tmp.sort(function(a,b){
+  tmp.sort(function (a, b) {
     return b.capacity > a.capacity ? 1 : b.capacity < a.capacity ? -1 : 0;
-  })
+  });
   showListWine(tmp);
 }
 
-//trie par prix
-function priceSort(){
+// Tri par prix
+function priceSort() {
   let tmp = getData();
-  tmp.sort(function(a,b){
+  tmp.sort(function (a, b) {
     return a.price > b.price ? 1 : a.price < b.price ? -1 : 0;
-  })
+  });
   showListWine(tmp);
 }
 
-// trie par prix inversée 
-function invertPriceSort(){
+// Tri par prix inversée 
+function invertPriceSort() {
   let tmp = getData();
-  tmp.sort(function(a,b){
+  tmp.sort(function (a, b) {
     return b.price > a.price ? 1 : b.price < a.price ? -1 : 0;
-  })
+  });
   showListWine(tmp);
 }
 
