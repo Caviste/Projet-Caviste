@@ -130,7 +130,7 @@ header nav {
     margin: 0px;
 }
 
-/* visibilité */
+/* visibilité bio*/
 .hide{
     visibility: hidden;
     height: 0px;
@@ -152,11 +152,10 @@ header nav {
 /* Boutons supprimer/sauvegarder */
 #supprimer,
 #sauvegarder {
-    display: inline-block;
+    display: none;
     margin-top: 15px;
     padding: 7px;
     font-size: 15px;
-    visibility: hidden;
 }
 
 /* Bouton sauvegarder */
