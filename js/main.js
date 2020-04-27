@@ -113,6 +113,19 @@ function showDetails(index) {
     document.getElementById("extras").className = 'hide';
   }
   document.getElementById("prix").value = vin.price + " €";
+
+  if(document.getElementById('couleur').value === ""){
+    document.getElementById('couleur').value = "info indisponible";
+  }
+
+  if(document.getElementById('capacite').value === "0"){
+    document.getElementById('capacite').value = "info indisponible";
+  }
+  
+  if(document.getElementById('prix').value === "0"){
+    document.getElementById('prix').value = "info indisponible"; 
+  }
+  
 }
 
 document.getElementById("recherche").addEventListener("click", searchWine);
