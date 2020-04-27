@@ -110,16 +110,17 @@ function showDetails(index) {
     } else {
       document.getElementById("bioFalse").checked = true;
     }
-   JSON.parse(vin.extra);
-    if(vin.extra.promo == undefined){
-      console.log("Promo exists");
-      let promoVin = JSON.parse(vin.extra);
-      document.getElementById("prix").value = parseFloat(vin.price) - (parseFloat(vin.price) * parseFloat(promoVin.promo));
-    }else{
-      document.getElementById('prix').value = "";
+
+    let extra = JSON.parse(vin.extra);
+
+    if(extra.promo !== null){
+      let promoVin = parseFloat(extra.promo);
+      document.getElementById("prix").value = parseFloat(vin.price) - (parseFloat(vin.price) * parseFloat(promoVin)) + " €";
+    } else {
       document.getElementById("prix").value = vin.price + " €";
     }
   } else {
+    document.getElementById("prix").value = vin.price + " €";
     document.getElementById("extras").className ='hide';
   }
 }
