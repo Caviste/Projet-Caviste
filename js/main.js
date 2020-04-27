@@ -45,6 +45,7 @@ function resetSearch() {
 document.getElementById("ajouter").addEventListener('click', function() {
   document.getElementById('supprimer').style.display="inline-block";
   document.getElementById('sauvegarder').style.display="inline-block";
+
 });
 // Empêche la redirection en appuyant sur Enter
 $('#strSearch').keypress(
@@ -109,10 +110,18 @@ function showDetails(index) {
     } else {
       document.getElementById("bioFalse").checked = true;
     }
+   JSON.parse(vin.extra);
+    if(vin.extra.promo !== undefined){
+      console.log("Promo exists");
+      let promoVin = JSON.parse(vin.extra);
+      document.getElementById("prix").value = parseFloat(vin.price) - (parseFloat(vin.price) * parseFloat(promoVin.promo));
+    }else{
+      document.getElementById('prix').value = "";
+      document.getElementById("prix").value = vin.price + " €";
+    }
   } else {
     document.getElementById("extras").className ='hide';
   }
-  document.getElementById("prix").value = vin.price + " €";
 }
 
 document.getElementById("recherche").addEventListener("click", searchWine);
