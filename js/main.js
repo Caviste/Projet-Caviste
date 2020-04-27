@@ -56,6 +56,11 @@ $('#strSearch').keypress(
 >>>>>>> 351d2ca2f9e29eb41793f0bd1848c6c88db03fe7
 });
 
+$('#ajouter').click(function (event) {
+  event.preventDefault();
+  // TODO call fct to enable details modif
+});
+
 // Affichage de la liste de vin
 function showListWine(arr) {
   let str = "";
