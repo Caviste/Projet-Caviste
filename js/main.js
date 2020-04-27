@@ -135,10 +135,11 @@ function sortMethods(selected) {
   }else if(selectOpt == 7) {
     invertCapacitySort();
   }else if (selectOpt == 8){
-    priceSort()
+    priceSort();
   }else{
     invertPriceSort();
   }
+  
 }
 
 // Récupère les infos de l'array vinData
@@ -184,59 +185,59 @@ function cepageSort() {
   showListWine(tmp);
 }
 
-//trie par année 
+// Tri par année 
 function yearSort() {
   let tmp = getData();
 
   tmp.sort(function (a, b) {
     return a.year > b.year ? 1 : a.year < b.year ? -1 : 0;
-  })
+  });
   showListWine(tmp);
 }
 
-//trie par année inversée
+// Tri par année inversée
 function invertYearSort() {
   let tmp = getData();
 
   tmp.sort(function (a, b) {
     return b.year > a.year ? 1 : b.year < a.year ? -1 : 0
-  })
+  });
   showListWine(tmp);
 }
 
-//trie par capacité
+// Tri par capacité
 function capacitySort() {
   let tmp = getData();
   tmp.sort(function (a, b) {
     return a.capacity > b.capacity ? 1 : a.capacity < b.capacity ? -1 : 0;
-  })
+  });
   showListWine(tmp);
 }
 
-//trie par capacité inversée
+// Tri par capacité inversée
 function invertCapacitySort(){
   let tmp = getData();
   tmp.sort(function(a,b){
     return b.capacity > a.capacity ? 1 : b.capacity < a.capacity ? -1 : 0;
-  })
+  });
   showListWine(tmp);
 }
 
-//trie par prix
+// Tri par prix
 function priceSort(){
   let tmp = getData();
   tmp.sort(function(a,b){
     return a.price > b.price ? 1 : a.price < b.price ? -1 : 0;
-  })
+  });
   showListWine(tmp);
 }
 
-// trie par prix inversée 
+// Tri par prix inversée 
 function invertPriceSort(){
   let tmp = getData();
   tmp.sort(function(a,b){
     return b.price > a.price ? 1 : b.price < a.price ? -1 : 0;
-  })
+  });
   showListWine(tmp);
 }
 
