@@ -41,6 +41,14 @@ function resetSearch() {
   document.getElementById("strSearch").value = "";
 }
 
+// Empêche la redirection en appuyant sur Enter
+$('#strSearch').keypress(
+  function(event){
+    if (event.which == '13') { // 13 = keyPress Enter
+      event.preventDefault();
+    }
+});
+
 // Affichage de la liste de vin
 function showListWine(arr) {
   let str = "";
