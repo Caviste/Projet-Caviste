@@ -135,13 +135,14 @@ header nav {
     visibility: hidden;
     height: 0px;
 }
+
 .show{
     visibility: visible;
     min-height: 23px;
     margin-bottom: 1rem;
 }
 
-/*radio style */
+/* Radio style */
 #bioFalse{
     margin-left: 80px;
 }
