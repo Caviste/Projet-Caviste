@@ -45,7 +45,7 @@ function resetSearch() {
 document.getElementById("ajouter").addEventListener('click', function() {
   document.getElementById('supprimer').style.display="inline-block";
   document.getElementById('sauvegarder').style.display="inline-block";
-});
+)};
 // Empêche la redirection en appuyant sur Enter
 $('#strSearch').keypress(
   function(event){
@@ -84,7 +84,7 @@ function showListWine(arr) {
 
   for (let i = 0; i < arr.length; i++) {
     document.getElementById("liste").getElementsByTagName("li")[i].addEventListener("click", function () {
-      showDetails(arr[i].id);
+        showDetails(arr[i].id);
     });
   }
 }
@@ -110,7 +110,7 @@ function showDetails(index) {
       document.getElementById("bioFalse").checked = true;
     }
   } else {
-    document.getElementById("extras").className = 'hide';
+    document.getElementById("extras").className ='hide';
   }
   document.getElementById("prix").value = vin.price + " €";
 }
@@ -124,20 +124,8 @@ function sortMethods(selected) {
     alphaSort();
   } else if (selectOpt == 2) {
     invertSort();
-  } else if (selectOpt == 3) {
+  } else {
     cepageSort();
-  } else if (selectOpt == 4) {
-    yearSort();
-  } else if (selectOpt == 5){
-    invertYearSort();
-  }else if(selectOpt == 6 ) {
-    capacitySort();
-  }else if(selectOpt == 7) {
-    invertCapacitySort();
-  }else if (selectOpt == 8){
-    priceSort()
-  }else{
-    invertPriceSort();
   }
 }
 
@@ -169,7 +157,7 @@ function invertSort() {
   tmp.sort(function (a, b) {
     return b.name > a.name ? 1 : b.name < a.name ? -1 : 0;
   });
-
+  
   showListWine(tmp);
 }
 
@@ -181,62 +169,6 @@ function cepageSort() {
     return a.grapes > b.grapes ? 1 : a.grapes < b.grapes ? -1 : 0;
   });
 
-  showListWine(tmp);
-}
-
-//trie par année 
-function yearSort() {
-  let tmp = getData();
-
-  tmp.sort(function (a, b) {
-    return a.year > b.year ? 1 : a.year < b.year ? -1 : 0;
-  })
-  showListWine(tmp);
-}
-
-//trie par année inversée
-function invertYearSort() {
-  let tmp = getData();
-
-  tmp.sort(function (a, b) {
-    return b.year > a.year ? 1 : b.year < a.year ? -1 : 0
-  })
-  showListWine(tmp);
-}
-
-//trie par capacité
-function capacitySort() {
-  let tmp = getData();
-  tmp.sort(function (a, b) {
-    return a.capacity > b.capacity ? 1 : a.capacity < b.capacity ? -1 : 0;
-  })
-  showListWine(tmp);
-}
-
-//trie par capacité inversée
-function invertCapacitySort(){
-  let tmp = getData();
-  tmp.sort(function(a,b){
-    return b.capacity > a.capacity ? 1 : b.capacity < a.capacity ? -1 : 0;
-  })
-  showListWine(tmp);
-}
-
-//trie par prix
-function priceSort(){
-  let tmp = getData();
-  tmp.sort(function(a,b){
-    return a.price > b.price ? 1 : a.price < b.price ? -1 : 0;
-  })
-  showListWine(tmp);
-}
-
-// trie par prix inversée 
-function invertPriceSort(){
-  let tmp = getData();
-  tmp.sort(function(a,b){
-    return b.price > a.price ? 1 : b.price < a.price ? -1 : 0;
-  })
   showListWine(tmp);
 }
 
