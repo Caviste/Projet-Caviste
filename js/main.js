@@ -117,10 +117,7 @@ function showDetails(index) {
 
     if (extra.promo !== null) {
       let promoVin = parseFloat(extra.promo);
-      document.getElementById("prix").value =
-        parseFloat(vin.price) -
-        parseFloat(vin.price) * parseFloat(promoVin) +
-        " €";
+      document.getElementById("prix").value = parseFloat(vin.price) - parseFloat(vin.price) * parseFloat(promoVin) + " €";
     } else {
       if (vin.price === "0") {
         document.getElementById("prix").value = "Info indisponible";
