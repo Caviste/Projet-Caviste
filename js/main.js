@@ -102,7 +102,7 @@ function showDetails(index) {
   document.getElementById("image").src = "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture;
   document.getElementById("description").value = vin.description;
   document.getElementById("couleur").value = vin.color;
-  document.getElementById("capacite").value = vin.capacity;
+  document.getElementById("capacite").value = vin.capacity + " CL";
   if (vin.extra !== null) {
     document.getElementById("extras").className = 'show';
     if (vin.extra["bio"] == true) {
