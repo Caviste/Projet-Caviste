@@ -45,7 +45,7 @@ function resetSearch() {
 document.getElementById("ajouter").addEventListener('click', function() {
   document.getElementById('supprimer').style.display="inline-block";
   document.getElementById('sauvegarder').style.display="inline-block";
-)};
+});
 // Empêche la redirection en appuyant sur Enter
 $('#strSearch').keypress(
   function(event){
