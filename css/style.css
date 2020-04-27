@@ -171,6 +171,16 @@ header nav {
     min-width: 122px;
 }
 
+/* Container Img + Icone */
+#container { 
+    position: relative; 
+}
+
+/* Image dans container */
+#container img { 
+    display: block; 
+}
+
 /* Image Vin */
 .styled {
     margin-top: 16px;
@@ -180,6 +190,14 @@ header nav {
     border-radius: 10px;
     width: 255px;
     height: 315px;
+}
+
+/* Icone Modif Img */
+#container .fa-edit { 
+    position: absolute; 
+    bottom:10px;
+    margin-left:228px; 
+    color:black;
 }
 
 /* Textarea */
