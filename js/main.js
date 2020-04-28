@@ -311,71 +311,31 @@ function searchWine() {
 }
 
 document.getElementById("btnSignUp").addEventListener("click", signUp);
-document.getElementById("btnLogIn").addEventListener("click", logIn);
+//document.getElementById("btnLogIn").addEventListener("click", logIn);
 
 //USE: Bearer
 function signUp() {
-  console.log("SignIn");
-  let username = document.getElementById("login").value.trim();
-  let pwd = document.getElementById("mdp").value.trim();
+  // TODO 
+  // Mock token, fakes being sent from server
+  localStorage.setItem("UniqueUserToken", JSON.stringify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"));
 
-  if (typeof Storage !== "undefined") {
-    if (username.length === 0) {
-      alert("Veuillez entrer un login valide!");
-    } else if (typeof username !== "string") {
-      alert("Le login doit être une chaîne de caractères!");
-    } else {
-      localStorage.username = username;
-    }
+  
+  let url = "http://jsonplaceholder.typicode.com/users"
+  let token = JSON.parse(sessionStorage.getItem('UniqueUserToken'));  
+  let h = new Headers();
+  h.append('Authentication', `Bearer ${token}`);
 
-    if (pwd.length === 0) {
-      alert("Veuillez entrer un mot de passe valide!");
-    } else if (typeof pwd !== "string") {
-      alert("Le mot de passe doit être une chaîne de caractères!");
-    } else {
-      localStorage.password = pwd;
-    }
+  let req = new Request(url, {
+    method: 'GET',
+    mode: 'cors',
+  });
 
-    if (
-      typeof localStorage.username !== "undefined" &&
-      typeof localStorage.password !== "undefined"
-    ) {
-      if (!localStorage.isLoggedIn) {
-        alert("Bienvenue sur Millésime, " + username + " !");
-        localStorage.isLoggedIn = true;
-        console.log(localStorage);
-      } else {
-        alert("Vous êtes déjà inscrit !");
-      }
-    }
-  } else {
-    console.log("L'information n'a pas pu être sauvegardée");
-  }
-}
-
-function logIn() {
-  console.log("LogIn");
-  let username = document.getElementById("login").value.trim();
-  let pwd = document.getElementById("mdp").value.trim();
-
-  if (username === localStorage.username) {
-    if (pwd === localStorage.password) {
-      sessionStorage.username = username;
-      sessionStorage.password = pwd;
-      sessionStorage.isLoggedIn = true;
-    } else {
-      alert("Mot de passe incorrect !");
-    }
-  } else {
-    alert("Le login ne correspond pas !");
-  }
-
-  if (
-    sessionStorage.username !== "undefined" &&
-    sessionStorage.password !== "undefined" &&
-    sessionStorage.isLoggedIn
-  ) {
-    console.log("Logged in ? " + sessionStorage.isLoggedIn);
-    alert("Vous êtes connecté(e) !");
-  }
+  fetch(req)
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(data[1]);
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
 }
