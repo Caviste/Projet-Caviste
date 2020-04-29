@@ -339,3 +339,15 @@ function signUp() {
       console.log(err.message);
     })
 }
+
+var ref = $('#ajouter');
+var popup = $("#popup");
+
+popup.hide();
+
+ref.click(function() {
+  popup.show();
+  var popper = new Popper(ref,popup,{
+    placement: 'top',         
+});
+})
