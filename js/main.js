@@ -294,8 +294,30 @@ function searchWine() {
       };
       request.send();
     } else {
-      if (typeof document.getElementById("strSearch").value === "string") {
-        fetch(url + "/search/" + strSearch)
+      if (typeof strSearch === "string") {
+        let arrRegions = ["California","Mendoza","Southern Rhone / Gigondas","Bordeaux","Oregon","Rioja","Burgundy","California Central Coast","Washington","Tuscany"];
+        let arrGrapes = ["Pinot Noir","Pinot Gris", "Grenache","Syrah","Merlot","Tempranillo","Chardonnay","Sauvignon Blanc","Syrah","Sangiovese"];
+
+        if ($.inArray(strSearch, arrRegions) !== -1) {
+          fetch(url + "/regions/" + strSearch)
+          .then((resp) => resp.json())
+          .then(function (data) {
+            data.forEach((vin) => {
+              queryArr.push(vin);
+            });
+            showListWine(queryArr);
+          })
+        } else if ($.inArray(strSearch, arrGrapes) !== -1) {
+          fetch(url + "/grapes/" + strSearch)
+          .then((resp) => resp.json())
+          .then(function (data) {
+            data.forEach((vin) => {
+              queryArr.push(vin);
+            });
+            showListWine(queryArr);
+          })
+        } else {
+          fetch(url + "/search/" + strSearch)
           .then((resp) => resp.json())
           .then(function (data) {
             data.forEach((vin) => {
@@ -303,6 +325,7 @@ function searchWine() {
             });
             showListWine(queryArr);
           });
+        }
       }
     }
   } else {
@@ -340,14 +363,10 @@ function signUp() {
     })
 }
 
-var ref = $('#ajouter');
-var popup = $("#popup");
 
-popup.hide();
-
-ref.click(function() {
-  popup.show();
-  var popper = new Popper(ref,popup,{
-    placement: 'top',         
-});
-})
+// Popper
+/* var button = $('#button');
+var tooltip = $("#tooltip");
+Popper.createPopper(button,tooltip,{ 
+  placement: 'right'     
+}); */
