@@ -364,19 +364,41 @@ function signUp() {
       console.log(err.message);
     })
 }
+
+// Chart JS
+
 $('#main').hide();
 $('#ChartGraph').click(function(event){
   const cadre = document.querySelector("#cadre");
   const ctx = cadre.getContext('2d');
+ 
+  let arrCountry = [];
+  // arr from all countries
+  vinData.forEach((vin) => {
+    if (!arrCountry.includes(vin["country"])){
+      arrCountry.push(vin["country"]);
+    }
+  });
 
-  let nbUSA = countWineByCountry(vinData,'USA');
-  let nbFrance = countWineByCountry(vinData,'France');
-  let nbSpain = countWineByCountry(vinData,'Spain');
-  let nbTotal = nbUSA+nbFrance+nbSpain;
+  let arrNb = [];
+  for (let i = 0; i < arrCountry.length; i++) {
+    arrNb.push(countWineByCountry(vinData, arrCountry[i]));
+  }
 
-  nbUSA =(nbUSA*100)/nbTotal; 
-  nbFrance =(nbFrance*100)/nbTotal;
-  nbSpain =(nbSpain*100)/nbTotal;
+  // Bug : When another country exist?
+  let nbFirst = countWineByCountry(vinData, arrCountry[0]); // => USA => 50
+  let nbSecond = countWineByCountry(vinData, arrCountry[1]); // Arg
+  let nbThird = countWineByCountry(vinData, arrCountry[2]); // France
+  let nbFourth = countWineByCountry(vinData,arrCountry[3]); // Spain
+  let nbFifth = countWineByCountry(vinData,arrCountry[4]); // IT
+
+/*   let nbTotal = nbFirst+nbSecond+nbThird+nbFourth+nbFifth;
+
+  nbFirst =((nbFirst*100)/nbTotal; 
+  nbSecond =(nbSecond*100)/nbTotal;
+  nbThird =(nbThird*100)/nbTotal;
+  nbFourth =(nbFourth*100)/nbTotal;
+  nbFifth =(nbFifth*100)/nbTotal; */
 
   function countWineByCountry(liste, country) {
     let cpt = 0;
@@ -390,8 +412,8 @@ $('#ChartGraph').click(function(event){
   }
 
   const myData = {
-    labels: ['USA', 'France', 'Spain'],
-    data: [nbUSA, nbFrance, nbSpain]
+    labels: arrCountry,
+    data: arrNb
   };
 
   let myChart = new Chart(ctx, {
@@ -402,16 +424,20 @@ $('#ChartGraph').click(function(event){
               label: 'Nombre de vins',
               data: myData.data,
               backgroundColor: [
-                  'rgba(0, 0, 0, 0.2)',
-                  'rgba(255, 247, 10, 0.2)',
-                  'rgba(255, 0, 0, 0.2)'
+                // Pick colors
+                  'rgba(0, 0, 0, 1)',
+                  'rgba(255, 247, 10, 1)',
+                  'rgba(255, 0, 0, 1)',
+                  'rgba(255, 50, 255, 1)',
+                  'rgba(255, 0, 100, 1)'
               ],
               borderColor: [
+                // Pick colors
                   'rgba(255, 99, 132, 1)',
                   'rgba(54, 162, 235, 1)',
                   'rgba(255, 206, 86, 1)'
               ],
-              borderWidth: 3
+              borderWidth: 1
           }]
       },
       options: {
@@ -424,5 +450,5 @@ $('#ChartGraph').click(function(event){
           }
       }
   });
-  $('#main').show();//???
+  $('#main').show();
 });
