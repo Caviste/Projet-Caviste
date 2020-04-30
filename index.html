@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
   <link href="fontawesome-free-5.13.0-web/css/all.min.css" rel="stylesheet">
   <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="node_modules/chart.js/dist/Chart.min.js"></script>
 </head>
 
 <body>
@@ -67,11 +68,11 @@
               <option value="7" class="list-group-item">Capacit&eacute; Invers&eacute;e</option>
               <option value="8" class="list-group-item">Prix</option>
               <option value="9" class="list-group-item">Prix invers&eacute;</option>
-
-              
             </select>
+            <button id="ChartGraph">example chart</button>
           </form>
         </div>
+
       </div>
     </div>
 
@@ -196,6 +197,9 @@
           </div>
       </div>
       </form>
+    </div>
+    <div class="row" id="main" style="background-color: white">
+        <canvas id="cadre"></canvas>
     </div>
     <footer>&copy; Amine, Nathan, Radad</footer>
   </div>

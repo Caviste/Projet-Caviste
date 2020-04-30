@@ -3,5 +3,6 @@
     "workbench.colorCustomizations": {
     
     },
-    "workbench.editor.labelFormat": "medium"
+    "workbench.editor.labelFormat": "medium",
+    "git.ignoreLimitWarning": true
 }
