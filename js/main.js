@@ -325,15 +325,6 @@ function searchWine() {
             });
             showListWine(queryArr);
           })
-        } else {
-          fetch(url + "/search/" + strSearch)
-          .then((resp) => resp.json())
-          .then(function (data) {
-            data.forEach((vin) => {
-              queryArr.push(vin);
-            });
-            showListWine(queryArr);
-          });
         }
       }
     }
