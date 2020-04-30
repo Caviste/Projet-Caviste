@@ -145,8 +145,6 @@ function showDetails(index) {
   }
 }
 
-document.getElementById("recherche").addEventListener("click", searchWine);
-
 // Mode de tri suivant l'option cliquée
 function sortMethods(selected) {
   let selectOpt = selected.value;
@@ -270,6 +268,17 @@ function invertPriceSort() {
   showListWine(tmp);
 }
 
+document.getElementById("recherche").addEventListener("click", searchWine);
+
+$(document).ready(function(){
+  $('#strSearch').on('keyup',function(){
+    let searchValue = $(this).val().toLowerCase();
+    $("#liste li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
+    });
+  });
+});
+
 function searchWine() {
   /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres, ou un nombre
    *  La fonction recupere le texte entre par l'user dans l'input "strSearch"
@@ -332,6 +341,8 @@ function searchWine() {
     alert("Veuillez écrire quelque chose dans la zone de recherche !");
   }
 }
+
+
 
 document.getElementById("btnSignUp").addEventListener("click", signUp);
 //document.getElementById("btnLogIn").addEventListener("click", logIn);
