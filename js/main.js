@@ -362,11 +362,3 @@ function signUp() {
       console.log(err.message);
     })
 }
-
-
-// Popper
-/* var button = $('#button');
-var tooltip = $("#tooltip");
-Popper.createPopper(button,tooltip,{ 
-  placement: 'right'     
-}); */
