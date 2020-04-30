@@ -371,38 +371,23 @@ $('#main').hide();
 $('#ChartGraph').click(function(event){
   const cadre = document.querySelector("#cadre");
   const ctx = cadre.getContext('2d');
- 
+  
+  // Crée un array contenant tous les pays des vins
   let arrCountry = [];
-  // arr from all countries
   vinData.forEach((vin) => {
     if (!arrCountry.includes(vin["country"])){
       arrCountry.push(vin["country"]);
     }
   });
 
+  // Crée un array contenant tous les nombres de vins, par pays
   let arrNb = [];
   for (let i = 0; i < arrCountry.length; i++) {
     arrNb.push(countWineByCountry(vinData, arrCountry[i]));
   }
 
-  // Bug : When another country exist?
-  let nbFirst = countWineByCountry(vinData, arrCountry[0]); // => USA => 50
-  let nbSecond = countWineByCountry(vinData, arrCountry[1]); // Arg
-  let nbThird = countWineByCountry(vinData, arrCountry[2]); // France
-  let nbFourth = countWineByCountry(vinData,arrCountry[3]); // Spain
-  let nbFifth = countWineByCountry(vinData,arrCountry[4]); // IT
-
-/*   let nbTotal = nbFirst+nbSecond+nbThird+nbFourth+nbFifth;
-
-  nbFirst =((nbFirst*100)/nbTotal; 
-  nbSecond =(nbSecond*100)/nbTotal;
-  nbThird =(nbThird*100)/nbTotal;
-  nbFourth =(nbFourth*100)/nbTotal;
-  nbFifth =(nbFifth*100)/nbTotal; */
-
   function countWineByCountry(liste, country) {
-    let cpt = 0;
-    
+    let cpt = 0;    
     for(let vin of liste) {
       if(vin.country==country) {
         cpt++;
