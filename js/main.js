@@ -373,3 +373,65 @@ function signUp() {
       console.log(err.message);
     })
 }
+$('#main').hide();
+$('#ChartGraph').click(function(event){
+  const cadre = document.querySelector("#cadre");
+  const ctx = cadre.getContext('2d');
+
+  let nbUSA = countWineByCountry(vinData,'USA');
+  let nbFrance = countWineByCountry(vinData,'France');
+  let nbSpain = countWineByCountry(vinData,'Spain');
+  let nbTotal = nbUSA+nbFrance+nbSpain;
+
+  nbUSA =(nbUSA*100)/nbTotal; 
+  nbFrance =(nbFrance*100)/nbTotal;
+  nbSpain =(nbSpain*100)/nbTotal;
+
+  function countWineByCountry(liste, country) {
+    let cpt = 0;
+    
+    for(let vin of liste) {
+      if(vin.country==country) {
+        cpt++;
+      }
+    }
+    return cpt;
+  }
+
+  const myData = {
+    labels: ['USA', 'France', 'Spain'],
+    data: [nbUSA, nbFrance, nbSpain]
+  };
+
+  let myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: myData.labels,
+          datasets: [{
+              label: 'Nombre de vins',
+              data: myData.data,
+              backgroundColor: [
+                  'rgba(0, 0, 0, 0.2)',
+                  'rgba(255, 247, 10, 0.2)',
+                  'rgba(255, 0, 0, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)'
+              ],
+              borderWidth: 3
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });
+  $('#main').show();//???
+});
