@@ -376,7 +376,7 @@ $('#clickMe').click(function(){
 
   const cadre = document.querySelector("#cadre");
   const ctx = cadre.getContext('2d');
-  
+  Chart.defaults.global.defaultFontColor = 'black';
   // Crée un array contenant tous les pays des vins
   let arrCountry = [];
   vinData.forEach((vin) => {
@@ -406,7 +406,8 @@ $('#clickMe').click(function(){
     data: arrNb
   };
   let myChart = new Chart(ctx, {
-      type: 'bar',
+    
+      type: 'pie',
       data: {
           labels: myData.labels,
           datasets: [{
@@ -414,29 +415,40 @@ $('#clickMe').click(function(){
               data: myData.data,
               backgroundColor: [
                 // Pick colors
-                  'rgba(0, 0, 0, 1)',
-                  'rgba(255, 247, 10, 1)',
-                  'rgba(255, 0, 0, 1)',
-                  'rgba(255, 50, 255, 1)',
-                  'rgba(255, 0, 100, 1)'
+                  'rgba(244, 67, 54, 0.4)',
+                  'rgba(102, 187, 106, 0.4)',
+                  'rgba(255, 167, 38, 0.4)',
+                  'rgba(3, 169, 244,0.4)',
+                  'rgba(244, 143, 177, 0.4)',
               ],
               borderColor: [
                 // Pick colors
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)'
+                  'rgb(244, 67, 54)',
+                  'rgb(139, 195, 74)',
+                  'rgb(255, 167, 38)',
+                  'rgb(3, 169, 244)',
+                  'rgb(244, 143, 177)',
               ],
-              borderWidth: 1
+              borderWidth: 2
           }]
       },
       options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
-          }
+        maintainAspectRatio:false,
+        responsive: true,
+          title: {
+            display: true,
+            text: 'Nombre des vins par Pays',
+            fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+            padding :10,
+            fontSize : 20,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+          }  
       }
   });
   
