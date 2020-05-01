@@ -3,6 +3,7 @@ body {
   background-image: url("../img/wine-back4.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: 'Cinzel', serif;
   scroll-behavior: smooth;
 }
