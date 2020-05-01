@@ -221,3 +221,199 @@ footer {
     color: white;
     font-size: 13px;
 }
+
+
+
+/* test popper*/
+#tooltip {
+    /* ... */
+    display: none;
+    z-index: -1;
+  }
+  
+  #tooltip[data-show] {
+    display: block;
+  }
+  #tooltip {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+  }
+
+  #arrow,
+#arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  z-index: 6;
+}
+
+#arrow::before {
+  content: '';
+  transform: rotate(45deg);
+  background: #333;
+}
+#tooltip[data-popper-placement^='top'] > #arrow {
+    bottom: -4px;
+  }
+  
+  #tooltip[data-popper-placement^='bottom'] > #arrow {
+    top: -4px;
+  }
+  
+  #tooltip[data-popper-placement^='left'] > #arrow {
+    right: -4px;
+  }
+  
+  #tooltip[data-popper-placement^='right'] > #arrow {
+    left: -4px;
+  }
+
+/* deuxième test*/
+#ajouteVin {
+    /* ... */
+    display: none;
+  }
+  
+  #ajouteVin[data-show] {
+    display: block;
+  }
+  #ajouteVin {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+  }
+
+  #arrow2,
+#arrow2::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  z-index: -1;
+}
+
+#arrow2::before {
+  content: '';
+  transform: rotate(45deg);
+  background: #333;
+}
+#ajouteVin[data-popper-placement^='top'] > #arrow2 {
+    bottom: -4px;
+  }
+  
+  #ajouteVin[data-popper-placement^='bottom'] > #arrow2 {
+    top: -4px;
+  }
+  
+  #ajouteVin[data-popper-placement^='left'] > #arrow2 {
+    right: -4px;
+  }
+  
+  #ajouteVin[data-popper-placement^='right'] > #arrow2 {
+    left: -4px;
+  }
+
+  /* troisième test*/
+
+#areaSearch {
+    /* ... */
+    display: none;
+  }
+  
+  #areaSearch[data-show] {
+    display: block;
+  }
+  #areaSearch {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+  }
+
+  
+
+  #arrow3,
+#arrow3::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+}
+
+#arrow3::before {
+  content: '';
+  transform: rotate(45deg);
+  background: #333;
+}
+#areaSearch[data-popper-placement^='top'] > #arrow3 {
+    bottom: -4px;
+  }
+  
+  #areaSearch[data-popper-placement^='bottom'] > #arrow3 {
+    top: -4px;
+  }
+  
+  #areaSearch[data-popper-placement^='left'] > #arrow3 {
+    right: -4px;
+  }
+  
+  #areaSearch[data-popper-placement^='right'] > #arrow3 {
+    left: -4px;
+  }
+
+  
+  /* quatrième test */
+
+
+#chart {
+    /* ... */
+    display: none;
+  }
+  
+  #chart[data-show] {
+    display: block;
+  }
+  #chart {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+  }
+
+  #arrow4,
+#arrow4::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  z-index: -1;
+}
+
+#arrow4::before {
+  content: '';
+  transform: rotate(45deg);
+  background: #333;
+}
+#chart[data-popper-placement^='top'] > #arrow4 {
+    bottom: -4px;
+  }
+  
+  #chart[data-popper-placement^='bottom'] > #arrow4 {
+    top: -4px;
+  }
+  
+  #chart[data-popper-placement^='left'] > #arrow4 {
+    right: -4px;
+  }
+  
+  #chart[data-popper-placement^='right'] > #arrow4 {
+    left: -4px;
+  }

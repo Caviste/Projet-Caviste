@@ -85,8 +85,8 @@ function showListWine(arr) {
 
   for (let i = 0; i < arr.length; i++) {
     document.getElementById("liste").getElementsByTagName("li")[i].addEventListener("click", function () {
-        showDetails(arr[i].id);
-      });
+      showDetails(arr[i].id);
+    });
   }
 }
 
@@ -270,10 +270,10 @@ function invertPriceSort() {
 
 document.getElementById("recherche").addEventListener("click", searchWine);
 
-$(document).ready(function(){
-  $('#strSearch').on('keyup',function(){
+$(document).ready(function () {
+  $('#strSearch').on('keyup', function () {
     let searchValue = $(this).val().toLowerCase();
-    $("#liste li").filter(function() {
+    $("#liste li").filter(function () {
       $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
     });
   });
@@ -304,27 +304,27 @@ function searchWine() {
       request.send();
     } else {
       if (typeof strSearch === "string") {
-        let arrRegions = ["California","Mendoza","Southern Rhone / Gigondas","Bordeaux","Oregon","Rioja","Burgundy","California Central Coast","Washington","Tuscany"];
-        let arrGrapes = ["Pinot Noir","Pinot Gris", "Grenache","Syrah","Merlot","Tempranillo","Chardonnay","Sauvignon Blanc","Syrah","Sangiovese"];
+        let arrRegions = ["California", "Mendoza", "Southern Rhone / Gigondas", "Bordeaux", "Oregon", "Rioja", "Burgundy", "California Central Coast", "Washington", "Tuscany"];
+        let arrGrapes = ["Pinot Noir", "Pinot Gris", "Grenache", "Syrah", "Merlot", "Tempranillo", "Chardonnay", "Sauvignon Blanc", "Syrah", "Sangiovese"];
 
         if ($.inArray(strSearch, arrRegions) !== -1) {
           fetch(url + "/regions/" + strSearch)
-          .then((resp) => resp.json())
-          .then(function (data) {
-            data.forEach((vin) => {
-              queryArr.push(vin);
-            });
-            showListWine(queryArr);
-          })
+            .then((resp) => resp.json())
+            .then(function (data) {
+              data.forEach((vin) => {
+                queryArr.push(vin);
+              });
+              showListWine(queryArr);
+            })
         } else if ($.inArray(strSearch, arrGrapes) !== -1) {
           fetch(url + "/grapes/" + strSearch)
-          .then((resp) => resp.json())
-          .then(function (data) {
-            data.forEach((vin) => {
-              queryArr.push(vin);
-            });
-            showListWine(queryArr);
-          })
+            .then((resp) => resp.json())
+            .then(function (data) {
+              data.forEach((vin) => {
+                queryArr.push(vin);
+              });
+              showListWine(queryArr);
+            })
         }
       }
     }
@@ -344,9 +344,9 @@ function signUp() {
   // Mock token, fakes being sent from server
   localStorage.setItem("UniqueUserToken", JSON.stringify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"));
 
-  
+
   let url = "http://jsonplaceholder.typicode.com/users"
-  let token = JSON.parse(sessionStorage.getItem('UniqueUserToken'));  
+  let token = JSON.parse(sessionStorage.getItem('UniqueUserToken'));
   let h = new Headers();
   h.append('Authentication', `Bearer ${token}`);
 
@@ -368,14 +368,14 @@ function signUp() {
 // Chart JS
 
 $('#main').hide();
-$('#ChartGraph').click(function(event){
+$('#ChartGraph').click(function (event) {
   const cadre = document.querySelector("#cadre");
   const ctx = cadre.getContext('2d');
-  
+
   // Crée un array contenant tous les pays des vins
   let arrCountry = [];
   vinData.forEach((vin) => {
-    if (!arrCountry.includes(vin["country"])){
+    if (!arrCountry.includes(vin["country"])) {
       arrCountry.push(vin["country"]);
     }
   });
@@ -387,9 +387,9 @@ $('#ChartGraph').click(function(event){
   }
 
   function countWineByCountry(liste, country) {
-    let cpt = 0;    
-    for(let vin of liste) {
-      if(vin.country==country) {
+    let cpt = 0;
+    for (let vin of liste) {
+      if (vin.country == country) {
         cpt++;
       }
     }
@@ -401,38 +401,301 @@ $('#ChartGraph').click(function(event){
     data: arrNb
   };
   let myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: myData.labels,
-          datasets: [{
-              label: 'Nombre de vins',
-              data: myData.data,
-              backgroundColor: [
-                // Pick colors
-                  'rgba(0, 0, 0, 1)',
-                  'rgba(255, 247, 10, 1)',
-                  'rgba(255, 0, 0, 1)',
-                  'rgba(255, 50, 255, 1)',
-                  'rgba(255, 0, 100, 1)'
-              ],
-              borderColor: [
-                // Pick colors
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
+    type: 'bar',
+    data: {
+      labels: myData.labels,
+      datasets: [{
+        label: 'Nombre de vins',
+        data: myData.data,
+        backgroundColor: [
+          // Pick colors
+          'rgba(0, 0, 0, 1)',
+          'rgba(255, 247, 10, 1)',
+          'rgba(255, 0, 0, 1)',
+          'rgba(255, 50, 255, 1)',
+          'rgba(255, 0, 100, 1)'
+        ],
+        borderColor: [
+          // Pick colors
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
           }
+        }]
       }
+    }
   });
   $('#main').show();
 });
+
+
+
+//test popper
+const buttonSearch = document.querySelector('#recherche');
+const tooltip = document.querySelector('#tooltip');
+
+const buttonAdd = document.querySelector('#ajouter');
+const ajouteVin = document.querySelector('#ajouteVin');
+
+const buttonArea = document.querySelector('#strSearch');
+const zoneTexte = document.querySelector('#areaSearch');
+
+const buttonChart = document.querySelector('#ChartGraph');
+const afficherChart = document.querySelector('#chart');
+
+Popper.createPopper(buttonSearch, tooltip);
+Popper.createPopper(buttonAdd, ajouteVin);
+Popper.createPopper(buttonArea, zoneTexte);
+Popper.createPopper(buttonChart, afficherChart);
+
+
+$("#recherche").mouseenter(showPopper(buttonSearch,tooltip,"bottom"));
+$("#ajouter").mouseenter(showPopper(buttonAdd,ajouteVin,'bottom'));
+$("#strSearch").mouseenter(showPopper(buttonArea,zoneTexte,'left'));
+$("#ChartGraph").mouseenter(showPopper(buttonChart,afficherChart,"right"));
+
+
+function showPopper(button,arrow,position) {
+
+
+  function show() {
+    arrow.setAttribute('data-show', '');
+  }
+
+  function hide() {
+    arrow.removeAttribute('data-show');
+  }
+
+  const showEvents = ['mouseenter', 'focus'];
+  const hideEvents = ['mouseleave', 'blur'];
+
+  showEvents.forEach(event => {
+    button.addEventListener(event, show);
+  });
+
+  hideEvents.forEach(event => {
+    button.addEventListener(event, hide);
+  });
+
+  let popperInstance = null;
+
+  function create() {
+    popperInstance = Popper.createPopper(button, arrow, {
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 8],
+          },
+        },
+      ],
+      placement : position,
+    });
+  }
+
+  function destroy() {
+    if (popperInstance) {
+      popperInstance.destroy();
+      popperInstance = null;
+    }
+  }
+
+  function show() {
+    arrow.setAttribute('data-show', '');
+    create();
+  }
+
+  function hide() {
+    arrow.removeAttribute('data-show');
+    destroy();
+  }
+
+}
+
+/*
+//deuxième test
+
+const buttonAdd = document.querySelector('#ajouter');
+const ajouteVin = document.querySelector('#ajouteVin');
+
+Popper.createPopper(buttonAdd, ajouteVin);
+
+function show2() {
+  ajouteVin.setAttribute('data-show', '');
+}
+
+function hide2() {
+  ajouteVin.removeAttribute('data-show');
+}
+
+const showEvents2 = ['mouseenter', 'focus'];
+const hideEvents2 = ['mouseleave', 'blur'];
+
+showEvents2.forEach(event => {
+  buttonAdd.addEventListener(event, show2);
+});
+
+hideEvents2.forEach(event => {
+  buttonAdd.addEventListener(event, hide2);
+});
+
+let popperInstance2 = null;
+
+function create2() {
+  popperInstance2 = Popper.createPopper(buttonAdd, ajouteVin, {
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 8],
+        },
+      },
+    ],
+  });
+}
+
+function destroy2() {
+  if (popperInstance2) {
+    popperInstance2.destroy();
+    popperInstance2 = null;
+  }
+}
+
+function show2() {
+  ajouteVin.setAttribute('data-show', '');
+  create2();
+}
+
+function hide2() {
+  ajouteVin.removeAttribute('data-show');
+  destroy2();
+}
+*/
+/*troisième test */
+
+/*
+const buttonArea = document.querySelector('#strSearch');
+const zoneTexte = document.querySelector('#areaSearch');
+
+Popper.createPopper(buttonArea, zoneTexte);
+
+function show3() {
+  zoneTexte.setAttribute('data-show', '');
+}
+
+function hide3() {
+  zoneTexte.removeAttribute('data-show');
+}
+
+const showEvents3 = ['mouseenter', 'focus'];
+const hideEvents3 = ['mouseleave', 'blur'];
+
+showEvents3.forEach(event => {
+  buttonArea.addEventListener(event, show3);
+});
+
+hideEvents3.forEach(event => {
+  buttonArea.addEventListener(event, hide3);
+});
+
+let popperInstance3 = null;
+
+function create3() {
+  popperInstance3 = Popper.createPopper(buttonArea, zoneTexte, {
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 8],
+        },
+      },
+    ],
+    placement : 'left',
+  });
+}
+
+function destroy3() {
+  if (popperInstance3) {
+    popperInstance3.destroy();
+    popperInstance3 = null;
+  }
+}
+
+function show3() {
+  zoneTexte.setAttribute('data-show', '');
+  create3();
+}
+
+function hide3() {
+  zoneTexte.removeAttribute('data-show');
+  destroy3();
+}
+*/
+/* Quatrième test*/
+/*
+
+const buttonChart = document.querySelector('#ChartGraph');
+const afficherChart = document.querySelector('#chart');
+Popper.createPopper(buttonChart, afficherChart);
+
+function show4() {
+  afficherChart.setAttribute('data-show', '');
+}
+
+function hide4() {
+  afficherChart.removeAttribute('data-show');
+}
+
+const showEvents4 = ['mouseenter', 'focus'];
+const hideEvents4 = ['mouseleave', 'blur'];
+
+showEvents4.forEach(event => {
+  buttonChart.addEventListener(event, show4);
+});
+
+hideEvents4.forEach(event => {
+  buttonChart.addEventListener(event, hide4);
+});
+
+let popperInstance4 = null;
+
+function create4() {
+  popperInstance4 = Popper.createPopper(buttonChart, afficherChart, {
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 8],
+        },
+      },
+    ],
+    placement : 'right',
+  });
+}
+
+function destroy4() {
+  if (popperInstance4) {
+    popperInstance4.destroy();
+    popperInstance4 = null;
+  }
+}
+
+function show4() {
+  afficherChart.setAttribute('data-show', '');
+  create4();
+}
+
+function hide4() {
+  afficherChart.removeAttribute('data-show');
+  destroy4();
+}
+*/
