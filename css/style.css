@@ -261,6 +261,11 @@ header nav {
         min-width: 300px;
         min-height: 300px;
     }
+    #stylediv{
+      min-width:370px;
+      margin-right: 15px;
+      margin-left: 15px;
+    }
   }
   
   @media all and (min-width:650px) and (max-width: 1000px) {
