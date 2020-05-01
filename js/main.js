@@ -365,16 +365,16 @@ function signUp() {
 }
 
 // Chart JS
-$('#main').hide();
-
+$('#mainPays').hide();
 
 $('#clickMe').click(function(){
-  $('#main').animate({
+  /* Chart pays */
+  $('#mainPays').animate({
   }, 5000, function() {
-    $('#main').show();
+    $('#mainPays').show();
   });
 
-  const cadre = document.querySelector("#cadre");
+  const cadre = document.querySelector("#cadrePays");
   const ctx = cadre.getContext('2d');
   Chart.defaults.global.defaultFontColor = 'black';
   // Crée un array contenant tous les pays des vins
