@@ -72,7 +72,10 @@ header nav {
     font-size: 16px;
     background-color: white;
 }
-
+/* Bouton tatistiques */
+#ChartGraph{
+    margin-left:10px;
+}
 /* Liste de vins */
 #liste {
     min-width: 300px;
@@ -221,6 +224,7 @@ footer {
     color: white;
     font-size: 13px;
 }
+<<<<<<< HEAD
 
 
 
@@ -417,3 +421,60 @@ footer {
   #chart[data-popper-placement^='right'] > #arrow4 {
     left: -4px;
   }
+=======
+#mainPays{
+    background-color: rgba(255, 255, 255, 0.904);
+    border-radius:10px;
+    max-width: 995px;
+    max-height: 500px;   
+    margin-left:10px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+/* css pour les telephones et tablettes */
+@media all and (min-width:300px) and (max-width:360px) {
+    #mainPays{
+        min-width:300px;
+        min-height: 300px; 
+        margin-bottom: 30px;
+    }
+    #cadrePays{
+        min-width: 300px;
+        min-height: 300px;
+    }
+}
+@media all and (min-width:361px) and (max-width:649px) {
+    #mainPays{
+        min-width:300px;
+        min-height: 300px; 
+        margin-bottom: 30px;
+        margin-right: 20px;
+    }
+    #cadrePays{
+        min-width: 300px;
+        min-height: 300px;
+    }
+}
+
+@media all and (min-width:650px) and (max-width: 1000px) {
+    #mainPays{
+        width:350px;
+        height: 350px;
+    }
+    #cadrePays{
+        min-width: 250px;
+        min-height: 250px;
+    }
+}
+
+@media all and (min-width:1001px) and (max-width: 3000px) {
+    #mainPays{
+        min-width:350px;
+        min-height: 350px;
+    }
+    #cadrePays{
+        min-width: 300px;
+        min-height: 300px;
+    }
+}
+>>>>>>> e0fbea5daad36a467c78398eb0af07aa2900ccce

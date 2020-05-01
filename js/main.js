@@ -337,7 +337,6 @@ function searchWine() {
 
 document.getElementById("btnSignUp").addEventListener("click", signUp);
 //document.getElementById("btnLogIn").addEventListener("click", logIn);
-
 //USE: Bearer
 function signUp() {
   // TODO 
@@ -366,12 +365,26 @@ function signUp() {
 }
 
 // Chart JS
+$('#mainPays').hide();
 
+$('#clickMe').click(function(){
+  /* Chart pays */
+  $('#mainPays').animate({
+  }, 5000, function() {
+    $('#mainPays').show();
+  });
+
+<<<<<<< HEAD
 $('#main').hide();
 $('#ChartGraph').click(function (event) {
   const cadre = document.querySelector("#cadre");
   const ctx = cadre.getContext('2d');
 
+=======
+  const cadre = document.querySelector("#cadrePays");
+  const ctx = cadre.getContext('2d');
+  Chart.defaults.global.defaultFontColor = 'black';
+>>>>>>> e0fbea5daad36a467c78398eb0af07aa2900ccce
   // Crée un array contenant tous les pays des vins
   let arrCountry = [];
   vinData.forEach((vin) => {
@@ -401,6 +414,7 @@ $('#ChartGraph').click(function (event) {
     data: arrNb
   };
   let myChart = new Chart(ctx, {
+<<<<<<< HEAD
     type: 'bar',
     data: {
       labels: myData.labels,
@@ -431,9 +445,55 @@ $('#ChartGraph').click(function (event) {
             beginAtZero: true
           }
         }]
+=======
+    
+      type: 'pie',
+      data: {
+          labels: myData.labels,
+          datasets: [{
+              label: 'Nombre de vins',
+              data: myData.data,
+              backgroundColor: [
+                // Pick colors
+                  'rgba(244, 67, 54, 0.4)',
+                  'rgba(102, 187, 106, 0.4)',
+                  'rgba(255, 167, 38, 0.4)',
+                  'rgba(3, 169, 244,0.4)',
+                  'rgba(244, 143, 177, 0.4)',
+              ],
+              borderColor: [
+                // Pick colors
+                  'rgb(244, 67, 54)',
+                  'rgb(139, 195, 74)',
+                  'rgb(255, 167, 38)',
+                  'rgb(3, 169, 244)',
+                  'rgb(244, 143, 177)',
+              ],
+              borderWidth: 2
+          }]
+      },
+      options: {
+        maintainAspectRatio:false,
+        responsive: true,
+          title: {
+            display: true,
+            text: 'Nombre des vins par Pays',
+            fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+            padding :10,
+            fontSize : 20,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+          }  
+>>>>>>> e0fbea5daad36a467c78398eb0af07aa2900ccce
       }
     }
   });
+<<<<<<< HEAD
   $('#main').show();
 });
 
@@ -699,3 +759,7 @@ function hide4() {
   destroy4();
 }
 */
+=======
+  
+});
+>>>>>>> e0fbea5daad36a467c78398eb0af07aa2900ccce
