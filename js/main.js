@@ -400,7 +400,6 @@ $('#ChartGraph').click(function(event){
     labels: arrCountry,
     data: arrNb
   };
-
   let myChart = new Chart(ctx, {
       type: 'bar',
       data: {
