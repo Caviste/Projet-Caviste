@@ -244,46 +244,46 @@ footer {
 }
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
-    #mainPays{
+    #mainPays,#mainRaisins{
         min-width:300px;
         min-height: 300px; 
         margin-bottom: 30px;
     }
-    #cadrePays{
+    #cadrePays,#cadreRaisins{
         min-width: 300px;
         min-height: 300px;
     }
 }
 @media all and (min-width:361px) and (max-width:649px) {
-    #mainPays{
+    #mainPays,#mainRaisins{
         min-width:300px;
         min-height: 300px; 
         margin-bottom: 30px;
         margin-right: 20px;
     }
-    #cadrePays{
+    #cadrePays,#cadreRaisins{
         min-width: 300px;
         min-height: 300px;
     }
 }
 
 @media all and (min-width:650px) and (max-width: 1000px) {
-    #mainPays{
+    #mainPays,#mainRaisins{
         width:350px;
         height: 350px;
     }
-    #cadrePays{
+    #cadrePays,#cadreRaisins{
         min-width: 250px;
         min-height: 250px;
     }
 }
 
 @media all and (min-width:1001px) and (max-width: 3000px) {
-    #mainPays{
+    #mainPay,#mainRaisinss{
         min-width:350px;
         min-height: 350px;
     }
-    #cadrePays{
+    #cadrePays,#cadreRaisins{
         min-width: 300px;
         min-height: 300px;
     }
