@@ -366,6 +366,7 @@ function signUp() {
 
 // Chart JS
 $('#mainPays').hide();
+$('#mainRaisins').hide();
 
 $('#clickMe').click(function(){
   /* Chart pays */
@@ -452,4 +453,97 @@ $('#clickMe').click(function(){
       }
   });
   
+   /* Chart raisins */
+   $('#mainRaisins').animate({
+  }, 5000, function() {
+    $('#mainRaisins').show();
+  });
+
+  const cadreRaisins = document.querySelector("#cadreRaisins");
+  const ctxRaisins = cadreRaisins.getContext('2d');
+  Chart.defaults.global.defaultFontColor = 'black';
+  // Crée un array contenant tous les pays des vins
+  let arrGrapes = [];
+  vinData.forEach((vin) => {
+    if (!arrGrapes.includes(vin["grapes"])){
+      arrGrapes.push(vin["grapes"]);
+    }
+  });
+
+  // Crée un array contenant tous les nombres de vins, par pays
+  let arrNbR = [];
+  for (let i = 0; i < arrGrapes.length; i++) {
+    arrNbR.push(countWineByGrapes(vinData, arrGrapes[i]));
+  }
+
+  function countWineByGrapes(liste, grapes) {
+    let cptR = 0;    
+    for(let vin of liste) {
+      if(vin.grapes==grapes) {
+        cptR++;
+      }
+    }
+    return cptR;
+  }
+
+  const myDataR = {
+    labels: arrGrapes,
+    data: arrNbR
+  };
+  let myChartR = new Chart(ctxRaisins, {
+    
+      type: 'pie',
+      data: {
+          labels: myDataR.labels,
+          datasets: [{
+              label: 'Nombre de raisins',
+              data: myDataR.data,
+              backgroundColor: [
+                // Pick colors
+                  'rgba(244, 67, 54, 0.4)',
+                  'rgba(102, 187, 106, 0.4)',
+                  'rgba(255, 167, 38, 0.4)',
+                  'rgba(3, 169, 244,0.4)',
+                  'rgba(244, 143, 177, 0.4)',//
+                  'rgba(51, 70, 255, 0.4)',
+                  'rgba(255, 51, 51, 0.4)',
+                  'rgba(255, 212, 51, 0.4)',
+                  'rgba(51, 255, 255 , 0.4)',
+              ],
+              borderColor: [
+                // Pick colors
+                  'rgb(244, 67, 54)',
+                  'rgb(139, 195, 74)',
+                  'rgb(255, 167, 38)',
+                  'rgb(3, 169, 244)',
+                  'rgb(244, 143, 177)',//
+                  'rgb(51, 70, 255)',
+                  'rgb(255, 51, 51)',
+                  'rgb(255, 212, 51)',
+                  'rgb(51, 255, 255 )',
+              ],
+              borderWidth: 2
+          }]
+      },
+      options: {
+        maintainAspectRatio:false,
+        responsive: true,
+          title: {
+            display: true,
+            text: 'Nombre des vins par raisins',
+            fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+            padding :10,
+            fontSize : 20,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+          }  
+      }
+  });
+  
 });
+
