@@ -337,7 +337,6 @@ function searchWine() {
 
 document.getElementById("btnSignUp").addEventListener("click", signUp);
 //document.getElementById("btnLogIn").addEventListener("click", logIn);
-
 //USE: Bearer
 function signUp() {
   // TODO 
@@ -366,9 +365,15 @@ function signUp() {
 }
 
 // Chart JS
-
 $('#main').hide();
-$('#ChartGraph').click(function(event){
+
+
+$('#clickMe').click(function(){
+  $('#main').animate({
+  }, 5000, function() {
+    $('#main').show();
+  });
+
   const cadre = document.querySelector("#cadre");
   const ctx = cadre.getContext('2d');
   
@@ -434,5 +439,5 @@ $('#ChartGraph').click(function(event){
           }
       }
   });
-  $('#main').show();
+  
 });
