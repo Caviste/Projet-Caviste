@@ -1,281 +1,281 @@
 /* Corps page */
 body {
-    background-image: url("../img/wine-back4.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: 'Cinzel', serif;
-    scroll-behavior: smooth;
+  background-image: url("../img/wine-back4.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: 'Cinzel', serif;
+  scroll-behavior: smooth;
 }
 
 /* Header */
 header nav {
-    background-color: rgba(29, 27, 27, 0.8);
-    border-radius: 10px;
-    margin-bottom: 10px;
+  background-color: rgba(29, 27, 27, 0.8);
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 /* Inputs texte login & password */
 #mdp,
 #login {
-    border-radius: 5px;
+  border-radius: 5px;
 }
 
 /* Boutons S'inscrire & Login */
 #btnSignUp,
 #btnLogIn {
-    color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d;
-    border-style: none;
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+  border-style: none;
 }
 
 #btnLogIn {
-    margin-left : 25px;
+  margin-left : 25px;
 }
 
 /* Logo Millesime */
 #millesime {
-    margin-right: 50px;
+  margin-right: 50px;
 }
 
 /* Input LogIn et Mot de passe */
 #login,
 #mdp {
-    border-radius: 3px;
-    border-style: none;
+  border-radius: 3px;
+  border-style: none;
 }
 
 /* Input texte Vin */
 #strSearch {
-    min-width: 270px;
-    border-style: solid;
-    border-color: rgb(145, 53, 64);
-    background-color: white;
-    border-width: 2px;
+  min-width: 270px;
+  border-style: solid;
+  border-color: rgb(145, 53, 64);
+  background-color: white;
+  border-width: 2px;
 }
 
 /* Boutons Rechercher, Ajouter */
 #recherche,
 #ajouter {
-    padding: 5px, 3px, 5px, 0px;
-    margin-left: 10px;
+  padding: 5px, 3px, 5px, 0px;
+  margin-left: 10px;
 }
 /* Bouton Trier */
 #trier {
-    max-width: 150px;
-    margin-left: 15px;
-    border-style: none;
-    appearance: none;
-    background: #F9F9F9;
-    background-image: none;
-    box-shadow: none;
-    font-size: 16px;
-    background-color: white;
+  max-width: 150px;
+  margin-left: 15px;
+  border-style: none;
+  appearance: none;
+  background: #F9F9F9;
+  background-image: none;
+  box-shadow: none;
+  font-size: 16px;
+  background-color: white;
 }
 /* Bouton tatistiques */
 #ChartGraph{
-    margin-left:10px;
+  margin-left:10px;
 }
 /* Liste de vins */
 #liste {
-    min-width: 300px;
-    max-height: 600px;
-    overflow-y: auto;
-    overflow-x: hidden;
+  min-width: 300px;
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 #trier :nth-child(0)
 
 /* Nom Vin individuel */
 #liste li {
-    min-width: 100px;
+  min-width: 100px;
 }
 
 /* Bouton Reset liste */
 #reset {
-    margin-top: 10px;
-    align-content: center;
-    width: 270px;
+  margin-top: 10px;
+  align-content: center;
+  width: 270px;
 }
 
 /* Changement de couleur Vin survolé */
 #liste li:hover {
-    background: rgb(219, 217, 217);
-    transition: 0.1s;
-    cursor: default;
+  background: rgb(219, 217, 217);
+  transition: 0.1s;
+  cursor: default;
 }
 
 /* Formulaire info vin + img */
 #stylediv {
-    z-index: 1;
-    position: relative;
-    max-height: 585px;
-    min-width: 100px;
-    margin-top: 17px;
-    margin-right: 20px;
-    margin-bottom: 2px;
-    margin-left: 20px;
-    padding-top: 25px;
-    border-radius: 10px;
-    background-color: rgba(95, 25, 32, 0.787);
-    -webkit-box-shadow: 0px 0px 40px 6px rgba(41, 41, 41, 0.93);
-    -moz-box-shadow: 0px 0px 40px 6px rgba(29, 29, 29, 0.93);
-    box-shadow: 0px 0px 40px 6px rgba(34, 34, 34, 0.93);
-    overflow-y: scroll;
-    overflow-x: hidden;
-    cursor: not-allowed;
+  z-index: 1;
+  position: relative;
+  max-height: 585px;
+  min-width: 100px;
+  margin-top: 17px;
+  margin-right: 20px;
+  margin-bottom: 2px;
+  margin-left: 20px;
+  padding-top: 25px;
+  border-radius: 10px;
+  background-color: rgba(95, 25, 32, 0.787);
+  -webkit-box-shadow: 0px 0px 40px 6px rgba(41, 41, 41, 0.93);
+  -moz-box-shadow: 0px 0px 40px 6px rgba(29, 29, 29, 0.93);
+  box-shadow: 0px 0px 40px 6px rgba(34, 34, 34, 0.93);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  cursor: not-allowed;
 }
 /*labels info vin input */
 #stylediv input{
-    pointer-events: none;
+  pointer-events: none;
 }
 
 /* Labels info vin */
 #stylediv label {
-    color: white;
-    margin: 0px;
+  color: white;
+  margin: 0px;
 }
 
 /* visibilité bio*/
 .hide{
-    visibility: hidden;
-    height: 0px;
+  visibility: hidden;
+  height: 0px;
 }
 
 .show{
-    visibility: visible;
-    min-height: 23px;
-    margin-bottom: 1rem;
+  visibility: visible;
+  min-height: 23px;
+  margin-bottom: 1rem;
 }
 
 /* Radio style */
 #bioFalse{
-    margin-left: 80px;
+  margin-left: 80px;
 }
 #bioTrue{
-    margin-left: -30px;
+  margin-left: -30px;
 }
 
 /* Boutons supprimer/sauvegarder */
 #supprimer,
 #sauvegarder {
-    display: none;
-    margin-top: 15px;
-    padding: 7px;
-    font-size: 15px;
+  display: none;
+  margin-top: 15px;
+  padding: 7px;
+  font-size: 15px;
 }
 
 /* Bouton sauvegarder */
 #sauvegarder {
-    max-width: 140px;
+  max-width: 140px;
 }
 
 /* Bouton supprimer */
 #supprimer {
-    min-width: 122px;
+  min-width: 122px;
 }
 
 /* Container Img + Icone */
 #container { 
-    position: relative; 
+  position: relative; 
 }
 
 /* Image dans container */
 #container img { 
-    display: block; 
+  display: block; 
 }
 
 /* Image Vin */
 .styled {
-    margin-top: 16px;
-    margin-bottom: 6px;
-    border-color: rgb(145, 53, 64);
-    border-style: solid;
-    border-radius: 10px;
-    width: 255px;
-    height: 315px;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  border-color: rgb(145, 53, 64);
+  border-style: solid;
+  border-radius: 10px;
+  width: 255px;
+  height: 315px;
 }
 
 /* Icone Modif Img */
 #container .fa-edit { 
-    position: absolute; 
-    bottom:10px;
-    margin-left:228px; 
-    color:black;
+  position: absolute; 
+  bottom:10px;
+  margin-left:228px; 
+  color:black;
 }
 
 /* Textarea */
 #description {
-    width: 255px;
-    height: 255px;
-    border-color: rgb(145, 53, 64);
-    border-width: 3px;
-    border-style: solid;
-    border-radius: 8px;
-    margin-top: 10px;
-    padding-left: 8px;
-    padding-top: 7px;
-    font-size: 13px;
-    overflow-y: auto;
-    resize: none;
+  width: 255px;
+  height: 255px;
+  border-color: rgb(145, 53, 64);
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 8px;
+  margin-top: 10px;
+  padding-left: 8px;
+  padding-top: 7px;
+  font-size: 13px;
+  overflow-y: auto;
+  resize: none;
 }
 
 /* Texte Footer */
 footer {
-    color: white;
-    font-size: 13px;
+  color: white;
+  font-size: 13px;
 }
 #mainPays{
-    background-color: rgba(255, 255, 255, 0.904);
-    border-radius:10px;
-    max-width: 995px;
-    max-height: 500px;   
-    margin-left:10px;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
+  background-color: rgba(255, 255, 255, 0.904);
+  border-radius:10px;
+  max-width: 995px;
+  max-height: 500px;   
+  margin-left:10px;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
 }
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
-    #mainPays{
-        min-width:300px;
-        min-height: 300px; 
-        margin-bottom: 30px;
-    }
-    #cadrePays{
-        min-width: 300px;
-        min-height: 300px;
-    }
+  #mainPays{
+      min-width:300px;
+      min-height: 300px; 
+      margin-bottom: 30px;
+  }
+  #cadrePays{
+      min-width: 300px;
+      min-height: 300px;
+  }
 }
 @media all and (min-width:361px) and (max-width:649px) {
-    #mainPays{
-        min-width:300px;
-        min-height: 300px; 
-        margin-bottom: 30px;
-        margin-right: 20px;
-    }
-    #cadrePays{
-        min-width: 300px;
-        min-height: 300px;
-    }
+  #mainPays{
+      min-width:300px;
+      min-height: 300px; 
+      margin-bottom: 30px;
+      margin-right: 20px;
+  }
+  #cadrePays{
+      min-width: 300px;
+      min-height: 300px;
+  }
 }
 
 @media all and (min-width:650px) and (max-width: 1000px) {
-    #mainPays{
-        width:350px;
-        height: 350px;
-    }
-    #cadrePays{
-        min-width: 250px;
-        min-height: 250px;
-    }
+  #mainPays{
+      width:350px;
+      height: 350px;
+  }
+  #cadrePays{
+      min-width: 250px;
+      min-height: 250px;
+  }
 }
 
 @media all and (min-width:1001px) and (max-width: 3000px) {
-    #mainPays{
-        min-width:350px;
-        min-height: 350px;
-    }
-    #cadrePays{
-        min-width: 300px;
-        min-height: 300px;
-    }
+  #mainPays{
+      min-width:350px;
+      min-height: 350px;
+  }
+  #cadrePays{
+      min-width: 300px;
+      min-height: 300px;
+  }
 }
