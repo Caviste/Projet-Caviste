@@ -374,11 +374,14 @@ function signUp() {
     })
 }
 
-// Chart JS
+/* Chart JS*/
+/* Hide les div des charts */
 $('#mainPays').hide();
 $('#mainRaisins').hide();
 
+/* Afficher les deux chart (Pays et Raisins) aprés un click sur le btn "Nos statistiques" */
 $('#clickMe').click(function(){
+
   /* Chart pays */
   $('#mainPays').animate({
   }, 5000, function() {
@@ -388,6 +391,7 @@ $('#clickMe').click(function(){
   const cadre = document.querySelector("#cadrePays");
   const ctx = cadre.getContext('2d');
   Chart.defaults.global.defaultFontColor = 'black';
+
   // Crée un array contenant tous les pays des vins
   let arrCountry = [];
   vinData.forEach((vin) => {
@@ -463,7 +467,7 @@ $('#clickMe').click(function(){
       }
   });
   
-   /* Chart  */
+   /* Chart Raisins */
    $('#mainRaisins').animate({
   }, 5000, function() {
     $('#mainRaisins').show();
@@ -472,7 +476,8 @@ $('#clickMe').click(function(){
   const cadreRaisins = document.querySelector("#cadreRaisins");
   const ctxRaisins = cadreRaisins.getContext('2d');
   Chart.defaults.global.defaultFontColor = 'black';
-  // Crée un array contenant tous les pays des vins
+
+  // Crée un array contenant tous les raisins des vins
   let arrGrapes = [];
   vinData.forEach((vin) => {
     if (!arrGrapes.includes(vin["grapes"])){
@@ -480,7 +485,7 @@ $('#clickMe').click(function(){
     }
   });
 
-  // Crée un array contenant tous les nombres de vins, par pays
+  // Crée un array contenant tous les raisins de vins, par pays
   let arrNbR = [];
   for (let i = 0; i < arrGrapes.length; i++) {
     arrNbR.push(countWineByGrapes(vinData, arrGrapes[i]));

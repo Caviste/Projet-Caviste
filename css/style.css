@@ -97,7 +97,7 @@ header nav {
   width: 270px;
 }
 
-/* Changement de couleur Vin survolé */
+/* Changement de couleur Vin survolï¿½ */
 #liste li:hover {
   background: rgb(219, 217, 217);
   transition: 0.1s;
@@ -135,7 +135,7 @@ header nav {
   margin: 0px;
 }
 
-/* visibilité bio*/
+/* visibilitï¿½ bio*/
 .hide{
   visibility: hidden;
   height: 0px;
@@ -218,73 +218,74 @@ header nav {
   overflow-y: auto;
   resize: none;
 }
+/* Style div chart */
+#mainPays{
+    background-color: rgba(255, 255, 255, 0.904);
+    border-radius:10px;
+    max-width: 995px;
+    max-height: 500px;   
+    margin-left:10px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+  #mainRaisins{
+    background-color: rgba(255, 255, 255, 0.904);
+    border-radius:10px;
+    max-width: 995px;
+    height: 350px;   
+    margin-left:10px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+  /* css pour les telephones et tablettes */
+  @media all and (min-width:300px) and (max-width:360px) {
+    #mainPays,#mainRaisins{
+        min-width:300px;
+        min-height: 300px; 
+        margin-bottom: 30px;
+    }
+    #cadrePays,#cadreRaisins{
+        min-width: 300px;
+        min-height: 300px;
+    }
+  }
+  @media all and (min-width:361px) and (max-width:649px) {
+    #mainPays,#mainRaisins{
+        min-width:300px;
+        min-height: 300px; 
+        margin-bottom: 30px;
+        margin-right: 20px;
+    }
+    #cadrePays,#cadreRaisins{
+        min-width: 300px;
+        min-height: 300px;
+    }
+  }
+  
+  @media all and (min-width:650px) and (max-width: 1000px) {
+    #mainPays,#mainRaisins{
+        width:350px;
+        height: 350px;
+    }
+    #cadrePays,#cadreRaisins{
+        min-width: 250px;
+        min-height: 250px;
+    }
+  }
+  
+  @media all and (min-width:1001px) and (max-width: 3000px) {
+    #mainPay,#mainRaisinss{
+        min-width:350px;
+        min-height: 350px;
+    }
+    #cadrePays,#cadreRaisins{
+        min-width: 300px;
+        min-height: 300px;
+    }
+  }
 
 /* Texte Footer */
 footer {
   color: white;
   font-size: 13px;
-}
-#mainPays{
-  background-color: rgba(255, 255, 255, 0.904);
-  border-radius:10px;
-  max-width: 995px;
-  max-height: 500px;   
-  margin-left:10px;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-}
-#mainRaisins{
-  background-color: rgba(255, 255, 255, 0.904);
-  border-radius:10px;
-  max-width: 995px;
-  height: 350px;   
-  margin-left:10px;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-}
-/* css pour les telephones et tablettes */
-@media all and (min-width:300px) and (max-width:360px) {
-  #mainPays,#mainRaisins{
-      min-width:300px;
-      min-height: 300px; 
-      margin-bottom: 30px;
-  }
-  #cadrePays,#cadreRaisins{
-      min-width: 300px;
-      min-height: 300px;
-  }
-}
-@media all and (min-width:361px) and (max-width:649px) {
-  #mainPays,#mainRaisins{
-      min-width:300px;
-      min-height: 300px; 
-      margin-bottom: 30px;
-      margin-right: 20px;
-  }
-  #cadrePays,#cadreRaisins{
-      min-width: 300px;
-      min-height: 300px;
-  }
-}
-
-@media all and (min-width:650px) and (max-width: 1000px) {
-  #mainPays,#mainRaisins{
-      width:350px;
-      height: 350px;
-  }
-  #cadrePays,#cadreRaisins{
-      min-width: 250px;
-      min-height: 250px;
-  }
-}
-
-@media all and (min-width:1001px) and (max-width: 3000px) {
-  #mainPay,#mainRaisinss{
-      min-width:350px;
-      min-height: 350px;
-  }
-  #cadrePays,#cadreRaisins{
-      min-width: 300px;
-      min-height: 300px;
-  }
 }
