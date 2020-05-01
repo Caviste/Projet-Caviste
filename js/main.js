@@ -304,10 +304,21 @@ function searchWine() {
       request.send();
     } else {
       if (typeof strSearch === "string") {
-        let arrRegions = ["California","Mendoza","Southern Rhone / Gigondas","Bordeaux","Oregon","Rioja","Burgundy","California Central Coast","Washington","Tuscany"];
-        let arrGrapes = ["Pinot Noir","Pinot Gris", "Grenache","Syrah","Merlot","Tempranillo","Chardonnay","Sauvignon Blanc","Syrah","Sangiovese"];
-
-        if ($.inArray(strSearch, arrRegions) !== -1) {
+        let arrRegions = [];
+        let arrGrapes = [];
+        vinData.forEach((vin)=> {
+          if(!arrRegions.includes(vin["region"])) {
+            arrRegions.push(vin["region"]);
+          }
+        });
+        vinData.forEach((vin) => {
+          if(!arrGrapes.includes(vin["grapes"])) {
+            arrGrapes.push(vin["grapes"]);
+          }
+        });
+        console.log(arrGrapes);
+        console.log(strSearch);
+        if ($.inArray(ucFirst(strSearch), arrRegions) !== -1) {
           fetch(url + "/regions/" + strSearch)
           .then((resp) => resp.json())
           .then(function (data) {
@@ -316,7 +327,8 @@ function searchWine() {
             });
             showListWine(queryArr);
           })
-        } else if ($.inArray(strSearch, arrGrapes) !== -1) {
+        
+        } else if (arrGrapes.indexOf(strSearch) !== -1) { //TODO: Bug when searching for Pinot (single word instead of full grape name)
           fetch(url + "/grapes/" + strSearch)
           .then((resp) => resp.json())
           .then(function (data) {
@@ -332,8 +344,6 @@ function searchWine() {
     alert("Veuillez écrire quelque chose dans la zone de recherche !");
   }
 }
-
-
 
 document.getElementById("btnSignUp").addEventListener("click", signUp);
 //document.getElementById("btnLogIn").addEventListener("click", logIn);
