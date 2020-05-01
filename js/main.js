@@ -330,13 +330,13 @@ function searchWine() {
         
         } else if (arrGrapes.indexOf(strSearch) !== -1) { //TODO: Bug when searching for Pinot (single word instead of full grape name)
           fetch(url + "/grapes/" + strSearch)
-            .then((resp) => resp.json())
-            .then(function (data) {
-              data.forEach((vin) => {
-                queryArr.push(vin);
-              });
-              showListWine(queryArr);
-            })
+          .then((resp) => resp.json())
+          .then(function (data) {
+            data.forEach((vin) => {
+              queryArr.push(vin);
+            });
+            showListWine(queryArr);
+          })
         }
       }
     }
@@ -378,6 +378,7 @@ function signUp() {
 
 // Chart JS
 $('#mainPays').hide();
+$('#mainRaisins').hide();
 
 $('#clickMe').click(function(){
   /* Chart pays */
