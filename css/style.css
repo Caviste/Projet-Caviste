@@ -272,14 +272,13 @@ header nav {
 
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
-  
   #mainPays,#mainRaisins{
-      min-width:300px;
-      min-height: 300px;
+    min-width:300px;
+    min-height: 300px;
   }
   #cadrePays,#cadreRaisins{
-      min-width: 300px;
-      min-height: 300px;
+    min-width: 300px;
+    min-height: 300px;
   }
   #recherche,#trier,#ajouter,#ChartGraph{
     margin-top: 7px;
