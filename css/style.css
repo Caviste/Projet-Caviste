@@ -88,6 +88,7 @@ header nav {
 #ChartGraph {
   margin-left: 10px;
   background-color: rgb(135, 35, 31);
+  border-color: rgb(135, 35, 31); ;
   border : none;
 }
 
@@ -272,6 +273,12 @@ header nav {
 
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
+<<<<<<< HEAD
+=======
+  #btnScroll{
+    display:none !important;
+  }
+>>>>>>> 04f18cbc14a1423b98bc89670007b781299ecb5d
   #mainPays,#mainRaisins{
     min-width:300px;
     min-height: 300px;
@@ -296,6 +303,9 @@ header nav {
     }
 } 
 @media all and (min-width:361px) and (max-width:649px) {
+  #btnScroll{
+    display:none  !important;
+  }
   #mainPays,#mainRaisins{
       min-width:300px;
       min-height: 300px; 
@@ -319,6 +329,9 @@ header nav {
 }
 
 @media all and (min-width:650px) and (max-width: 1000px) {
+  #btnScroll{
+    display:none  !important;
+  }
   #mainPays,#mainRaisins{
       width:350px;
       height: 350px;
@@ -367,4 +380,19 @@ header nav {
 footer {
   color: white;
   font-size: 13px;
+}
+
+#btnScroll {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  right: 50px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 50px;
 }
