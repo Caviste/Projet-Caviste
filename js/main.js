@@ -60,6 +60,8 @@ $("#ajouter").click(function (event) {
   // TODO call fct to enable details modif
 });
 
+
+
 // Affichage de la liste de vin
 function showListWine(arr) {
   let str = "";
@@ -271,13 +273,22 @@ function invertPriceSort() {
 document.getElementById("recherche").addEventListener("click", searchWine);
 
 $(document).ready(function(){
-  $('#strSearch').on('keyup',function(){
+  $('#strSearch').keyup(function(){
     let searchValue = $(this).val().toLowerCase();
     $("#liste li").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
+      $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
     });
+    $('#resetList').css("display", "inline");
   });
 });
+
+$('#resetList').click(function() {
+  resetSearch();
+  showListWine(vinData);
+  $(this).css("display","none");
+})
+
+
 
 function searchWine() {
   /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres, ou un nombre

@@ -80,6 +80,10 @@ header nav {
   border-style: none;
 }
 
+#searchBtnReset {
+  position: relative;
+}
+
 /* Input texte Vin */
 #strSearch {
   min-width: 270px;
@@ -87,6 +91,15 @@ header nav {
   border-color: rgb(145, 53, 64);
   background-color: white;
   border-width: 2px;
+}
+#resetList {
+  position: absolute;
+  display: none;
+  top: 11px;
+  right: 20px;
+  z-index: 1;
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 /* Bouton  Ajouter */
@@ -105,7 +118,7 @@ header nav {
   background-color: white;
 }
 
-/* Bouton tatistiques */
+/* Bouton statistiques */
 #ChartGraph {
   margin-left: 10px;
   background-color: rgb(135, 35, 31);
