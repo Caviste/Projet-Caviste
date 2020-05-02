@@ -347,13 +347,13 @@ function searchWine() {
 
 document.getElementById("btnSignUp").addEventListener("click", signUp);
 //document.getElementById("btnLogIn").addEventListener("click", logIn);
+
 //USE: Bearer
 function signUp() {
   // TODO 
   // Mock token, fakes being sent from server
   localStorage.setItem("UniqueUserToken", JSON.stringify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"));
 
-  
   let url = "http://jsonplaceholder.typicode.com/users"
   let token = JSON.parse(sessionStorage.getItem('UniqueUserToken'));  
   let h = new Headers();
@@ -379,13 +379,14 @@ function signUp() {
 $('#mainPays').hide();
 $('#mainRaisins').hide();
 
-/* Afficher les deux chart (Pays et Raisins) aprés un click sur le btn "Nos statistiques" */
+/* Afficher les deux chart (Pays et Raisins) aprés un click sur le btn "Statistiques" */
 $('#clickMe').click(function(){
 
   /* Chart pays */
   $('#mainPays').animate({
   }, 5000, function() {
     $('#mainPays').show();
+    $('#closePays').show();
   });
 
   const cadre = document.querySelector("#cadrePays");
@@ -420,55 +421,60 @@ $('#clickMe').click(function(){
     labels: arrCountry,
     data: arrNb
   };
+
   let myChart = new Chart(ctx, {
-    
-      type: 'pie',
-      data: {
-          labels: myData.labels,
-          datasets: [{
-              label: 'Nombre de vins',
-              data: myData.data,
-              backgroundColor: [
-                // Pick colors
-                  'rgba(244, 67, 54, 0.4)',
-                  'rgba(102, 187, 106, 0.4)',
-                  'rgba(255, 167, 38, 0.4)',
-                  'rgba(3, 169, 244,0.4)',
-                  'rgba(244, 143, 177, 0.4)',
-              ],
-              borderColor: [
-                // Pick colors
-                  'rgb(244, 67, 54)',
-                  'rgb(139, 195, 74)',
-                  'rgb(255, 167, 38)',
-                  'rgb(3, 169, 244)',
-                  'rgb(244, 143, 177)',
-              ],
-              borderWidth: 2
-          }]
-      },
-      options: {
-        maintainAspectRatio:false,
-        responsive: true,
-          title: {
-            display: true,
-            text: 'Nombre des vins par Pays',
-            fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-            padding :10,
-            fontSize : 20,
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-          }  
-      }
+    type: 'pie',
+    data: {
+      labels: myData.labels,
+      datasets: [{
+        label: 'Nombre de vins',
+        data: myData.data,
+        backgroundColor: [
+          // Pick colors
+          'rgba(244, 67, 54, 0.4)',
+          'rgba(102, 187, 106, 0.4)',
+          'rgba(255, 167, 38, 0.4)',
+          'rgba(3, 169, 244,0.4)',
+          'rgba(244, 143, 177, 0.4)',
+        ],
+        borderColor: [
+          // Pick colors
+          'rgb(244, 67, 54)',
+          'rgb(139, 195, 74)',
+          'rgb(255, 167, 38)',
+          'rgb(3, 169, 244)',
+          'rgb(244, 143, 177)',
+        ],
+        borderWidth: 2
+      }]
+    },
+    options: {
+      maintainAspectRatio:false,
+      responsive: true,
+        title: {
+          display: true,
+          text: 'Nombre des vins par Pays',
+          fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+          padding :10,
+          fontSize : 20,
+          scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+          }
+        }  
+    }
   });
   
+  // Bouton Close Graph Pays
+  $('#closePays').click(function(){
+    $("#mainPays").css("display","none");
+  });
+
    /* Chart Raisins */
-   $('#mainRaisins').animate({
+  $('#mainRaisins').animate({
   }, 5000, function() {
     $('#mainRaisins').show();
   });
@@ -506,59 +512,61 @@ $('#clickMe').click(function(){
     data: arrNbR
   };
   let myChartR = new Chart(ctxRaisins, {
-    
-      type: 'pie',
-      data: {
-          labels: myDataR.labels,
-          datasets: [{
-              label: 'Nombre de raisins',
-              data: myDataR.data,
-              backgroundColor: [
-                // Pick colors
-                  'rgba(244, 67, 54, 0.4)',
-                  'rgba(102, 187, 106, 0.4)',
-                  'rgba(255, 167, 38, 0.4)',
-                  'rgba(3, 169, 244,0.4)',
-                  'rgba(244, 143, 177, 0.4)',//
-                  'rgba(51, 70, 255, 0.4)',
-                  'rgba(255, 51, 51, 0.4)',
-                  'rgba(255, 212, 51, 0.4)',
-                  'rgba(51, 255, 255 , 0.4)',
-              ],
-              borderColor: [
-                // Pick colors
-                  'rgb(244, 67, 54)',
-                  'rgb(139, 195, 74)',
-                  'rgb(255, 167, 38)',
-                  'rgb(3, 169, 244)',
-                  'rgb(244, 143, 177)',//
-                  'rgb(51, 70, 255)',
-                  'rgb(255, 51, 51)',
-                  'rgb(255, 212, 51)',
-                  'rgb(51, 255, 255 )',
-              ],
-              borderWidth: 2
-          }]
-      },
-      options: {
-        maintainAspectRatio:false,
-        responsive: true,
-          title: {
-            display: true,
-            text: 'Nombre des vins par raisins',
-            fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-            padding :10,
-            fontSize : 20,
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+    type: 'pie',
+    data: {
+      labels: myDataR.labels,
+      datasets: [{
+        label: 'Nombre de raisins',
+        data: myDataR.data,
+        backgroundColor: [
+          // Pick colors
+          'rgba(244, 67, 54, 0.4)',
+          'rgba(102, 187, 106, 0.4)',
+          'rgba(255, 167, 38, 0.4)',
+          'rgba(3, 169, 244,0.4)',
+          'rgba(244, 143, 177, 0.4)',
+          'rgba(51, 70, 255, 0.4)',
+          'rgba(255, 51, 51, 0.4)',
+          'rgba(255, 212, 51, 0.4)',
+          'rgba(51, 255, 255 , 0.4)',
+        ],
+        borderColor: [
+          // Pick colors
+          'rgb(244, 67, 54)',
+          'rgb(139, 195, 74)',
+          'rgb(255, 167, 38)',
+          'rgb(3, 169, 244)',
+          'rgb(244, 143, 177)',//
+          'rgb(51, 70, 255)',
+          'rgb(255, 51, 51)',
+          'rgb(255, 212, 51)',
+          'rgb(51, 255, 255 )',
+        ],
+        borderWidth: 2
+      }]
+    },
+    options: {
+      maintainAspectRatio:false,
+      responsive: true,
+      title: {
+        display: true,
+        text: 'Nombre des vins par raisins',
+        fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        padding :10,
+        fontSize : 20,
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
             }
-          }  
-      }
+          }]
+        }
+      }  
+    }
   });
-  
+  // Bouton Close Graph Pays
+  $('#closeRaisins').click(function(){
+    $("#mainRaisins").css("display","none");
+  });
 });
 
