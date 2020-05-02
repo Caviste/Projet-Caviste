@@ -378,7 +378,6 @@ function signUp() {
 /* Hide les div des charts */
 $('#mainPays').hide();
 $('#mainRaisins').hide();
-$('#closePays').hide();
 
 /* Afficher les deux chart (Pays et Raisins) aprés un click sur le btn "Statistiques" */
 $('#clickMe').click(function(){
