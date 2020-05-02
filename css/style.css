@@ -9,7 +9,28 @@ body {
   scroll-behavior: smooth;
 
 }
+/* Message */
+#message{
+  display:none;
+  position: absolute;
+  z-index: 2;
+  width: 100% ;
+  height: 50px;
+  padding-top: 15px;
+  padding-left: 10px;
+  font-size:15px;
+  border-bottom:solid 3px black;
+  color:white;
+  background-color:rgba(95, 25, 32, 0.8);
+}
 
+/* Icone message */
+#closeMessage{
+  position: absolute;
+  top: 10px;
+  right: 8px;
+  z-index: 2; 
+}
 /* Header */
 header nav {
   background-color: rgba(29, 27, 27, 0.8);
@@ -34,7 +55,7 @@ header nav {
   border-radius: 5px;
 }
 
-/* Boutons S'inscrire & Login */
+/* Boutons s'inscrire & Login */
 #btnSignUp,
 #btnLogIn {
   color: #fff;
@@ -100,7 +121,6 @@ header nav {
   overflow-x: hidden;
 }
 
-
 /* Nom Vin individuel */
 #liste li {
   min-width: 100px;
@@ -113,7 +133,7 @@ header nav {
   width: 270px;
 }
 
-/* Changement de couleur Vin survolÔøΩ */
+/* Changement de couleur Vin survolù */
 #liste li:hover {
   background: rgb(219, 217, 217);
   transition: 0.1s;
@@ -152,7 +172,7 @@ header nav {
   margin: 0px;
 }
 
-/* visibilitÔøΩ bio*/
+/* visibilitù bio*/
 .hide {
   visibility: hidden;
   height: 0px;
@@ -194,7 +214,7 @@ header nav {
 
 /* Container Img + Icone */
 #container {
-  position: absolute;
+  position: relative;
 }
 
 /* Image dans container */

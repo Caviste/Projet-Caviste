@@ -592,10 +592,9 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
-/* TEST 4543 */
-/* if ($(window).width() == 768) {
-  $("#image").css("float","left");
-  $("#description").css("float","right");
-  //$('input').addClass('form-control');
+if($(window).width()===768){
+  $('#message').css('display','block');
+  $('#closeMessage').click(function(){
+    $('#message').css('display','none');
+ });
 }
- */
