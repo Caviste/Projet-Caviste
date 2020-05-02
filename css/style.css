@@ -273,12 +273,9 @@ header nav {
 
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
-<<<<<<< HEAD
-=======
   #btnScroll{
     display:none !important;
   }
->>>>>>> 04f18cbc14a1423b98bc89670007b781299ecb5d
   #mainPays,#mainRaisins{
     min-width:300px;
     min-height: 300px;
