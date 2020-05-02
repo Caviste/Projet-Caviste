@@ -272,116 +272,80 @@ header nav {
 
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
-
-  #mainPays,
-  #mainRaisins {
-    min-width: 300px;
-    min-height: 300px;
-  }
-
-  #cadrePays,
-  #cadreRaisins {
-    min-width: 300px;
-    min-height: 300px;
-  }
-  /* css pour les telephones et tablettes */
-  @media all and (min-width:300px) and (max-width:360px) {
-   
-    #mainPays,#mainRaisins{
-        min-width:300px;
-        min-height: 300px;
-    }
-    #cadrePays,#cadreRaisins{
-        min-width: 300px;
-        min-height: 300px;
-    }
-    #recherche,#trier,#ajouter,#ChartGraph{
-      margin-top: 7px;
-    }
-    #stylediv{
-      width: 280px;
-      margin-left:16px;
-    }
-    #a:ChartGraph{
-      width: 120px;
-      height: 25px;
-     }
-     #trier{
-       width: 100px;
-     }
-  } 
-  @media all and (min-width:361px) and (max-width:649px) {
-    #mainPays,#mainRaisins{
-        min-width:300px;
-        min-height: 300px; 
-        margin-right: 20px;
-    }
-    #cadrePays,#cadreRaisins{
-        min-width: 300px;
-        min-height: 300px;
-    }
-    #stylediv{
-      min-width:330px;
-      margin-right: 15px;
-      margin-left: 15px;
-    }
-    #recherche,#trier,#ajouter,#ChartGraph{
-      margin-top: 7px;
-    }
-    #strSearch{
-      margin-bottom: 5px;
-    }
-  }
   
-  @media all and (min-width:650px) and (max-width: 1000px) {
-    #mainPays,#mainRaisins{
-        width:350px;
-        height: 350px;
-    }
-    #cadrePays,#cadreRaisins{
-        min-width: 250px;
-        min-height: 250px;
-    }
-    #trier,#ChartGraph{
-      margin-top: 7px;
-    }
-    #strSearch{
-      width:500px;
-    }
-    #ajouter{
-      margin-top: 7px;
-      margin-left:0px;
-    }
-    #recherche{
-      width: 152px;;
-    }
-    .column {
-      width: 50%;
-    }
-    #stylediv,#liste{
-      width: 50%;
-    }
+  #mainPays,#mainRaisins{
+      min-width:300px;
+      min-height: 300px;
   }
-
-  #stylediv {
-    min-width: 370px;
+  #cadrePays,#cadreRaisins{
+      min-width: 300px;
+      min-height: 300px;
+  }
+  #recherche,#trier,#ajouter,#ChartGraph{
+    margin-top: 7px;
+  }
+  #stylediv{
+    width: 280px;
+    margin-left:16px;
+  }
+  #a:ChartGraph{
+    width: 120px;
+    height: 25px;
+    }
+    #trier{
+      width: 100px;
+    }
+} 
+@media all and (min-width:361px) and (max-width:649px) {
+  #mainPays,#mainRaisins{
+      min-width:300px;
+      min-height: 300px; 
+      margin-right: 20px;
+  }
+  #cadrePays,#cadreRaisins{
+      min-width: 300px;
+      min-height: 300px;
+  }
+  #stylediv{
+    min-width:330px;
     margin-right: 15px;
     margin-left: 15px;
+  }
+  #recherche,#trier,#ajouter,#ChartGraph{
+    margin-top: 7px;
+  }
+  #strSearch{
+    margin-bottom: 5px;
   }
 }
 
 @media all and (min-width:650px) and (max-width: 1000px) {
-
-  #mainPays,
-  #mainRaisins {
-    width: 350px;
-    height: 350px;
+  #mainPays,#mainRaisins{
+      width:350px;
+      height: 350px;
   }
-
-  #cadrePays,
-  #cadreRaisins {
-    min-width: 250px;
-    min-height: 250px;
+  #cadrePays,#cadreRaisins{
+      min-width: 250px;
+      min-height: 250px;
+  }
+  #trier,#ChartGraph{
+    margin-top: 7px;
+  }
+  #strSearch{
+    width:500px;
+  }
+  #ajouter{
+    margin-top: 7px;
+    margin-left:0px;
+  }
+  #recherche{
+    width: 152px;;
+  }
+  
+  #stylediv {
+    min-width: 370px;
+    margin-right: 15px;
+    margin-left: 15px;
   }
 }
 
