@@ -591,3 +591,11 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+/* TEST 4543 */
+/* if ($(window).width() == 768) {
+  $("#image").css("float","left");
+  $("#description").css("float","right");
+  //$('input').addClass('form-control');
+}
+ */

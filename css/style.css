@@ -194,7 +194,7 @@ header nav {
 
 /* Container Img + Icone */
 #container {
-  position: relative;
+  position: absolute;
 }
 
 /* Image dans container */
