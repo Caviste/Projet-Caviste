@@ -146,7 +146,7 @@ header nav {
   width: 270px;
 }
 
-/* Changement de couleur Vin survolù */
+/* Changement de couleur Vin survolÔøΩ */
 #liste li:hover {
   background: rgb(219, 217, 217);
   transition: 0.1s;
@@ -185,7 +185,7 @@ header nav {
   margin: 0px;
 }
 
-/* visibilitù bio*/
+/* visibilitÔøΩ bio*/
 .hide {
   visibility: hidden;
   height: 0px;
@@ -327,10 +327,13 @@ header nav {
   #a:ChartGraph{
     width: 120px;
     height: 25px;
-    }
-    #trier{
-      width: 100px;
-    }
+  }
+  #trier{
+    width: 100px;
+  }
+  #resetList{
+    right: 10px;
+  }
 } 
 @media all and (min-width:361px) and (max-width:649px) {
   #btnScroll{
@@ -355,6 +358,9 @@ header nav {
   }
   #strSearch{
     margin-bottom: 5px;
+  }
+  #resetList{
+    right: 10px;
   }
 }
 
@@ -383,11 +389,13 @@ header nav {
   #recherche{
     width: 152px;;
   }
-  
   #stylediv {
     min-width: 370px;
     margin-right: 15px;
     margin-left: 15px;
+  }
+  #resetList{
+    right: 10px;
   }
 }
 
