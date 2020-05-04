@@ -406,8 +406,11 @@ header nav {
   margin-bottom: 15px;
 }
 /* notes et commentaires */
-#Notes,#Comments{
+#notes,#comments{
   display : none;
+  height: 180px;
+  background-color: yellow;
+  overflow-y: auto;
 }
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {

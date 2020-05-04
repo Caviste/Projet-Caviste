@@ -132,13 +132,25 @@ function showDetails(index) {
       let reply = JSON.parse(this.response);
       reply.forEach((comment) => {
         arrComment.push(comment);
-        });
+      });
+      let str = '';
+      for (let i = 0; i < arrComment.length; i++) {
+        str += "<p>User " + arrComment[i]['user_id'] + "<br>Commentaire: " + arrComment[i].content + "</p><br>";
+      }
+
+      document.getElementById('comments').innerHTML = str;
     }
+    console.log(arrComment);
   };
   request.send();
   
 }
 
+/* in arrComment 
+-> id comment
+-> user-id
+-> wine-id
+-> content */
 
 /* Populating selectCountries */
 let selectCountries = $('#selectCountries');
@@ -165,7 +177,6 @@ $.getJSON(url, function(data) {
   })
 }).done(function() {
   arrYears.sort((a,b) => a - b);
-  console.log(arrYears);
   for (let i = 0; i < arrYears.length; i++) {
     let year = arrYears[i];
     let newOpt = document.createElement("option");
@@ -611,14 +622,14 @@ function numberOfLikes() {
  function showComments(){
   document.getElementById("tabComments").className = "nav-link active";
   document.getElementById("tabNotes").className = "nav-link";
-  $('#Notes').css("display","none");
-  $('#Comments').css("display","block");
+  $('#notes').css("display","none");
+  $('#comments').css("display","block");
  }
  function showNotes(){
   document.getElementById("tabComments").className = "nav-link";
   document.getElementById("tabNotes").className = "nav-link active";
-  $('#Comments').css("display","none");
-  $('#Notes').css("display","block");
+  $('#comments').css("display","none");
+  $('#notes').css("display","block");
  }
 
  tabComment.click(function(){
