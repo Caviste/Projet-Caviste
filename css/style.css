@@ -371,13 +371,13 @@ header nav {
 }
 
 /* Style div chart */
-#mainPays {
+#mainPays,#mainRaisins {
   position: relative;
   background-color: rgba(255, 255, 255, 0.904);
   border-radius: 10px;
   max-width: 995px;
   max-height: 500px;
-  margin-left: 10px;
+  margin-left: 14px;
   padding-bottom: 30px;
   margin-bottom: 30px;
 }
@@ -394,16 +394,21 @@ header nav {
   cursor: pointer;
 }
 
-#mainRaisins {
+/*Section commentaire et notes */
+#tabs{
+  position: relative;
   background-color: rgba(255, 255, 255, 0.904);
-  border-radius: 10px;
+  border-radius: 3px;
   max-width: 995px;
-  height: 350px;
-  margin-left: 10px;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
+  height: 200px;
+  margin-left: 0px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
-
+/* Style des li de tabs */
+#btnComment,btnNotes{
+  border: none !important;
+}
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
   #btnScroll{
