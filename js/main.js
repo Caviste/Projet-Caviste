@@ -143,6 +143,21 @@ function showDetails(index) {
 
 /* Populating selectCountries */
 let selectCountries = $('#selectCountries');
+selectCountries.empty();
+selectCountries.append('<option selected="true" disabled>Pays</option>');
+selectCountries.prop('selectedIndex', 0);
+let countryUrl = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/countries";
+$.getJSON(countryUrl, function (data) {
+  $.each(data, function (key, info) {
+    selectCountries.append($('<option></option>').attr('value', key).text(info['country']));
+  })
+})
+
+/* Populating selectYears */
+let selectYears = $('#selectYears');
+selectYears.empty();
+selectYears.append('<option selected="true" disabled>Ann&eacute;e</option>');
+selectYears.prop('selectedIndex', 0);
 
 document.getElementById("recherche").addEventListener("click", searchWine);
 
