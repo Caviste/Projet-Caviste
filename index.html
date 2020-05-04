@@ -21,7 +21,7 @@
 <body>
   <div id="message">
     <span>Pour une meilleure exp&eacute;rience sur notre site, faites pivoter votre &eacute;cran en paysage !</span>
-    <i id ="closeMessage" class="fa fa-times fa-2x"></i>
+    <i id="closeMessage" class="fa fa-times fa-2x"></i>
   </div>
   <div class="container">
     <div class="row">
@@ -57,25 +57,35 @@
           <form action="#" method="get" class="form-inline" data-aos="fade-down" data-aos-delay="300">
 
             <div id="searchBtnReset">
-              <input placeholder="Tappez un nom de vin" type="text" name="recherche" id="strSearch" class="form-control mr-2">
+              <input placeholder="Tappez un nom de vin" type="text" name="recherche" id="strSearch"
+                class="form-control mr-2">
               <i id="resetList" class="fa fa-times fa-1x"></i>
+              <div id="tooltip" role="tooltip">Cherchez un vin
+                <div id="arrow" data-popper-arrow></div>
+              </div>
+
             </div>
 
             <button id="recherche" name="recherche" type="button" class="btn btn-success mr-1"><i
                 class="fas fa-search"></i> Rechercher</button>
 
-            <select class="btn btn-primary" name="selectedCountries" id="">
+            <select class="btn btn-primary" name="selectCountries" id="selectCountries">
               <option value="0">Country</option>
             </select>
 
-            <select class="btn btn-primary" name="selectedYears" id="">
+            <select class="btn btn-primary" name="selectYears" id="selectYears">
               <option value="0">Year</option>
             </select>
 
             <button id="filtrer" class="btn btn-info">Filtrer</button>
 
             <div id="clickMe">
-              <a href="#cadrePays" id="ChartGraph" class="btn btn-primary"><img width="20px" height="20px" src="./img/icone-stat.png"></img> statistiques</a>
+              <a href="#cadrePays" id="ChartGraph" class="btn btn-primary"><img width="20px" height="20px"
+                  src="./img/icone-stat.png"></img> statistiques</a>
+              <div id="tooltipChart" role="tooltip">Voir nos statistiques
+                <div id="arrowChart" data-popper-arrow></div>
+              </div>
+            
             </div>
 
           </form>
@@ -157,22 +167,23 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="pays">Capacit&eacute; :</label>
                 <div class="col-md-10">
-                  <input id="capacite" name="capacite" type="text" placeholder="Capacit&eacute; (L)" class="form-control input-md">
+                  <input id="capacite" name="capacite" type="text" placeholder="Capacit&eacute; (L)"
+                    class="form-control input-md">
                 </div>
               </div>
 
               <!-- Bio -->
               <div id="extras" class="hide">
-              <div class="form-group" >
-                <label class="col-md-4 control-label" >Bio :</label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" id="bioTrue">Oui&nbsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" id="bioFalse">Non
-                </label>
+                <div class="form-group">
+                  <label class="col-md-4 control-label">Bio :</label>
+                  <label class="radio-inline">
+                    <input type="radio" name="optradio" id="bioTrue">Oui&nbsp;
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="optradio" id="bioFalse">Non
+                  </label>
+                </div>
               </div>
-            </div>
               <!-- Prix -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="pays">Prix :</label>
@@ -196,9 +207,9 @@
               <div id="container">
                 <img class="styled" src="./pics/block_nine.jpg" id="image" alt="wine">
                 <!-- Icone modif img -->
-                  <a href="#" class="icon" title="Edit wine">
-                    <i class="far fa-edit fa-1x"></i>
-                  </a>
+                <a href="#" class="icon" title="Edit wine">
+                  <i class="far fa-edit fa-1x"></i>
+                </a>
               </div>
               <textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
             </div>
