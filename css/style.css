@@ -404,14 +404,10 @@ header nav {
   margin-left: 0px;
   margin-top: 15px;
   margin-bottom: 15px;
-}
-/* notes et commentaires */
-#notes,#comments{
-  display : none;
-  height: 180px;
-  background-color: yellow;
   overflow-y: auto;
 }
+/* notes et commentaires */
+
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
   #btnScroll{

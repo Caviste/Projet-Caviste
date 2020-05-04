@@ -124,6 +124,7 @@ function showDetails(index) {
   } else if (vin.price === "0") {
     document.getElementById("prix").value = "Info indisponible";
   }
+  /*Affichage des commentaires */
   let arrComment =[];
   let request = new XMLHttpRequest();
   request.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/"+index+"/comments", true);
@@ -143,7 +144,7 @@ function showDetails(index) {
     console.log(arrComment);
   };
   request.send();
-  
+  showComments();
 }
 
 /* in arrComment 
