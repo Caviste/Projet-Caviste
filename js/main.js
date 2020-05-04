@@ -88,7 +88,7 @@ function showDetails(index) {
   document.getElementById("region").value = vin.region;
   document.getElementById("year").value = vin.year;
   document.getElementById("image").src = "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture;
-  document.getElementById("description").value = vin.description;
+  document.getElementById("description").innerText = vin.description;
   document.getElementById("couleur").value = vin.color;
   document.getElementById("capacite").value = vin.capacity + " CL";
   
@@ -122,7 +122,21 @@ function showDetails(index) {
   } else if (vin.price === "0") {
     document.getElementById("prix").value = "Info indisponible";
   }
+  let arrComment =[];
+  let request = new XMLHttpRequest();
+  request.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/"+index+"/comments", true);
+  request.onload = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let reply = JSON.parse(this.response);
+      reply.forEach((comment) => {
+        arrComment.push(comment);
+        });
+    }
+  };
+  request.send();
+  
 }
+
 
 /* Populating selectCountries */
 let selectCountries = $('#selectCountries');
@@ -547,25 +561,13 @@ function showPopper(selector, message, position) {
     selector.addEventListener(event, hide);
   });
 }
- //Style du nav 
- let tabComment = $('#tabComments');
- let tabNotes = $('#tabNotes');
- tabComment.click(function(event){
-  document.getElementById("tabComments").className = "nav-link active";
-  document.getElementById("tabNotes").className = "nav-link";
- 
- });
- tabNotes.click(function(event){
-  document.getElementById("tabComments").className = "nav-link";
-  document.getElementById("tabNotes").className = "nav-link active";
- 
- });
 
 //bouton like 
 //L'user cliquera sur un bouton "Like" qui enverra une valeur booléenne à l'API
 //PUT : url/api/wines/id/like
 //JSON : { "like" : true|false }
 
+/*
 let numberLike = 0;
 
 
@@ -590,4 +592,28 @@ function numberOfLikes() {
     }
   }
 }
+*/
+ //Style du nav 
+ let tabComment = $('#tabComments');
+ let tabNotes = $('#tabNotes');
 
+ function showComments(){
+  document.getElementById("tabComments").className = "nav-link active";
+  document.getElementById("tabNotes").className = "nav-link";
+  $('#Notes').css("display","none");
+  $('#Comments').css("display","block");
+ }
+ function showNotes(){
+  document.getElementById("tabComments").className = "nav-link";
+  document.getElementById("tabNotes").className = "nav-link active";
+  $('#Comments').css("display","none");
+  $('#Notes').css("display","block");
+ }
+
+ tabComment.click(function(){
+  showComments();
+ });
+
+ tabNotes.click(function(){
+  showNotes();
+ });

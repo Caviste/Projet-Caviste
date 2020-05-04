@@ -405,7 +405,10 @@ header nav {
   margin-top: 15px;
   margin-bottom: 15px;
 }
-
+/* notes et commentaires */
+#Notes,#Comments{
+  display : none;
+}
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
   #btnScroll{

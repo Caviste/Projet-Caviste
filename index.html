@@ -211,17 +211,21 @@
                   <i class="far fa-edit fa-1x"></i>
                 </a>
               </div>
-              <textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
               <button id="likeButton" name="likes" type="button" class="btn btn-primary" onclick="number()">
                 <i class="fas fa-heart"> Like Wine </i>
               </button>
+              <button id="ajoutNote" type="button" class="btn btn-secondary">
+                <i class="fas fa-pencil-alt">Add note</i>
+              </button>
+              <textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
+             
             </div>
           </div>
       </div>
      </form>
     </div>
    
-    <div class="row" id="tabs">
+    <div id="tabs">
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <a id="tabComments" class="nav-link" href="#tabs">Commentaires</a>
@@ -230,8 +234,14 @@
           <a id="tabNotes" class="nav-link" href="#tabs">Notes personnelles</a>
         </li>
       </ul>
+      <div id="Comments">
+       
+      </div>
+      <div id ="Notes">
+      
+      </div>
     </div>
-  </div>
+
     <div class="row">
       <div class="col" id="mainPays">
         <i id="closePays" class="fa fa-times fa-1x"></i>
@@ -246,7 +256,7 @@
     </div>
     <button onclick="topFunction()" id="btnScroll" title="Go to top"><i class="fas fa-arrow-up"></i></button>
     <footer>&copy; Amine, Nathan, Radad</footer>
-  </div>
+  </dciv>
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
