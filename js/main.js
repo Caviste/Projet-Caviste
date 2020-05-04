@@ -42,11 +42,12 @@ function resetSearch() {
 }
 
 //Bouton ajouter -affichage des btn sauvegarder et supprimer
+/*
 document.getElementById("ajouter").addEventListener("click", function () {
   document.getElementById("supprimer").style.display = "inline-block";
   document.getElementById("sauvegarder").style.display = "inline-block";
 });
-
+*/
 // Empêche la redirection en appuyant sur Enter
 $("#strSearch").keypress(function (event) {
   // 13 = keyPress Enter
@@ -54,13 +55,6 @@ $("#strSearch").keypress(function (event) {
     event.preventDefault();
   }
 });
-
-$("#ajouter").click(function (event) {
-  event.preventDefault();
-  // TODO call fct to enable details modif
-});
-
-
 
 // Affichage de la liste de vin
 function showListWine(arr) {
@@ -147,128 +141,8 @@ function showDetails(index) {
   }
 }
 
-// Mode de tri suivant l'option cliquée
-function sortMethods(selected) {
-  let selectOpt = selected.value;
-  if (selectOpt == 1) {
-    alphaSort();
-  } else if (selectOpt == 2) {
-    invertSort();
-  } else if (selectOpt == 3) {
-    cepageSort();
-  } else if (selectOpt == 4) {
-    yearSort();
-  } else if (selectOpt == 5) {
-    invertYearSort();
-  } else if (selectOpt == 6) {
-    capacitySort();
-  } else if (selectOpt == 7) {
-    invertCapacitySort();
-  } else if (selectOpt == 8) {
-    priceSort();
-  } else {
-    invertPriceSort();
-  }
-}
-
-// Récupère les infos de l'array vinData
-function getData() {
-  let arr = [];
-
-  vinData.forEach((vin) => {
-    arr.push(vin);
-  });
-
-  return arr;
-}
-
-// Tri alphabétique A-Z
-function alphaSort() {
-  let tmp = getData();
-
-  tmp.sort(function (a, b) {
-    return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
-  });
-  showListWine(tmp);
-}
-
-// Tri Inversé Z-A
-function invertSort() {
-  let tmp = getData();
-
-  tmp.sort(function (a, b) {
-    return b.name > a.name ? 1 : b.name < a.name ? -1 : 0;
-  });
-
-  showListWine(tmp);
-}
-
-// Tri par raisin
-function cepageSort() {
-  let tmp = getData();
-
-  tmp.sort(function (a, b) {
-    return a.grapes > b.grapes ? 1 : a.grapes < b.grapes ? -1 : 0;
-  });
-
-  showListWine(tmp);
-}
-
-// Tri par année
-function yearSort() {
-  let tmp = getData();
-
-  tmp.sort(function (a, b) {
-    return a.year > b.year ? 1 : a.year < b.year ? -1 : 0;
-  });
-  showListWine(tmp);
-}
-
-// Tri par année inversée
-function invertYearSort() {
-  let tmp = getData();
-
-  tmp.sort(function (a, b) {
-    return b.year > a.year ? 1 : b.year < a.year ? -1 : 0;
-  });
-  showListWine(tmp);
-}
-
-// Tri par capacité
-function capacitySort() {
-  let tmp = getData();
-  tmp.sort(function (a, b) {
-    return a.capacity > b.capacity ? 1 : a.capacity < b.capacity ? -1 : 0;
-  });
-  showListWine(tmp);
-}
-
-// Tri par capacité inversée
-function invertCapacitySort() {
-  let tmp = getData();
-  tmp.sort(function (a, b) {
-    return b.capacity > a.capacity ? 1 : b.capacity < a.capacity ? -1 : 0;
-  });
-  showListWine(tmp);
-}
-
-// Tri par prix
-function priceSort() {
-  let tmp = getData();
-  tmp.sort(function (a, b) {
-    return a.price > b.price ? 1 : a.price < b.price ? -1 : 0;
-  });
-  showListWine(tmp);
-}
-
-// Tri par prix inversée
-function invertPriceSort() {
-  let tmp = getData();
-  tmp.sort(function (a, b) {
-    return b.price > a.price ? 1 : b.price < a.price ? -1 : 0;
-  });
-  showListWine(tmp);
-}
+/* Populating selectCountries */
+let selectCountries = $('#selectCountries');
 
 document.getElementById("recherche").addEventListener("click", searchWine);
 
