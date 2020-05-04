@@ -5,24 +5,15 @@ const url = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines"; /
 let showReset = false;
 let vinData = [];
 
-// Récupération des données de l'API Caviste
-let request = new XMLHttpRequest();
-request.open("GET", url, true);
-
-request.onload = function () {
-  let dataResp = JSON.parse(this.response);
-  if (request.status == 200 && request.readyState == 4) {
-    dataResp.forEach((vin) => {
-      vinData.push(vin);
-    });
-    showListWine(vinData); // Affiche la liste de vin
-  } else {
-    if (request.status >= 400) {
-      alert("Récupération des données de l'API");
-    }
+// Récuperation des données de l'API
+fetch('https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines')
+.then(response => response.json())
+.then(function(data) {
+  for (let prop in data) {
+    vinData.push(data[prop]);
   }
-};
-request.send();
+  showListWine(vinData);
+});
 
 // Reset le choix de tri
 var options = document.querySelectorAll("#trier option");
@@ -48,6 +39,7 @@ document.getElementById("ajouter").addEventListener("click", function () {
   document.getElementById("sauvegarder").style.display = "inline-block";
 });
 */
+
 // Empêche la redirection en appuyant sur Enter
 $("#strSearch").keypress(function (event) {
   // 13 = keyPress Enter
@@ -95,23 +87,21 @@ function showDetails(index) {
   document.getElementById("pays").value = vin.country;
   document.getElementById("region").value = vin.region;
   document.getElementById("year").value = vin.year;
-  document.getElementById("image").src =
-    "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture;
+  document.getElementById("image").src = "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture;
   document.getElementById("description").value = vin.description;
   document.getElementById("couleur").value = vin.color;
   document.getElementById("capacite").value = vin.capacity + " CL";
-
+  
   if (vin.extra !== null) {
+    let extra = JSON.parse(vin.extra);
     document.getElementById("extras").className = "show";
-    if (vin.extra["bio"] == true) {
+    if (extra["bio"] == true) {
       document.getElementById("bioTrue").checked = true;
     } else {
       document.getElementById("bioFalse").checked = true;
     }
-
-    let extra = JSON.parse(vin.extra);
-
-    if (extra.promo !== null) {
+    
+    if (extra["promo"] !== undefined) {
       let promoVin = parseFloat(extra.promo);
       document.getElementById("prix").value = parseFloat(vin.price) - parseFloat(vin.price) * parseFloat(promoVin) + " €";
     } else {
@@ -122,22 +112,15 @@ function showDetails(index) {
       }
     }
   } else {
-    document.getElementById("prix").value = vin.price + " €";
     document.getElementById("extras").className = "hide";
-
-    if (vin.color === "") {
-      document.getElementById("couleur").value = "Info indisponible";
-    }
-
-    if (vin.capacity === "0") {
-      document.getElementById("capacite").value = "Info indisponible";
-    }
-
-    if (vin.price === "0") {
-      document.getElementById("prix").value = "Info indisponible";
-    } else {
-      document.getElementById("prix").value = vin.price + " €";
-    }
+  }
+  document.getElementById("prix").value = vin.price + " €";
+  if (vin.color === "") {
+    document.getElementById("couleur").value = "Info indisponible";
+  } else if (vin.capacity === "0") {
+    document.getElementById("capacite").value = "Info indisponible";
+  } else if (vin.price === "0") {
+    document.getElementById("prix").value = "Info indisponible";
   }
 }
 
@@ -158,6 +141,14 @@ let selectYears = $('#selectYears');
 selectYears.empty();
 selectYears.append('<option selected="true" disabled>Ann&eacute;e</option>');
 selectYears.prop('selectedIndex', 0);
+console.log(selectYears);
+for (let i = 0; i < vinData.length; i++) {
+  selectYears.append($('<option></option>').attr('value', i).text(vinData[i].year));
+  console.log(vinData[i]);
+}
+
+// Filtrer sends selectCountries & selectYears to API
+
 
 document.getElementById("recherche").addEventListener("click", searchWine);
 
@@ -216,8 +207,7 @@ function searchWine() {
             arrGrapes.push(vin["grapes"]);
           }
         });
-        console.log(arrGrapes);
-        console.log(strSearch);
+
         if ($.inArray(ucFirst(strSearch), arrRegions) !== -1) {
           fetch(url + "/regions/" + strSearch)
             .then((resp) => resp.json())
