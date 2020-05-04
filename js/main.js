@@ -15,6 +15,8 @@ fetch('https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines')
   showListWine(vinData);
 });
 
+
+
 // Reset le choix de tri
 var options = document.querySelectorAll("#trier option");
 for (let i = 0; i < options.length; i++) {
@@ -137,8 +139,28 @@ $.getJSON(countryUrl, function (data) {
 })
 
 /* Populating selectYears */
+let arrYears = [];
+let selectYears = $('#selectYears');
+selectYears.empty();
+selectYears.append('<option selected="true" disabled>Ann&eacute;e</option>');
+selectCountries.prop('selectedIndex', 0);
+$.getJSON(url, function(data) {
+  $.each(data, function(key, detail) {
+    if (!arrYears.includes(detail['year']))
+    arrYears.push(detail['year']);
+  })
+}).done(function() {
+  arrYears.sort((a,b) => a - b);
+  console.log(arrYears);
+  for (let i = 0; i < arrYears.length; i++) {
+    let year = arrYears[i];
+    let newOpt = document.createElement("option");
+    newOpt.textContent = year;
+    $('#selectYears').append(newOpt);
+  }
+});
 
-// Filtrer sends selectCountries & selectYears to API
+//TODO: Filtrer sends selectCountries & selectYears to API
 
 
 document.getElementById("recherche").addEventListener("click", searchWine);
