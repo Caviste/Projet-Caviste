@@ -10,7 +10,7 @@ fetch('https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines')
 .then(response => response.json())
 .then(function(data) {
   for (let prop in data) {
-    vinData.push(data[prop]);
+    vinData.push(data[prop]); // vinData === object!
   }
   showListWine(vinData);
 });
@@ -137,15 +137,6 @@ $.getJSON(countryUrl, function (data) {
 })
 
 /* Populating selectYears */
-let selectYears = $('#selectYears');
-selectYears.empty();
-selectYears.append('<option selected="true" disabled>Ann&eacute;e</option>');
-selectYears.prop('selectedIndex', 0);
-console.log(selectYears);
-for (let i = 0; i < vinData.length; i++) {
-  selectYears.append($('<option></option>').attr('value', i).text(vinData[i].year));
-  console.log(vinData[i]);
-}
 
 // Filtrer sends selectCountries & selectYears to API
 
@@ -167,8 +158,6 @@ $('#resetList').click(function () {
   showListWine(vinData);
   $(this).css("display", "none");
 })
-
-
 
 function searchWine() {
   /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres, ou un nombre
