@@ -509,12 +509,12 @@ const graph = document.querySelector('#ChartGraph');
 const graphMessage = document.querySelector('#tooltipChart');
 
 
-$("#strSearch").mouseenter(showPopper(search,searchMessage,"left"));
-$("#ChartGraph").mouseenter(showPopper(graph,graphMessage,"right"));
+$("#strSearch").mouseenter(showPopper(search, searchMessage, "top"));
+$("#ChartGraph").mouseenter(showPopper(graph, graphMessage, "right"));
 
 let popperInstance = null;
 
-function showPopper(selector, message,position) {
+function showPopper(selector, message, position) {
 
   function create() {
     popperInstance = Popper.createPopper(selector, message, {
@@ -526,7 +526,7 @@ function showPopper(selector, message,position) {
           },
         },
       ],
-      placement : position,
+      placement: position,
     });
   }
 
@@ -558,3 +558,47 @@ function showPopper(selector, message,position) {
     selector.addEventListener(event, hide);
   });
 }
+ //Style du nav 
+ let tabComment = $('#tabComments');
+ let tabNotes = $('#tabNotes');
+ tabComment.click(function(event){
+  document.getElementById("tabComments").className = "nav-link active";
+  document.getElementById("tabNotes").className = "nav-link";
+ 
+ });
+ tabNotes.click(function(event){
+  document.getElementById("tabComments").className = "nav-link";
+  document.getElementById("tabNotes").className = "nav-link active";
+ 
+ });
+
+//bouton like 
+//L'user cliquera sur un bouton "Like" qui enverra une valeur booléenne à l'API
+//PUT : url/api/wines/id/like
+//JSON : { "like" : true|false }
+
+let numberLike = 0;
+
+
+function number() {
+  numberLike ++;
+  document.getElementById("likeButton").innerHTML = numberLike;
+ 
+};
+
+function numberOfLikes() {
+  let request = new XMLHttpRequest();
+  request.open("PUT", url + "/id/like", false);
+
+  request.onload = function () {
+    let dataResp = JSON.parse(this.response);
+    if (request.status == 200 && request.readyState == 4) {
+
+    } else {
+      if (request.status >= 400) {
+
+      }
+    }
+  }
+}
+
