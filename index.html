@@ -59,10 +59,10 @@
             <div id="searchBtnReset">
               <input placeholder="Tappez un nom de vin" type="text" name="recherche" id="strSearch"
                 class="form-control mr-2">
+                <div id="tooltip" role="tooltip">Cherchez un vin
+                  <div id="arrow" data-popper-arrow></div>
+                </div>
               <i id="resetList" class="fa fa-times fa-1x"></i>
-              <div id="tooltip" role="tooltip">Cherchez un vin
-                <div id="arrow" data-popper-arrow></div>
-              </div>
 
             </div>
 
@@ -212,6 +212,9 @@
                 </a>
               </div>
               <textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
+              <button id="likeButton" name="likes" type="button" class="btn btn-primary" onclick="number()">
+                <i class="fas fa-heart"> Like Wine </i>
+              </button>
             </div>
           </div>
       </div>
