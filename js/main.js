@@ -10,10 +10,12 @@ fetch('https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines')
 .then(response => response.json())
 .then(function(data) {
   for (let prop in data) {
-    vinData.push(data[prop]);
+    vinData.push(data[prop]); // vinData === object!
   }
   showListWine(vinData);
 });
+
+
 
 // Reset le choix de tri
 var options = document.querySelectorAll("#trier option");
@@ -151,17 +153,28 @@ $.getJSON(countryUrl, function (data) {
 })
 
 /* Populating selectYears */
+let arrYears = [];
 let selectYears = $('#selectYears');
 selectYears.empty();
 selectYears.append('<option selected="true" disabled>Ann&eacute;e</option>');
-selectYears.prop('selectedIndex', 0);
-console.log(selectYears);
-for (let i = 0; i < vinData.length; i++) {
-  selectYears.append($('<option></option>').attr('value', i).text(vinData[i].year));
-  console.log(vinData[i]);
-}
+selectCountries.prop('selectedIndex', 0);
+$.getJSON(url, function(data) {
+  $.each(data, function(key, detail) {
+    if (!arrYears.includes(detail['year']))
+    arrYears.push(detail['year']);
+  })
+}).done(function() {
+  arrYears.sort((a,b) => a - b);
+  console.log(arrYears);
+  for (let i = 0; i < arrYears.length; i++) {
+    let year = arrYears[i];
+    let newOpt = document.createElement("option");
+    newOpt.textContent = year;
+    $('#selectYears').append(newOpt);
+  }
+});
 
-// Filtrer sends selectCountries & selectYears to API
+//TODO: Filtrer sends selectCountries & selectYears to API
 
 
 document.getElementById("recherche").addEventListener("click", searchWine);
@@ -181,8 +194,6 @@ $('#resetList').click(function () {
   showListWine(vinData);
   $(this).css("display", "none");
 })
-
-
 
 function searchWine() {
   /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres, ou un nombre
