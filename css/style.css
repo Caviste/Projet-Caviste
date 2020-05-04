@@ -405,10 +405,7 @@ header nav {
   margin-top: 15px;
   margin-bottom: 15px;
 }
-/* Style des li de tabs */
-#btnComment,btnNotes{
-  border: none !important;
-}
+
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
   #btnScroll{

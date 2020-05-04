@@ -547,3 +547,16 @@ function showPopper(selector, message,position) {
     selector.addEventListener(event, hide);
   });
 }
+ //Style du nav 
+ let tabComment = $('#tabComments');
+ let tabNotes = $('#tabNotes');
+ tabComment.click(function(event){
+  document.getElementById("tabComments").className = "nav-link active";
+  document.getElementById("tabNotes").className = "nav-link";
+ 
+ });
+ tabNotes.click(function(event){
+  document.getElementById("tabComments").className = "nav-link";
+  document.getElementById("tabNotes").className = "nav-link active";
+ 
+ });
