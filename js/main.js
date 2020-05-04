@@ -141,6 +141,9 @@ function showDetails(index) {
   }
 }
 
+/* Populating selectCountries */
+let selectCountries = $('#selectCountries');
+
 document.getElementById("recherche").addEventListener("click", searchWine);
 
 $(document).ready(function(){
