@@ -382,6 +382,15 @@ header nav {
   margin-bottom: 30px;
 }
 
+#mainRaisins {
+  background-color: rgba(255, 255, 255, 0.904);
+  border-radius: 10px;
+  max-width: 995px;
+  height: 350px;
+  margin-left: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
 /* Bouton Close Chart Pays */
 #closePays,
 #closeRaisins {
@@ -394,15 +403,7 @@ header nav {
   cursor: pointer;
 }
 
-#mainRaisins {
-  background-color: rgba(255, 255, 255, 0.904);
-  border-radius: 10px;
-  max-width: 995px;
-  height: 350px;
-  margin-left: 10px;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-}
+
 
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
@@ -533,4 +534,13 @@ footer {
   cursor: pointer;
   padding: 15px;
   border-radius: 50px;
+}
+#tabs{
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.904);
+  border-radius: 3px;
+  max-width: 995px;
+  height: 200px;
+  margin-left: 0px;
+  margin-top: 30px;
 }
