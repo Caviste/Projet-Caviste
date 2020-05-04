@@ -87,8 +87,8 @@ function showListWine(arr) {
 
   for (let i = 0; i < arr.length; i++) {
     document.getElementById("liste").getElementsByTagName("li")[i].addEventListener("click", function () {
-        showDetails(arr[i].id);
-      });
+      showDetails(arr[i].id);
+    });
   }
 }
 
@@ -272,20 +272,20 @@ function invertPriceSort() {
 
 document.getElementById("recherche").addEventListener("click", searchWine);
 
-$(document).ready(function(){
-  $('#strSearch').keyup(function(){
+$(document).ready(function () {
+  $('#strSearch').keyup(function () {
     let searchValue = $(this).val().toLowerCase();
-    $("#liste li").filter(function() {
+    $("#liste li").filter(function () {
       $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
     });
     $('#resetList').css("display", "inline");
   });
 });
 
-$('#resetList').click(function() {
+$('#resetList').click(function () {
   resetSearch();
   showListWine(vinData);
-  $(this).css("display","none");
+  $(this).css("display", "none");
 })
 
 
@@ -317,13 +317,13 @@ function searchWine() {
       if (typeof strSearch === "string") {
         let arrRegions = [];
         let arrGrapes = [];
-        vinData.forEach((vin)=> {
-          if(!arrRegions.includes(vin["region"])) {
+        vinData.forEach((vin) => {
+          if (!arrRegions.includes(vin["region"])) {
             arrRegions.push(vin["region"]);
           }
         });
         vinData.forEach((vin) => {
-          if(!arrGrapes.includes(vin["grapes"])) {
+          if (!arrGrapes.includes(vin["grapes"])) {
             arrGrapes.push(vin["grapes"]);
           }
         });
@@ -331,23 +331,23 @@ function searchWine() {
         console.log(strSearch);
         if ($.inArray(ucFirst(strSearch), arrRegions) !== -1) {
           fetch(url + "/regions/" + strSearch)
-          .then((resp) => resp.json())
-          .then(function (data) {
-            data.forEach((vin) => {
-              queryArr.push(vin);
-            });
-            showListWine(queryArr);
-          })
-        
+            .then((resp) => resp.json())
+            .then(function (data) {
+              data.forEach((vin) => {
+                queryArr.push(vin);
+              });
+              showListWine(queryArr);
+            })
+
         } else if (arrGrapes.indexOf(strSearch) !== -1) { //TODO: Bug when searching for Pinot (single word instead of full grape name)
           fetch(url + "/grapes/" + strSearch)
-          .then((resp) => resp.json())
-          .then(function (data) {
-            data.forEach((vin) => {
-              queryArr.push(vin);
-            });
-            showListWine(queryArr);
-          })
+            .then((resp) => resp.json())
+            .then(function (data) {
+              data.forEach((vin) => {
+                queryArr.push(vin);
+              });
+              showListWine(queryArr);
+            })
         }
       }
     }
@@ -366,7 +366,7 @@ function signUp() {
   localStorage.setItem("UniqueUserToken", JSON.stringify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"));
 
   let url = "http://jsonplaceholder.typicode.com/users"
-  let token = JSON.parse(sessionStorage.getItem('UniqueUserToken'));  
+  let token = JSON.parse(sessionStorage.getItem('UniqueUserToken'));
   let h = new Headers();
   h.append('Authentication', `Bearer ${token}`);
 
@@ -391,11 +391,11 @@ $('#mainPays').hide();
 $('#mainRaisins').hide();
 
 /* Afficher les deux chart (Pays et Raisins) aprés un click sur le btn "Statistiques" */
-$('#clickMe').click(function(){
+$('#clickMe').click(function () {
 
   /* Chart pays */
   $('#mainPays').animate({
-  }, 5000, function() {
+  }, 5000, function () {
     $('#mainPays').show();
     $('#closePays').show();
   });
@@ -407,7 +407,7 @@ $('#clickMe').click(function(){
   // Crée un array contenant tous les pays des vins
   let arrCountry = [];
   vinData.forEach((vin) => {
-    if (!arrCountry.includes(vin["country"])){
+    if (!arrCountry.includes(vin["country"])) {
       arrCountry.push(vin["country"]);
     }
   });
@@ -419,9 +419,9 @@ $('#clickMe').click(function(){
   }
 
   function countWineByCountry(liste, country) {
-    let cpt = 0;    
-    for(let vin of liste) {
-      if(vin.country==country) {
+    let cpt = 0;
+    for (let vin of liste) {
+      if (vin.country == country) {
         cpt++;
       }
     }
@@ -460,33 +460,33 @@ $('#clickMe').click(function(){
       }]
     },
     options: {
-      maintainAspectRatio:false,
+      maintainAspectRatio: false,
       responsive: true,
-        title: {
-          display: true,
-          text: 'Nombre des vins par Pays',
-          fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-          padding :10,
-          fontSize : 20,
-          scales: {
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-          }
-        }  
+      title: {
+        display: true,
+        text: 'Nombre des vins par Pays',
+        fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        padding: 10,
+        fontSize: 20,
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
     }
   });
-  
+
   // Bouton Close Graph Pays
-  $('#closePays').click(function(){
-    $("#mainPays").css("display","none");
+  $('#closePays').click(function () {
+    $("#mainPays").css("display", "none");
   });
 
-   /* Chart Raisins */
+  /* Chart Raisins */
   $('#mainRaisins').animate({
-  }, 5000, function() {
+  }, 5000, function () {
     $('#mainRaisins').show();
   });
 
@@ -497,7 +497,7 @@ $('#clickMe').click(function(){
   // Crée un array contenant tous les raisins des vins
   let arrGrapes = [];
   vinData.forEach((vin) => {
-    if (!arrGrapes.includes(vin["grapes"])){
+    if (!arrGrapes.includes(vin["grapes"])) {
       arrGrapes.push(vin["grapes"]);
     }
   });
@@ -509,9 +509,9 @@ $('#clickMe').click(function(){
   }
 
   function countWineByGrapes(liste, grapes) {
-    let cptR = 0;    
-    for(let vin of liste) {
-      if(vin.grapes==grapes) {
+    let cptR = 0;
+    for (let vin of liste) {
+      if (vin.grapes == grapes) {
         cptR++;
       }
     }
@@ -557,14 +557,14 @@ $('#clickMe').click(function(){
       }]
     },
     options: {
-      maintainAspectRatio:false,
+      maintainAspectRatio: false,
       responsive: true,
       title: {
         display: true,
         text: 'Nombre des vins par raisins',
         fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-        padding :10,
-        fontSize : 20,
+        padding: 10,
+        fontSize: 20,
         scales: {
           yAxes: [{
             ticks: {
@@ -572,12 +572,12 @@ $('#clickMe').click(function(){
             }
           }]
         }
-      }  
+      }
     }
   });
   // Bouton Close Graph Pays
-  $('#closeRaisins').click(function(){
-    $("#mainRaisins").css("display","none");
+  $('#closeRaisins').click(function () {
+    $("#mainRaisins").css("display", "none");
   });
 });
 
@@ -585,7 +585,7 @@ $('#clickMe').click(function(){
 var mybutton = document.getElementById("btnScroll");
 
 // When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {
+window.onscroll = function () {
   scrollFunction()
 };
 
@@ -603,9 +603,68 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
-if($(window).width()===768){
-  $('#message').css('display','block');
-  $('#closeMessage').click(function(){
-    $('#message').css('display','none');
- });
+if ($(window).width() === 768) {
+  $('#message').css('display', 'block');
+  $('#closeMessage').click(function () {
+    $('#message').css('display', 'none');
+  });
+}
+
+//fonction popper
+
+const search = document.querySelector('#strSearch');
+const searchMessage = document.querySelector('#tooltip');
+
+const graph = document.querySelector('#ChartGraph');
+const graphMessage = document.querySelector('#tooltipChart');
+
+
+$("#strSearch").mouseenter(showPopper(search,searchMessage,"left"));
+$("#ChartGraph").mouseenter(showPopper(graph,graphMessage,"right"));
+
+let popperInstance = null;
+
+function showPopper(selector, message,position) {
+
+  function create() {
+    popperInstance = Popper.createPopper(selector, message, {
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 8],
+          },
+        },
+      ],
+      placement : position,
+    });
+  }
+
+  function destroy() {
+    if (popperInstance) {
+      popperInstance.destroy();
+      popperInstance = null;
+    }
+  }
+
+  function show() {
+    message.setAttribute('data-show', '');
+    create();
+  }
+
+  function hide() {
+    message.removeAttribute('data-show');
+    destroy();
+  }
+
+  const showEvents = ['mouseenter', 'focus'];
+  const hideEvents = ['mouseleave', 'blur'];
+
+  showEvents.forEach(event => {
+    selector.addEventListener(event, show);
+  });
+
+  hideEvents.forEach(event => {
+    selector.addEventListener(event, hide);
+  });
 }
