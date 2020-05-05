@@ -218,6 +218,12 @@ header nav {
   background-color: white;
 }
 
+#selectCountries,#selectMethods,#filtrer,#recherche{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
 /* Bouton statistiques */
 #ChartGraph {
   margin-left: 10px;
@@ -357,7 +363,7 @@ header nav {
 /* Textarea */
 #description {
   width: 255px;
-  height: 255px;
+  height: 220px;
   border-color: rgb(145, 53, 64);
   border-width: 3px;
   border-style: solid;
@@ -400,14 +406,22 @@ header nav {
   background-color: rgba(255, 255, 255, 0.904);
   border-radius: 3px;
   max-width: 995px;
-  height: 200px;
+  height: 42px;
   margin-left: 0px;
   margin-top: 15px;
-  margin-bottom: 15px;
-  overflow-y: auto;
+ 
 }
 /* notes et commentaires */
-
+#comments,#notes{
+  background-color: #fff;
+  display: none;
+  max-width: 995px;
+  height: 200px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 0px 0px 3px 3px;
+  overflow-y: auto;
+}
 /* css pour les telephones et tablettes */
 @media all and (min-width:300px) and (max-width:360px) {
   #btnScroll{
