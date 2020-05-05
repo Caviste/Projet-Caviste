@@ -148,6 +148,8 @@ function showDetails(index) {
 }
 
 /* in arrComment 
+-> arrComment[index]['prop']
+Props: 
 -> id comment
 -> user-id
 -> wine-id
@@ -165,29 +167,15 @@ $.getJSON(countryUrl, function (data) {
   })
 })
 
-/* Populating selectYears */
-let arrYears = [];
-let selectYears = $('#selectYears');
-selectYears.empty();
-selectYears.append('<option selected="true" disabled>Ann&eacute;e</option>');
-selectCountries.prop('selectedIndex', 0);
-$.getJSON(url, function(data) {
-  $.each(data, function(key, detail) {
-    if (!arrYears.includes(detail['year']))
-    arrYears.push(detail['year']);
-  })
-}).done(function() {
-  arrYears.sort((a,b) => a - b);
-  for (let i = 0; i < arrYears.length; i++) {
-    let year = arrYears[i];
-    let newOpt = document.createElement("option");
-    newOpt.textContent = year;
-    $('#selectYears').append(newOpt);
-  }
-});
 
 //TODO: Filtrer sends selectCountries & selectYears to API
+$('#filtrer').click(function() {
+  event.preventDefault();
+  let pays = $('#selectCountries option:selected').text();
+  let sortMethod = $('#selectMethods option:selected').text();
+  console.log(sortMethod);
 
+})
 
 document.getElementById("recherche").addEventListener("click", searchWine);
 
