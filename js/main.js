@@ -136,7 +136,7 @@ function showDetails(index) {
       });
       let str = '';
       for (let i = 0; i < arrComment.length; i++) {
-        str += "<i>User " + arrComment[i]['user_id'] + "<br>Commentaire: " + arrComment[i].content + "</i><br>";
+        str += "<i><strong>User " + arrComment[i]['user_id'] + "</strong></i><br><p>Commentaire: " + arrComment[i].content + "</p><br>";
       }
 
       document.getElementById('comments').innerHTML = str;

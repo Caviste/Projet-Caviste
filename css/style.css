@@ -357,7 +357,7 @@ header nav {
 /* Textarea */
 #description {
   width: 255px;
-  height: 255px;
+  height: 220px;
   border-color: rgb(145, 53, 64);
   border-width: 3px;
   border-style: solid;
@@ -412,6 +412,7 @@ header nav {
   max-width: 995px;
   height: 200px;
   margin-bottom: 15px;
+  padding: 10px;
   border-radius: 0px 0px 3px 3px;
   overflow-y: auto;
 }
