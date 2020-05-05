@@ -138,8 +138,13 @@ function showDetails(index) {
       for (let i = 0; i < arrComment.length; i++) {
         str += "<i><strong>User " + arrComment[i]['user_id'] + "</strong></i><br><p>Commentaire: " + arrComment[i].content + "</p><br>";
       }
-
-      document.getElementById('comments').innerHTML = str;
+      if(str == []){
+        $('#comments').css('height','100px');
+        document.getElementById('comments').innerText = "Pas de commentaires sur ce vin";
+      }else{
+       $('#comments').css('height','200px');
+       document.getElementById('comments').innerHTML = str;
+      }
     }
     console.log(arrComment);
   };

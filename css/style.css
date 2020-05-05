@@ -359,6 +359,18 @@ header nav {
   margin-left: 228px;
   color: black;
 }
+/* bouton Like */
+#likeButton{
+  background-color: rgb(195, 0, 0);
+  border-color:rgb(195, 0, 0);
+  color: #fff;
+  width: 120px;
+  margin-right:10px;
+  margin-left: 3px;
+}
+#ajoutNote{
+  width: 115px;
+}
 
 /* Textarea */
 #description {
@@ -416,7 +428,7 @@ header nav {
   background-color: #fff;
   display: none;
   max-width: 995px;
-  height: 200px;
+  height: 100px;
   margin-bottom: 15px;
   padding: 10px;
   border-radius: 0px 0px 3px 3px;
