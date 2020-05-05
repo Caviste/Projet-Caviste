@@ -138,10 +138,8 @@ function showDetails(index) {
       for (let i = 0; i < arrComment.length; i++) {
         str += "<i><strong>User " + arrComment[i]['user_id'] + "</strong></i><br><p>Commentaire: " + arrComment[i].content + "</p><br>";
       }
-
       document.getElementById('comments').innerHTML = str;
     }
-    console.log(arrComment);
   };
   request.send();
   showComments();
@@ -167,33 +165,39 @@ $.getJSON(countryUrl, function (data) {
   })
 })
 
-
-//TODO: Filtrer sends selectCountries & selectYears to API
 $('#filtrer').click(function() {
-  // http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines?key=country&val=USA&sort=year
-  // http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines
   event.preventDefault();
-  let queryArr = [];
+  
+  let arrReply = [];
   let pays = $('#selectCountries option:selected').text();
-  let sortMethod = $('#selectMethods option:selected').text();
-  // fetch
-  console.log(url + "?key=country&val=" + pays + "&sort=" + sortMethod);
+  let sortMethod = $('#selectMethods option:selected').text().toLowerCase();
+
   let xmlReq = new XMLHttpRequest();
   xmlReq.open("GET", url + "?key=country&val=" + pays + "&sort=" + sortMethod, true);
+
   xmlReq.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
       let reply = JSON.parse(this.response);
-      showListWine(reply);
+      for (let prop in reply) {
+        arrReply.push(reply[prop]);
+      }
+      if (sortMethod == "year") {
+        arrReply.sort((a,b) => a.year - b.year);
+      } else if (sortMethod == "name") {
+        arrReply.sort(function(a,b) {
+          return a['name'] > b['name'] ? 1 : a['name'] < b['name'] ? -1 : 0;
+        });
+      } else if (sortMethod === "grapes") {
+        console.log("IN");
+        console.log(arrReply);
+        arrReply.sort(function(a,b) {
+        return a['grapes'] > b['grapes'] ? 1 : a['grapes'] < b['grapes'] ? -1 : 0;
+        });
+      }
+      showListWine(arrReply);
     }
   };
   xmlReq.send();
-
-    if (sortMethod === "year") {
-      console.log("IN");
-    }
-    // showListWine(queryArr);
-  // sort method
-
 })
 
 document.getElementById("recherche").addEventListener("click", searchWine);
