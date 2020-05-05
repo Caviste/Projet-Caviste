@@ -218,6 +218,12 @@ header nav {
   background-color: white;
 }
 
+#selectCountries,#selectMethods,#filtrer,#recherche{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
 /* Bouton statistiques */
 #ChartGraph {
   margin-left: 10px;
