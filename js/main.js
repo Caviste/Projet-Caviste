@@ -167,7 +167,7 @@ $.getJSON(countryUrl, function (data) {
 
 $('#filtrer').click(function() {
   event.preventDefault();
-  
+
   let arrReply = [];
   let pays = $('#selectCountries option:selected').text();
   let sortMethod = $('#selectMethods option:selected').text().toLowerCase();
@@ -181,9 +181,9 @@ $('#filtrer').click(function() {
       for (let prop in reply) {
         arrReply.push(reply[prop]);
       }
-      if (sortMethod == "year") {
+      if (sortMethod === "year") {
         arrReply.sort((a,b) => a.year - b.year);
-      } else if (sortMethod == "name") {
+      } else if (sortMethod === "name") {
         arrReply.sort(function(a,b) {
           return a['name'] > b['name'] ? 1 : a['name'] < b['name'] ? -1 : 0;
         });
