@@ -170,10 +170,31 @@ $.getJSON(countryUrl, function (data) {
 
 //TODO: Filtrer sends selectCountries & selectYears to API
 $('#filtrer').click(function() {
+  // http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines?key=country&val=USA&sort=year
+  // http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines
   event.preventDefault();
+  let queryArr = [];
   let pays = $('#selectCountries option:selected').text();
   let sortMethod = $('#selectMethods option:selected').text();
-  console.log(sortMethod);
+  // fetch
+  console.log(url + "?key=country&val=" + pays + "&sort=" + sortMethod);
+  let xmlReq = new XMLHttpRequest();
+  xmlReq.open("GET", url + "?key=country&val=" + pays + "&sort=" + sortMethod, true);
+  xmlReq.onload = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let reply = JSON.parse(this.response);
+      showListWine(reply);
+    }
+  };
+  xmlReq.send();
+
+    if (sortMethod === "year") {
+      console.log("IN");
+    }
+    // showListWine(queryArr);
+  })
+
+  // sort method
 
 })
 
@@ -240,8 +261,8 @@ function searchWine() {
               data.forEach((vin) => {
                 queryArr.push(vin);
               });
-              showListWine(queryArr);
-            })
+            showListWine(queryArr);
+          })
 
         } else if (arrGrapes.indexOf(strSearch) !== -1) { //TODO: Bug when searching for Pinot (single word instead of full grape name)
           fetch(url + "/grapes/" + strSearch)
