@@ -192,8 +192,6 @@ $('#filtrer').click(function() {
       console.log("IN");
     }
     // showListWine(queryArr);
-  })
-
   // sort method
 
 })
