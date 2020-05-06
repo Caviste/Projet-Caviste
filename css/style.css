@@ -92,89 +92,108 @@ header nav {
   background-color: white;
   border-width: 2px;
 }
+#strSearch:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/*popper texte  vin + graph */
+#tooltip {
+  /* ... */
+  display: none;
+}
 
-  /*popper texte  vin + graph */
-  #tooltip {
-    /* ... */
-    display: none;
-  }
-  
-  #tooltip[data-show] {
-    display: block;
-  }
+#tooltip[data-show] {
+  display: block;
+}
 
-  #tooltip {
-    background: #333;
-    color: white;
-    font-weight: bold;
-    padding: 4px 8px;
-    font-size: 13px;
-    border-radius: 4px;
-  }
+#tooltip {
+  background: #333;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+}
 
-  #arrow,
-  #arrow::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    z-index: -1;
-    
-  }
+#arrow,
+#arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  z-index: -1;
+}
 
-  #arrow::before {
-    content: '';
-    transform: rotate(45deg);
-    background: #333;
-    
-  }
+#arrow::before {
+  content: '';
+  transform: rotate(45deg);
+  background: #333;
+}
 
-  
+#tooltip[data-popper-placement^='top'] > #arrow {
+  bottom: -4px;
+}
 
-  #tooltip[data-popper-placement^='left'] > #arrow {
-    right: -4px;
-  }
+#tooltip[data-popper-placement^='bottom'] > #arrow {
+  top: -4px;
+}
 
-  
-  /*popper graphique */
+#tooltip[data-popper-placement^='left'] > #arrow {
+  right: -4px;
+}
 
-  #tooltipChart {
-    /* ... */
-    display: none;
-  }
-  
-  #tooltipChart[data-show] {
-    display: block;
-  }
+#tooltip[data-popper-placement^='right'] > #arrow {
+  left: -4px;
+}
+/*popper graphique */
 
-  #tooltipChart {
-    background: #333;
-    color: white;
-    font-weight: bold;
-    padding: 4px 8px;
-    font-size: 13px;
-    border-radius: 4px;
-  }
+#tooltipChart {
+  /* ... */
+  display: none;
+}
 
-  #arrowChart,
-  #arrowChart::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    z-index: -1;
-  }
+#tooltipChart[data-show] {
+  display: block;
+}
 
-  #arrowChart::before {
-    content: '';
-    transform: rotate(45deg);
-    background: #333;
-  }
+#tooltipChart {
+  background: #333;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+}
 
-  
+#arrowChart,
+#arrowChart::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  z-index: -1;
+}
 
-  #tooltipChart[data-popper-placement^='right'] > #arrowChart {
-    left: -4px;
-  }
-  /*fin popper*/
+#arrowChart::before {
+  content: '';
+  transform: rotate(45deg);
+  background: #333;
+}
+
+#tooltipChart[data-popper-placement^='top'] > #arrowChart {
+  bottom: -4px;
+}
+
+#tooltipChart[data-popper-placement^='bottom'] > #arrowChart {
+  top: -4px;
+}
+
+#tooltipChart[data-popper-placement^='left'] > #arrowChart {
+  right: -4px;
+}
+
+#tooltipChart[data-popper-placement^='right'] > #arrowChart {
+  left: -4px;
+}
+/*fin popper*/
 
 #resetList {
   position: absolute;
@@ -398,6 +417,7 @@ header nav {
 
 /*Section commentaire et notes */
 #tabs{
+  display: none;
   position: relative;
   background-color: rgba(255, 255, 255, 0.904);
   border-radius: 3px;
@@ -419,7 +439,8 @@ header nav {
   overflow-y: auto;
 }
 /* css pour les telephones et tablettes */
-@media all and (min-width:300px) and (max-width:360px) {
+/*  Iphone 5SE */
+@media all and (min-width:200px) and (max-width:320px) {
   #btnScroll{
     display:none !important;
   }
@@ -431,7 +452,7 @@ header nav {
     min-width: 300px;
     min-height: 300px;
   }
-  #recherche,#trier,#ajouter,#ChartGraph{
+  #recherche,#selectCountries,#selectMethods,#ChartGraph,#filtrer{
     margin-top: 7px;
   }
   #stylediv{
@@ -442,14 +463,56 @@ header nav {
     width: 120px;
     height: 25px;
   }
-  #trier{
-    width: 100px;
+  #resetList{
+    right: 10px;
+  }
+  #recherche,#selectCountries,#filtrer{
+    margin-left :0px;
+  }
+  #tabs{
+    height: 35px;
+  }
+  #tabComments,#tabNotes{
+    font-size: 12px;
+  }
+} 
+@media all and (min-width:321px) and (max-width:375px) {
+  #btnScroll{
+    display:none !important;
+  }
+  #mainPays,#mainRaisins{
+    min-width:300px;
+    min-height: 300px;
+  }
+  #cadrePays,#cadreRaisins{
+    min-width: 300px;
+    min-height: 300px;
+  }
+  #recherche,#selectCountries,#selectMethods,#ChartGraph,#filtrer{
+    margin-top: 7px;
+  }
+  #stylediv{
+    width: 280px;
+    margin-left:16px;
+  }
+  #a:ChartGraph{
+    width: 120px;
+    height: 25px;
   }
   #resetList{
     right: 10px;
   }
+  #recherche,#selectMethods,#ChartGraph{
+    margin-left :0px;
+  }
+  #tabs{
+    height: 40px;
+  }
+  #tabComments,#tabNotes{
+    font-size: 14px;
+  }
 } 
-@media all and (min-width:361px) and (max-width:649px) {
+@media all and (min-width:376px) and (max-width:649px) {
   #btnScroll{
     display:none  !important;
   }
@@ -467,7 +530,7 @@ header nav {
     margin-right: 15px;
     margin-left: 15px;
   }
-  #recherche,#trier,#ajouter,#ChartGraph{
+  #recherche,#selectCountries,#selectMethods,#ChartGraph,#filtrer{
     margin-top: 7px;
   }
   #strSearch{
@@ -475,6 +538,9 @@ header nav {
   }
   #resetList{
     right: 10px;
+  }
+  #recherche,#selectMethods,#ChartGraph{
+    margin-left :0px;
   }
 }
 
@@ -490,7 +556,7 @@ header nav {
       min-width: 250px;
       min-height: 250px;
   }
-  #trier,#ChartGraph{
+  #recherche,#selectCountries,#selectMethods,#filtrer,#ChartGraph{
     margin-top: 7px;
   }
   #strSearch{
@@ -514,7 +580,10 @@ header nav {
 }
 
 @media all and (min-width:1001px) and (max-width: 3000px) {
-
+  #ChartGraph{
+    margin-top:7px;
+    margin-left: 0px;
+  }
   #mainPay,
   #mainRaisinss {
     min-width: 350px;

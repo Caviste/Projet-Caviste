@@ -15,8 +15,6 @@ fetch('https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines')
   showListWine(vinData);
 });
 
-
-
 // Reset le choix de tri
 var options = document.querySelectorAll("#trier option");
 for (let i = 0; i < options.length; i++) {
@@ -138,8 +136,9 @@ function showDetails(index) {
       for (let i = 0; i < arrComment.length; i++) {
         str += "<i><strong>User " + arrComment[i]['user_id'] + "</strong></i><br><p>Commentaire: " + arrComment[i].content + "</p><br>";
       }
+      $('#tabs').css('display','block');
       if(str == []){
-        $('#comments').css('height','100px');
+       $('#comments').css('height','100px');
         document.getElementById('comments').innerText = "Pas de commentaires sur ce vin";
       }else{
        $('#comments').css('height','200px');
@@ -151,14 +150,6 @@ function showDetails(index) {
   showComments();
 }
 
-/* in arrComment 
--> arrComment[index]['prop']
-Props: 
--> id comment
--> user-id
--> wine-id
--> content */
-
 /* Populating selectCountries */
 let selectCountries = $('#selectCountries');
 selectCountries.empty();
@@ -169,7 +160,11 @@ $.getJSON(countryUrl, function (data) {
   $.each(data, function (key, info) {
     selectCountries.append($('<option></option>').attr('value', key).text(info['country']));
   })
-})
+});
+
+function addBtnReset() {
+  $('#liste').prepend('<button type="button" id="btnReset" class="btn btn-danger">RESET LISTE</button>');
+}
 
 $('#filtrer').click(function() {
   event.preventDefault();
@@ -201,6 +196,7 @@ $('#filtrer').click(function() {
         });
       }
       showListWine(arrReply);
+      addBtnReset();
     }
   };
   xmlReq.send();
@@ -214,14 +210,24 @@ $(document).ready(function () {
     $("#liste li").filter(function () {
       $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
     });
-    $('#resetList').css("display", "inline");
-  });
+    if ($(this).val().length == 0) {
+      $('#resetList').fadeOut(150, function() {
+        $('#resetList').hide();
+      } );
+    } else {
+      $('#resetList').fadeIn(150, function() {
+        $('#resetList').show();
+      } );
+    }
+  })  
 });
 
 $('#resetList').click(function () {
   resetSearch();
   showListWine(vinData);
-  $(this).css("display", "none");
+  $(this).fadeOut(150, function() {
+    $(this).css("display", "none");
+  })
 })
 
 function searchWine() {
@@ -536,7 +542,7 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
-if ($(window).width() === 768) {
+if (($(window).width() === 768)||($(window).width()===834)) {
   $('#message').css('display', 'block');
   $('#closeMessage').click(function () {
     $('#message').css('display', 'none');
