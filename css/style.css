@@ -92,104 +92,108 @@ header nav {
   background-color: white;
   border-width: 2px;
 }
-  /*popper texte  vin + graph */
-  #tooltip {
-    /* ... */
-    display: none;
-  }
-  
-  #tooltip[data-show] {
-    display: block;
-  }
+#strSearch:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/*popper texte  vin + graph */
+#tooltip {
+  /* ... */
+  display: none;
+}
 
-  #tooltip {
-    background: #333;
-    color: white;
-    font-weight: bold;
-    padding: 4px 8px;
-    font-size: 13px;
-    border-radius: 4px;
-  }
+#tooltip[data-show] {
+  display: block;
+}
 
-  #arrow,
-  #arrow::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    z-index: -1;
-  }
+#tooltip {
+  background: #333;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+}
 
-  #arrow::before {
-    content: '';
-    transform: rotate(45deg);
-    background: #333;
-  }
+#arrow,
+#arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  z-index: -1;
+}
 
-  #tooltip[data-popper-placement^='top'] > #arrow {
-    bottom: -4px;
-  }
+#arrow::before {
+  content: '';
+  transform: rotate(45deg);
+  background: #333;
+}
 
-  #tooltip[data-popper-placement^='bottom'] > #arrow {
-    top: -4px;
-  }
+#tooltip[data-popper-placement^='top'] > #arrow {
+  bottom: -4px;
+}
 
-  #tooltip[data-popper-placement^='left'] > #arrow {
-    right: -4px;
-  }
+#tooltip[data-popper-placement^='bottom'] > #arrow {
+  top: -4px;
+}
 
-  #tooltip[data-popper-placement^='right'] > #arrow {
-    left: -4px;
-  }
-  /*popper graphique */
+#tooltip[data-popper-placement^='left'] > #arrow {
+  right: -4px;
+}
 
-  #tooltipChart {
-    /* ... */
-    display: none;
-  }
-  
-  #tooltipChart[data-show] {
-    display: block;
-  }
+#tooltip[data-popper-placement^='right'] > #arrow {
+  left: -4px;
+}
+/*popper graphique */
 
-  #tooltipChart {
-    background: #333;
-    color: white;
-    font-weight: bold;
-    padding: 4px 8px;
-    font-size: 13px;
-    border-radius: 4px;
-  }
+#tooltipChart {
+  /* ... */
+  display: none;
+}
 
-  #arrowChart,
-  #arrowChart::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    z-index: -1;
-  }
+#tooltipChart[data-show] {
+  display: block;
+}
 
-  #arrowChart::before {
-    content: '';
-    transform: rotate(45deg);
-    background: #333;
-  }
+#tooltipChart {
+  background: #333;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+}
 
-  #tooltipChart[data-popper-placement^='top'] > #arrowChart {
-    bottom: -4px;
-  }
+#arrowChart,
+#arrowChart::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  z-index: -1;
+}
 
-  #tooltipChart[data-popper-placement^='bottom'] > #arrowChart {
-    top: -4px;
-  }
+#arrowChart::before {
+  content: '';
+  transform: rotate(45deg);
+  background: #333;
+}
 
-  #tooltipChart[data-popper-placement^='left'] > #arrowChart {
-    right: -4px;
-  }
+#tooltipChart[data-popper-placement^='top'] > #arrowChart {
+  bottom: -4px;
+}
 
-  #tooltipChart[data-popper-placement^='right'] > #arrowChart {
-    left: -4px;
-  }
-  /*fin popper*/
+#tooltipChart[data-popper-placement^='bottom'] > #arrowChart {
+  top: -4px;
+}
+
+#tooltipChart[data-popper-placement^='left'] > #arrowChart {
+  right: -4px;
+}
+
+#tooltipChart[data-popper-placement^='right'] > #arrowChart {
+  left: -4px;
+}
+/*fin popper*/
 
 #resetList {
   position: absolute;
@@ -413,6 +417,7 @@ header nav {
 
 /*Section commentaire et notes */
 #tabs{
+  display: none;
   position: relative;
   background-color: rgba(255, 255, 255, 0.904);
   border-radius: 3px;
