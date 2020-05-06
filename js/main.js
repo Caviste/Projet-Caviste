@@ -536,7 +536,7 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
-if ($(window).width() === 768) {
+if (($(window).width() === 768)||($(window).width()===834)) {
   $('#message').css('display', 'block');
   $('#closeMessage').click(function () {
     $('#message').css('display', 'none');

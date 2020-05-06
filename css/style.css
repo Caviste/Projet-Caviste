@@ -439,7 +439,8 @@ header nav {
   overflow-y: auto;
 }
 /* css pour les telephones et tablettes */
-@media all and (min-width:300px) and (max-width:360px) {
+/*  Iphone 5SE */
+@media all and (min-width:200px) and (max-width:320px) {
   #btnScroll{
     display:none !important;
   }
@@ -451,7 +452,7 @@ header nav {
     min-width: 300px;
     min-height: 300px;
   }
-  #recherche,#trier,#ajouter,#ChartGraph{
+  #recherche,#selectCountries,#selectMethods,#ChartGraph,#filtrer{
     margin-top: 7px;
   }
   #stylediv{
@@ -462,14 +463,56 @@ header nav {
     width: 120px;
     height: 25px;
   }
-  #trier{
-    width: 100px;
+  #resetList{
+    right: 10px;
+  }
+  #recherche,#selectCountries,#filtrer{
+    margin-left :0px;
+  }
+  #tabs{
+    height: 35px;
+  }
+  #tabComments,#tabNotes{
+    font-size: 12px;
+  }
+} 
+@media all and (min-width:321px) and (max-width:375px) {
+  #btnScroll{
+    display:none !important;
+  }
+  #mainPays,#mainRaisins{
+    min-width:300px;
+    min-height: 300px;
+  }
+  #cadrePays,#cadreRaisins{
+    min-width: 300px;
+    min-height: 300px;
+  }
+  #recherche,#selectCountries,#selectMethods,#ChartGraph,#filtrer{
+    margin-top: 7px;
+  }
+  #stylediv{
+    width: 280px;
+    margin-left:16px;
+  }
+  #a:ChartGraph{
+    width: 120px;
+    height: 25px;
   }
   #resetList{
     right: 10px;
   }
+  #recherche,#selectMethods,#ChartGraph{
+    margin-left :0px;
+  }
+  #tabs{
+    height: 40px;
+  }
+  #tabComments,#tabNotes{
+    font-size: 14px;
+  }
 } 
-@media all and (min-width:361px) and (max-width:649px) {
+@media all and (min-width:376px) and (max-width:649px) {
   #btnScroll{
     display:none  !important;
   }
@@ -487,7 +530,7 @@ header nav {
     margin-right: 15px;
     margin-left: 15px;
   }
-  #recherche,#trier,#ajouter,#ChartGraph{
+  #recherche,#selectCountries,#selectMethods,#ChartGraph,#filtrer{
     margin-top: 7px;
   }
   #strSearch{
@@ -495,6 +538,9 @@ header nav {
   }
   #resetList{
     right: 10px;
+  }
+  #recherche,#selectMethods,#ChartGraph{
+    margin-left :0px;
   }
 }
 
@@ -510,7 +556,7 @@ header nav {
       min-width: 250px;
       min-height: 250px;
   }
-  #trier,#ChartGraph{
+  #recherche,#selectCountries,#selectMethods,#filtrer,#ChartGraph{
     margin-top: 7px;
   }
   #strSearch{
@@ -534,7 +580,10 @@ header nav {
 }
 
 @media all and (min-width:1001px) and (max-width: 3000px) {
-
+  #ChartGraph{
+    margin-top:7px;
+    margin-left: 0px;
+  }
   #mainPay,
   #mainRaisinss {
     min-width: 350px;
