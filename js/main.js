@@ -209,8 +209,12 @@ $(document).ready(function () {
     $("#liste li").filter(function () {
       $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
     });
-    $('#resetList').css("display", "inline");
-  });
+    if ($(this).val().length == 0) {
+      $('#resetList').hide();
+    } else {
+      $('#resetList').show();
+    }
+  })  
 });
 
 $('#resetList').click(function () {
