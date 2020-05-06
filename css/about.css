@@ -1,0 +1,14 @@
+body{
+    background-image: url("../img/wine-back4.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    font-family: 'Cinzel', serif;
+    scroll-behavior: smooth;
+}
+
+#mainContent{
+    background-color: rgba(95, 25, 32, 0.787);
+    color: whitesmoke;
+}

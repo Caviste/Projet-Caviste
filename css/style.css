@@ -118,29 +118,23 @@ header nav {
     width: 8px;
     height: 8px;
     z-index: -1;
+    
   }
 
   #arrow::before {
     content: '';
     transform: rotate(45deg);
     background: #333;
+    
   }
 
-  #tooltip[data-popper-placement^='top'] > #arrow {
-    bottom: -4px;
-  }
-
-  #tooltip[data-popper-placement^='bottom'] > #arrow {
-    top: -4px;
-  }
+  
 
   #tooltip[data-popper-placement^='left'] > #arrow {
     right: -4px;
   }
 
-  #tooltip[data-popper-placement^='right'] > #arrow {
-    left: -4px;
-  }
+  
   /*popper graphique */
 
   #tooltipChart {
@@ -175,17 +169,7 @@ header nav {
     background: #333;
   }
 
-  #tooltipChart[data-popper-placement^='top'] > #arrowChart {
-    bottom: -4px;
-  }
-
-  #tooltipChart[data-popper-placement^='bottom'] > #arrowChart {
-    top: -4px;
-  }
-
-  #tooltipChart[data-popper-placement^='left'] > #arrowChart {
-    right: -4px;
-  }
+  
 
   #tooltipChart[data-popper-placement^='right'] > #arrowChart {
     left: -4px;

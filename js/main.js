@@ -552,7 +552,7 @@ const graph = document.querySelector('#ChartGraph');
 const graphMessage = document.querySelector('#tooltipChart');
 
 
-$("#strSearch").mouseenter(showPopper(search, searchMessage, "top"));
+$("#strSearch").mouseenter(showPopper(search, searchMessage, "left"));
 $("#ChartGraph").mouseenter(showPopper(graph, graphMessage, "right"));
 
 let popperInstance = null;
