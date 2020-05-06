@@ -211,9 +211,13 @@ $(document).ready(function () {
       $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
     });
     if ($(this).val().length == 0) {
-      $('#resetList').hide();
+      $('#resetList').fadeOut(150, function() {
+        $('#resetList').hide();
+      } );
     } else {
-      $('#resetList').show();
+      $('#resetList').fadeIn(150, function() {
+        $('#resetList').show();
+      } );
     }
   })  
 });
@@ -221,7 +225,9 @@ $(document).ready(function () {
 $('#resetList').click(function () {
   resetSearch();
   showListWine(vinData);
-  $(this).css("display", "none");
+  $(this).fadeOut(150, function() {
+    $(this).css("display", "none");
+  })
 })
 
 function searchWine() {
