@@ -136,8 +136,9 @@ function showDetails(index) {
       for (let i = 0; i < arrComment.length; i++) {
         str += "<i><strong>User " + arrComment[i]['user_id'] + "</strong></i><br><p>Commentaire: " + arrComment[i].content + "</p><br>";
       }
+      $('#tabs').css('display','block');
       if(str == []){
-        $('#comments').css('height','100px');
+       $('#comments').css('height','100px');
         document.getElementById('comments').innerText = "Pas de commentaires sur ce vin";
       }else{
        $('#comments').css('height','200px');
