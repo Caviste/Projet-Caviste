@@ -15,8 +15,6 @@ fetch('https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines')
   showListWine(vinData);
 });
 
-
-
 // Reset le choix de tri
 var options = document.querySelectorAll("#trier option");
 for (let i = 0; i < options.length; i++) {
@@ -151,14 +149,6 @@ function showDetails(index) {
   showComments();
 }
 
-/* in arrComment 
--> arrComment[index]['prop']
-Props: 
--> id comment
--> user-id
--> wine-id
--> content */
-
 /* Populating selectCountries */
 let selectCountries = $('#selectCountries');
 selectCountries.empty();
@@ -169,10 +159,10 @@ $.getJSON(countryUrl, function (data) {
   $.each(data, function (key, info) {
     selectCountries.append($('<option></option>').attr('value', key).text(info['country']));
   })
-})
+});
 
 function addBtnReset() {
-  $('#liste').prepend('<button ')
+  $('#liste').prepend('<button type="button" id="btnReset" class="btn btn-danger">RESET LISTE</button>');
 }
 
 $('#filtrer').click(function() {
@@ -205,6 +195,7 @@ $('#filtrer').click(function() {
         });
       }
       showListWine(arrReply);
+      addBtnReset();
     }
   };
   xmlReq.send();
