@@ -165,6 +165,10 @@ $.getJSON(countryUrl, function (data) {
   })
 })
 
+function addBtnReset() {
+  $('#liste').prepend('<button ')
+}
+
 $('#filtrer').click(function() {
   event.preventDefault();
 
