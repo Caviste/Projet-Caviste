@@ -205,34 +205,17 @@ header nav {
   opacity: 0.8;
 }
 
-/* Bouton  Ajouter */
-#ajouter {
+/* Boutons de filtrage */
+#selectCountries,#selectMethods,#filtrer,#recherche,#ChartGraph{
   margin-left: 10px;
   margin-right: 10px;
 }
-
-/* Bouton Trier */
-#trier {
-  max-width: 150px;
-  border-style: none;
-  background: #F9F9F9;
-  box-shadow: none;
-  font-size: 16px;
-  background-color: white;
-}
-
-#selectCountries,#selectMethods,#filtrer,#recherche{
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 
 /* Bouton statistiques */
 #ChartGraph {
-  margin-left: 10px;
   background-color: rgb(135, 35, 31);
-  border-color: rgb(135, 35, 31); ;
-  border : none;
+  border: 1px solid rgb(135, 35, 31); ;
+ 
 }
 
 /* Liste de vins */
@@ -579,7 +562,7 @@ header nav {
   }
 }
 
-@media all and (min-width:1001px) and (max-width: 3000px) {
+@media all and (min-width:1001px) and (max-width: 1350px) {
   #ChartGraph{
     margin-top:7px;
     margin-left: 0px;
