@@ -605,15 +605,4 @@ footer {
   cursor: pointer;
   padding: 15px;
   border-radius: 50px;
-}/*
-@media screen and (max-width:3150px){
-  #ChartGraph{
-    margin-top:0px;
-    margin-left: 0px;
-  }
-  #cadrePays,
-  #cadreRaisins {
-    min-width: 300px;
-    min-height: 300px;
-  }
-}*/
+}
