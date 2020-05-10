@@ -537,7 +537,7 @@ $('#clickMe').click(function() {
 });
 
 // Bouton scrollToTop
-var mybutton = $("#btnScroll");
+let mybutton = document.getElementById('btnScroll');
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {
