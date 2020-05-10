@@ -215,7 +215,7 @@ header nav {
 #ChartGraph {
   background-color: rgb(135, 35, 31);
   border: 1px solid rgb(135, 35, 31); ;
- 
+  margin-top:0px;
 }
 
 /* Liste de vins */
@@ -386,6 +386,11 @@ header nav {
   margin-bottom: 30px;
 }
 
+#cadrePays,
+#cadreRaisins {
+  min-width: 300px;
+  min-height: 300px;
+}
 /* Bouton Close Chart Pays */
 #closePays,
 #closeRaisins {
@@ -423,13 +428,13 @@ header nav {
 }
 /* css pour les telephones et tablettes */
 /*  Iphone 5SE */
-@media all and (min-width:200px) and (max-width:320px) {
+@media all and (min-width:150px) and (max-width:320px) {
   #btnScroll{
     display:none !important;
   }
   #mainPays,#mainRaisins{
-    min-width:300px;
-    min-height: 300px;
+    min-width:330px;
+    min-height: 330px;
   }
   #cadrePays,#cadreRaisins{
     min-width: 300px;
@@ -466,6 +471,7 @@ header nav {
   #mainPays,#mainRaisins{
     min-width:300px;
     min-height: 300px;
+    margin-right:15px;
   }
   #cadrePays,#cadreRaisins{
     min-width: 300px;
@@ -562,7 +568,7 @@ header nav {
   }
 }
 
-@media all and (min-width:1001px) and (max-width: 1350px) {
+@media all and (min-width:1001px) and (max-width: 1200px) {
   #ChartGraph{
     margin-top:7px;
     margin-left: 0px;
@@ -599,4 +605,15 @@ footer {
   cursor: pointer;
   padding: 15px;
   border-radius: 50px;
-}
+}/*
+@media screen and (max-width:3150px){
+  #ChartGraph{
+    margin-top:0px;
+    margin-left: 0px;
+  }
+  #cadrePays,
+  #cadreRaisins {
+    min-width: 300px;
+    min-height: 300px;
+  }
+}*/
