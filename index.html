@@ -33,7 +33,7 @@
                         </a>
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link" href="about.html">Ã€ propos <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="about.html">À propos <span class="sr-only">(current)</span></a>
                             </li>
                         </ul>
                         <form name="login">
@@ -73,7 +73,7 @@
             </select>
 
                         <select class="btn btn-light" name="selectMethods" id="selectMethods">
-              <option selected="true" disabled>Tri</option>
+              <option selected disabled>Tri</option>
               <option value="0">Year</option>
               <option value="1">Name</option>
               <option value="2">Grapes</option>
@@ -82,7 +82,7 @@
                         <button id="filtrer" class="btn btn-light">Filtrer</button>
 
                         <div id="clickMe">
-                            <a href="#cadrePays" id="ChartGraph" class="btn btn-primary"><img width="20px" height="20px" src="./img/icone-stat.png"></img> statistiques</a>
+                            <a href="#cadrePays" id="ChartGraph" class="btn btn-primary"><img width="20" height="20" src="./img/icone-stat.png" alt="ChartIcone"> statistiques</a>
                             <div id="tooltipChart" role="tooltip">Voir nos statistiques
                                 <div id="arrowChart" data-popper-arrow></div>
                             </div>
@@ -104,13 +104,13 @@
 
             <!-- Formulaire Vin + Img -->
             <div class="col">
-                <form id="" action="#" method="">
+                <form id="FormAfficher" action="#" method="get">
                     <div class="row">
                         <div id="stylediv" class="col">
 
                             <!-- id -->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="id">ID :</label>
+                                <label class="col-md-4 control-label" for="idVin">ID :</label>
                                 <div class="col-md-4">
                                     <input id="idVin" name="vin" type="text" placeholder="ID" class="form-control input-md">
                                 </div>
@@ -118,7 +118,7 @@
 
                             <!-- Nom Vin -->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="nom">Nom :</label>
+                                <label class="col-md-4 control-label" for="nomVin">Nom :</label>
                                 <div class="col-md-10">
                                     <input id="nomVin" name="nom" type="text" placeholder="nom" class="form-control input-md">
                                 </div>
@@ -150,7 +150,7 @@
 
                             <!-- Annee -->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="annee">Ann&eacute;e :</label>
+                                <label class="col-md-4 control-label" for="year">Ann&eacute;e :</label>
                                 <div class="col-md-10">
                                     <input id="year" name="annee" type="number" placeholder="Ann&eacute;e" class="form-control input-md">
                                 </div>
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
 
-                            <!-- Capacitï¿½ -->
+                            <!-- Capacit -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="pays">Capacit&eacute; :</label>
                                 <div class="col-md-10">
@@ -207,11 +207,10 @@
                             <div id="container">
                                 <img class="styled" src="./pics/block_nine.jpg" id="image" alt="wine">
 
-                                <img id="countryFlagsImg">
-
+                                <img id="countryFlagsImg" alt="Pays du vin">
                                 <!-- Icone modif img -->
                                 <a href="#" class="icon" title="Edit wine">
-                                    <i class="fa fa-edit fa-1x"></i>
+                                    <i class="far fa-edit fa-1x"></i>
                                 </a>
                             </div>
                             <button id="likeButton" name="likes" type="button" class="btn" onclick="number()">
@@ -224,8 +223,9 @@
 
                         </div>
                     </div>
+                </form>
             </div>
-            </form>
+
         </div>
 
         <div id="tabs">
@@ -256,24 +256,24 @@
         </div>
         <button onclick="topFunction()" id="btnScroll" title="Go to top"><i class="fas fa-arrow-up"></i></button>
         <footer>&copy; Amine, Nathan, Radad</footer>
-        </dciv>
+    </div>
 
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 
-        <!-- Bootstrap -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-        <!-- AOS animation -->
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- AOS animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-        <script>
-            AOS.init({
-                once: true,
-            });
-        </script>
-        <script type="text/javascript" src="./js/main.js"></script>
-        <script type="text/javascript" src="./node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+        });
+    </script>
+    <script src="./js/main.js"></script>
+    <script src="./node_modules/@popperjs/core/dist/umd/popper.js"></script>
 </body>
 
 </html>

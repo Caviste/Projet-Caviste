@@ -409,9 +409,10 @@ header nav {
 }
 
 #container #countryFlagsImg {
+    display: none;
     position: absolute;
-    top: 8px;
-    margin-left: 220px;
+    top: 5px;
+    margin-left: 213px;
 }
 
 
