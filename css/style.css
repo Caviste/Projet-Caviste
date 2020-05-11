@@ -1,611 +1,749 @@
 /* Corps page */
-body {
-  background-image: url("../img/wine-back4.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  font-family: 'Cinzel', serif;
-  scroll-behavior: smooth;
 
+body {
+    background-image: url("../img/wine-back4.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    font-family: 'Cinzel', serif;
+    scroll-behavior: smooth;
 }
+
+
 /* Message */
-#message{
-  display:none;
-  position: absolute;
-  z-index: 2;
-  width: 100% ;
-  height: 50px;
-  padding-top: 15px;
-  padding-left: 10px;
-  font-size:15px;
-  border-bottom:solid 3px black;
-  color:white;
-  background-color:rgba(95, 25, 32, 0.8);
+
+#message {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 50px;
+    padding-top: 15px;
+    padding-left: 10px;
+    font-size: 15px;
+    border-bottom: solid 3px black;
+    color: white;
+    background-color: rgba(95, 25, 32, 0.8);
 }
+
 
 /* Icone message */
-#closeMessage{
-  position: absolute;
-  top: 10px;
-  right: 8px;
-  z-index: 2; 
+
+#closeMessage {
+    position: absolute;
+    top: 10px;
+    right: 8px;
+    z-index: 2;
 }
+
+
 /* Header */
+
 header nav {
-  background-color: rgba(29, 27, 27, 0.8);
-  border-radius: 10px;
-  margin-bottom: 10px;
+    background-color: rgba(29, 27, 27, 0.8);
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
+
 
 /* Logo */
-#logo{
-  height: 100px;
-  width: 100px;
+
+#logo {
+    height: 100px;
+    width: 100px;
 }
+
 
 /* Millesime */
-#millesime{
-  height: 80px;
-  width: 170px;
+
+#millesime {
+    height: 80px;
+    width: 170px;
 }
+
+
 /* Inputs texte login & password */
+
 #mdp,
 #login {
-  border-radius: 5px;
+    border-radius: 5px;
 }
+
 
 /* Boutons s'inscrire & Login */
+
 #btnSignUp,
 #btnLogIn {
-  color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
-  border-style: none;
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    border-style: none;
 }
 
 #btnLogIn {
-  margin-left: 25px;
+    margin-left: 25px;
 }
+
 
 /* Logo Millesime */
+
 #millesime {
-  margin-right: 50px;
+    margin-right: 50px;
 }
 
+
 /* Input LogIn et Mot de passe */
+
 #login,
 #mdp {
-  border-radius: 3px;
-  border-style: none;
+    border-radius: 3px;
+    border-style: none;
 }
 
 #searchBtnReset {
-  position: relative;
+    position: relative;
 }
 
+
 /* Input texte Vin */
+
 #strSearch {
-  min-width: 270px;
-  border-style: solid;
-  border-color: rgb(145, 53, 64);
-  background-color: white;
-  border-width: 2px;
+    min-width: 270px;
+    border-style: solid;
+    border-color: rgb(145, 53, 64);
+    background-color: white;
+    border-width: 2px;
 }
+
 #strSearch:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
+
+
 /*popper texte  vin + graph */
+
 #tooltip {
-  /* ... */
-  display: none;
+    /* ... */
+    display: none;
 }
 
 #tooltip[data-show] {
-  display: block;
+    display: block;
 }
 
 #tooltip {
-  background: #333;
-  color: white;
-  font-weight: bold;
-  padding: 4px 8px;
-  font-size: 13px;
-  border-radius: 4px;
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
 }
 
 #arrow,
 #arrow::before {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  z-index: -1;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
 }
 
 #arrow::before {
-  content: '';
-  transform: rotate(45deg);
-  background: #333;
+    content: '';
+    transform: rotate(45deg);
+    background: #333;
 }
 
-#tooltip[data-popper-placement^='top'] > #arrow {
-  bottom: -4px;
+#tooltip[data-popper-placement^='top']>#arrow {
+    bottom: -4px;
 }
 
-#tooltip[data-popper-placement^='bottom'] > #arrow {
-  top: -4px;
+#tooltip[data-popper-placement^='bottom']>#arrow {
+    top: -4px;
 }
 
-#tooltip[data-popper-placement^='left'] > #arrow {
-  right: -4px;
+#tooltip[data-popper-placement^='left']>#arrow {
+    right: -4px;
 }
 
-#tooltip[data-popper-placement^='right'] > #arrow {
-  left: -4px;
+#tooltip[data-popper-placement^='right']>#arrow {
+    left: -4px;
 }
+
+
 /*popper graphique */
 
 #tooltipChart {
-  /* ... */
-  display: none;
+    /* ... */
+    display: none;
 }
 
 #tooltipChart[data-show] {
-  display: block;
+    display: block;
 }
 
 #tooltipChart {
-  background: #333;
-  color: white;
-  font-weight: bold;
-  padding: 4px 8px;
-  font-size: 13px;
-  border-radius: 4px;
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
 }
 
 #arrowChart,
 #arrowChart::before {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  z-index: -1;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
 }
 
 #arrowChart::before {
-  content: '';
-  transform: rotate(45deg);
-  background: #333;
+    content: '';
+    transform: rotate(45deg);
+    background: #333;
 }
 
-#tooltipChart[data-popper-placement^='top'] > #arrowChart {
-  bottom: -4px;
+#tooltipChart[data-popper-placement^='top']>#arrowChart {
+    bottom: -4px;
 }
 
-#tooltipChart[data-popper-placement^='bottom'] > #arrowChart {
-  top: -4px;
+#tooltipChart[data-popper-placement^='bottom']>#arrowChart {
+    top: -4px;
 }
 
-#tooltipChart[data-popper-placement^='left'] > #arrowChart {
-  right: -4px;
+#tooltipChart[data-popper-placement^='left']>#arrowChart {
+    right: -4px;
 }
 
-#tooltipChart[data-popper-placement^='right'] > #arrowChart {
-  left: -4px;
+#tooltipChart[data-popper-placement^='right']>#arrowChart {
+    left: -4px;
 }
+
+
 /*fin popper*/
 
 #resetList {
-  position: absolute;
-  display: none;
-  top: 11px;
-  right: 20px;
-  z-index: 1;
-  cursor: pointer;
-  opacity: 0.8;
+    position: absolute;
+    display: none;
+    top: 11px;
+    right: 20px;
+    z-index: 1;
+    cursor: pointer;
+    opacity: 0.8;
 }
+
 
 /* Boutons de filtrage */
-#selectCountries,#selectMethods,#filtrer,#recherche,#ChartGraph{
-  margin-left: 10px;
-  margin-right: 10px;
+
+#selectCountries,
+#selectMethods,
+#filtrer,
+#recherche,
+#ChartGraph {
+    margin-left: 10px;
+    margin-right: 10px;
 }
+
 
 /* Bouton statistiques */
+
 #ChartGraph {
-  background-color: rgb(135, 35, 31);
-  border: 1px solid rgb(135, 35, 31); ;
-  margin-top:0px;
+    background-color: rgb(135, 35, 31);
+    border: 1px solid rgb(135, 35, 31);
+    ;
+    margin-top: 0px;
 }
+
 
 /* Liste de vins */
+
 #liste {
-  min-width: 300px;
-  max-height: 600px;
-  overflow-y: auto;
-  overflow-x: hidden;
+    min-width: 300px;
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
+
 
 /* Nom Vin individuel */
+
 #liste li {
-  min-width: 100px;
+    min-width: 100px;
 }
+
 
 /* Bouton Reset liste */
+
 #reset {
-  margin-top: 10px;
-  align-content: center;
-  width: 270px;
+    margin-top: 10px;
+    align-content: center;
+    width: 270px;
 }
+
 
 /* Changement de couleur Vin survol� */
+
 #liste li:hover {
-  background: rgb(219, 217, 217);
-  transition: 0.1s;
-  cursor: default;
+    background: rgb(219, 217, 217);
+    transition: 0.1s;
+    cursor: default;
 }
+
 
 /* Formulaire info vin + img */
+
 #stylediv {
-  z-index: 1;
-  position: relative;
-  max-height: 585px;
-  min-width: 100px;
-  margin-top: 17px;
-  margin-right: 20px;
-  margin-bottom: 2px;
-  margin-left: 20px;
-  padding-top: 25px;
-  border-radius: 10px;
-  background-color: rgba(95, 25, 32, 0.787);
-  -webkit-box-shadow: 0px 0px 40px 6px rgba(41, 41, 41, 0.93);
-  -moz-box-shadow: 0px 0px 40px 6px rgba(29, 29, 29, 0.93);
-  box-shadow: 0px 0px 40px 6px rgba(34, 34, 34, 0.93);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  cursor: not-allowed;
+    z-index: 1;
+    position: relative;
+    max-height: 585px;
+    min-width: 100px;
+    margin-top: 17px;
+    margin-right: 20px;
+    margin-bottom: 2px;
+    margin-left: 20px;
+    padding-top: 25px;
+    border-radius: 10px;
+    background-color: rgba(95, 25, 32, 0.787);
+    -webkit-box-shadow: 0px 0px 40px 6px rgba(41, 41, 41, 0.93);
+    -moz-box-shadow: 0px 0px 40px 6px rgba(29, 29, 29, 0.93);
+    box-shadow: 0px 0px 40px 6px rgba(34, 34, 34, 0.93);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    cursor: not-allowed;
 }
+
 
 /*labels info vin input */
+
 #stylediv input {
-  pointer-events: none;
+    pointer-events: none;
 }
+
 
 /* Labels info vin */
+
 #stylediv label {
-  color: white;
-  margin: 0px;
+    color: white;
+    margin: 0px;
 }
 
+
 /* visibilit� bio*/
+
 .hide {
-  visibility: hidden;
-  height: 0px;
+    visibility: hidden;
+    height: 0px;
 }
 
 .show {
-  visibility: visible;
-  min-height: 23px;
-  margin-bottom: 1rem;
+    visibility: visible;
+    min-height: 23px;
+    margin-bottom: 1rem;
 }
 
+
 /* Radio style */
+
 #bioFalse {
-  margin-left: 80px;
+    margin-left: 80px;
 }
 
 #bioTrue {
-  margin-left: -30px;
+    margin-left: -30px;
 }
+
 
 /* Boutons supprimer/sauvegarder */
+
 #supprimer,
 #sauvegarder {
-  display: none;
-  margin-top: 15px;
-  padding: 7px;
-  font-size: 15px;
+    display: none;
+    margin-top: 15px;
+    padding: 7px;
+    font-size: 15px;
 }
+
 
 /* Bouton sauvegarder */
+
 #sauvegarder {
-  max-width: 140px;
+    max-width: 140px;
 }
+
 
 /* Bouton supprimer */
+
 #supprimer {
-  min-width: 122px;
+    min-width: 122px;
 }
+
 
 /* Container Img + Icone */
+
 #container {
-  position: relative;
+    position: relative;
 }
+
 
 /* Image dans container */
+
 #container img {
-  display: block;
+    display: block;
 }
+
 
 /* Image Vin */
+
 .styled {
-  margin-top: 16px;
-  margin-bottom: 6px;
-  border-color: rgb(145, 53, 64);
-  border-style: solid;
-  border-radius: 10px;
-  width: 255px;
-  height: 315px;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    border-color: rgb(145, 53, 64);
+    border-style: solid;
+    border-radius: 10px;
+    width: 255px;
+    height: 315px;
 }
+
+#container #countryFlagsImg {
+    display: none;
+    position: absolute;
+    top: 5px;
+    margin-left: 213px;
+}
+
 
 /* Icone Modif Img */
+
 #container .fa-edit {
-  position: absolute;
-  bottom: 10px;
-  margin-left: 228px;
-  color: black;
+    position: absolute;
+    bottom: 10px;
+    margin-left: 228px;
+    color: black;
 }
+
+
 /* bouton Like */
-#likeButton{
-  background-color: rgb(195, 0, 0);
-  border-color:rgb(195, 0, 0);
-  color: #fff;
-  width: 120px;
-  margin-right:10px;
-  margin-left: 3px;
+
+#likeButton {
+    background-color: rgb(195, 0, 0);
+    border-color: rgb(195, 0, 0);
+    color: #fff;
+    width: 120px;
+    margin-right: 10px;
+    margin-left: 3px;
 }
-#ajoutNote{
-  width: 115px;
+
+#ajoutNote {
+    width: 115px;
 }
+
 
 /* Textarea */
+
 #description {
-  width: 255px;
-  height: 220px;
-  border-color: rgb(145, 53, 64);
-  border-width: 3px;
-  border-style: solid;
-  border-radius: 8px;
-  margin-top: 10px;
-  padding-left: 8px;
-  padding-top: 7px;
-  font-size: 13px;
-  overflow-y: auto;
-  resize: none;
+    width: 255px;
+    height: 220px;
+    border-color: rgb(145, 53, 64);
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding-left: 8px;
+    padding-top: 7px;
+    font-size: 13px;
+    overflow-y: auto;
+    resize: none;
 }
 
+
 /* Style div chart */
-#mainPays{
-  margin-top: 15px;
+
+#mainPays {
+    margin-top: 15px;
 }
-#mainPays,#mainRaisins {
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.904);
-  border-radius: 10px;
-  max-width: 995px;
-  max-height: 500px;
-  margin-left: 14px;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+
+#mainPays,
+#mainRaisins {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.904);
+    border-radius: 10px;
+    max-width: 995px;
+    max-height: 500px;
+    margin-left: 14px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 #cadrePays,
 #cadreRaisins {
-  min-width: 300px;
-  min-height: 300px;
-}
-/* Bouton Close Chart Pays */
-#closePays,
-#closeRaisins {
-  position: absolute;
-  top: 10px;
-  right: 5px;
-  width: 25px;
-  height: 25px;
-  z-index: 1;
-  cursor: pointer;
+    min-width: 300px;
+    min-height: 300px;
 }
 
+
+/* Bouton Close Chart Pays */
+
+#closePays,
+#closeRaisins {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+
 /*Section commentaire et notes */
-#tabs{
-  display: none;
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.904);
-  border-radius: 3px;
-  max-width: 995px;
-  height: 42px;
-  margin-left: 0px;
-  margin-top: 15px;
- 
+
+#tabs {
+    display: none;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.904);
+    border-radius: 3px;
+    max-width: 995px;
+    height: 42px;
+    margin-left: 0px;
+    margin-top: 15px;
 }
+
+
 /* notes et commentaires */
-#comments,#notes{
-  background-color: #fff;
-  display: none;
-  max-width: 995px;
-  height: 100px;
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 0px 0px 3px 3px;
-  overflow-y: auto;
+
+#comments,
+#notes {
+    background-color: #fff;
+    display: none;
+    max-width: 995px;
+    height: 100px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 0px 0px 3px 3px;
+    overflow-y: auto;
 }
+
+
 /* css pour les telephones et tablettes */
+
+
 /*  Iphone 5SE */
+
 @media all and (min-width:150px) and (max-width:320px) {
-  #btnScroll{
-    display:none !important;
-  }
-  #mainPays,#mainRaisins{
-    min-width:330px;
-    min-height: 330px;
-  }
-  #cadrePays,#cadreRaisins{
-    min-width: 300px;
-    min-height: 300px;
-  }
-  #recherche,#selectCountries,#selectMethods,#ChartGraph,#filtrer{
-    margin-top: 7px;
-  }
-  #stylediv{
-    width: 280px;
-    margin-left:16px;
-  }
-  #a:ChartGraph{
-    width: 120px;
-    height: 25px;
-  }
-  #resetList{
-    right: 10px;
-  }
-  #recherche,#selectCountries,#filtrer{
-    margin-left :0px;
-  }
-  #tabs{
-    height: 35px;
-  }
-  #tabComments,#tabNotes{
-    font-size: 12px;
-  }
-} 
+    #btnScroll {
+        display: none !important;
+    }
+    #mainPays,
+    #mainRaisins {
+        min-width: 330px;
+        min-height: 330px;
+    }
+    #cadrePays,
+    #cadreRaisins {
+        min-width: 300px;
+        min-height: 300px;
+    }
+    #recherche,
+    #selectCountries,
+    #selectMethods,
+    #ChartGraph,
+    #filtrer {
+        margin-top: 7px;
+    }
+    #stylediv {
+        width: 280px;
+        margin-left: 16px;
+    }
+    #a:ChartGraph {
+        width: 120px;
+        height: 25px;
+    }
+    #resetList {
+        right: 10px;
+    }
+    #recherche,
+    #selectCountries,
+    #filtrer {
+        margin-left: 0px;
+    }
+    #tabs {
+        height: 35px;
+    }
+    #tabComments,
+    #tabNotes {
+        font-size: 12px;
+    }
+}
+
 @media all and (min-width:321px) and (max-width:375px) {
-  #btnScroll{
-    display:none !important;
-  }
-  #mainPays,#mainRaisins{
-    min-width:300px;
-    min-height: 300px;
-    margin-right:15px;
-  }
-  #cadrePays,#cadreRaisins{
-    min-width: 300px;
-    min-height: 300px;
-  }
-  #recherche,#selectCountries,#selectMethods,#ChartGraph,#filtrer{
-    margin-top: 7px;
-  }
-  #stylediv{
-    width: 280px;
-    margin-left:16px;
-  }
-  #a:ChartGraph{
-    width: 120px;
-    height: 25px;
-  }
-  #resetList{
-    right: 10px;
-  }
-  #recherche,#selectMethods,#ChartGraph{
-    margin-left :0px;
-  }
-  #tabs{
-    height: 40px;
-  }
-  #tabComments,#tabNotes{
-    font-size: 14px;
-  }
-} 
+    #btnScroll {
+        display: none !important;
+    }
+    #mainPays,
+    #mainRaisins {
+        min-width: 300px;
+        min-height: 300px;
+        margin-right: 15px;
+    }
+    #cadrePays,
+    #cadreRaisins {
+        min-width: 300px;
+        min-height: 300px;
+    }
+    #recherche,
+    #selectCountries,
+    #selectMethods,
+    #ChartGraph,
+    #filtrer {
+        margin-top: 7px;
+    }
+    #stylediv {
+        width: 280px;
+        margin-left: 16px;
+    }
+    #a:ChartGraph {
+        width: 120px;
+        height: 25px;
+    }
+    #resetList {
+        right: 10px;
+    }
+    #recherche,
+    #selectMethods,
+    #ChartGraph {
+        margin-left: 0px;
+    }
+    #tabs {
+        height: 40px;
+    }
+    #tabComments,
+    #tabNotes {
+        font-size: 14px;
+    }
+}
+
 @media all and (min-width:376px) and (max-width:649px) {
-  #btnScroll{
-    display:none  !important;
-  }
-  #mainPays,#mainRaisins{
-      min-width:300px;
-      min-height: 300px; 
-      margin-right: 20px;
-  }
-  #cadrePays,#cadreRaisins{
-      min-width: 300px;
-      min-height: 300px;
-  }
-  #stylediv{
-    min-width:330px;
-    margin-right: 15px;
-    margin-left: 15px;
-  }
-  #recherche,#selectCountries,#selectMethods,#ChartGraph,#filtrer{
-    margin-top: 7px;
-  }
-  #strSearch{
-    margin-bottom: 5px;
-  }
-  #resetList{
-    right: 10px;
-  }
-  #recherche,#selectMethods,#ChartGraph{
-    margin-left :0px;
-  }
+    #btnScroll {
+        display: none !important;
+    }
+    #mainPays,
+    #mainRaisins {
+        min-width: 300px;
+        min-height: 300px;
+        margin-right: 20px;
+    }
+    #cadrePays,
+    #cadreRaisins {
+        min-width: 300px;
+        min-height: 300px;
+    }
+    #stylediv {
+        min-width: 330px;
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+    #recherche,
+    #selectCountries,
+    #selectMethods,
+    #ChartGraph,
+    #filtrer {
+        margin-top: 7px;
+    }
+    #strSearch {
+        margin-bottom: 5px;
+    }
+    #resetList {
+        right: 10px;
+    }
+    #recherche,
+    #selectMethods,
+    #ChartGraph {
+        margin-left: 0px;
+    }
 }
 
 @media all and (min-width:650px) and (max-width: 1000px) {
-  #btnScroll{
-    display:none  !important;
-  }
-  #mainPays,#mainRaisins{
-      width:350px;
-      height: 350px;
-  }
-  #cadrePays,#cadreRaisins{
-      min-width: 250px;
-      min-height: 250px;
-  }
-  #recherche,#selectCountries,#selectMethods,#filtrer,#ChartGraph{
-    margin-top: 7px;
-  }
-  #strSearch{
-    width:500px;
-  }
-  #ajouter{
-    margin-top: 7px;
-    margin-left:0px;
-  }
-  #recherche{
-    width: 152px;;
-  }
-  #stylediv {
-    min-width: 370px;
-    margin-right: 15px;
-    margin-left: 15px;
-  }
-  #resetList{
-    right: 10px;
-  }
+    #btnScroll {
+        display: none !important;
+    }
+    #mainPays,
+    #mainRaisins {
+        width: 350px;
+        height: 350px;
+    }
+    #cadrePays,
+    #cadreRaisins {
+        min-width: 250px;
+        min-height: 250px;
+    }
+    #recherche,
+    #selectCountries,
+    #selectMethods,
+    #filtrer,
+    #ChartGraph {
+        margin-top: 7px;
+    }
+    #strSearch {
+        width: 500px;
+    }
+    #ajouter {
+        margin-top: 7px;
+        margin-left: 0px;
+    }
+    #recherche {
+        width: 152px;
+        ;
+    }
+    #stylediv {
+        min-width: 370px;
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+    #resetList {
+        right: 10px;
+    }
 }
 
 @media all and (min-width:1001px) and (max-width: 1200px) {
-  #ChartGraph{
-    margin-top:7px;
-    margin-left: 0px;
-  }
-  #mainPay,
-  #mainRaisinss {
-    min-width: 350px;
-    min-height: 350px;
-  }
-
-  #cadrePays,
-  #cadreRaisins {
-    min-width: 300px;
-    min-height: 300px;
-  }
+    #ChartGraph {
+        margin-top: 7px;
+        margin-left: 0px;
+    }
+    #mainPay,
+    #mainRaisinss {
+        min-width: 350px;
+        min-height: 350px;
+    }
+    #cadrePays,
+    #cadreRaisins {
+        min-width: 300px;
+        min-height: 300px;
+    }
 }
 
+
 /* Texte Footer */
+
 footer {
-  color: white;
-  font-size: 13px;
+    color: white;
+    font-size: 13px;
 }
 
 #btnScroll {
-  display: none;
-  position: fixed;
-  bottom: 40px;
-  right: 50px;
-  z-index: 99;
-  font-size: 18px;
-  border: none;
-  outline: none;
-  background-color: rgb(255, 255, 255);
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 50px;
+    display: none;
+    position: fixed;
+    bottom: 40px;
+    right: 50px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50px;
 }

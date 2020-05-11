@@ -2,6 +2,7 @@
 // Wiki
 // mit // cc // open-source license
 const url = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines"; // URL de l'API
+const restCountriesURL = "https://restcountries.eu/rest/v2/name/"; // URL API RESTCountries
 let showReset = false;
 let vinData = [];
 
@@ -83,6 +84,7 @@ function showListWine(arr) {
 
 // Affiche les détails du vin cliqué
 function showDetails(index) {
+    let codeCountry;
     let vin = vinData.find((element) => element.id == index);
     //document.getElementById("idVin").value = vin.id;
     $('#idVin').val(vin.id);
@@ -92,6 +94,23 @@ function showDetails(index) {
     $("#region").val(vin.region);
     $("#year").val(vin.year);
     $("#image").attr("src", "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture);
+
+    //Use RESTCOUNTRIES API;
+    //$('#countryFlagsImg').attr("src", "https://www.countryflags.io/" + countryCode + "/flat/64.png");
+    fetch(restCountriesURL + vin.country)
+        .then(function(res) {
+            return res.json();
+        })
+        .then(data => initialize(data))
+        .catch(error => console.log("Erreur: ", error));
+
+    function initialize(countriesData) {
+        let countries = countriesData;
+        codeCountry = countries[0].alpha2Code;
+        $('#countryFlagsImg').attr("src", "https://www.countryflags.io/" + codeCountry + "/flat/32.png");
+        $('#countryFlagsImg').css("display", "block");
+    }
+
     $("#description").text("" + vin.description + "");
     $("#couleur").val(vin.color);
     $("#capacite").val(vin.capacity + " CL");
@@ -116,13 +135,20 @@ function showDetails(index) {
                 $("#prix").val(vin.price + " €");
             }
         }
-    } else {
 
+        if (vin.capacity === "0") {
+            $("#capacite").val("Info indisponible");
+        }
+    } else {
         document.getElementById("extras").className = "hide";
         if (vin.price === "0") {
             $('#prix').val("Info indisponible");
         } else {
             $("#prix").val(vin.price + " €");
+        }
+
+        if (vin.capacity === "0") {
+            $("#capacite").val("Info indisponible");
         }
     }
 
@@ -336,9 +362,9 @@ function searchWine() {
 }
 
 $("#btnSignUp").click(signUp);
-//document.getElementById("btnLogIn").addEventListener("click", logIn);
+$('#btnLogIn').click(logIn);
 
-//USE: Bearer
+//USE: Basic auth
 function signUp() {
     // TODO 
     // Mock token, fakes being sent from server
@@ -362,6 +388,25 @@ function signUp() {
         .catch(error => {
             console.log('Erreur: ', error);
         })
+}
+
+function logIn() {
+    let request = new XMLHttpRequest();
+    request.open('GET', "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/", true);
+
+    //format des données envoyées
+    request.setRequestHeader("Content-Type", "application/json");
+
+    //definir les identifiants
+    let data = btoa('ced:123');
+    let user = 'Basic ' + data;
+
+    request.setRequestHeader("Authorization", user);
+
+    request.onload = function() {
+        console.log(this.responseText);
+    }
+    request.send()
 }
 
 /* Chart JS*/
