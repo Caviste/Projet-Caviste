@@ -462,6 +462,10 @@ header nav {
 
 /* Style div chart */
 
+#mainPays {
+    margin-top: 15px;
+}
+
 #mainPays,
 #mainRaisins {
     position: relative;

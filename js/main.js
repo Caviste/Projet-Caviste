@@ -135,13 +135,20 @@ function showDetails(index) {
                 $("#prix").val(vin.price + " €");
             }
         }
-    } else {
 
+        if (vin.capacity === "0") {
+            $("#capacite").val("Info indisponible");
+        }
+    } else {
         document.getElementById("extras").className = "hide";
         if (vin.price === "0") {
             $('#prix').val("Info indisponible");
         } else {
             $("#prix").val(vin.price + " €");
+        }
+
+        if (vin.capacity === "0") {
+            $("#capacite").val("Info indisponible");
         }
     }
 
