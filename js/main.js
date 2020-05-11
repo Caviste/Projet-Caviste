@@ -10,9 +10,12 @@ fetch('https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines')
     .then(response => response.json())
     .then(function(data) {
         for (let prop in data) {
-            vinData.push(data[prop]); // vinData === object!
+            vinData.push(data[prop]);
         }
         showListWine(vinData);
+    })
+    .catch((error) => {
+        console.error('Erreur: ', error);
     });
 
 // Reset le choix de tri
@@ -82,7 +85,6 @@ function showListWine(arr) {
 function showDetails(index) {
     let vin = vinData.find((element) => element.id == index);
     //document.getElementById("idVin").value = vin.id;
-    console.log(vin);
     $('#idVin').val(vin.id);
     $('#nomVin').val(vin.name);
     $("#raisins").val(vin.grapes);
@@ -111,13 +113,14 @@ function showDetails(index) {
             if (vin.price === "0") {
                 $('#prix').text("Info indisponible");
             } else {
-                $("prix").val(vin.price + " €");
+                $("#prix").val(vin.price + " €");
             }
         }
     } else {
+
         document.getElementById("extras").className = "hide";
         if (vin.price === "0") {
-            $('#prix').text("Info indisponible");
+            $('#prix').val("Info indisponible");
         } else {
             $("#prix").val(vin.price + " €");
         }
@@ -157,6 +160,11 @@ function showDetails(index) {
             }
         }
     };
+
+    request.onerror = function() {
+        alert('Une erreur est survenue durant la communication avec l\'API !');
+    };
+
     request.send();
     showComments();
 }
@@ -214,6 +222,10 @@ $('#filtrer').click(function() {
             addBtnReset();
         }
     };
+
+    xmlReq.onerror = function() {
+        alert('Une erreur est survenue durant la communication avec l\'API !');
+    };
     xmlReq.send();
 })
 
@@ -269,6 +281,10 @@ function searchWine() {
                     showListWine(reply);
                 }
             };
+
+            request.onerror = function() {
+                alert('Une erreur est survenue durant la communication avec l\'API !')
+            }
             request.send();
         } else {
             if (typeof strSearch === "string") {
@@ -296,6 +312,9 @@ function searchWine() {
                             });
                             showListWine(queryArr);
                         })
+                        .catch((error) => {
+                            console.error('Erreur: ', error);
+                        });
                 } else if (arrGrapes.indexOf(strSearch) !== -1) { //TODO: Bug when searching for Pinot (single word instead of full grape name)
                     fetch(url + "/grapes/" + strSearch)
                         .then((resp) => resp.json())
@@ -305,6 +324,9 @@ function searchWine() {
                             });
                             showListWine(queryArr);
                         })
+                        .catch((error) => {
+                            console.log('Erreur: ', error);
+                        });
                 }
             }
         }
@@ -337,8 +359,8 @@ function signUp() {
         .then(data => {
             console.log(data[1]);
         })
-        .catch(err => {
-            console.log(err.message);
+        .catch(error => {
+            console.log('Erreur: ', error);
         })
 }
 
