@@ -97,6 +97,7 @@ function showDetails(index) {
     $("#capacite").val(vin.capacity + " CL");
 
     if (vin.extra !== null) {
+        console.log("IN EXTRA");
         let extra = JSON.parse(vin.extra);
         $("#extras").toggleClass('hidden show');
 
@@ -113,13 +114,14 @@ function showDetails(index) {
             if (vin.price === "0") {
                 $('#prix').text("Info indisponible");
             } else {
-                $("prix").val(vin.price + " €");
+                $("#prix").val(vin.price + " €");
             }
         }
     } else {
+
         document.getElementById("extras").className = "hide";
         if (vin.price === "0") {
-            $('#prix').text("Info indisponible");
+            $('#prix').val("Info indisponible");
         } else {
             $("#prix").val(vin.price + " €");
         }
