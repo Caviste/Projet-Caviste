@@ -97,7 +97,6 @@ function showDetails(index) {
     $("#capacite").val(vin.capacity + " CL");
 
     if (vin.extra !== null) {
-        console.log("IN EXTRA");
         let extra = JSON.parse(vin.extra);
         $("#extras").toggleClass('hidden show');
 
