@@ -208,16 +208,11 @@ $.getJSON(countryUrl, function(data) {
     })
 });
 
-// Ajoute un bouton pour réinitialiser la liste de vin
-function addBtnReset() {
-    $('#liste').prepend('<button type="button" id="btnReset" class="btn btn-danger">RESET LISTE</button>');
-}
-
 // Clic sur le bouton filtrer => tri de la liste de vin suivant des options de tri
 // GET : url + /api/wines?key=country&val=France&sort=year
 $('#filtrer').click(function() {
     event.preventDefault();
-
+    showReset = true;
     let arrReply = [];
     let pays = $('#selectCountries option:selected').text();
     let sortMethod = $('#selectMethods option:selected').text().toLowerCase();
