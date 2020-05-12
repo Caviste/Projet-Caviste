@@ -273,6 +273,7 @@ $(document).ready(function() {
 });
 
 $('#resetList').click(function() {
+    showReset = false;
     resetSearch();
     showListWine(vinData);
     $(this).fadeOut(150, function() {
