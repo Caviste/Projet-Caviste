@@ -272,6 +272,12 @@ $(document).ready(function() {
     })
 });
 
+if ($('#strSearch').val().length === 0) {
+    $('#resetList').fadeOut(150, function() {
+        $('#resetList').hide();
+    });
+}
+
 $('#resetList').click(function() {
     showReset = false;
     resetSearch();
@@ -307,6 +313,7 @@ function searchWine() {
             request.onerror = function() {
                 alert('Une erreur est survenue durant la communication avec l\'API !')
             }
+
             request.send();
         } else {
             if (typeof strSearch === "string") {
@@ -324,7 +331,8 @@ function searchWine() {
                         arrGrapes.push(vin["grapes"]);
                     }
                 });
-
+                console.log(arrGrapes);
+                no
                 if ($.inArray(ucFirst(strSearch), arrRegions) !== -1) {
                     fetch(url + "/regions/" + strSearch)
                         .then((resp) => resp.json())
@@ -634,6 +642,7 @@ const searchMessage = document.querySelector('#tooltip');
 
 const graph = document.querySelector('#ChartGraph');
 const graphMessage = document.querySelector('#tooltipChart');
+
 
 
 $("#strSearch").mouseenter(showPopper(search, searchMessage, "left"));
