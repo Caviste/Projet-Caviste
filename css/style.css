@@ -122,10 +122,9 @@ header nav {
 }
 
 
-/*popper texte  vin + graph */
+/* Popper strSearch */
 
 #tooltip {
-    /* ... */
     display: none;
 }
 
@@ -173,10 +172,159 @@ header nav {
 }
 
 
-/*popper graphique */
+/* Popper btnSearch */
+
+#btnSearchTooltip {
+    display: none;
+}
+
+#btnSearchTooltip[data-show] {
+    display: block;
+}
+
+#btnSearchTooltip {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+#arrow,
+#arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
+}
+
+#arrow::before {
+    content: '';
+    transform: rotate(45deg);
+    background: #333;
+}
+
+#btnSearchTooltip[data-popper-placement^='top']>#arrow {
+    bottom: -4px;
+}
+
+#btnSearchTooltip[data-popper-placement^='bottom']>#arrow {
+    top: -4px;
+}
+
+#btnSearchTooltip[data-popper-placement^='left']>#arrow {
+    right: -4px;
+}
+
+#btnSearchTooltip[data-popper-placement^='right']>#arrow {
+    left: -4px;
+}
+
+
+/* Popper select Pays */
+
+#paysTooltip {
+    display: none;
+}
+
+#paysTooltip[data-show] {
+    display: block;
+}
+
+#paysTooltip {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+#arrow,
+#arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
+}
+
+#arrow::before {
+    content: '';
+    transform: rotate(45deg);
+    background: #333;
+}
+
+#paysTooltip[data-popper-placement^='top']>#arrow {
+    bottom: -4px;
+}
+
+#paysTooltip[data-popper-placement^='bottom']>#arrow {
+    top: -4px;
+}
+
+#paysTooltip[data-popper-placement^='left']>#arrow {
+    right: -4px;
+}
+
+#paysTooltip[data-popper-placement^='right']>#arrow {
+    left: -4px;
+}
+
+
+/* Popper select Tri */
+
+#sortTooltip {
+    display: none;
+}
+
+#sortTooltip[data-show] {
+    display: block;
+}
+
+#sortTooltip {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+#arrow,
+#arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
+}
+
+#arrow::before {
+    content: '';
+    transform: rotate(45deg);
+    background: #333;
+}
+
+#sortTooltip[data-popper-placement^='top']>#arrow {
+    bottom: -4px;
+}
+
+#sortTooltip[data-popper-placement^='bottom']>#arrow {
+    top: -4px;
+}
+
+#sortTooltip[data-popper-placement^='left']>#arrow {
+    right: -4px;
+}
+
+#sortTooltip[data-popper-placement^='right']>#arrow {
+    left: -4px;
+}
+
+
+/* Popper Charts */
 
 #tooltipChart {
-    /* ... */
     display: none;
 }
 

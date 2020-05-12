@@ -643,9 +643,19 @@ const searchMessage = document.querySelector('#tooltip');
 const graph = document.querySelector('#ChartGraph');
 const graphMessage = document.querySelector('#tooltipChart');
 
+const btnSearch = document.querySelector('#recherche');
+const btnSearchTooltip = document.querySelector('#btnSearchTooltip');
 
+const selectPays = document.querySelector('#selectCountries');
+const paysTooltip = document.querySelector('#paysTooltip');
 
-$("#strSearch").mouseenter(showPopper(search, searchMessage, "left"));
+const selectTri = document.querySelector('#selectMethods');
+const triTooltip = document.querySelector('#sortTooltip');
+
+$("#strSearch").mouseenter(showPopper(search, searchMessage, "top"));
+$('#recherche').mouseenter(showPopper(btnSearch, btnSearchTooltip, "top"));
+$('#selectCountries').mouseenter(showPopper(selectPays, paysTooltip, "top"));
+$('#selectMethods').mouseenter(showPopper(selectTri, triTooltip, "top"));
 $("#ChartGraph").mouseenter(showPopper(graph, graphMessage, "right"));
 
 let popperInstance = null;
