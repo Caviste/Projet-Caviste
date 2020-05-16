@@ -84,9 +84,6 @@ function showListWine(arr) {
 // Affiche les détails du vin cliqué
 function showDetails(index) {
     $('#isLiked').attr('value', "true");
-
-    alert($('#wineIsLiked').val());
-    isWineLiked(isLiked);
     let vin = vinData.find((element) => element.id == index);
     wineClicked = true;
     $("#idVin").val(vin.id);
@@ -117,7 +114,7 @@ function showDetails(index) {
         $("#countryFlagsImg").css("display", "block");
     }
 
-    $("#description").text("" + vin.description + "");
+    $("#desc").text("" + vin.description + "");
     $("#couleur").val(vin.color);
     $("#capacite").val(vin.capacity + " CL");
 
@@ -211,7 +208,7 @@ function showDetails(index) {
     };
 
     request.send();
-    showComments();
+    showDesc();
 }
 
 //TODO: Bouton like
@@ -761,28 +758,46 @@ function showPopper(selector, message, position) {
   });
 }
 
-//Style du nav
-let tabComment = $("#tabComments");
-let tabNotes = $("#tabNotes");
+//Style du nav 
+let tabComment = $('#tabComments');
+let tabDescription = $('#tabDescription');
+let tabFavourite = $('#tabFavourite');
 
 function showComments() {
-  document.getElementById("tabComments").className = "nav-link active";
-  document.getElementById("tabNotes").className = "nav-link";
-  $("#notes").css("display", "none");
-  $("#comments").css("display", "block");
+    document.getElementById("tabComments").className = "nav-link active";
+    document.getElementById("tabDescription").className = "nav-link";
+    document.getElementById("tabFavourite").className = "nav-link";
+    $('#comments').css("display", "block");
+    $('#desc').css("display", "none");
+    $('#favourite').css("display", "none");
 }
 
-function showNotes() {
-  document.getElementById("tabComments").className = "nav-link";
-  document.getElementById("tabNotes").className = "nav-link active";
-  $("#comments").css("display", "none");
-  $("#notes").css("display", "block");
+function showDesc() {
+    document.getElementById("tabDescription").className = "nav-link active";
+    document.getElementById("tabComments").className = "nav-link";
+    document.getElementById("tabFavourite").className = "nav-link";
+    $('#desc').css("display", "block");
+    $('#comments').css("display", "none");
+    $('#favourite').css("display", "none");
+}
+
+function showFavourite() {
+    document.getElementById("tabFavourite").className = "nav-link active";
+    document.getElementById("tabDescription").className = "nav-link";
+    document.getElementById("tabComments").className = "nav-link";
+    $('#favourite').css("display", "block");
+    $('#desc').css("display", "none");
+    $('#comments').css("display", "none");
 }
 
 tabComment.click(function () {
   showComments();
 });
 
-tabNotes.click(function () {
-  showNotes();
+tabDescription.click(function() {
+    showDesc();
+});
+
+tabFavourite.click(function() {
+    showFavourite();
 });

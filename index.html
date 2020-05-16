@@ -116,7 +116,7 @@
 
         <!-- Liste Vins -->
         <div class="row" data-aos="fade-down" data-aos-delay="300">
-            <div class="col-md-3 col-sm-12 mt-3" id="liste">
+            <div class="col-2 col-md-3 col-sm-12 mt-3" id="liste">
                 <ul id="listeVin" class="list-group">
                 </ul>
             </div>
@@ -235,10 +235,7 @@
                                 <button id="likeButton" name="likes" type="button" class="btn btn-danger">
                                     <i class="fas fa-heart" id="iconLike"> Like Wine</i>
                                 </button>
-                            <button id="ajoutNote" type="button" class="btn btn-light">
-                                <i class="fas fa-pencil-alt"> Add note</i>
-                            </button>
-                            <textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
+                                <textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
                         </div>
                     </div>
                 </form>
@@ -249,19 +246,24 @@
             <div id="tabs">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
+                        <a id="tabDescription" class="nav-link active" href="#tabs">Description</a>
+                    </li>
+                    <li class="nav-item">
                         <a id="tabComments" class="nav-link" href="#tabs">Commentaires</a>
                     </li>
                     <li class="nav-item">
-                        <a id="tabNotes" class="nav-link" href="#tabs">Notes personnelles</a>
+                        <a id="tabFavourite" class="nav-link" href="#tabs">Vins préférés</a>
                     </li>
                 </ul>
             </div>
-
+            <div id="desc">
+            </div>
             <div id="comments">
             </div>
-            <div id="notes">
+            <div id="favourite">
             </div>
         </div>
+
         <div class="row">
             <div class="col" id="mainPays">
                 <i id="closePays" class="fa fa-times fa-1x"></i>
