@@ -116,7 +116,7 @@
 
         <!-- Liste Vins -->
         <div class="row" data-aos="fade-down" data-aos-delay="300">
-            <div class="col-md-3 col-sm-12 mt-3" id="liste">
+            <div class="col-2 col-md-3 col-sm-12 mt-3" id="liste">
                 <ul id="listeVin" class="list-group">
                 </ul>
             </div>
@@ -233,8 +233,8 @@
                             </div>
                             <button id="likeButton" name="likes" type="button" class="btn" onclick="number()">
                              <i class="fas fa-heart"> Like Wine </i></button>
-                            <button id="ajoutNote" type="button" class="btn btn-light">
-                             <i class="fas fa-pencil-alt">Add note</i></button>
+                            <button id="likes" type="button" class="btn btn-light">
+                            <i class="fas fa-heart"></i></button>
                         </div>
                     </div>
                 </form>
@@ -250,11 +250,16 @@
                     <li class="nav-item">
                         <a id="tabComments" class="nav-link" href="#tabs">Commentaires</a>
                     </li>
+                    <li class="nav-item">
+                        <a id="tabFavourite" class="nav-link" href="#tabs">Vins préférés</a>
+                    </li>
                 </ul>
             </div>
             <div id="desc">
             </div>
             <div id="comments">
+            </div>
+            <div id="favourite">
             </div>
         </div>
 

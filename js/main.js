@@ -703,19 +703,33 @@ function numberOfLikes() {
 //Style du nav 
 let tabComment = $('#tabComments');
 let tabDescription = $('#tabDescription');
+let tabFavourite = $('#tabFavourite');
 
 function showComments() {
     document.getElementById("tabComments").className = "nav-link active";
     document.getElementById("tabDescription").className = "nav-link";
-    $('#desc').css("display", "none");
+    document.getElementById("tabFavourite").className = "nav-link";
     $('#comments').css("display", "block");
+    $('#desc').css("display", "none");
+    $('#favourite').css("display", "none");
 }
 
 function showDesc() {
-    document.getElementById("tabComments").className = "nav-link";
     document.getElementById("tabDescription").className = "nav-link active";
-    $('#comments').css("display", "none");
+    document.getElementById("tabComments").className = "nav-link";
+    document.getElementById("tabFavourite").className = "nav-link";
     $('#desc').css("display", "block");
+    $('#comments').css("display", "none");
+    $('#favourite').css("display", "none");
+}
+
+function showFavourite() {
+    document.getElementById("tabFavourite").className = "nav-link active";
+    document.getElementById("tabDescription").className = "nav-link";
+    document.getElementById("tabComments").className = "nav-link";
+    $('#favourite').css("display", "block");
+    $('#desc').css("display", "none");
+    $('#comments').css("display", "none");
 }
 
 tabComment.click(function() {
@@ -724,4 +738,8 @@ tabComment.click(function() {
 
 tabDescription.click(function() {
     showDesc();
+});
+
+tabFavourite.click(function() {
+    showFavourite();
 });
