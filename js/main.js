@@ -220,14 +220,18 @@ function showDetails(index) {
             replyFav.forEach((vinFav)=> {
                 arrFavourite.push(vinFav);
             });
-            let strFav = '';
+            let strFav = "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
             for (let i = 0; i < arrFavourite.length; i++) {
-                strFav += "<p>User " + arrComment[i]['user_id']+ "</p><br>";
+                strFav +="<tr>"+"<td>"+arrFavourite[i].name+"</td>"+"<td>"+arrFavourite[i].country+"<td>"+arrFavourite[i].region+"</td></tr>";
             }
+            strFav+="</tbody></table>";
+             document.getElementById("favourite").innerHTML = strFav;
         }
-
-    }
-
+    };
+    requestFav.onerror = function () {
+        alert("Une erreur est survenue durant la communication avec l'API !");
+    };
+    requestFav.send();
 }
 
 //TODO: Bouton like
