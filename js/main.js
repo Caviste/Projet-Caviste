@@ -239,19 +239,22 @@ function modifyComment(idComment, idWine) {
 }
 
 function deleteComment(idComment, idWine) {	
-    $.ajax({
-        url: url + idWine + "/comments/" + idComment,
-        type: "DELETE",
-        contentType: 'application/json',
-        async: true,
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa('ced:123'));
-        },
-        success: function (msg) {
-            console.log(msg);
-        },
-        error: (e) => console.log(e),
-    });
+    let deleteConfirm = confirm('Voulez-vous vraiment supprimer ce commentaire ?');
+    if (deleteConfirm) {
+        $.ajax({
+            url: url + idWine + "/comments/" + idComment,
+            type: "DELETE",
+            contentType: 'application/json',
+            async: true,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Basic ' + btoa('ced:123'));
+            },
+            success: function (msg) {
+                console.log(msg);
+            },
+            error: (e) => console.log(e),
+        });
+    }
 }
     
 /*Affichage des vins préférés */
@@ -264,15 +267,42 @@ requestFav.onload = function(){
         replyFav.forEach((vinFav)=> {
             arrFavourite.push(vinFav);
         });
-        let strFav = '';
+        let strFav = "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
         for (let i = 0; i < arrFavourite.length; i++) {
-            strFav += "<p>User " + arrComment[i]['user_id']+ "</p><br>";
+            strFav +="<tr>"+"<td>"+arrFavourite[i].name+"</td>"+"<td>"+arrFavourite[i].country+"<td>"+arrFavourite[i].region+"</td></tr>";
         }
+        strFav+="</tbody></table>";
+            document.getElementById("favourite").innerHTML = strFav;
     }
+};
+requestFav.onerror = function () {
+    alert("Une erreur est survenue durant la communication avec l'API !");
+};
+requestFav.send();
 
-}
-
-
+$('#iconAdd').click(function() {
+    let addComment = prompt('Entrez un commentaire !');
+    let idWine = $('#idVin').val();
+    let data = { 
+        "content" : addComment, 
+    };
+    /* POST	/api/wines/10/comments
+    { "content" : "some content" } */
+    $.ajax({
+        url: url + '/' + idWine + '/comments',
+        type: "POST",
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        async: true,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa('ced:123'));
+        },
+        success: function(msg) {
+            console.log(msg);
+        },
+        error: (e) => console.log(e),
+    });
+});
 
 //TODO: Bouton like
 // TODO: Bug -> button turns back to red when coming back to the same wine
@@ -829,6 +859,7 @@ function showComments() {
     document.getElementById("tabFavourite").className = "nav-link";
     $('#comments').css("display", "block");
     $('#favourite').css("display", "none");
+    $('#iconAdd').css("display","block");
 }
 
 
@@ -837,6 +868,7 @@ function showFavourite() {
     document.getElementById("tabComments").className = "nav-link";
     $('#favourite').css("display", "block");
     $('#comments').css("display", "none");
+    $('#iconAdd').css("display","none");
 }
 
 tabComment.click(function () {
