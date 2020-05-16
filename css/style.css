@@ -573,7 +573,6 @@ header nav {
     color: black;
 }
 
-
 /* bouton Like */
 
 #likeButton {
@@ -664,11 +663,11 @@ header nav {
 /* notes et commentaires */
 
 #comments,
-#notes {
+#desc {
     background-color: #fff;
     display: none;
     max-width: 995px;
-    height: 100px;
+    height: auto;
     margin-bottom: 15px;
     padding: 10px;
     border-radius: 0px 0px 3px 3px;
@@ -722,7 +721,7 @@ header nav {
         height: 35px;
     }
     #tabComments,
-    #tabNotes {
+    #tabDescription {
         font-size: 12px;
     }
 }
@@ -769,7 +768,7 @@ header nav {
         height: 40px;
     }
     #tabComments,
-    #tabNotes {
+    #tabDescription {
         font-size: 14px;
     }
 }

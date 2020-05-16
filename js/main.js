@@ -111,7 +111,7 @@ function showDetails(index) {
         $('#countryFlagsImg').css("display", "block");
     }
 
-    $("#description").text("" + vin.description + "");
+    $("#desc").text("" + vin.description + "");
     $("#couleur").val(vin.color);
     $("#capacite").val(vin.capacity + " CL");
 
@@ -192,7 +192,7 @@ function showDetails(index) {
     };
 
     request.send();
-    showComments();
+    showDesc();
 }
 
 /* Populating selectCountries */
@@ -737,26 +737,26 @@ function numberOfLikes() {
 
 //Style du nav 
 let tabComment = $('#tabComments');
-let tabNotes = $('#tabNotes');
+let tabDescription = $('#tabDescription');
 
 function showComments() {
     document.getElementById("tabComments").className = "nav-link active";
-    document.getElementById("tabNotes").className = "nav-link";
-    $('#notes').css("display", "none");
+    document.getElementById("tabDescription").className = "nav-link";
+    $('#desc').css("display", "none");
     $('#comments').css("display", "block");
 }
 
-function showNotes() {
+function showDesc() {
     document.getElementById("tabComments").className = "nav-link";
-    document.getElementById("tabNotes").className = "nav-link active";
+    document.getElementById("tabDescription").className = "nav-link active";
     $('#comments').css("display", "none");
-    $('#notes').css("display", "block");
+    $('#desc').css("display", "block");
 }
 
 tabComment.click(function() {
     showComments();
 });
 
-tabNotes.click(function() {
-    showNotes();
+tabDescription.click(function() {
+    showDesc();
 });
