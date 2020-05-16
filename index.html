@@ -231,14 +231,14 @@
                                     <i class="far fa-edit fa-1x"></i>
                                 </a>
                             </div>
-                            <button id="likeButton" name="likes" type="button" class="btn" onclick="number()">
-                                <i class="fas fa-heart"> Like Wine </i>
-                            </button>
+                                <input type="hidden" id="hiddenWineId" name="hiddenWineId">
+                                <button id="likeButton" name="likes" type="button" class="btn btn-danger">
+                                    <i class="fas fa-heart" id="iconLike"> Like Wine</i>
+                                </button>
                             <button id="ajoutNote" type="button" class="btn btn-light">
-                                <i class="fas fa-pencil-alt">Add note</i>
+                                <i class="fas fa-pencil-alt"> Add note</i>
                             </button>
                             <textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
-
                         </div>
                     </div>
                 </form>
@@ -275,7 +275,7 @@
             </div>
         </div>
         <button onclick="topFunction()" id="btnScroll" title="Go to top"><i class="fas fa-arrow-up"></i></button>
-        <footer>&copy; Amine, Nathan, Radad</footer>
+        <footer>&copy; EPFC, Nathan, Radad</footer>
     </div>
 
     <!-- jQuery -->
