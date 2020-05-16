@@ -114,7 +114,7 @@ function showDetails(index) {
         $("#countryFlagsImg").css("display", "block");
     }
 
-    $("#desc").text("" + vin.description + "");
+    $("#description").text("" + vin.description + "");
     $("#couleur").val(vin.color);
     $("#capacite").val(vin.capacity + " CL");
 
@@ -178,13 +178,17 @@ function showDetails(index) {
         let str = "";
 
         for (let i = 0; i < arrComment.length; i++) {
-            str += "<i><strong>User " + arrComment[i]["user_id"] + "</strong></i><br><p>Commentaire: " + arrComment[i].content + "</p><br>";
+            str += "<div class='containerComment'><strong>User " +
+            arrComment[i]["user_id"] +
+            "</strong><br><p>Commentaire: " +
+            arrComment[i].content +
+            "</p><i id ='iconEdit' class='far fa-edit' onclick='modifyComment(" + arrComment[i]['id'] + "," + arrComment[i]['wine_id'] + ")'></i><i id='iconDlt' class='far fa-trash-alt' onclick='deleteComment(" + arrComment[i]['id'] + "," + arrComment[i]['wine_id'] + ")'></i><br></div>";
         }
         $("#tabs").css("display", "block");
 
         if (str == []) {
             $("#comments").css("height", "100px");
-            $("#comments").text("Pas de commentaires sur ce vin");
+            $("#comments").text("Pas de commentaires pour ce vin");
         } else {
             $("#comments").css("height", "200px");
             document.getElementById("comments").innerHTML = str;
@@ -197,9 +201,8 @@ function showDetails(index) {
     };
 
     request.send();
-    showDesc();
+    showComments();
     fetchNbLikes(vin.id);
-
 }
 
 function fetchNbLikes(idVin) {
@@ -213,6 +216,63 @@ function fetchNbLikes(idVin) {
         }
     });
 }
+
+function modifyComment(idComment, idWine) {
+    let newComment = prompt('Entrez un nouveau commentaire');
+    alert(newComment);
+    let data = { "content" : newComment}
+    $.ajax({
+        url: url + idWine + "/comments/" + idComment,
+        type: "PUT",
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        dataType: "json",
+        async: true,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa('ced:123'));
+        },
+        success: function (msg) {
+            console.log(msg);
+        },
+        error: (e) => console.log(e),
+    });
+}
+
+function deleteComment(idComment, idWine) {	
+    $.ajax({
+        url: url + idWine + "/comments/" + idComment,
+        type: "DELETE",
+        contentType: 'application/json',
+        async: true,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa('ced:123'));
+        },
+        success: function (msg) {
+            console.log(msg);
+        },
+        error: (e) => console.log(e),
+    });
+}
+    
+/*Affichage des vins préférés */
+let arrFavourite =[];
+let requestFav = new XMLHttpRequest();
+requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines", true);
+requestFav.onload = function(){
+    if(this.readyState == 4 && this.status == 200){
+        let replyFav = JSON.parse(this.response);
+        replyFav.forEach((vinFav)=> {
+            arrFavourite.push(vinFav);
+        });
+        let strFav = '';
+        for (let i = 0; i < arrFavourite.length; i++) {
+            strFav += "<p>User " + arrComment[i]['user_id']+ "</p><br>";
+        }
+    }
+
+}
+
+
 
 //TODO: Bouton like
 // TODO: Bug -> button turns back to red when coming back to the same wine
@@ -766,37 +826,21 @@ let tabFavourite = $('#tabFavourite');
 
 function showComments() {
     document.getElementById("tabComments").className = "nav-link active";
-    document.getElementById("tabDescription").className = "nav-link";
     document.getElementById("tabFavourite").className = "nav-link";
     $('#comments').css("display", "block");
-    $('#desc').css("display", "none");
     $('#favourite').css("display", "none");
 }
 
-function showDesc() {
-    document.getElementById("tabDescription").className = "nav-link active";
-    document.getElementById("tabComments").className = "nav-link";
-    document.getElementById("tabFavourite").className = "nav-link";
-    $('#desc').css("display", "block");
-    $('#comments').css("display", "none");
-    $('#favourite').css("display", "none");
-}
 
 function showFavourite() {
     document.getElementById("tabFavourite").className = "nav-link active";
-    document.getElementById("tabDescription").className = "nav-link";
     document.getElementById("tabComments").className = "nav-link";
     $('#favourite').css("display", "block");
-    $('#desc').css("display", "none");
     $('#comments').css("display", "none");
 }
 
 tabComment.click(function () {
   showComments();
-});
-
-tabDescription.click(function() {
-    showDesc();
 });
 
 tabFavourite.click(function() {

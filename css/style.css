@@ -400,7 +400,7 @@ header nav {
 #ChartGraph {
     background-color: rgb(135, 35, 31);
     border: 1px solid rgb(135, 35, 31);
-    ;
+    width :155px;
     margin-top: 0px;
 }
 
@@ -537,14 +537,14 @@ header nav {
 
 
 /* Icone Modif Img */
-
+/*
 #container .fa-edit {
     position: absolute;
     bottom: 10px;
     margin-left: 228px;
     color: black;
 }
-
+*/
 /* bouton Like */
 
 #likeButton {
@@ -638,8 +638,7 @@ header nav {
 
 /* notes et commentaires */
 #favourite,
-#comments,
-#desc {
+#comments{
     background-color: #fff;
     display: none;
     max-width: 995px;
@@ -649,7 +648,23 @@ header nav {
     border-radius: 0px 0px 3px 3px;
     overflow-y: auto;
 }
+ /* Icons edit et supprimer */
+.containerComment{
+    position : relative;
+}
 
+#iconDlt{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    cursor: pointer;
+}
+#iconEdit{
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    cursor: pointer;
+}
 
 /* css pour les telephones et tablettes */
 /*  Iphone 5SE */
