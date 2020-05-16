@@ -634,8 +634,7 @@ header nav {
 
 /* notes et commentaires */
 #favourite,
-#comments,
-#desc {
+#comments{
     background-color: #fff;
     display: none;
     max-width: 995px;

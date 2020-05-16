@@ -103,7 +103,7 @@ function showDetails(index) {
         $('#countryFlagsImg').css("display", "block");
     }
 
-    $("#desc").text("" + vin.description + "");
+    $("#description").text("" + vin.description + "");
     $("#couleur").val(vin.color);
     $("#capacite").val(vin.capacity + " CL");
 
@@ -184,7 +184,26 @@ function showDetails(index) {
     };
 
     request.send();
-    showDesc();
+    showComments();
+
+    /*Affichage des vins préférés */
+    let arrFavourite =[];
+    let requestFav = new XMLHttpRequest();
+    requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines", true);
+    requestFav.onload = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let replyFav = JSON.parse(this.response);
+            replyFav.forEach((vinFav)=> {
+                arrFavourite.push(vinFav);
+            });
+            let strFav = '';
+            for (let i = 0; i < arrFavourite.length; i++) {
+                strFav += "<p>User " + arrComment[i]['user_id']+ "</p><br>";
+            }
+        }
+
+    }
+
 }
 
 /* Populating selectCountries */
@@ -707,37 +726,21 @@ let tabFavourite = $('#tabFavourite');
 
 function showComments() {
     document.getElementById("tabComments").className = "nav-link active";
-    document.getElementById("tabDescription").className = "nav-link";
     document.getElementById("tabFavourite").className = "nav-link";
     $('#comments').css("display", "block");
-    $('#desc').css("display", "none");
     $('#favourite').css("display", "none");
 }
 
-function showDesc() {
-    document.getElementById("tabDescription").className = "nav-link active";
-    document.getElementById("tabComments").className = "nav-link";
-    document.getElementById("tabFavourite").className = "nav-link";
-    $('#desc').css("display", "block");
-    $('#comments').css("display", "none");
-    $('#favourite').css("display", "none");
-}
 
 function showFavourite() {
     document.getElementById("tabFavourite").className = "nav-link active";
-    document.getElementById("tabDescription").className = "nav-link";
     document.getElementById("tabComments").className = "nav-link";
     $('#favourite').css("display", "block");
-    $('#desc').css("display", "none");
     $('#comments').css("display", "none");
 }
 
 tabComment.click(function() {
     showComments();
-});
-
-tabDescription.click(function() {
-    showDesc();
 });
 
 tabFavourite.click(function() {
