@@ -371,9 +371,7 @@ $("#filtrer").click(function () {
 
   let xmlReq = new XMLHttpRequest();
   xmlReq.open(
-    "GET",
-    url + "?key=country&val=" + pays + "&sort=" + sortMethod,
-    true
+    "GET", url + "?key=country&val=" + pays + "&sort=" + sortMethod, true
   );
 
   xmlReq.onload = function () {
@@ -382,6 +380,7 @@ $("#filtrer").click(function () {
       for (let prop in reply) {
         arrReply.push(reply[prop]);
       }
+      console.log(arrReply);
       if (sortMethod === "year") {
         arrReply.sort((a, b) => a.year - b.year);
       } else if (sortMethod === "name") {
@@ -389,18 +388,11 @@ $("#filtrer").click(function () {
           return a["name"] > b["name"] ? 1 : a["name"] < b["name"] ? -1 : 0;
         });
       } else if (sortMethod === "grapes") {
-        console.log("IN");
-        console.log(arrReply);
         arrReply.sort(function (a, b) {
-          return a["grapes"] > b["grapes"]
-            ? 1
-            : a["grapes"] < b["grapes"]
-            ? -1
-            : 0;
+          return a["grapes"] > b["grapes"] ? 1 : a["grapes"] < b["grapes"] ? -1 : 0;
         });
       }
       showListWine(arrReply);
-      addBtnReset();
     }
   };
 

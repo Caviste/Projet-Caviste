@@ -54,15 +54,22 @@ header nav {
     width: 100px;
 }
 
-
 /* Millesime */
-
 #millesime {
     height: 80px;
     width: 170px;
 }
 
+#logoBrand:hover {
+    transform: translateX(4px);
+    transition: 0.2s ease-in-out;
+}
 
+/* Link A propos survolé */
+#about:hover {
+    color: rgba(240, 149, 157);
+    transition: 0.2s;
+}
 /* Inputs texte login & password */
 
 #mdp,
@@ -660,6 +667,7 @@ header nav {
 #containerAdd{
     position:relative;
 }
+
  /* Icons edit et supprimer */
 .containerComment{
     position : relative;
