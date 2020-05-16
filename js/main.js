@@ -791,6 +791,7 @@ function showComments() {
     document.getElementById("tabFavourite").className = "nav-link";
     $('#comments').css("display", "block");
     $('#favourite').css("display", "none");
+    $('#iconAdd').css("display","block");
 }
 
 
@@ -799,6 +800,7 @@ function showFavourite() {
     document.getElementById("tabComments").className = "nav-link";
     $('#favourite').css("display", "block");
     $('#comments').css("display", "none");
+    $('#iconAdd').css("display","none");
 }
 
 tabComment.click(function () {

@@ -643,6 +643,16 @@ header nav {
     border-radius: 0px 0px 3px 3px;
     overflow-y: auto;
 }
+/*Icone ajouter commentaire */
+#iconAdd{
+    display: block;
+    right: 10px;
+    top:5px;
+    position: absolute;
+}
+#containerAdd{
+    position:relative;
+}
  /* Icons edit et supprimer */
 .containerComment{
     position :relative;
