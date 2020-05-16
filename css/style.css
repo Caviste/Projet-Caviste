@@ -502,32 +502,6 @@ header nav {
     margin-left: -30px;
 }
 
-
-/* Boutons supprimer/sauvegarder */
-
-#supprimer,
-#sauvegarder {
-    display: none;
-    margin-top: 15px;
-    padding: 7px;
-    font-size: 15px;
-}
-
-
-/* Bouton sauvegarder */
-
-#sauvegarder {
-    max-width: 140px;
-}
-
-
-/* Bouton supprimer */
-
-#supprimer {
-    min-width: 122px;
-}
-
-
 /* Container Img + Icone */
 
 #container {
