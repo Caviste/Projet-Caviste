@@ -167,13 +167,7 @@ function showDetails(index) {
     let arrComment = [];
 
     let request = new XMLHttpRequest();
-    request.open(
-        "GET",
-        "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/" +
-        index +
-        "/comments",
-        true
-    );
+    request.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/" + index + "/comments", true);
 
     request.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -184,12 +178,7 @@ function showDetails(index) {
         let str = "";
 
         for (let i = 0; i < arrComment.length; i++) {
-            str +=
-            "<i><strong>User " +
-            arrComment[i]["user_id"] +
-            "</strong></i><br><p>Commentaire: " +
-            arrComment[i].content +
-            "</p><br>";
+            str += "<i><strong>User " + arrComment[i]["user_id"] + "</strong></i><br><p>Commentaire: " + arrComment[i].content + "</p><br>";
         }
         $("#tabs").css("display", "block");
 
@@ -209,6 +198,20 @@ function showDetails(index) {
 
     request.send();
     showDesc();
+    fetchNbLikes(vin.id);
+
+}
+
+function fetchNbLikes(idVin) {
+    fetch(url + '/' + idVin + '/likes-count')
+    .then(res => res.json())
+    .then(data => {
+        if (data.total <= 1) {
+            $('#nbLike').text(' ' + data.total + ' Like');
+        } else {
+            $('#nbLike').text(' ' + data.total + ' Likes');
+        }
+    });
 }
 
 //TODO: Bouton like
@@ -249,8 +252,6 @@ $("#likeButton").click(function () {
       alert("Choisissez un vin avant de l'aimer !");
     }
   }); */
-
-/* Likes Count */
 
 
 /* Populating selectCountries */

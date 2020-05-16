@@ -551,8 +551,13 @@ header nav {
 
     color: #fff;
     width: 120px;
-    margin-right: 10px;
-    margin-left: 3px;
+    margin-right: 7px;
+    margin-left: 2px;
+}
+
+#btnNbLikes {
+    color: #fff;
+    width: 120px;
 }
 
 #ajoutNote {
@@ -647,8 +652,6 @@ header nav {
 
 
 /* css pour les telephones et tablettes */
-
-
 /*  Iphone 5SE */
 
 @media all and (min-width:150px) and (max-width:320px) {
