@@ -643,11 +643,21 @@ header nav {
     border-radius: 0px 0px 3px 3px;
     overflow-y: auto;
 }
-
-
+ /* Icons edit et supprimer */
+.containerComment{
+    position :relative;
+}
+#iconDlt{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+#iconEdit{
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
 /* css pour les telephones et tablettes */
-
-
 /*  Iphone 5SE */
 
 @media all and (min-width:150px) and (max-width:320px) {

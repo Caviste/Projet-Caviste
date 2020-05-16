@@ -185,11 +185,11 @@ function showDetails(index) {
 
         for (let i = 0; i < arrComment.length; i++) {
             str +=
-            "<i><strong>User " +
+            "<div class='containerComment'><strong>User " +
             arrComment[i]["user_id"] +
-            "</strong></i><br><p>Commentaire: " +
+            "</strong><br><p>Commentaire: " +
             arrComment[i].content +
-            "</p><br>";
+            "</p><i id ='iconEdit' class='far fa-edit'></i><i id='iconDlt' class='far fa-trash-alt'></i><br></div>";
         }
         $("#tabs").css("display", "block");
 
