@@ -548,8 +548,7 @@ header nav {
 /* bouton Like */
 
 #likeButton {
-    background-color: rgb(195, 0, 0);
-    border-color: rgb(195, 0, 0);
+
     color: #fff;
     width: 120px;
     margin-right: 10px;
