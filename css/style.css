@@ -70,10 +70,8 @@ header nav {
     border-radius: 5px;
 }
 
+/* Bouton Login */
 
-/* Boutons s'inscrire & Login */
-
-#btnSignUp,
 #btnLogIn {
     color: #fff;
     background-color: #6c757d;

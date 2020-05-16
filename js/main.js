@@ -365,34 +365,7 @@ function searchWine() {
     }
 }
 
-$("#btnSignUp").click(signUp);
 $('#btnLogIn').click(logIn);
-
-//USE: Basic auth
-function signUp() {
-    // TODO 
-    // Mock token, fakes being sent from server
-    localStorage.setItem("UniqueUserToken", JSON.stringify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"));
-
-    let url = "http://jsonplaceholder.typicode.com/users"
-    let token = JSON.parse(sessionStorage.getItem('UniqueUserToken'));
-    let h = new Headers();
-    h.append('Authentication', `Bearer ${token}`);
-
-    let req = new Request(url, {
-        method: 'GET',
-        mode: 'cors',
-    });
-
-    fetch(req)
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data[1]);
-        })
-        .catch(error => {
-            console.log('Erreur: ', error);
-        })
-}
 
 function logIn() {
     let request = new XMLHttpRequest();
