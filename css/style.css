@@ -65,29 +65,39 @@ header nav {
     transition: 0.2s ease-in-out;
 }
 
-/* Link A propos survolé */
-#about:hover {
-    color: rgba(240, 149, 157);
-    transition: 0.2s;
+
+#frmBack{
+    visibility: hidden;
+    border-radius:7px;
+    padding:8px 8px 8px 8px;
+    width:250px;
+    height:125px;
+    background: linear-gradient(-45deg, #bd0600, #e73c3c, #6b1717, #420000);
+    background-size: 400% 400%;
+    animation: gradient 12s ease infinite;
 }
-/* Inputs texte login & password */
-
-#mdp,
-#login {
-    border-radius: 5px;
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
+/* Input LogIn et Mot de passe */
 
-/* Bouton Login */
-
-#btnLogIn {
-    color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d;
+#login,
+#mdp {
+    border-radius: 3px;
     border-style: none;
+    margin-bottom: 8px;
+    
 }
-
-#btnLogIn {
-    margin-left: 25px;
+#btnLogIn,#btnClose{
+    width:49%;
 }
 
 
@@ -97,22 +107,11 @@ header nav {
     margin-right: 50px;
 }
 
-
-/* Input LogIn et Mot de passe */
-
-#login,
-#mdp {
-    border-radius: 3px;
-    border-style: none;
-}
-
 #searchBtnReset {
     position: relative;
 }
 
-
 /* Input texte Vin */
-
 #strSearch {
     min-width: 270px;
     border-style: solid;
@@ -418,7 +417,6 @@ header nav {
     min-width: 300px;
     max-height: 600px;
     overflow-y: auto;
-    overflow-x: hidden;
 }
 
 
@@ -520,6 +518,7 @@ header nav {
 
 #container img {
     display: block;
+    width:280px;
 }
 
 
@@ -555,27 +554,19 @@ header nav {
 /* bouton Like */
 
 #likeButton {
-
     color: #fff;
-    width: 120px;
-    margin-right: 7px;
-    margin-left: 2px;
+    width: 49%;
 }
 
 #btnNbLikes {
     color: #fff;
-    width: 120px;
+    width: 49%;
 }
-
-#ajoutNote {
-    width: 115px;
-}
-
 
 /* Textarea */
 
 #description {
-    width: 255px;
+    width: 280px;
     height: 220px;
     border-color: rgb(145, 53, 64);
     border-width: 3px;
@@ -899,6 +890,7 @@ footer {
     border: none;
     outline: none;
     background-color: rgb(255, 255, 255);
+    box-shadow: 22px 9px 46px 6px rgba(0,0,0,0.75);
     cursor: pointer;
     padding: 15px;
     border-radius: 50px;

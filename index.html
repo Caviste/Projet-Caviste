@@ -33,28 +33,19 @@
                                 <img id="millesime" src="./img/millesime.png" alt="logo">
                             </a>
                         </div>
-                        <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="about.html" id="about">
-                                    &agrave; propos
-                                </a>
-                            </li>
-                        </ul>
-                        <form name="login">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <input placeholder="Login" type="text" name="login" id="login"
-                                        class="input-group input-group-sm mb-3">
-                                </li>
-                                <li class="nav-item">
-                                    <input placeholder="Mot de passe" type="password" name="mdp" id="mdp"
-                                        class="input-group input-group-sm mb-3">
-                                </li>
-                                <li class="nav-item">
-                                    <button type="button" id="btnLogIn" class="btn btn-secondary">Login</button>
-                                </li>
-                            </ul>
-                        </form>
+                         
+                        <div id="frmBack" class="frmBack">
+                            <form id="frmSignUp" name="login" method="post">
+                                <input placeholder="Login" type="text" name="login" id="login"
+                                    class="input-group input-group-sm ">
+                                <input placeholder="Mot de passe" type="password" name="mdp" id="mdp"
+                                    class="input-group input-group-sm">
+                                <button type="button" id="btnLogIn" class="btn btn-secondary">Login</button>
+                                <button type="button" id="btnClose" class="btn btn-light">Close</button>
+
+                            </form>
+                        </div>
+                        <img src="img/sign-in.png" title="Sign-Up" id="iconSignUp" width="25" height="25"></i>
                     </nav>
                 </header>
 
@@ -119,7 +110,7 @@
 
         <!-- Liste Vins -->
         <div class="row" data-aos="fade-down" data-aos-delay="300">
-            <div class="col-2 col-md-3 col-sm-12 mt-3" id="liste">
+            <div class="col-3 mt-3" id="liste">
                 <ul id="listeVin" class="list-group">
                 </ul>
             </div>
@@ -128,7 +119,7 @@
             <div class="col">
                 <form id="FormAfficher" action="#" method="get">
                     <div class="row">
-                        <div id="stylediv" class="col">
+                        <div id="stylediv" class="col-7">
 
                             <!-- id -->
                             <div class="form-group">

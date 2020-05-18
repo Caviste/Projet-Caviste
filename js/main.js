@@ -866,3 +866,12 @@ tabComment.click(function () {
 tabFavourite.click(function() {
     showFavourite();
 });
+
+$('#iconSignUp').click(function(){
+  $('#frmBack').css("visibility","visible");
+  $('#iconSignUp').css("display","none");
+});
+$('#btnClose').click(function(){
+  $('#frmBack').css("visibility","hidden");
+  $('#iconSignUp').css("display","block");
+});
