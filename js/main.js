@@ -439,86 +439,62 @@ $("#resetList").click(function () {
 });
 
 function searchWine() {
-  /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres, ou un nombre
-   *  La fonction recupere le texte entre par l'user dans l'input "strSearch"
-   *  La fonction cherche le vin correspondant a l'input dans l'API
-   *  S'il y en a au moins une, elle affiche le ou les resultats
-   *  Si l'user clique sur "Rechercher", showReset devient true, ce qui affichera un bouton pour reset la liste
-   **/
-  let queryArr = [];
-  showReset = true;
-  let str = "";
-  let strSearch = $("#strSearch").val().trim();
+    /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres, ou un nombre
+     *  La fonction recupere le texte entre par l'user dans l'input "strSearch"
+     *  La fonction cherche le vin correspondant a l'input dans l'API
+     *  S'il y en a au moins une, elle affiche le ou les resultats
+     *  Si l'user clique sur "Rechercher", showReset devient true, ce qui affichera un bouton pour reset la liste
+     **/
+    let queryArr = [];
+    showReset = true;
+    let strSearch = $("#strSearch").val().trim();
 
-  if (document.getElementById("strSearch").value !== "") {
-    if (strSearch == parseInt(strSearch)) {
-      let request = new XMLHttpRequest();
-      request.open("GET", url + "/" + parseInt(strSearch), true);
-      request.onload = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          let reply = JSON.parse(this.response);
-          showListWine(reply);
+    if (document.getElementById("strSearch").value !== "") {
+        if (strSearch == parseInt(strSearch)) {
+            let request = new XMLHttpRequest();
+
+            request.open("GET", url + "/" + parseInt(strSearch), true);
+
+            request.onload = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    let reply = JSON.parse(this.response);
+                    showListWine(reply);
+                }
+            };
+
+            request.onerror = function () {
+                alert("Une erreur est survenue durant la communication avec l'API !");
+            };
+
+            request.send();
+        } else {
+            if (typeof strSearch === "string") {
+                strSearch = ucFirst(strSearch);
+                let arrRegions = [];
+                let arrFound = [];
+
+                vinData.forEach((vin) => {
+                    if (!arrRegions.includes(vin["region"])) {
+                        arrRegions.push(vin["region"]);
+                    }
+                });
+
+                if ($.inArray(strSearch, arrRegions) !== -1) {
+                    vinData.forEach((vin) => {
+                        if (vin.region == ucFirst(strSearch)) {
+                            arrFound.push(vin);
+                        }
+                    })
+                    showListWine(arrFound);
+                }
+            }
         }
-      };
-
-      request.onerror = function () {
-        alert("Une erreur est survenue durant la communication avec l'API !");
-      };
-
-      request.send();
     } else {
-      if (typeof strSearch === "string") {
-        let arrRegions = [];
-        let arrGrapes = [];
-
-        vinData.forEach((vin) => {
-          if (!arrRegions.includes(vin["region"])) {
-            arrRegions.push(vin["region"]);
-          }
-        });
-
-        vinData.forEach((vin) => {
-          if (!arrGrapes.includes(vin["grapes"])) {
-            arrGrapes.push(vin["grapes"]);
-          }
-        });
-        console.log(arrGrapes);
-        no;
-        if ($.inArray(ucFirst(strSearch), arrRegions) !== -1) {
-          fetch(url + "/regions/" + strSearch)
-            .then((resp) => resp.json())
-            .then(function (data) {
-              data.forEach((vin) => {
-                queryArr.push(vin);
-              });
-              showListWine(queryArr);
-            })
-            .catch((error) => {
-              console.error("Erreur: ", error);
-            });
-        } else if (arrGrapes.indexOf(strSearch) !== -1) {
-          //TODO: Bug when searching for Pinot (single word instead of full grape name)
-          fetch(url + "/grapes/" + strSearch)
-            .then((resp) => resp.json())
-            .then(function (data) {
-              data.forEach((vin) => {
-                queryArr.push(vin);
-              });
-              showListWine(queryArr);
-            })
-            .catch((error) => {
-              console.log("Erreur: ", error);
-            });
-        }
-      }
+        alert("Veuillez écrire quelque chose dans la zone de recherche !");
     }
-  } else {
-    alert("Veuillez écrire quelque chose dans la zone de recherche !");
-  }
 }
 
 $("#btnLogIn").click(logIn);
-
 function logIn() {
   let request = new XMLHttpRequest();
   request.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/", true);
