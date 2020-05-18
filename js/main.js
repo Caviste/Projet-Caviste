@@ -363,43 +363,42 @@ $.getJSON(countryUrl, function (data) {
 // Clic sur le bouton filtrer => tri de la liste de vin suivant des options de tri
 // GET : url + /api/wines?key=country&val=France&sort=year
 $("#filtrer").click(function () {
-  event.preventDefault();
-  showReset = true;
-  let arrReply = [];
-  let pays = $("#selectCountries option:selected").text();
-  let sortMethod = $("#selectMethods option:selected").text().toLowerCase();
+    event.preventDefault();
+    showReset = true;
+    let arrReply = [];
+    let pays = $("#selectCountries option:selected").text();
+    let sortMethod = $("#selectMethods option:selected").text().toLowerCase();
 
-  let xmlReq = new XMLHttpRequest();
-  xmlReq.open(
-    "GET", url + "?key=country&val=" + pays + "&sort=" + sortMethod, true
-  );
+    let xmlReq = new XMLHttpRequest();
+    xmlReq.open("GET", url + "?key=country&val=" + pays + "&sort=" + sortMethod, true);
 
-  xmlReq.onload = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      let reply = JSON.parse(this.response);
-      for (let prop in reply) {
-        arrReply.push(reply[prop]);
-      }
-      console.log(arrReply);
-      if (sortMethod === "year") {
-        arrReply.sort((a, b) => a.year - b.year);
-      } else if (sortMethod === "name") {
-        arrReply.sort(function (a, b) {
-          return a["name"] > b["name"] ? 1 : a["name"] < b["name"] ? -1 : 0;
-        });
-      } else if (sortMethod === "grapes") {
-        arrReply.sort(function (a, b) {
-          return a["grapes"] > b["grapes"] ? 1 : a["grapes"] < b["grapes"] ? -1 : 0;
-        });
-      }
-      showListWine(arrReply);
+    xmlReq.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let reply = JSON.parse(this.response);
+
+            for (data in reply) {
+                arrReply.push(reply[data]);
+            }
+
+            if (sortMethod === "year") {
+                arrReply.sort((a, b) => a.year - b.year);
+            } else if (sortMethod === "name") {
+                arrReply.sort(function (a, b) {
+                    return a["name"] > b["name"] ? 1 : a["name"] < b["name"] ? -1 : 0;
+                });
+            } else if (sortMethod === "grapes") {
+                arrReply.sort(function (a, b) {
+                    return a["grapes"] > b["grapes"] ? 1 : a["grapes"] < b["grapes"] ? -1 : 0;
+                });
+            }
+            showListWine(arrReply);
+        }
     }
-  };
 
-  xmlReq.onerror = function () {
-    alert("Une erreur est survenue durant la communication avec l'API !");
-  };
-  xmlReq.send();
+    xmlReq.onerror = function () {
+        alert("Une erreur est survenue durant la communication avec l'API !");
+    };
+    xmlReq.send();
 });
 
 $("#recherche").click(searchWine);
@@ -522,20 +521,17 @@ $("#btnLogIn").click(logIn);
 
 function logIn() {
   let request = new XMLHttpRequest();
-  request.open(
-    "GET",
-    "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/",
-    true
-  );
-
+  request.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/", true);
+  let username = $('#login').val();
+  let pwd = $('#mdp').val();
   //format des données envoyées
   request.setRequestHeader("Content-Type", "application/json");
 
   //definir les identifiants
-  let data = btoa("ced:123");
-  let user = "Basic " + data;
+  let data = btoa(username + ':' + pwd);
+  let hashedUser = "Basic " + data;
 
-  request.setRequestHeader("Authorization", user);
+  request.setRequestHeader("Authorization", hashedUser);
 
   request.onload = function () {
     console.log(this.responseText);
