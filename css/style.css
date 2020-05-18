@@ -195,20 +195,6 @@ header nav {
     border-radius: 4px;
 }
 
-#arrow,
-#arrow::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    z-index: -1;
-}
-
-#arrow::before {
-    content: '';
-    transform: rotate(45deg);
-    background: #333;
-}
-
 #btnSearchTooltip[data-popper-placement^='top']>#arrow {
     bottom: -4px;
 }
@@ -245,20 +231,6 @@ header nav {
     border-radius: 4px;
 }
 
-#arrow,
-#arrow::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    z-index: -1;
-}
-
-#arrow::before {
-    content: '';
-    transform: rotate(45deg);
-    background: #333;
-}
-
 #paysTooltip[data-popper-placement^='top']>#arrow {
     bottom: -4px;
 }
@@ -277,7 +249,6 @@ header nav {
 
 
 /* Popper select Tri */
-
 #sortTooltip {
     display: none;
 }
@@ -293,20 +264,6 @@ header nav {
     padding: 4px 8px;
     font-size: 13px;
     border-radius: 4px;
-}
-
-#arrow,
-#arrow::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    z-index: -1;
-}
-
-#arrow::before {
-    content: '';
-    transform: rotate(45deg);
-    background: #333;
 }
 
 #sortTooltip[data-popper-placement^='top']>#arrow {
@@ -345,20 +302,6 @@ header nav {
     border-radius: 4px;
 }
 
-#arrowChart,
-#arrowChart::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    z-index: -1;
-}
-
-#arrowChart::before {
-    content: '';
-    transform: rotate(45deg);
-    background: #333;
-}
-
 #tooltipChart[data-popper-placement^='top']>#arrowChart {
     bottom: -4px;
 }
@@ -374,9 +317,6 @@ header nav {
 #tooltipChart[data-popper-placement^='right']>#arrowChart {
     left: -4px;
 }
-
-
-/*fin popper*/
 
 #resetList {
     position: absolute;
@@ -406,7 +346,7 @@ header nav {
 #ChartGraph {
     background-color: rgb(135, 35, 31);
     border: 1px solid rgb(135, 35, 31);
-    width :155px;
+    width: 155px;
     margin-top: 0px;
 }
 
@@ -568,18 +508,17 @@ header nav {
 #description {
     width: 280px;
     height: 220px;
-    border-color: rgb(145, 53, 64);
-    border-width: 3px;
-    border-style: solid;
-    border-radius: 8px;
     margin-top: 10px;
     padding-left: 8px;
     padding-top: 7px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgb(145, 53, 64);
+    border-radius: 8px;
     font-size: 13px;
     overflow-y: auto;
     resize: none;
 }
-
 
 /* Style div chart */
 
@@ -604,7 +543,6 @@ header nav {
     min-width: 300px;
     min-height: 300px;
 }
-
 
 /* Bouton Close Chart Pays */
 
@@ -636,7 +574,7 @@ header nav {
 
 /* notes et commentaires */
 #favourite,
-#comments{
+#comments {
     background-color: #fff;
     display: none;
     max-width: 995px;
@@ -646,8 +584,9 @@ header nav {
     border-radius: 0px 0px 3px 3px;
     overflow-y: auto;
 }
+
 /*Icone ajouter commentaire */
-#iconAdd{
+#iconAdd {
     display: block;
     padding: 5px;
     right: 10px;
@@ -655,22 +594,24 @@ header nav {
     position: absolute;
     cursor: pointer;
 }
-#containerAdd{
-    position:relative;
+
+#containerAdd {
+    position: relative;
 }
 
- /* Icons edit et supprimer */
-.containerComment{
-    position : relative;
+/* Icons edit et supprimer */
+.containerComment {
+    position: relative;
 }
 
-#iconDlt{
+#iconDlt {
     position: absolute;
     top: 20px;
     right: 10px;
     cursor: pointer;
 }
-#iconEdit{
+
+#iconEdit {
     position: absolute;
     top: 20px;
     right: 40px;
@@ -684,16 +625,19 @@ header nav {
     #btnScroll {
         display: none !important;
     }
+
     #mainPays,
     #mainRaisins {
         min-width: 330px;
         min-height: 330px;
     }
+
     #cadrePays,
     #cadreRaisins {
         min-width: 300px;
         min-height: 300px;
     }
+
     #recherche,
     #selectCountries,
     #selectMethods,
@@ -701,25 +645,31 @@ header nav {
     #filtrer {
         margin-top: 7px;
     }
+
     #stylediv {
         width: 280px;
         margin-left: 16px;
     }
+
     #a:ChartGraph {
         width: 120px;
         height: 25px;
     }
+
     #resetList {
         right: 10px;
     }
+
     #recherche,
     #selectCountries,
     #filtrer {
         margin-left: 0px;
     }
+
     #tabs {
         height: 35px;
     }
+
     #tabComments,
     #tabDescription {
         font-size: 12px;
@@ -730,17 +680,20 @@ header nav {
     #btnScroll {
         display: none !important;
     }
+
     #mainPays,
     #mainRaisins {
         min-width: 300px;
         min-height: 300px;
         margin-right: 15px;
     }
+
     #cadrePays,
     #cadreRaisins {
         min-width: 300px;
         min-height: 300px;
     }
+
     #recherche,
     #selectCountries,
     #selectMethods,
@@ -748,25 +701,31 @@ header nav {
     #filtrer {
         margin-top: 7px;
     }
+
     #stylediv {
         width: 280px;
         margin-left: 16px;
     }
+
     #a:ChartGraph {
         width: 120px;
         height: 25px;
     }
+
     #resetList {
         right: 10px;
     }
+
     #recherche,
     #selectMethods,
     #ChartGraph {
         margin-left: 0px;
     }
+
     #tabs {
         height: 40px;
     }
+
     #tabComments,
     #tabDescription {
         font-size: 14px;
@@ -777,22 +736,26 @@ header nav {
     #btnScroll {
         display: none !important;
     }
+
     #mainPays,
     #mainRaisins {
         min-width: 300px;
         min-height: 300px;
         margin-right: 20px;
     }
+
     #cadrePays,
     #cadreRaisins {
         min-width: 300px;
         min-height: 300px;
     }
+
     #stylediv {
         min-width: 330px;
         margin-right: 15px;
         margin-left: 15px;
     }
+
     #recherche,
     #selectCountries,
     #selectMethods,
@@ -800,12 +763,15 @@ header nav {
     #filtrer {
         margin-top: 7px;
     }
+
     #strSearch {
         margin-bottom: 5px;
     }
+
     #resetList {
         right: 10px;
     }
+
     #recherche,
     #selectMethods,
     #ChartGraph {
@@ -817,16 +783,19 @@ header nav {
     #btnScroll {
         display: none !important;
     }
+
     #mainPays,
     #mainRaisins {
         width: 350px;
         height: 350px;
     }
+
     #cadrePays,
     #cadreRaisins {
         min-width: 250px;
         min-height: 250px;
     }
+
     #recherche,
     #selectCountries,
     #selectMethods,
@@ -834,22 +803,27 @@ header nav {
     #ChartGraph {
         margin-top: 7px;
     }
+
     #strSearch {
         width: 500px;
     }
+
     #ajouter {
         margin-top: 7px;
         margin-left: 0px;
     }
+
     #recherche {
         width: 152px;
         ;
     }
+
     #stylediv {
         min-width: 370px;
         margin-right: 15px;
         margin-left: 15px;
     }
+
     #resetList {
         right: 10px;
     }
@@ -860,11 +834,13 @@ header nav {
         margin-top: 7px;
         margin-left: 0px;
     }
+
     #mainPay,
     #mainRaisinss {
         min-width: 350px;
         min-height: 350px;
     }
+
     #cadrePays,
     #cadreRaisins {
         min-width: 300px;
