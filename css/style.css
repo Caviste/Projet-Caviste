@@ -478,9 +478,13 @@ header nav {
     display: none;
     position: absolute;
     top: 5px;
-    margin-left: 213px;
+    margin-left: 215px;
 }
 
+/*taille d'image drapeau */
+img#countryFlagsImg {
+    width: 50px;
+}
 
 /* Icone Modif Img */
 /*
@@ -531,9 +535,9 @@ header nav {
     position: relative;
     background-color: rgba(255, 255, 255, 0.904);
     border-radius: 10px;
-    max-width: 995px;
     max-height: 500px;
     margin-left: 14px;
+    margin-right: 16px;
     padding-bottom: 30px;
     margin-bottom: 30px;
 }
@@ -565,7 +569,6 @@ header nav {
     position: relative;
     background-color: rgba(255, 255, 255, 0.904);
     border-radius: 3px;
-    max-width: 995px;
     height: 42px;
     margin-left: 0px;
     margin-top: 15px;
@@ -577,7 +580,6 @@ header nav {
 #comments {
     background-color: #fff;
     display: none;
-    max-width: 995px;
     height: 250px;
     margin-bottom: 15px;
     padding: 10px;
