@@ -347,14 +347,29 @@ $("#iconAdd").click(function () {
     let password = sessionStorage["pwd"];
     let btoaHash = btoa(username + ":" + password);
 
-    const xhr = new XMLHttpRequest();
-
-    xhr.open("POST", url + "/" + idWine + "/comments", true);
-
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("My-Authorization", "Basic " + btoaHash);
-
-    xhr.send('{"content" : "' + addComment + '"}');
+    console.log(addComment);
+    const options = {
+      'method' : 'POST',
+      'body' : { 'content' : addComment },
+      'mode' : 'cors',
+      'headers' : {
+        'content-type' : 'application/json; charset=utf-8',
+        'Authorization' : 'Basic '+ btoaHash
+      }
+    };
+    console.log(options);
+    console.log(url + '/' + idWine + '/comments');
+    fetch(url + '/' + idWine + '/comments', options)
+      .then(function(response) {
+        if(response.ok) {
+          response.json().then(function(data) {
+            console.log(data);
+          });
+        } else {
+          alert("HTTP-Error: " + response.status);
+        }
+      })
+      
   } else {
     alert("Veuillez vous identifier !");
   }
@@ -560,7 +575,7 @@ $("#btnLogIn").click(logIn);
 
 function logIn() {
   if ($("#login").val() !== "" && $("#mdp").val() !== "") {
-    sessionStorage.setItem("username", $("#login").val());
+    sessionStorage.setItem("username", $('#login').val());
     sessionStorage.setItem("pwd", $("#mdp").val());
   } else {
     alert("Les identifiants ne peuvent pas être vides !");
