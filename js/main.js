@@ -171,18 +171,22 @@ function showDetails(index) {
   }
 
   showComments();
-
-  // Checks if user has already liked the wine
-  if (arrLikedWines.indexOf($("#idVin").val()) !== -1) {
-    $("#likeButton").attr("class", "btn btn-success");
-    $("#iconLike").text(" Liked !");
-  } else {
-    $("#iconLike").text(" Like Wine");
-    $("#likeButton").attr("class", "btn btn-danger");
-  }
-
+  checkLiked();
   fetchNbLikes(vin.id);
   fetchComments(vin.id);
+}
+
+function checkLiked() {
+  if(sessionStorage.length) { // if connected 
+    // Checks if user has already liked the wine
+    if (arrLikedWines.indexOf($("#idVin").val()) !== -1) {
+      $("#likeButton").attr("class", "btn btn-success");
+      $("#iconLike").text(" Liked !");
+    } else {
+      $("#iconLike").text(" Like Wine");
+      $("#likeButton").attr("class", "btn btn-danger");
+    }
+  }
 }
 
 function fetchNbLikes(idVin) {
@@ -591,6 +595,13 @@ let hardCodedUsers = [
 
 $("#btnLogIn").click(logIn);
 
+$("#frmSignUp").keypress(function (event) {
+  // 13 = keyPress Enter
+  if (event.which == "13") {
+    logIn();
+  }
+});
+
 function logIn() {
   if(!sessionStorage.length){
     if ($("#login").val() !== "" && $("#mdp").val() !== "") {
@@ -605,13 +616,13 @@ function logIn() {
 
           userLikes(); // Retrieves liked wines from user
         } else {
-          alert('Identifiants inconnus !');
+          alert('Utilisateur inconnu !');
         }
     } else {
       alert("Les identifiants ne peuvent pas être vides !");
     }
-  }else{
-    alert("Vous êtes déjà connecté");
+  } else {
+    alert("Vous êtes déjà connecté(e) !");
   }
 }
 
@@ -622,13 +633,21 @@ function signOut() {
   if(sessionStorage.length) {
 
   sessionStorage.clear();
-
+  
   $("#iconSignUp").css("display","block");
   $("#iconSignOut").css("display","none");
+
   alert("Vous êtes déconnecté");
-  }else{
-    alert("Vous êtes déjà déconnecté");
+
+  resetBtnLike();
+  } else {
+    alert("Vous vous êtes bien déconnecté(e).");
   }
+}
+
+function resetBtnLike() {
+  $("#iconLike").text(" Like Wine");
+  $("#likeButton").attr("class", "btn btn-danger");
 }
 
 function userLikes() {
