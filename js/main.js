@@ -358,8 +358,8 @@ $("#iconAdd").click(function () {
       }
     };
     console.log(options);
-    console.log(url + '/' + idWine + '/comments');
-    fetch(url + '/' + idWine + '/comments', options)
+    console.log(url + '/' + 10 + '/comments');
+    fetch(url + '/' + 10 + '/comments', options)
       .then(function(response) {
         if(response.ok) {
           response.json().then(function(data) {
@@ -577,6 +577,7 @@ function logIn() {
   if ($("#login").val() !== "" && $("#mdp").val() !== "") {
     sessionStorage.setItem("username", $('#login').val());
     sessionStorage.setItem("pwd", $("#mdp").val());
+    console.log(sessionStorage);
   } else {
     alert("Les identifiants ne peuvent pas être vides !");
   }
