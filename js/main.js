@@ -563,7 +563,7 @@ function logIn() {
     if ($("#login").val() !== "" && $("#mdp").val() !== "") {
       sessionStorage.setItem("username", $("#login").val());
       sessionStorage.setItem("pwd", $("#mdp").val());
-      $("#frmBack").css("visibility","hidden");
+      $("#frmBack").css("display","none");
       $("#iconSignUp").css("display","none");
       $("#iconSignOut").css("display","block");
     } else {
@@ -922,10 +922,10 @@ tabFavourite.click(function () {
 });
 
 $('#iconSignUp').click(function(){
-  $('#frmBack').css("visibility","visible");
+  $('#frmBack').css("display","block");
   $('#iconSignUp').css("display","none");
 });
 $('#btnClose').click(function(){
-  $('#frmBack').css("visibility","hidden");
+  $('#frmBack').css("display","none");
   $('#iconSignUp').css("display","block");
 });

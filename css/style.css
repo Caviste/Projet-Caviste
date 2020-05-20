@@ -67,7 +67,7 @@ header nav {
 
 
 #frmBack{
-    visibility: hidden;
+    display: none;
     border-radius:7px;
     padding:8px 8px 8px 8px;
     width:250px;
