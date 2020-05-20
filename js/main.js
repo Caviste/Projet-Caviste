@@ -1,12 +1,15 @@
-// trier par couleur, bio & prix ascendant/descendant
+
 // Wiki
 // mit // cc // open-source license
+sessionStorage.removeItem("username");
+sessionStorage.removeItem("pwd");
 const url = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines"; // URL de l'API
 const restCountriesURL = "https://restcountries.eu/rest/v2/name/"; // URL API RESTCountries
 let showReset = false;
 let wineClicked = false;
 let wineLiked = false;
 let vinData = [];
+let arrLikedWines = [];
 
 // Récuperation des données de l'API
 fetch("https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines")
@@ -169,17 +172,39 @@ function showDetails(index) {
     $("#capacite").val("Info indisponible");
   }
 
+  showComments();
+
+  // Checks if user has already liked the wine
+  if (arrLikedWines.indexOf($("#idVin").val()) !== -1) {
+    $("#likeButton").attr("class", "btn btn-success");
+    $("#iconLike").text(" Liked !");
+  } else {
+    $("#iconLike").text(" Like Wine");
+    $("#likeButton").attr("class", "btn btn-danger");
+  }
+
+  fetchNbLikes(vin.id);
+  fetchComments(vin.id);
+}
+
+function fetchNbLikes(idVin) {
+  fetch(url + "/" + idVin + "/likes-count")
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.total <= 1) {
+        $("#nbLike").text(" " + data.total + " Like");
+      } else {
+        $("#nbLike").text(" " + data.total + " Likes");
+      }
+    });
+}
+
+function fetchComments(idVin) {
   /*Affichage des commentaires */
   let arrComment = [];
 
   let request = new XMLHttpRequest();
-  request.open(
-    "GET",
-    "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/" +
-      index +
-      "/comments",
-    true
-  );
+  request.open( "GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/" + idVin + "/comments", true);
 
   request.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -222,53 +247,71 @@ function showDetails(index) {
   };
 
   request.send();
-  showComments();
-  fetchNbLikes(vin.id);
 }
 
-function fetchNbLikes(idVin) {
-  fetch(url + "/" + idVin + "/likes-count")
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.total <= 1) {
-        $("#nbLike").text(" " + data.total + " Like");
+$("#iconAdd").click(function () {
+  if ( sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+    let addComment = prompt("Entrez un commentaire !");
+    
+    if (addComment === null) {
+      return;
+    }
+    
+    let username = sessionStorage["username"];
+    let password = sessionStorage["pwd"];
+    let btoaHash = btoa(username + ":" + password);
+    let idWine = $("#idVin").val();
+    let toSend = { content: addComment };
+    toSend = JSON.stringify(toSend);
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+      if (this.status === 200) {
+        console.log("ok");
+        fetchComments(idWine);
       } else {
-        $("#nbLike").text(" " + data.total + " Likes");
+        console.log(this.responseText);
       }
-    });
-}
+    };
+
+    xhr.open("POST", url + "/" + idWine + "/comments", true);
+
+    xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
+    xhr.send(toSend);
+  } else {
+    alert("Veuillez vous identifier !");
+  }
+});
 
 function modifyComment(idComment, idWine) {
-  if (
-    sessionStorage["username"] !== undefined &&
-    sessionStorage["pwd"] !== undefined
-  ) {
+  if ( sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
     let username = sessionStorage["username"];
     let password = sessionStorage["pwd"];
     let btoaHash = btoa(username + ":" + password);
 
     let modifiedComment = prompt("Entrez un nouveau commentaire");
 
-    let data = { content: modifiedComment };
+    let toSend = { content: modifiedComment };
+    toSend = JSON.stringify(toSend);
 
     const xhr = new XMLHttpRequest();
 
+    xhr.onload = function () {
+      fetchComments(idWine);
+    };
+
     xhr.open("PUT", url + "/" + idWine + "/comments/" + idComment, true);
+    xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
 
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("My-Authorization", "Basic " + btoaHash);
-
-    xhr.send('{ "content" : "' + modifiedComment + '"}');
+    xhr.send(toSend);
   } else {
     alert("Veuillez vous identifier !");
   }
 }
 
 function deleteComment(idComment, idWine) {
-  if (
-    sessionStorage["username"] !== undefined &&
-    sessionStorage["pwd"] !== undefined
-  ) {
+  if ( sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined ) {
     let username = sessionStorage["username"];
     let password = sessionStorage["pwd"];
     let btoaHash = btoa(username + ":" + password);
@@ -278,15 +321,15 @@ function deleteComment(idComment, idWine) {
     );
     if (deleteConfirm) {
       $.ajax({
-        url: url + idWine + "/comments/" + idComment,
+        url: url + "/" + idWine + "/comments/" + idComment,
         type: "DELETE",
         contentType: "application/json",
         async: true,
         beforeSend: function (xhr) {
-          xhr.setRequestHeader("My-Authorization", "Basic " + btoaHash);
+          xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
         },
-        success: function (msg) {
-          console.log(msg);
+        success: function () {
+          fetchComments(idWine);
         },
         error: (e) => console.log(e),
       });
@@ -298,20 +341,19 @@ function deleteComment(idComment, idWine) {
 
 /*Affichage des vins préférés */
 let arrFavourite = [];
+
 let requestFav = new XMLHttpRequest();
-requestFav.open(
-  "GET",
-  "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines",
-  true
-);
+requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines", true);
+
 requestFav.onload = function () {
   if (this.readyState == 4 && this.status == 200) {
     let replyFav = JSON.parse(this.response);
+
     replyFav.forEach((vinFav) => {
       arrFavourite.push(vinFav);
     });
-    let strFav =
-      "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
+
+    let strFav = "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
     for (let i = 0; i < arrFavourite.length; i++) {
       strFav +=
         "<tr>" +
@@ -333,82 +375,45 @@ requestFav.onerror = function () {
 };
 requestFav.send();
 
-sessionStorage.removeItem("username");
-sessionStorage.removeItem("pwd");
-
-$("#iconAdd").click(function () {
-  if (
-    sessionStorage["username"] !== undefined &&
-    sessionStorage["pwd"] !== undefined
-  ) {
-    let addComment = prompt("Entrez un commentaire !");
-    let idWine = $("#idVin").val();
-    let username = sessionStorage["username"];
-    let password = sessionStorage["pwd"];
-    let btoaHash = btoa(username + ":" + password);
-
-    console.log(addComment);
-    const options = {
-      'method' : 'POST',
-      'body' : { 'content' : addComment },
-      'mode' : 'cors',
-      'headers' : {
-        'content-type' : 'application/json; charset=utf-8',
-        'Authorization' : 'Basic '+ btoaHash
-      }
-    };
-    console.log(options);
-    console.log(url + '/' + 10 + '/comments');
-    fetch(url + '/' + 10 + '/comments', options)
-      .then(function(response) {
-        if(response.ok) {
-          response.json().then(function(data) {
-            console.log(data);
-          });
-        } else {
-          alert("HTTP-Error: " + response.status);
-        }
-      })
-      
-  } else {
-    alert("Veuillez vous identifier !");
-  }
-});
-
-//TODO: Bouton like
-// TODO: Bug -> button turns back to red when coming back to the same wine
-//L'user cliquera sur un bouton "Like" qui enverra une valeur booléenne à l'API
-//PUT : url/api/wines/id/like
-//JSON : { "like" : true|false }
-// NEEDS : know user id to show liked wines from api
 $("#likeButton").click(function () {
-  if (
-    sessionStorage["username"] !== undefined &&
-    sessionStorage["pwd"] !== undefined
-  ) {
+  if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
     if (wineClicked) {
-      let wineId = $("#hiddenWineId").val();
       let username = sessionStorage["username"];
       let password = sessionStorage["pwd"];
       let btoaHash = btoa(username + ":" + password);
+      let wineId = $("#idVin").val();
+      let like = false;
+
+      if (!arrLikedWines.includes(wineId)) {
+        like = true;
+      }
+
+      let toSend = { like: like };
+      toSend = JSON.stringify(toSend);
 
       const xhr = new XMLHttpRequest();
+
+      xhr.onload = function () {
+        if (this.status === 200) {
+          if (like) {
+            arrLikedWines.push(wineId);
+            $("#likeButton").attr("class", "btn btn-success");
+            $("#iconLike").text(" Liked !");
+          } else {
+            let idx = arrLikedWines.indexOf(wineId);
+            arrLikedWines.splice(idx, 1);
+            $("#iconLike").text(" Like Wine");
+            $("#likeButton").attr("class", "btn btn-danger");
+          }
+          fetchNbLikes(wineId);
+        } else {
+          alert(xhr.responseText);
+        }
+      };
+
       xhr.open("PUT", url + "/" + wineId + "/like", true);
-
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.setRequestHeader("My-Authorization", "Basic " + btoaHash);
-
-      if (!wineLiked) {
-        xhr.send('{"like" : "' + true + '"}');
-        $("#likeButton").attr("class", "btn btn-success");
-        $("#iconLike").text(" Liked !");
-      } else {
-        xhr.send('{"like" : "' + false + '"}');
-        $("#iconLike").text(" Like Wine");
-        $("#likeButton").attr("class", "btn btn-danger");
-      }
-      wineLiked = !wineLiked;
-      fetchNbLikes(wineId);
+      xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
+      xhr.send(toSend);
     } else {
       alert("Choisissez un vin avant de l'aimer !");
     }
@@ -443,11 +448,7 @@ $("#filtrer").click(function () {
   let sortMethod = $("#selectMethods option:selected").text().toLowerCase();
 
   let xmlReq = new XMLHttpRequest();
-  xmlReq.open(
-    "GET",
-    url + "?key=country&val=" + pays + "&sort=" + sortMethod,
-    true
-  );
+  xmlReq.open("GET", url + "?key=country&val=" + pays + "&sort=" + sortMethod, true);
 
   xmlReq.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -465,7 +466,11 @@ $("#filtrer").click(function () {
         });
       } else if (sortMethod === "grapes") {
         arrReply.sort(function (a, b) {
-          return a["grapes"] > b["grapes"] ? 1 : a["grapes"] < b["grapes"] ? -1 : 0;
+          return a["grapes"] > b["grapes"]
+            ? 1
+            : a["grapes"] < b["grapes"]
+            ? -1
+            : 0;
         });
       }
       showListWine(arrReply);
@@ -574,22 +579,59 @@ function searchWine() {
 $("#btnLogIn").click(logIn);
 
 function logIn() {
-  if ($("#login").val() !== "" && $("#mdp").val() !== "") {
-    sessionStorage.setItem("username", $('#login').val());
+  if (($("#login").val() !== "") && ($("#mdp").val() !== "")) {
+    sessionStorage.setItem("username", $("#login").val());
     sessionStorage.setItem("pwd", $("#mdp").val());
-    console.log(sessionStorage);
+    userLikes();
   } else {
     alert("Les identifiants ne peuvent pas être vides !");
   }
+}
 
-  /*     //format des données envoyées
-    request.setRequestHeader("Content-Type", "application/json");
+let hardCodedUsers = [
+  {
+    username: "nathan",
+    id: 24,
+  },
+  {
+    username: "radad",
+    id: 3,
+  },
+  {
+    username: "ced",
+    id: 1,
+  },
+];
 
-    //definir les identifiants
-    let data = btoa(username + ':' + pwd);
-    let hashedUser = "Basic " + data;
+function userLikes() {
+  let userId = 0;
 
-    request.setRequestHeader("Authorization", hashedUser) */
+  let urlLike = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users";
+
+  for (let i = 0; i < hardCodedUsers.length; i++) {
+    if (hardCodedUsers[i].username === sessionStorage["username"]) {
+      userId = hardCodedUsers[i].id;
+    }
+  }
+
+  const xhr = new XMLHttpRequest();
+
+  xhr.onload = function () {
+    if (this.status === 200) {
+      let data = this.responseText;
+
+      data = JSON.parse(data);
+
+      data.forEach((vin) => {
+        arrLikedWines.push(vin.id);
+      });
+    } else {
+      alert(xhr.responseText);
+    }
+  };
+
+  xhr.open("GET", urlLike + "/" + userId + "/likes/wines", true);
+  xhr.send();
 }
 
 /* Chart JS*/
@@ -802,7 +844,7 @@ window.onscroll = function () {
 };
 
 function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+  if ((document.body.scrollTop > 20) || (document.documentElement.scrollTop > 20)) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";
@@ -815,7 +857,7 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
-if ($(window).width() === 768 || $(window).width() === 834) {
+if (($(window).width() === 768) || ($(window).width() === 834)) {
   $("#message").css("display", "block");
   $("#closeMessage").click(function () {
     $("#message").css("display", "none");
@@ -919,11 +961,11 @@ tabFavourite.click(function () {
   showFavourite();
 });
 
-$('#iconSignUp').click(function(){
-  $('#frmBack').css("visibility","visible");
-  $('#iconSignUp').css("display","none");
+$("#iconSignUp").click(function () {
+  $("#frmBack").css("visibility", "visible");
+  $("#iconSignUp").css("display", "none");
 });
-$('#btnClose').click(function(){
-  $('#frmBack').css("visibility","hidden");
-  $('#iconSignUp').css("display","block");
+$("#btnClose").click(function () {
+  $("#frmBack").css("visibility", "hidden");
+  $("#iconSignUp").css("display", "block");
 });
