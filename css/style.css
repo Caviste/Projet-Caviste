@@ -499,6 +499,9 @@ img#countryFlagsImg {
     color: black;
 }
 */
+#divBtns{
+    width:280px;
+}
 /* bouton Like */
 
 #likeButton {
@@ -630,6 +633,7 @@ img#countryFlagsImg {
 /*  Iphone 5SE */
 
 @media all and (min-width:150px) and (max-width:320px) {
+
     #btnScroll {
         display: none !important;
     }
@@ -853,6 +857,12 @@ img#countryFlagsImg {
     #cadreRaisins {
         min-width: 300px;
         min-height: 300px;
+    }
+    #divBtns,#description, .styled{
+        width: 105% !important;
+    }
+    img#countryFlagsImg{
+        margin-left: 198px !important;
     }
 }
 
