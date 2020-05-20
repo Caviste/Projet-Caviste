@@ -1,8 +1,6 @@
-
 // Wiki
 // mit // cc // open-source license
-sessionStorage.removeItem("username");
-sessionStorage.removeItem("pwd");
+sessionStorage.clear();
 const url = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines"; // URL de l'API
 const restCountriesURL = "https://restcountries.eu/rest/v2/name/"; // URL API RESTCountries
 let showReset = false;
@@ -576,39 +574,6 @@ function searchWine() {
   }
 }
 
-$("#btnLogIn").click(logIn);
-
-function logIn() {
-  if(!sessionStorage.length){
-    if ($("#login").val() !== "" && $("#mdp").val() !== "") {
-      sessionStorage.setItem("username", $("#login").val());
-      sessionStorage.setItem("pwd", $("#mdp").val());
-      userLikes();
-      $("#frmBack").css("display","none");
-      $("#iconSignUp").css("display","none");
-      $("#iconSignOut").css("display","block");
-    } else {
-      alert("Les identifiants ne peuvent pas être vides !");
-    }
-  }else{
-    alert("Vous êtes déjà connecté");
-  }
-}
-
-$("#iconSignOut").click(signOut);
-
-function signOut(){
-  //If session exists
-  if(sessionStorage.length){
-  sessionStorage.clear();
-  $("#iconSignUp").css("display","block");
-  $("#iconSignOut").css("display","none");
-  alert("Vous êtes déconnecté");
-  }else{
-    alert("Vous êtes déjà déconnecté");
-  }
-}
-
 let hardCodedUsers = [
   {
     username: "nathan",
@@ -623,6 +588,48 @@ let hardCodedUsers = [
     id: 1,
   },
 ];
+
+$("#btnLogIn").click(logIn);
+
+function logIn() {
+  if(!sessionStorage.length){
+    if ($("#login").val() !== "" && $("#mdp").val() !== "") {
+        if (hardCodedUsers.find((element) => element.username == $('#login').val()) !== undefined) {
+          sessionStorage.setItem("username", $("#login").val());
+          sessionStorage.setItem("pwd", $("#mdp").val());
+
+          // Ferme le formulaire logIn & affiche l'icone signOut
+          $("#frmBack").css("display","none");
+          $("#iconSignUp").css("display","none");
+          $("#iconSignOut").css("display","block");
+
+          userLikes(); // Retrieves liked wines from user
+        } else {
+          alert('Identifiants inconnus !');
+        }
+    } else {
+      alert("Les identifiants ne peuvent pas être vides !");
+    }
+  }else{
+    alert("Vous êtes déjà connecté");
+  }
+}
+
+$("#iconSignOut").click(signOut);
+
+function signOut() {
+  //If session exists
+  if(sessionStorage.length) {
+
+  sessionStorage.clear();
+
+  $("#iconSignUp").css("display","block");
+  $("#iconSignOut").css("display","none");
+  alert("Vous êtes déconnecté");
+  }else{
+    alert("Vous êtes déjà déconnecté");
+  }
+}
 
 function userLikes() {
   let userId = 0;
