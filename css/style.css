@@ -99,8 +99,12 @@ header nav {
 #btnLogIn,#btnClose{
     width:49%;
 }
-
-
+#iconSignOut{
+    display: none;
+}
+#iconSignUp,#iconSignOut{
+    cursor: pointer;
+}
 /* Logo Millesime */
 
 #millesime {

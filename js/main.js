@@ -559,13 +559,20 @@ function searchWine() {
 $("#btnLogIn").click(logIn);
 
 function logIn() {
-  if ($("#login").val() !== "" && $("#mdp").val() !== "") {
-    sessionStorage.setItem("username", $("#login").val());
-    sessionStorage.setItem("pwd", $("#mdp").val());
-  } else {
-    alert("Les identifiants ne peuvent pas être vides !");
-  }
+  if(!sessionStorage.length){
+    if ($("#login").val() !== "" && $("#mdp").val() !== "") {
+      sessionStorage.setItem("username", $("#login").val());
+      sessionStorage.setItem("pwd", $("#mdp").val());
+      $("#frmBack").css("visibility","hidden");
+      $("#iconSignUp").css("display","none");
+      $("#iconSignOut").css("display","block");
 
+    } else {
+      alert("Les identifiants ne peuvent pas être vides !");
+    }
+  }else{
+    alert("Vous êtes déjà connecté");
+  }
   /*     //format des données envoyées
     request.setRequestHeader("Content-Type", "application/json");
 
@@ -576,6 +583,17 @@ function logIn() {
     request.setRequestHeader("Authorization", hashedUser) */
 }
 
+$("#iconSignOut").click(signOut);
+function signOut(){
+  //If session exists
+  if(sessionStorage.length){
+  sessionStorage.clear();
+  $("#iconSignUp").css("display","block");
+  $("#iconSignOut").css("display","none");
+  }else{
+    alert("Vous êtes déjà déconnecté");
+  }
+}
 /* Chart JS*/
 /* Hide les div des charts */
 $("#mainPays").hide();
