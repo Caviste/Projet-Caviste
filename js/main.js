@@ -603,7 +603,7 @@ $("#frmSignUp").keypress(function (event) {
 });
 
 function logIn() {
-  if(!sessionStorage.length){
+  if(!sessionStorage.length) {
     if ($("#login").val() !== "" && $("#mdp").val() !== "") {
         if (hardCodedUsers.find((element) => element.username == $('#login').val()) !== undefined) {
           sessionStorage.setItem("username", $("#login").val());
@@ -632,16 +632,16 @@ function signOut() {
   //If session exists
   if(sessionStorage.length) {
 
-  sessionStorage.clear();
-  
-  $("#iconSignUp").css("display","block");
-  $("#iconSignOut").css("display","none");
+    sessionStorage.clear();
+    
+    $("#iconSignUp").css("display","block");
+    $("#iconSignOut").css("display","none");
 
-  alert("Vous êtes déconnecté");
-
-  resetBtnLike();
-  } else {
     alert("Vous vous êtes bien déconnecté(e).");
+
+    resetBtnLike();
+  } else {
+    alert("Vous êtes déjà déconnecté(e) !");
   }
 }
 
