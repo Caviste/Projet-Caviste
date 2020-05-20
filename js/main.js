@@ -566,7 +566,6 @@ function logIn() {
       $("#frmBack").css("visibility","hidden");
       $("#iconSignUp").css("display","none");
       $("#iconSignOut").css("display","block");
-
     } else {
       alert("Les identifiants ne peuvent pas être vides !");
     }
@@ -590,6 +589,7 @@ function signOut(){
   sessionStorage.clear();
   $("#iconSignUp").css("display","block");
   $("#iconSignOut").css("display","none");
+  alert("Vous êtes déconnecté !");
   }else{
     alert("Vous êtes déjà déconnecté");
   }
