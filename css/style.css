@@ -580,7 +580,7 @@ img#countryFlagsImg {
 #comments {
     background-color: #fff;
     display: none;
-    height: 250px;
+    max-height: 250px;
     margin-bottom: 15px;
     padding: 10px;
     border-radius: 0px 0px 3px 3px;
@@ -619,7 +619,9 @@ img#countryFlagsImg {
     right: 40px;
     cursor: pointer;
 }
-
+#divComment{
+    display: none;
+}
 /* css pour les telephones et tablettes */
 /*  Iphone 5SE */
 
