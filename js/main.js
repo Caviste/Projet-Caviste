@@ -342,40 +342,49 @@ function deleteComment(idComment, idWine) {
 }
 
 /*Affichage des vins préférés */
-let arrFavourite = [];
-
-let requestFav = new XMLHttpRequest();
-requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines", true);
-
-requestFav.onload = function () {
-  if (this.readyState == 4 && this.status == 200) {
-    let replyFav = JSON.parse(this.response);
-
-    replyFav.forEach((vinFav) => {
-      arrFavourite.push(vinFav);
-    });
-
-    let strFav = "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
-    for (let i = 0; i < arrFavourite.length; i++) {
-      strFav +=
-        "<tr>" +
-        "<td>" +
-        arrFavourite[i].name +
-        "</td>" +
-        "<td>" +
-        arrFavourite[i].country +
-        "<td>" +
-        arrFavourite[i].region +
-        "</td></tr>";
-    }
-    strFav += "</tbody></table>";
-    document.getElementById("favourite").innerHTML = strFav;
+function showFavedWines() {
+  let arrFavourite = [];
+  if (sessionStorage.length) {
+    let requestFav = new XMLHttpRequest();
+    requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines", true);
+  
+    requestFav.onload = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        let replyFav = JSON.parse(this.response);
+  
+        replyFav.forEach((vinFav) => {
+          arrFavourite.push(vinFav);
+        });
+  
+        let strFav = "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
+        for (let i = 0; i < arrFavourite.length; i++) {
+          strFav +=
+            "<tr>" +
+            "<td>" +
+            arrFavourite[i].name +
+            "</td>" +
+            "<td>" +
+            arrFavourite[i].country +
+            "<td>" +
+            arrFavourite[i].region +
+            "</td></tr>";
+        }
+        strFav += "</tbody></table>";
+        document.getElementById("favourite").innerHTML = strFav;
+      }
+    };
+    requestFav.onerror = function () {
+      alert("Une erreur est survenue durant la communication avec l'API !");
+    };
+    requestFav.send();
+  } else {
+    let strFav = "<span id='mustLogIn'>Veuillez vous connecter pour consulter vos vins pr&eacute;f&eacute;r&eacute;s</span>";
+    document.getElementById('favourite').innerHTML = strFav;
   }
-};
-requestFav.onerror = function () {
-  alert("Une erreur est survenue durant la communication avec l'API !");
-};
-requestFav.send();
+}
+
+
+
 
 $("#likeButton").click(function () {
   if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
@@ -503,6 +512,8 @@ $(document).ready(function () {
       });
     }
   });
+
+  showFavedWines();
 });
 
 if ($("#strSearch").val().length === 0) {
@@ -615,6 +626,7 @@ function logIn() {
           $("#iconSignOut").css("display","block");
 
           userLikes(); // Retrieves liked wines from user
+          showFavedWines();
         } else {
           alert('Utilisateur inconnu !');
         }
@@ -640,6 +652,7 @@ function signOut() {
     alert("Vous vous êtes bien déconnecté(e).");
 
     resetBtnLike();
+    showFavedWines();
   } else {
     alert("Vous êtes déjà déconnecté(e) !");
   }
@@ -993,8 +1006,9 @@ function showComments() {
 }
 
 function showFavourite() {
-  document.getElementById("tabFavourite").className = "nav-link active";
+  
   document.getElementById("tabComments").className = "nav-link";
+  document.getElementById("tabFavourite").className = "nav-link active";
   $("#favourite").css("display", "block");
   $("#comments").css("display", "none");
   $("#iconAdd").css("display", "none");
