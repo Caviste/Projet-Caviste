@@ -611,7 +611,7 @@ function logIn() {
 
           // Ferme le formulaire logIn & affiche l'icone signOut
           $("#frmBack").css("display","none");
-          $("#iconSignUp").css("display","none");
+          $("#iconLogin").css("display","none");
           $("#iconSignOut").css("display","block");
 
           userLikes(); // Retrieves liked wines from user
@@ -634,7 +634,7 @@ function signOut() {
 
     sessionStorage.clear();
     
-    $("#iconSignUp").css("display","block");
+    $("#iconLogin").css("display","block");
     $("#iconSignOut").css("display","none");
 
     alert("Vous vous êtes bien déconnecté(e).");
@@ -927,6 +927,8 @@ const paysTooltip = document.querySelector("#paysTooltip");
 const selectTri = document.querySelector("#selectMethods");
 const triTooltip = document.querySelector("#sortTooltip");
 
+const icnLogin = document.querySelector('#iconLogin');
+
 $("#strSearch").mouseenter(showPopper(search, searchMessage, "top"));
 $("#recherche").mouseenter(showPopper(btnSearch, btnSearchTooltip, "top"));
 $("#selectCountries").mouseenter(showPopper(selectPays, paysTooltip, "top"));
@@ -1008,11 +1010,11 @@ tabFavourite.click(function () {
   showFavourite();
 });
 
-$('#iconSignUp').click(function(){
+$('#iconLogin').click(function(){
   $('#frmBack').css("display","block");
-  $('#iconSignUp').css("display","none");
+  $('#iconLogin').css("display","none");
 });
 $('#btnClose').click(function(){
   $('#frmBack').css("display","none");
-  $('#iconSignUp').css("display","block");
+  $('#iconLogin').css("display","block");
 });

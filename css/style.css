@@ -102,7 +102,7 @@ header nav {
 #iconSignOut{
     display: none;
 }
-#iconSignUp,#iconSignOut{
+#iconLogin,#iconSignOut{
     cursor: pointer;
 }
 /* Logo Millesime */
