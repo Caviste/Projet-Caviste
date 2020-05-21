@@ -96,13 +96,15 @@ header nav {
     margin-bottom: 8px;
     
 }
-#btnLogIn,#btnClose{
+
+#btnLogIn,#btnClose {
     width:49%;
 }
-#iconSignOut{
+
+#iconSignOut {
     display: none;
 }
-#iconLogin,#iconSignOut{
+#iconLogin,#iconSignOut {
     cursor: pointer;
 }
 /* Logo Millesime */
@@ -178,7 +180,6 @@ header nav {
 #tooltip[data-popper-placement^='right']>#arrow {
     left: -4px;
 }
-
 
 /* Popper btnSearch */
 

@@ -927,8 +927,6 @@ const paysTooltip = document.querySelector("#paysTooltip");
 const selectTri = document.querySelector("#selectMethods");
 const triTooltip = document.querySelector("#sortTooltip");
 
-const icnLogin = document.querySelector('#iconLogin');
-
 $("#strSearch").mouseenter(showPopper(search, searchMessage, "top"));
 $("#recherche").mouseenter(showPopper(btnSearch, btnSearchTooltip, "top"));
 $("#selectCountries").mouseenter(showPopper(selectPays, paysTooltip, "top"));
