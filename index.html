@@ -42,9 +42,9 @@
                                     class="input-group input-group-sm">
                                     <button type="button" id="btnLogIn" class="btn btn-secondary">Login</button>
                                 <button type="button" id="btnClose" class="btn btn-light">Close</button>
-
                             </form>
                         </div>
+
 
                         <img src="img/sign-in.png" title="Sign-Up" id="iconLogin" width="25" height="25"></i>                            
 
@@ -120,7 +120,7 @@
 
             <!-- Formulaire Vin + Img -->
             <div class="col">
-                <form id="FormAfficher" action="#" method="get">
+                <form id="FormAfficher" action="#" method="post">
                     <div class="row">
                         <div id="stylediv" class="col-11 col-md-6 col-lg-6 col-xl-7">
 
@@ -224,6 +224,10 @@
                                 <img id="countryFlagsImg" alt="Pays du vin">
                                 </div>
                                 <input type="hidden" id="hiddenWineId" name="hiddenWineId">
+
+                                <input type="file" id="inpFile"><br>
+                                <button type="submit">Upload</button>
+
                                 <div id="divBtns">
                                     <button id="likeButton" name="likes" type="button" class="btn btn-danger">
                                         <i class="fas fa-heart" id="iconLike"> Like Wine</i>
@@ -272,6 +276,7 @@
         </div>
         <button onclick="topFunction()" id="btnScroll" title="Go to top"><i class="fas fa-arrow-up"></i></button>
         <footer>&copy; EPFC, Nathan, Radad</footer>
+
     </div>
 
     <!-- jQuery -->
@@ -291,6 +296,7 @@
         });
     </script>
     <script src="./js/main.js"></script>
+    
     <script src="./node_modules/@popperjs/core/dist/umd/popper.js"></script>
 </body>
 

@@ -773,7 +773,7 @@ $("#divStat").click(function () {
       responsive: true,
       title: {
         display: true,
-        text: "Nombre des vins par Pays",
+        text: "Nombre des vins par pays",
         fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
         padding: 10,
         fontSize: 20,
@@ -789,6 +789,9 @@ $("#divStat").click(function () {
       },
     },
   });
+
+
+
 
   // Bouton Close Graph Pays
   $("#closePays").click(function () {
@@ -858,7 +861,7 @@ $("#divStat").click(function () {
             "rgb(139, 195, 74)",
             "rgb(255, 167, 38)",
             "rgb(3, 169, 244)",
-            "rgb(244, 143, 177)", //
+            "rgb(244, 143, 177)",
             "rgb(51, 70, 255)",
             "rgb(255, 51, 51)",
             "rgb(255, 212, 51)",
@@ -873,7 +876,7 @@ $("#divStat").click(function () {
       responsive: true,
       title: {
         display: true,
-        text: "Nombre des vins par raisins",
+        text: "Nombre de vins par raisins",
         fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
         padding: 10,
         fontSize: 20,
@@ -889,6 +892,8 @@ $("#divStat").click(function () {
       },
     },
   });
+
+
   // Bouton Close Graph Pays
   $("#closeRaisins").click(function () {
     $("#mainRaisins").css("display", "none");
@@ -1030,3 +1035,76 @@ $('#btnClose').click(function(){
   $('#frmBack').css("display","none");
   $('#iconLogin').css("display","block");
 });
+
+
+// img upload 
+// runs once
+// needs : 
+let frm = document.getElementById('FormAfficher');
+
+frm.addEventListener('submit', e => {
+  e.preventDefault();
+  if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+    let username = sessionStorage["username"];
+    let password = sessionStorage["pwd"];
+    let btoaHash = btoa(username + ":" + password);
+
+    let file = document.querySelector('input[type="file"]');
+    let data = new FormData();
+    data.append('file', file.files[0]);
+
+    fetch(url + '/' + $('#idVin').val() + '/pictures', {
+      method : "POST",
+      body : data,
+      headers : new Headers({
+        'Authorization': 'Basic ' + btoaHash,
+      })
+    }).then(function() {
+      alert('Image uploadée!');
+    }).catch(function() {
+      console.log("error");
+    });
+  } else {
+    alert('Vous devez être identifié(e) !');
+  }
+})
+
+// img get
+function getPics() {
+  let arrPics = [];
+  let id = $('#idVin').val();
+  fetch(url + '/' + 9 + '/pictures', {
+    method: 'GET',
+    headers : new Headers ({
+      'Authorization' : 'Basic ' + btoa('nathan:epfc'),
+    })
+  })
+  .then((res) => res.json())
+  .then((data) => {
+    data.forEach((pic) => {
+      arrPics.push(pic); // idPic, user_id, wine_id
+    })
+  });
+}
+
+// img delete
+function deletePic(idPic) {
+  if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+  let username = sessionStorage["username"];
+  let password = sessionStorage["pwd"];
+  let btoaHash = btoa(username + ":" + password);
+  let idVin = $('#idVin').val();
+  fetch(url + '/' + 9 + '/pictures/' + idPic, {
+    method : 'DELETE',
+    headers : new Headers ({
+      'Authorization': 'Basic ' + btoaHash,
+    })
+  })
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+  })
+  } else {
+    alert('Vous devez être identifié(e) !');
+  }
+}
