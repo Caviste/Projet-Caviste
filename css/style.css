@@ -500,6 +500,9 @@ img#countryFlagsImg {
     color: black;
 }
 */
+#divBtns{
+    width:280px;
+}
 /* bouton Like */
 
 #likeButton {
@@ -631,6 +634,9 @@ img#countryFlagsImg {
 /*  Iphone 5SE */
 
 @media all and (min-width:150px) and (max-width:320px) {
+    *, ::after, ::before{
+        box-sizing: content-box;
+    }
     #btnScroll {
         display: none !important;
     }
@@ -674,7 +680,9 @@ img#countryFlagsImg {
     #filtrer {
         margin-left: 0px;
     }
-
+    #likeButton,#btnNbLikes{
+        width: 40%;
+    }
     #tabs {
         height: 35px;
     }
@@ -854,6 +862,12 @@ img#countryFlagsImg {
     #cadreRaisins {
         min-width: 300px;
         min-height: 300px;
+    }
+    #divBtns,#description, .styled{
+        width: 105% !important;
+    }
+    img#countryFlagsImg{
+        margin-left: 198px !important;
     }
 }
 
