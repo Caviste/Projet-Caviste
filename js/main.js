@@ -1036,7 +1036,11 @@ $('#btnClose').click(function(){
   $('#iconLogin').css("display","block");
 });
 
-
+let inpFile = document.getElementById('inpFile');
+inpFile.addEventListener('change',function(){
+  let lblFile = document.getElementById('lblFile');
+  lblFile.innerHTML = inpFile.files[0].name;
+})
 // img upload 
 // runs once
 // needs : 

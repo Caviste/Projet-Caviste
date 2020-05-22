@@ -224,10 +224,12 @@
                                 </div>
                                 <input type="hidden" id="hiddenWineId" name="hiddenWineId">
 
-                                <input type="file" id="inpFile"><br>
-                                <button type="submit">Upload</button>
-
-                                <div id="divBtns">
+                                <input type="file" id="inpFile" class="inputfile">
+                                <div class="divBtns">
+                                    <label id="lblFile" for="inpFile"><i class="fas fa-upload"></i>&nbsp;Ajouter une photo</label>
+                                    <button type="submit" id="btnUpload"><i class="fas fa-paper-plane"></i></button>
+                                </div>
+                                <div class="divBtns">
                                     <button id="likeButton" name="likes" type="button" class="btn btn-danger">
                                         <i class="fas fa-heart" id="iconLike"> Like Wine</i>
                                     </button>

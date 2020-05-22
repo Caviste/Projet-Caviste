@@ -500,7 +500,7 @@ img#countryFlagsImg {
     color: black;
 }
 */
-#divBtns{
+.divBtns{
     width:280px;
 }
 /* bouton Like */
@@ -863,7 +863,7 @@ img#countryFlagsImg {
         min-width: 300px;
         min-height: 300px;
     }
-    #divBtns,#description, .styled{
+    .divBtns,#description, .styled{
         width: 105% !important;
     }
     img#countryFlagsImg{
@@ -893,4 +893,23 @@ footer {
     cursor: pointer;
     padding: 15px;
     border-radius: 50px;
+}
+#inpFile{
+    display: none;
+}
+#lblFile,#btnUpload{
+    color:white;
+    background-color: #c14c55;
+    border: 2px solid #c14c55;
+    padding: 3px;
+    border-radius: .25rem;
+    font-size : 15px;
+    
+    text-align: center;
+}
+#lblFile{
+    width:78%;
+}
+#btnUpload{
+    width:20%;
 }
