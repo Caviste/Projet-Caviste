@@ -381,7 +381,7 @@ function showFavedWines() {
     if (sessionStorage.length) {
         let requestFav = new XMLHttpRequest();
         let userId = 0;
-        
+
         for (let i = 0; i < hardCodedUsers.length; i++) {
             if (hardCodedUsers[i].username === sessionStorage["username"]) {
                 userId = hardCodedUsers[i].id;
@@ -397,7 +397,7 @@ function showFavedWines() {
                 replyFav.forEach((vinFav) => {
                     arrFavourite.push(vinFav);
                 });
-                console.log(arrFavourite);
+                
                 let strFav = "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
                 for (let i = 0; i < arrFavourite.length; i++) {
                     strFav +=
