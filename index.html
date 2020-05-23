@@ -8,15 +8,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="stylesheet" type="text/css" href="./lib/bootstrap-4.4.1-dist/css/bootstrap.min.css">
-	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
 	<link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
 	<link href="./lib/fontawesome-free-5.13.0-web/css/all.min.css" rel="stylesheet">
-	<script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
-	<script src="node_modules/chart.js/dist/Chart.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="./node_modules/slick-carousel/slick/slick.css" />
 	<link rel="stylesheet" type="text/css" href="./node_modules/slick-carousel/slick/slick-theme.css" />
+	<script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
+	<script src="node_modules/chart.js/dist/Chart.min.js"></script>
 </head>
 
 <body>
@@ -27,7 +26,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<header data-aos="fade-down" data-aos-delay="300">
+				<header>
 					<nav class="navbar navbar-dark">
 						<div id="logoBrand">
 							<a class="navbar-brand" href="#">
@@ -56,7 +55,7 @@
 
 				<!-- Boutons Rechercher / Ajouter / Trier -->
 				<div id="SearchAddSort">
-					<form action="#" method="get" class="form-inline" data-aos="fade-down" data-aos-delay="300">
+					<form action="#" method="get" class="form-inline">
 
 						<div id="searchBtnReset">
 							<input placeholder="Tappez un nom de vin" type="text" name="recherche" id="strSearch"
@@ -113,7 +112,7 @@
 		</div>
 
 		<!-- Liste Vins -->
-		<div class="row" data-aos="fade-down" data-aos-delay="300">
+		<div class="row">
 			<div class="col-12 col-sm-12 col-lg-1 mt-3" id="liste">
 				<ul id="listeVin" class="list-group">
 				</ul>
@@ -274,7 +273,8 @@
 		</div>
 
 		<div id="comments">
-		</div>
+        </div>
+        
 		<div id="favourite">
 		</div>
 	</div>
@@ -290,36 +290,29 @@
 			<i id="closeRaisins" class="fa fa-times fa-1x"></i>
 			<canvas id="cadreRaisins"></canvas>
 		</div>
-	</div>
+    </div>
+    
+    <div>
 	<button id="btnScroll" title="Go to top"><i class="fas fa-arrow-up"></i></button>
 	<footer>&copy; EPFC, Nathan, Radad</footer>
 
 	</div>
 
 	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    
+    <!-- Slick Carousel-->
+    <script src="./node_modules/slick-carousel/slick/slick.min.js"></script>
 
 	<!-- Bootstrap -->
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-		crossorigin="anonymous"></script>
-
-	<!-- AOS animation -->
-	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-	<script>
-		AOS.init({
-			once: true,
-		});
-	</script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    <!-- Main Script -->
 	<script src="./js/main.js"></script>
 
+    <!-- Popper -->
 	<script src="./node_modules/@popperjs/core/dist/umd/popper.js"></script>
-
-
-	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<!-- Slick Carousel-->
-	<script src="./node_modules/slick-carousel/slick/slick.min.js"></script>
 
 </body>
 
