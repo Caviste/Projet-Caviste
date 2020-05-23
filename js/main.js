@@ -378,7 +378,7 @@ function deleteComment(idComment, idWine) {
 }
 
 /**
- * 
+ * Affiche les vins favoris de l'utilisateur
  */
 function showFavedWines() {
   let arrFavourite = [];
@@ -1153,39 +1153,35 @@ function getPics() {
       if (data.length >= 1) {
         data.forEach((pic) => {
           arrPics.push(pic);
-        });
+		});
 
-		if(arrPics.length >= 1) {
-			for (let i = 0; i < arrPics.length; i++) {
-				let img =
-				  '<img class="added" src=' +
-				  urlUploads +
-				  arrPics[i].url +
-				  " id=" +
-				  arrPics[i].id +
-				  ">";
-				$(".slickC").append(img);
-			  }
-	  
-			  $(".slickC").slick({
-				dots: false,
-				arrows: true,
-				autoplay: true,
-				autoplaySpeed: 3000,
-			  });
-		} else {
-			if ($('#carousel').hasClass('slick-initialized slick-slider')) {
-				$(".slickC").slick("unslick");
-				$(".added").remove();
+		// ensures slick hasn't already been initialized
+		if(!($('#carousel').hasClass('slick-initialized slick-slider')) ) {
+			if(arrPics.length > 0) {
+				for (let i = 0; i < arrPics.length; i++) {
+					let img =
+					'<img class="added" src=' +
+					urlUploads +
+					arrPics[i].url +
+					" id=" +
+					arrPics[i].id +
+					">";
+					$(".slickC").append(img);
+				}
+		
+				$(".slickC").slick({
+					dots: false,
+					arrows: true,
+					autoplay: true,
+					autoplaySpeed: 3000,
+				});
 			}
-			
 		}
       } else {
 		if ($('#carousel').hasClass('slick-initialized slick-slider')) {
 			$(".slickC").slick("destroy");
 			$(".added").remove();
 		}
-		
 	  }
     });
 }
