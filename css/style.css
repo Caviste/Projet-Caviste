@@ -355,13 +355,16 @@ header nav {
     width: 155px;
     margin-top: 0px;
 }
-
+#ChartGraph:hover {
+    background-color: rgb(107, 15, 12);
+    border: 1px solid rgb(107, 15, 12);
+}
 
 /* Liste de vins */
 
 #liste {
     min-width: 300px;
-    max-height: 600px;
+    max-height: 625px;
     overflow-y: auto;
 }
 
@@ -370,6 +373,7 @@ header nav {
 
 #liste li {
     min-width: 100px;
+    height: 52px;
 }
 
 
@@ -396,7 +400,7 @@ header nav {
 #stylediv {
     z-index: 1;
     position: relative;
-    max-height: 585px;
+    max-height: 625px;
     min-width: 100px;
     margin-top: 17px;
     margin-right: 20px;
@@ -906,7 +910,7 @@ footer {
     padding: 3px;
     border-radius: .25rem;
     font-size : 15px;
-    
+    cursor: pointer;
     text-align: center;
 }
 #lblFile{
@@ -920,4 +924,8 @@ footer {
 #btnUpload{
     width:20%;
 }
-
+#lblFile:hover,#btnUpload:hover{
+    background-color:#a7222d;
+    border-color: #a7222d;
+    transition: 0.3s;
+}
