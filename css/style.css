@@ -1,5 +1,4 @@
 /* Corps page */
-
 body {
 	background-image: url("../img/wine-back4.jpg");
 	background-size: cover;
@@ -12,7 +11,6 @@ body {
 
 
 /* Message */
-
 #message {
 	display: none;
 	position: absolute;

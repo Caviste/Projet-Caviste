@@ -57,7 +57,6 @@ $("#strSearch").keypress(function (event) {
  * Crée une liste de vin et l'incorpore dans le document
  * @param {Array} arr Le tableau contenant des vins
  */
-
 function showListWine(arr) {
     let str = "";
 
@@ -80,8 +79,8 @@ function showListWine(arr) {
 
         const btnReset = document.getElementById("reset");
         btnReset.addEventListener("click", function () {
-        resetSearch();
-        showListWine(vinData);
+            resetSearch();
+            showListWine(vinData);
         });
     }
 
@@ -117,7 +116,7 @@ function showDetails(index) {
     let codeCountry;
     fetch(restCountriesURL + vin.country)
     .then(function (res) {
-        return res.json();
+    return res.json();
     })
     .then((data) => initialize(data))
     .catch((error) => console.log("Erreur: ", error));
@@ -142,9 +141,9 @@ function showDetails(index) {
         $("#extras").toggleClass("hidden show");
 
         if (extra["bio"] == true) {
-        $("#bioTrue").prop("checked", true);
+            $("#bioTrue").prop("checked", true);
         } else {
-        $("#bioFalse").prop("checked", true);
+            $("#bioFalse").prop("checked", true);
         }
 
         if (extra["promo"] !== undefined) {
@@ -232,12 +231,12 @@ function fetchComments(idVin) {
 
     request.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
-            let str = "";
             let reply = JSON.parse(this.response);
-            
             reply.forEach((comment) => {
                 arrComment.push(comment);
             });
+
+            let str = "";
 
             for (let i = 0; i < arrComment.length; i++) {
                 str +=
@@ -266,17 +265,17 @@ function fetchComments(idVin) {
                 document.getElementById("comments").innerHTML = str;
             }
         }
-    };
+    }
 
     request.onerror = function () {
         alert("Une erreur est survenue durant la communication avec l'API !");
-    };
+    }
 
     request.send();
 }
 
 $("#iconAdd").click(function () {
-    if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+    if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
         let addComment = prompt("Entrez un commentaire !");
 
         if (addComment === null) {
@@ -295,7 +294,6 @@ $("#iconAdd").click(function () {
 
         xhr.onload = function () {
             if (this.status === 200) {
-                console.log("ok");
                 fetchComments(idWine);
             } else {
                 console.log(this.responseText);
@@ -318,7 +316,7 @@ $("#iconAdd").click(function () {
  * @param {number} idWine L'id du vin
  */
 function modifyComment(idComment, idWine) {
-    if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+    if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
         let username = sessionStorage.getItem("username");
         let password = sessionStorage.getItem("pwd");
         let btoaHash = btoa(username + ":" + password);
@@ -350,13 +348,13 @@ function modifyComment(idComment, idWine) {
  * @param {number} idWine L'id du vin
  */
 function deleteComment(idComment, idWine) {
-    if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+    if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
         let username = sessionStorage.getItem("username");
         let password = sessionStorage.getItem("pwd");
         let btoaHash = btoa(username + ":" + password);
 
         let deleteConfirm = confirm("Voulez-vous vraiment supprimer ce commentaire ?");
-
+        
         if (deleteConfirm) {
             $.ajax({
                 url: url + "/" + idWine + "/comments/" + idComment,
@@ -377,46 +375,43 @@ function deleteComment(idComment, idWine) {
     }
 }
 
-/**
- * Affiche les vins favoris de l'utilisateur
- */
+// Affiche les vins favoris de l'utilisateur
 function showFavedWines() {
     let arrFavourite = [];
     if (sessionStorage.length) {
-    let requestFav = new XMLHttpRequest();
+        let requestFav = new XMLHttpRequest();
+        requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines", true);
 
-    requestFav.onload = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            let replyFav = JSON.parse(this.response);
+        requestFav.onload = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let replyFav = JSON.parse(this.response);
 
-            replyFav.forEach((vinFav) => {
-                arrFavourite.push(vinFav);
-            });
+                replyFav.forEach((vinFav) => {
+                    arrFavourite.push(vinFav);
+                });
 
-            let strFav = "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
-            for (let i = 0; i < arrFavourite.length; i++) {
-                strFav +=
-                "<tr>" +
-                "<td>" +
-                arrFavourite[i].name +
-                "</td>" +
-                "<td>" +
-                arrFavourite[i].country +
-                "<td>" +
-                arrFavourite[i].region +
-                "</td></tr>";
+                let strFav = "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
+                for (let i = 0; i < arrFavourite.length; i++) {
+                    strFav +=
+                        "<tr>" +
+                        "<td>" +
+                        arrFavourite[i].name +
+                        "</td>" +
+                        "<td>" +
+                        arrFavourite[i].country +
+                        "<td>" +
+                        arrFavourite[i].region +
+                        "</td></tr>";
+                }
+                strFav += "</tbody></table>";
+                document.getElementById("favourite").innerHTML = strFav;
             }
-            strFav += "</tbody></table>";
-            document.getElementById("favourite").innerHTML = strFav;
         }
-    };
 
-    requestFav.onerror = function () {
-        alert("Une erreur est survenue durant la communication avec l'API !");
-    };
-
-    requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines", true);
-    requestFav.send();
+        requestFav.onerror = function () {
+            alert("Une erreur est survenue durant la communication avec l'API !");
+        }
+        requestFav.send();
     } else {
         let strFav = "<span id='mustLogIn'>Veuillez vous connecter pour consulter vos vins pr&eacute;f&eacute;r&eacute;s</span>";
         document.getElementById("favourite").innerHTML = strFav;
@@ -430,7 +425,7 @@ function showFavedWines() {
  * L'utilisateur doit être identifié pour aimer un vin 
  */
 $("#likeButton").click(function () {
-    if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+    if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
         if (wineClicked) {
             let username = sessionStorage.getItem("username");
             let password = sessionStorage.getItem("pwd");
@@ -463,7 +458,7 @@ $("#likeButton").click(function () {
                 } else {
                     alert(xhr.responseText);
                 }
-            };
+            }
 
             xhr.open("PUT", url + "/" + wineId + "/like", true);
             xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
@@ -476,7 +471,7 @@ $("#likeButton").click(function () {
     }
 });
 
-// Remplissage le select selectCountries avec les pays référencés par l'API Caviste
+// Remplis le select selectCountries avec les pays référencés par l'API Caviste
 let selectCountries = $("#selectCountries");
 selectCountries.empty();
 selectCountries.append('<option selected="true" disabled>Pays</option>');
@@ -486,9 +481,7 @@ let countryUrl = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wine
 
 $.getJSON(countryUrl, function (data) {
     $.each(data, function (key, info) {
-        selectCountries.append(
-            $("<option></option>").attr("value", key).text(info["country"])
-        );
+        selectCountries.append($("<option></option>").attr("value", key).text(info["country"]));
     });
 });
 
@@ -506,25 +499,25 @@ $("#filtrer").click(function () {
     let sortMethod = $("#selectMethods option:selected").text().toLowerCase();
 
     let xmlReq = new XMLHttpRequest();
-
+    
     xmlReq.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
             let reply = JSON.parse(this.response);
 
             for (data in reply) {
-            arrReply.push(reply[data]);
+                arrReply.push(reply[data]);
             }
 
             if (sortMethod === "year") {
-            arrReply.sort((a, b) => a.year - b.year);
+                arrReply.sort((a, b) => a.year - b.year);
             } else if (sortMethod === "name") {
-            arrReply.sort(function (a, b) {
-                return a["name"] > b["name"] ? 1 : a["name"] < b["name"] ? -1 : 0;
-            });
+                arrReply.sort(function (a, b) {
+                    return a["name"] > b["name"] ? 1 : a["name"] < b["name"] ? -1 : 0;
+                });
             } else if (sortMethod === "grapes") {
-            arrReply.sort(function (a, b) {
-                return a["grapes"] > b["grapes"] ? 1 : a["grapes"] < b["grapes"] ? -1 : 0;
-            });
+                arrReply.sort(function (a, b) {
+                    return a["grapes"] > b["grapes"] ? 1 : a["grapes"] < b["grapes"] ? -1 : 0;
+                });
             }
             showListWine(arrReply);
         }
@@ -539,7 +532,6 @@ $("#filtrer").click(function () {
 });
 
 $(document).ready(function () {
-
     /**
      * Filtrage dynamique de la liste des vins
      * Le filtrage s'effectue automatiquement lors de la présence d'un caractère dans la zone strSearch
@@ -555,7 +547,7 @@ $(document).ready(function () {
 
         if ($(this).val().length < 1) {
             $("#resetList").fadeOut(150, function () {
-            $("#resetList").hide();
+                $("#resetList").hide();
             });
         } else {
             $("#resetList").fadeIn(150, function () {
@@ -563,6 +555,7 @@ $(document).ready(function () {
             });
         }
     });
+
     showFavedWines();
 });
 
@@ -572,11 +565,14 @@ if ($("#strSearch").val().length === 0) {
     });
 }
 
-// Réinitialise la zone strSearch lors d'un click sur l'icone (X)
+/**
+ * Réinitialise la zone strSearch lors d'un click sur l'icone (X)
+ */
 $("#resetList").click(function () {
     showReset = false;
     resetSearch();
     showListWine(vinData);
+
     $(this).fadeOut(150, function () {
         $(this).css("display", "none");
     });
@@ -586,11 +582,11 @@ $("#resetList").click(function () {
 $("#recherche").click(searchWine);
 
 function searchWine() {
-  /**
-   * La fonction récupère l'input de l'utilisateur dans la zone strSearch
-   * Si l'input est un nombre, la fonction communiquera avec l'API pour rechercher le vin ayant ce nombre comme ID
-   * Si l'input est une chaîne de caractère, la fonction cherchera la region correspondante à l'input
-   */
+/**
+ * La fonction récupère l'input de l'utilisateur dans la zone strSearch
+ * Si l'input est un nombre, la fonction communiquera avec l'API pour rechercher le vin ayant ce nombre comme ID
+ * Si l'input est une chaîne de caractère, la fonction cherchera la region correspondante à l'input
+ */
     let queryArr = [];
     showReset = true;
     let strSearch = $("#strSearch").val().trim();
@@ -603,8 +599,8 @@ function searchWine() {
 
             request.onload = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                let reply = JSON.parse(this.response);
-                showListWine(reply);
+                    let reply = JSON.parse(this.response);
+                    showListWine(reply);
                 }
             };
 
@@ -659,18 +655,6 @@ let hardCodedUsers = [
     },
 ];
 
-// Ouvre le formulaire de connexion
-$("#iconLogin").click(function () {
-    $("#frmBack").css("display", "block");
-    $("#iconLogin").css("display", "none");
-});
-
-// Ferme le formulaire de connexion
-$("#btnClose").click(function () {
-    $("#frmBack").css("display", "none");
-    $("#iconLogin").css("display", "block");
-});
-
 $("#btnLogIn").click(logIn);
 
 // Appel de la fonction logIn lorsque la touche enter est activée
@@ -687,10 +671,9 @@ $("#frmSignUp").keypress(function (event) {
  * 
  */
 function logIn() {
-    // Si aucune donnée existe dans sessionStorage
     if (!sessionStorage.length) {
         if ($("#login").val() !== "" && $("#mdp").val() !== "") {
-            if (hardCodedUsers.find((element) => element.username == $("#login").val()) !== undefined) {
+            if ( hardCodedUsers.find((element) => element.username == $("#login").val()) !== undefined ) {
                 sessionStorage.setItem("username", $("#login").val());
                 sessionStorage.setItem("pwd", $("#mdp").val());
 
@@ -705,7 +688,7 @@ function logIn() {
                 alert("Utilisateur inconnu !");
             }
         } else {
-        alert("Les identifiants ne peuvent pas être vides !");
+            alert("Les identifiants ne peuvent pas être vides !");
         }
     } else {
         alert("Vous êtes déjà connecté(e) !");
@@ -714,14 +697,12 @@ function logIn() {
 
 $("#iconSignOut").click(signOut);
 
-
 /**
  * Déconnecte l'utilisateur 
- * Supprime ses identifiants figurant dans sessionStorage
- * Réinitialise le bouton "Like"
+ * Supprime ses identifiants dans sessionStorage
  */
 function signOut() {
-    //If session exists
+  //If session exists
     if (sessionStorage.length) {
         sessionStorage.clear();
 
@@ -737,18 +718,14 @@ function signOut() {
     }
 }
 
-// Réinitialise le bouton de vin et lui rend son apparence initiale
 function resetBtnLike() {
     $("#iconLike").text(" Like Wine");
     $("#likeButton").attr("class", "btn btn-danger");
 }
 
-/**
- * Récupère les vins aimés par l'utilisateur
- * L'utilisateur doit figurer dans le tableau hardCodedUsers
- */
 function userLikes() {
     let userId = 0;
+
     let urlLike = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users";
 
     for (let i = 0; i < hardCodedUsers.length; i++) {
@@ -791,7 +768,7 @@ $("#mainRaisins").hide();
 // Affiche les deux graphiques après un click sur le bouton "Statistiques"
 $("#divStat").click(function () {
     /* Chart pays */
-    $("#mainPays").animate({}, 2000, function () {
+    $("#mainPays").animate({}, 5000, function () {
         $("#mainPays").show();
         $("#closePays").show();
     });
@@ -804,7 +781,7 @@ $("#divStat").click(function () {
     let arrCountry = [];
     vinData.forEach((vin) => {
         if (!arrCountry.includes(vin["country"])) {
-        arrCountry.push(vin["country"]);
+            arrCountry.push(vin["country"]);
         }
     });
 
@@ -838,44 +815,50 @@ $("#divStat").click(function () {
     let myChart = new Chart(ctx, {
         type: "pie",
         data: {
-            labels: myData.labels,
-            datasets: [{
-                label: "Nombre de vins",
-                data: myData.data,
-                backgroundColor: [
-                    "rgba(244, 67, 54, 0.4)",
-                    "rgba(102, 187, 106, 0.4)",
-                    "rgba(255, 167, 38, 0.4)",
-                    "rgba(3, 169, 244,0.4)",
-                    "rgba(244, 143, 177, 0.4)",
-                ],
-                borderColor: [
-                    "rgb(244, 67, 54)",
-                    "rgb(139, 195, 74)",
-                    "rgb(255, 167, 38)",
-                    "rgb(3, 169, 244)",
-                    "rgb(244, 143, 177)",
-                ],
-                borderWidth: 2,
-            }],
+        labels: myData.labels,
+        datasets: [
+            {
+            label: "Nombre de vins",
+            data: myData.data,
+            backgroundColor: [
+                // Pick colors
+                "rgba(244, 67, 54, 0.4)",
+                "rgba(102, 187, 106, 0.4)",
+                "rgba(255, 167, 38, 0.4)",
+                "rgba(3, 169, 244,0.4)",
+                "rgba(244, 143, 177, 0.4)",
+            ],
+            borderColor: [
+                // Pick colors
+                "rgb(244, 67, 54)",
+                "rgb(139, 195, 74)",
+                "rgb(255, 167, 38)",
+                "rgb(3, 169, 244)",
+                "rgb(244, 143, 177)",
+            ],
+            borderWidth: 2,
+            },
+        ],
         },
         options: {
-            maintainAspectRatio: false,
-            responsive: true,
-            title: {
-                display: true,
-                text: "Nombre des vins par pays",
-                fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-                padding: 10,
-                fontSize: 20,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                        },
-                    }],
+        maintainAspectRatio: false,
+        responsive: true,
+        title: {
+            display: true,
+            text: "Nombre des vins par pays",
+            fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+            padding: 10,
+            fontSize: 20,
+            scales: {
+            yAxes: [
+                {
+                ticks: {
+                    beginAtZero: true,
                 },
+                },
+            ],
             },
+        },
         },
     });
 
@@ -884,8 +867,8 @@ $("#divStat").click(function () {
         $("#mainPays").css("display", "none");
     });
 
-    /* Graphique Raisins */
-    $("#mainRaisins").animate({}, 2000, function () {
+    // Graphique Raisins
+    $("#mainRaisins").animate({}, 5000, function () {
         $("#mainRaisins").show();
     });
 
@@ -893,14 +876,13 @@ $("#divStat").click(function () {
     const ctxRaisins = cadreRaisins.getContext("2d");
     Chart.defaults.global.defaultFontColor = "black";
 
-    // Crée un tableau contenant tous les raisins
+    // Crée un array contenant tous les raisins des vins
     let arrGrapes = [];
     vinData.forEach((vin) => {
         if (!arrGrapes.includes(vin["grapes"])) {
             arrGrapes.push(vin["grapes"]);
         }
     });
-
 
     /**
      * Crée un tableau contenant tous les vins, par raisins
@@ -935,34 +917,34 @@ $("#divStat").click(function () {
     let myChartR = new Chart(ctxRaisins, {
         type: "pie",
         data: {
-            labels: myDataR.labels,
-            datasets: [{
-                label: "Nombre de raisins",
-                data: myDataR.data,
-                backgroundColor: [
-                    "rgba(244, 67, 54, 0.4)",
-                    "rgba(102, 187, 106, 0.4)",
-                    "rgba(255, 167, 38, 0.4)",
-                    "rgba(3, 169, 244,0.4)",
-                    "rgba(244, 143, 177, 0.4)",
-                    "rgba(51, 70, 255, 0.4)",
-                    "rgba(255, 51, 51, 0.4)",
-                    "rgba(255, 212, 51, 0.4)",
-                    "rgba(51, 255, 255 , 0.4)",
-                ],
-                borderColor: [
-                    "rgb(244, 67, 54)",
-                    "rgb(139, 195, 74)",
-                    "rgb(255, 167, 38)",
-                    "rgb(3, 169, 244)",
-                    "rgb(244, 143, 177)",
-                    "rgb(51, 70, 255)",
-                    "rgb(255, 51, 51)",
-                    "rgb(255, 212, 51)",
-                    "rgb(51, 255, 255 )",
-                ],
-                borderWidth: 2,
-            }],
+        labels: myDataR.labels,
+        datasets: [{
+            label: "Nombre de raisins",
+            data: myDataR.data,
+            backgroundColor: [
+                "rgba(244, 67, 54, 0.4)",
+                "rgba(102, 187, 106, 0.4)",
+                "rgba(255, 167, 38, 0.4)",
+                "rgba(3, 169, 244,0.4)",
+                "rgba(244, 143, 177, 0.4)",
+                "rgba(51, 70, 255, 0.4)",
+                "rgba(255, 51, 51, 0.4)",
+                "rgba(255, 212, 51, 0.4)",
+                "rgba(51, 255, 255 , 0.4)",
+            ],
+            borderColor: [
+                "rgb(244, 67, 54)",
+                "rgb(139, 195, 74)",
+                "rgb(255, 167, 38)",
+                "rgb(3, 169, 244)",
+                "rgb(244, 143, 177)",
+                "rgb(51, 70, 255)",
+                "rgb(255, 51, 51)",
+                "rgb(255, 212, 51)",
+                "rgb(51, 255, 255 )",
+            ],
+            borderWidth: 2,
+        }],
         },
         options: {
             maintainAspectRatio: false,
@@ -974,11 +956,13 @@ $("#divStat").click(function () {
                 padding: 10,
                 fontSize: 20,
                 scales: {
-                yAxes: [{
+                yAxes: [
+                    {
                     ticks: {
                         beginAtZero: true,
                     },
-                }],
+                    },
+                ],
                 },
             },
         },
@@ -993,11 +977,11 @@ $("#divStat").click(function () {
 // Bouton pour remonter en haut de la page
 let btnScroll = document.getElementById("btnScroll");
 
-$('#btnScroll').click(scrollToTop)
+$('#btnScroll').click(scrollToTop);
 
 // Appelle la fonction scroll lorsque l'utilisateur fait défiler la page 
 window.onscroll = function () {
-    scroll();
+  scroll();
 };
 
 // Affiche le bouton btnScroll si l'utilisateur défile la page d'au moins 20pixels vers le bas, le cache dans le cas contraire
@@ -1009,10 +993,10 @@ function scroll() {
     }
 }
 
-// Remonte vers le haut de la page lorsque l'utilisateur clique sur le bouton btnScroll
+// When the user clicks on the button, scroll to the top of the document
 function scrollToTop() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
 }
 
 /**
@@ -1059,23 +1043,24 @@ let popperInstance = null;
  * @param {string} position Position du tooltip 
  */
 function showPopper(selector, message, position) {
-
     function create() {
         popperInstance = Popper.createPopper(selector, message, {
-            modifiers: [{
-                name: "offset",
-                options: {
+        modifiers: [
+            {
+            name: "offset",
+            options: {
                 offset: [0, 8],
-                },
-            }],
-            placement: position,
+            },
+            },
+        ],
+        placement: position,
         });
     }
 
     function destroy() {
         if (popperInstance) {
-            popperInstance.destroy();
-            popperInstance = null;
+        popperInstance.destroy();
+        popperInstance = null;
         }
     }
 
@@ -1096,11 +1081,12 @@ function showPopper(selector, message, position) {
         selector.addEventListener(event, show);
     });
 
-    hideEvents.forEach((event) => {
-        selector.addEventListener(event, hide);
-    });
+  hideEvents.forEach((event) => {
+    selector.addEventListener(event, hide);
+  });
 }
 
+    
 // Affichage du div ayant les commentaire des vins et les vins favoris de l'utilisateur
 let tabComment = $("#tabComments");
 let tabFavourite = $("#tabFavourite");
@@ -1131,6 +1117,15 @@ tabFavourite.click(function () {
     showFavourite();
 });
 
+$("#iconLogin").click(function () {
+    $("#frmBack").css("display", "block");
+    $("#iconLogin").css("display", "none");
+});
+$("#btnClose").click(function () {
+    $("#frmBack").css("display", "none");
+    $("#iconLogin").css("display", "block");
+});
+
 // Récupère le fichier séléctionné par l'utilisateur
 let inpFile = document.getElementById("inpFile");
 
@@ -1145,7 +1140,8 @@ $("#btnUpload").click(function () {
     event.preventDefault();
 
     let frm = document.forms["FormAfficher"];
-    if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+
+    if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
         let username = sessionStorage.getItem("username");
         let password = sessionStorage.getItem("pwd");
         let btoaHash = btoa(username + ":" + password);
@@ -1160,14 +1156,13 @@ $("#btnUpload").click(function () {
 
         upload.append("userfile", imgToUpload);
         const xhr = new XMLHttpRequest();
-    
+
         xhr.onload = function () {
             if (this.status === 200) {
                 alert("Upload réussi !");
                 lblFile.innerHTML = "<i class='fas fa-upload'></i>&nbsp;Ajouter une photo";
-                getPics();
             } else {
-                alert("Vous avez atteint le nombre de photos maximal autorisé pour ce vin (max. 3 photos)");
+                alert("Vous avez atteint le nombre de photo maximal pour ce vin (max 3 ajouts possibles");
             }
         }
 
@@ -1187,50 +1182,50 @@ $("#btnUpload").click(function () {
 
 // Récupèration des images supplémentaires d'un vin
 function getPics() {
-    let arrPics = [];
     let urlUploads = "http://cruth.phpnet.org/epfc/caviste/public/uploads/";
+    let arrPics = [];
     let id = $("#idVin").val();
-    let username = sessionStorage.getItem("username");
-    let password = sessionStorage.getItem("pwd");
-    let btoaHash = btoa(username + ":" + password);
 
     fetch(url + "/" + id + "/pictures", {
         method: "GET",
         headers: new Headers({
-            Authorization: "Basic " + btoaHash,
+            Authorization: "Basic " + btoa("nathan:epfc"),
         }),
     })
     .then((res) => res.json())
     .then((data) => {
-        if (data.length > 0) {
+        if (data.length >= 1) {
             data.forEach((pic) => {
                 arrPics.push(pic);
             });
 
             //S'assure que slick n'a pas déjà été initialisé
             if (!$("#carousel").hasClass("slick-initialized slick-slider")) {
-                for (let i = 0; i < arrPics.length; i++) {
-                    let img = 
-                        "<img class='added' src=" +
-                        urlUploads +
-                        arrPics[i].url +
-                        " id=" +
-                        arrPics[i].id +
-                        ">";
+                if (arrPics.length > 0) {
+                    for (let i = 0; i < arrPics.length; i++) {
+                        let img =
+                            "<img class='added' src=" +
+                            urlUploads +
+                            arrPics[i].url +
+                            " id=" +
+                            arrPics[i].id +
+                            ">";
 
-                    $(".slickC").append(img);
+                        $(".slickC").append(img);
+                    }
+        
+                    $(".slickC").slick({
+                        dots: false,
+                        arrows: true,
+                        autoplay: false,
+                    });
                 }
-
-                $(".slickC").slick({
-                    dots: false,
-                    arrows: true,
-                    autoplay: false,
-                });
             } else {
                 $(".slickC").slick("unslick");
                 $(".added").remove();
                 getPics();
             }
+            
         } else {
             // Si le vin n'a aucune photo supplémentaire, détruit le carousel et supprime les éventuelles photos en trop
             if ($("#carousel").hasClass("slick-initialized slick-slider")) {
@@ -1247,7 +1242,7 @@ function getPics() {
  * @param {number} idPic L'ID de la photo 
  */
 function deletePic(idPic) {
-    if ((sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined)) {
+    if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
         let username = sessionStorage.getItem("username");
         let password = sessionStorage.getItem("pwd");
         let btoaHash = btoa(username + ":" + password);
@@ -1262,18 +1257,20 @@ function deletePic(idPic) {
         .then((res) => res.json())
         .then((data) => {
             if (data.success === true) {
-                // Si la suppréssion s'est bien déroulée, recharge l'affichange d'éventuelles photos supplémentaires
                 getPics();
             }
         });
     } else {
-    alert("Vous devez être identifié(e) !");
-  }
+        alert("Vous devez être identifié(e) !");
+    }
 }
+
 $('#iconDelete').click(function(){
-  let picDeleted = document.getElementsByClassName('added slick-slide slick-current slick-active')[0].id;
-  confirm("Etes-vous sûr de vouloir supprimer cette photo ?");
-  if(confirm){
-    deletePic(picDeleted);
-  }
+    let picToDelete = document.getElementsByClassName('added slick-slide slick-current slick-active')[0].id;
+
+    confirm("Etes-vous sûr de vouloir supprimer cette photo ?");
+    
+    if(confirm){
+        deletePic(picToDelete);
+    }
 });
