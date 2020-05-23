@@ -1150,12 +1150,12 @@ function getPics() {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      if (data.length > 0) {
+      if (data.length >= 1) {
         data.forEach((pic) => {
           arrPics.push(pic);
         });
 
-		if(arrPics.length > 0) {
+		if(arrPics.length >= 1) {
 			for (let i = 0; i < arrPics.length; i++) {
 				let img =
 				  '<img class="added" src=' +
@@ -1173,11 +1173,20 @@ function getPics() {
 				autoplay: true,
 				autoplaySpeed: 3000,
 			  });
+		} else {
+			if ($('#carousel').hasClass('slick-initialized slick-slider')) {
+				$(".slickC").slick("unslick");
+				$(".added").remove();
+			}
+			
 		}
       } else {
-        $(".slickC").slick("unslick");
-        $(".added").remove();
-      }
+		if ($('#carousel').hasClass('slick-initialized slick-slider')) {
+			$(".slickC").slick("destroy");
+			$(".added").remove();
+		}
+		
+	  }
     });
 }
 
