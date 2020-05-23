@@ -1160,10 +1160,11 @@ $("#btnUpload").click(function () {
 
         upload.append("userfile", imgToUpload);
         const xhr = new XMLHttpRequest();
-
+    
         xhr.onload = function () {
             if (this.status === 200) {
                 alert("Upload réussi !");
+                lblFile.innerHTML = "<i class='fas fa-upload'></i>&nbsp;Ajouter une photo";
                 getPics();
             } else {
                 alert("Vous avez atteint le nombre de photos maximal autorisé pour ce vin (max. 3 photos)");
@@ -1267,5 +1268,12 @@ function deletePic(idPic) {
         });
     } else {
     alert("Vous devez être identifié(e) !");
-    }
+  }
 }
+$('#iconDelete').click(function(){
+  let picDeleted = document.getElementsByClassName('added slick-slide slick-current slick-active')[0].id;
+  confirm("Etes-vous sûr de vouloir supprimer cette photo ?");
+  if(confirm){
+    deletePic(picDeleted);
+  }
+});

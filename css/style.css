@@ -242,7 +242,7 @@ header nav {
 	width: 270px;
 }
 
-/* Changement de couleur Vin survolé */
+/* Changement de couleur Vin survolï¿½ */
 #liste li:hover {
 	background: rgb(219, 217, 217);
 	transition: 0.1s;
@@ -281,7 +281,7 @@ header nav {
 	margin: 0px;
 }
 
-/* visibilité bio*/
+/* visibilitï¿½ bio*/
 .hide {
 	visibility: hidden;
 	height: 0px;
@@ -312,7 +312,7 @@ header nav {
 /* Image dans container */
 #container img {
 	display: block;
-	width: 280px !important;
+	width: 280px;
 }
 
 
@@ -746,14 +746,17 @@ img#countryFlagsImg {
 		min-height: 300px;
 	}
 
-	.divBtns,
-	#description,
-	.styled {
-		width: 105% !important;
+	.divBtns,#description {
+		width: 265px;
 	}
-
+	#iconDelete{
+		margin-left:235px !important;
+	}
 	img#countryFlagsImg {
 		margin-left: 198px !important;
+	}
+	#container img{
+		width:auto;
 	}
 }
 
@@ -781,3 +784,9 @@ footer {
 	border-radius: 50px;
 }
 
+#iconDelete{
+    position : absolute;
+    margin-left:250px;
+	bottom: 15px;
+	cursor: pointer;
+}
