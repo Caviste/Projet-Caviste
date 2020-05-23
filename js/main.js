@@ -32,7 +32,8 @@ for (let i = 0; i < options.length; i++) {
  * Ajoute une majuscule au début de la string
  * @param {string} str La chaine de caractère à modifier
  * @return {string} La chaine de caractère modifiée
- */ 
+ */
+
 function ucFirst(str) {
   if (!str) return str;
   return str[0].toUpperCase() + str.slice(1);
@@ -55,12 +56,18 @@ $("#strSearch").keypress(function (event) {
  * Affichage de la liste de vin
  * Crée une liste de vin et l'incorpore dans le document
  * @param {Array} arr Le tableau contenant des vins
- */ 
+ */
+
 function showListWine(arr) {
   let str = "";
 
   for (let i = 0; i < arr.length; i++) {
-    str += '<li class="list-group-item" id=' + arr[i].id + ">" + arr[i].name + "</li>";
+    str +=
+      '<li class="list-group-item" id=' +
+      arr[i].id +
+      ">" +
+      arr[i].name +
+      "</li>";
   }
 
   document.getElementById("liste").innerHTML = str;
@@ -81,17 +88,20 @@ function showListWine(arr) {
   showReset = false; // Réinitialisation à false pour ne plus afficher le bouton
 
   for (let i = 0; i < arr.length; i++) {
-	document.getElementById("liste")
-		.getElementsByTagName("li")[i].addEventListener("click", function () {
-        	showDetails(arr[i].id);
-      	});
+    document
+      .getElementById("liste")
+      .getElementsByTagName("li")
+      [i].addEventListener("click", function () {
+        showDetails(arr[i].id);
+      });
   }
 }
 
 /**
  * Affiche les détails du vin cliqué dans les inputs dédiés pour
  * @param {number} index L'index (id) du vin
- */ 
+ */
+
 function showDetails(index) {
   wineClicked = true;
   let vin = vinData.find((element) => element.id == index); // Retrouve le vin dans l'array vinData grâce à son id
@@ -101,7 +111,10 @@ function showDetails(index) {
   $("#pays").val(vin.country);
   $("#region").val(vin.region);
   $("#year").val(vin.year);
-  $("#image").attr("src", "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture);
+  $("#image").attr(
+    "src",
+    "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture
+  );
   $("#hiddenWineId").val(vin.id);
 
   //Use RESTCOUNTRIES API;
@@ -113,14 +126,17 @@ function showDetails(index) {
     .then((data) => initialize(data))
     .catch((error) => console.log("Erreur: ", error));
 
-	/**
-	 * Affichage dynamique du pays du vin
-	 * @param {object} countriesData  
-	 */
+  /**
+   * Affichage dynamique du pays du vin
+   * @param {object} countriesData
+   */
   function initialize(countriesData) {
     let countries = countriesData;
     codeCountry = countries[0].alpha2Code;
-    $("#countryFlagsImg").attr("src", "https://www.countryflags.io/" + codeCountry + "/flat/32.png");
+    $("#countryFlagsImg").attr(
+      "src",
+      "https://www.countryflags.io/" + codeCountry + "/flat/32.png"
+    );
     $("#countryFlagsImg").css("display", "inline-block");
   }
 
@@ -140,7 +156,9 @@ function showDetails(index) {
 
     if (extra["promo"] !== undefined) {
       let promoVin = parseFloat(extra.promo);
-      $("#prix").val(parseFloat(vin.price) - parseFloat(vin.price) * promoVin + " €");
+      $("#prix").val(
+        parseFloat(vin.price) - parseFloat(vin.price) * promoVin + " €"
+      );
     } else {
       if (vin.price === "0") {
         $("#prix").text("Info indisponible");
@@ -213,22 +231,27 @@ function fetchNbLikes(idVin) {
  * Récupère les commentaires du vin en appelant l'API Caviste
  * Affiche ces commentaires dans le le div tabs
  * Ajoute des boutons à chaque commentaire pour modifier et/ou supprimer ce commentaire
- * @param {number} idVin L'id du vin 
+ * @param {number} idVin L'id du vin
  */
 function fetchComments(idVin) {
-
   let arrComment = [];
 
   let request = new XMLHttpRequest();
-  request.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/" + idVin + "/comments", true);
+  request.open(
+    "GET",
+    "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/" +
+      idVin +
+      "/comments",
+    true
+  );
 
   request.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
       let reply = JSON.parse(this.response);
       reply.forEach((comment) => {
         arrComment.push(comment);
-	  });
-	  
+      });
+
       let str = "";
 
       for (let i = 0; i < arrComment.length; i++) {
@@ -246,8 +269,8 @@ function fetchComments(idVin) {
           "," +
           arrComment[i]["wine_id"] +
           ")'></i><br></div>";
-	  }
-	  
+      }
+
       $("#tabs").css("display", "block");
 
       if (str == []) {
@@ -278,10 +301,10 @@ $("#iconAdd").click(function () {
       return; // Arrête l'execution si l'user n'a rien écrit
     }
 
-	let username =  sessionStorage.getItem('username');
-    let password =  sessionStorage.getItem('pwd');
-	let btoaHash = btoa(username + ":" + password);
-	
+    let username = sessionStorage.getItem("username");
+    let password = sessionStorage.getItem("pwd");
+    let btoaHash = btoa(username + ":" + password);
+
     let idWine = $("#idVin").val();
     let toSend = { content: addComment };
     toSend = JSON.stringify(toSend);
@@ -317,8 +340,8 @@ function modifyComment(idComment, idWine) {
     sessionStorage["username"] !== undefined &&
     sessionStorage["pwd"] !== undefined
   ) {
-    let username =  sessionStorage.getItem('username');
-    let password =  sessionStorage.getItem('pwd');
+    let username = sessionStorage.getItem("username");
+    let password = sessionStorage.getItem("pwd");
     let btoaHash = btoa(username + ":" + password);
 
     let modifiedComment = prompt("Entrez un nouveau commentaire");
@@ -352,11 +375,13 @@ function deleteComment(idComment, idWine) {
     sessionStorage["username"] !== undefined &&
     sessionStorage["pwd"] !== undefined
   ) {
-    let username =  sessionStorage.getItem('username');
-    let password =  sessionStorage.getItem('pwd');
+    let username = sessionStorage.getItem("username");
+    let password = sessionStorage.getItem("pwd");
     let btoaHash = btoa(username + ":" + password);
 
-    let deleteConfirm = confirm("Voulez-vous vraiment supprimer ce commentaire ?");
+    let deleteConfirm = confirm(
+      "Voulez-vous vraiment supprimer ce commentaire ?"
+    );
     if (deleteConfirm) {
       $.ajax({
         url: url + "/" + idWine + "/comments/" + idComment,
@@ -383,7 +408,6 @@ function deleteComment(idComment, idWine) {
 function showFavedWines() {
   let arrFavourite = [];
   if (sessionStorage.length) {
-
     let requestFav = new XMLHttpRequest();
     requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines", true);
 
@@ -418,36 +442,41 @@ function showFavedWines() {
     };
     requestFav.send();
   } else {
-    let strFav =
-      "<span id='mustLogIn'>Veuillez vous connecter pour consulter vos vins pr&eacute;f&eacute;r&eacute;s</span>";
+    let strFav = "<span id='mustLogIn'>Veuillez vous connecter pour consulter vos vins pr&eacute;f&eacute;r&eacute;s</span>";
     document.getElementById("favourite").innerHTML = strFav;
   }
 }
 
+/**
+ * Fonction like d'un vin
+ * Elle ajoutera le vin aimé parmis les vins favoris de l'utilisateur
+ * Si l'utilisateur reclique sur le bouton, le vin sera enlevé de ses favoris
+ * L'utilisateur doit être identifié pour aimer un vin 
+ */
 $("#likeButton").click(function () {
   if (
     sessionStorage["username"] !== undefined &&
     sessionStorage["pwd"] !== undefined
   ) {
     if (wineClicked) {
-		let username =  sessionStorage.getItem('username');
-		let password =  sessionStorage.getItem('pwd');
+      let username = sessionStorage.getItem("username");
+      let password = sessionStorage.getItem("pwd");
       let btoaHash = btoa(username + ":" + password);
       let wineId = $("#idVin").val();
-      let like = false;
+      let liked = false;
 
       if (!arrLikedWines.includes(wineId)) {
-        like = true;
+        liked = true;
       }
 
-      let toSend = { like: like };
+      let toSend = { like: liked };
       toSend = JSON.stringify(toSend);
 
       const xhr = new XMLHttpRequest();
 
       xhr.onload = function () {
         if (this.status === 200) {
-          if (like) {
+          if (liked) {
             arrLikedWines.push(wineId);
             $("#likeButton").attr("class", "btn btn-success");
             $("#iconLike").text(" Liked !");
@@ -474,14 +503,15 @@ $("#likeButton").click(function () {
   }
 });
 
-/* Populating selectCountries */
+/**
+ * Remplis le select selectCountries avec les pays référencés par l'API Caviste
+ */ 
 let selectCountries = $("#selectCountries");
 selectCountries.empty();
 selectCountries.append('<option selected="true" disabled>Pays</option>');
 selectCountries.prop("selectedIndex", 0);
 
-let countryUrl =
-  "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/countries";
+let countryUrl = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/countries";
 
 $.getJSON(countryUrl, function (data) {
   $.each(data, function (key, info) {
@@ -491,8 +521,12 @@ $.getJSON(countryUrl, function (data) {
   });
 });
 
-// Clic sur le bouton filtrer => tri de la liste de vin suivant des options de tri
-// GET : url + /api/wines?key=country&val=France&sort=year
+/**
+ * Filtrage de vins en fonction des choix de l'utilisateur
+ * L'utilisateur choisit un pays et un option de tri
+ * Les vins affichés seront ceux qui répondent à ces critères
+ * 
+ */
 $("#filtrer").click(function () {
   event.preventDefault();
   showReset = true;
@@ -501,12 +535,7 @@ $("#filtrer").click(function () {
   let sortMethod = $("#selectMethods option:selected").text().toLowerCase();
 
   let xmlReq = new XMLHttpRequest();
-  xmlReq.open(
-    "GET",
-    url + "?key=country&val=" + pays + "&sort=" + sortMethod,
-    true
-  );
-
+  
   xmlReq.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
       let reply = JSON.parse(this.response);
@@ -523,11 +552,7 @@ $("#filtrer").click(function () {
         });
       } else if (sortMethod === "grapes") {
         arrReply.sort(function (a, b) {
-          return a["grapes"] > b["grapes"]
-            ? 1
-            : a["grapes"] < b["grapes"]
-            ? -1
-            : 0;
+          return a["grapes"] > b["grapes"] ? 1 : a["grapes"] < b["grapes"] ? -1 : 0;
         });
       }
       showListWine(arrReply);
@@ -537,27 +562,36 @@ $("#filtrer").click(function () {
   xmlReq.onerror = function () {
     alert("Une erreur est survenue durant la communication avec l'API !");
   };
+
+  xmlReq.open("GET", url + "?key=country&val=" + pays + "&sort=" + sortMethod, true);
   xmlReq.send();
 });
 
 $(document).ready(function () {
-  $("#strSearch").keyup(function () {
+
+    /**
+     * Filtrage dynamique de la liste des vins
+     * Le filtrage s'effectue automatiquement lors de la présence d'un caractère dans la zone strSearch
+     * Le filtrage ne s'effectue qu'avec des lettres et ne filtre que les noms qui correspondent à la chaine de caractères.
+     * Un icone s'affiche pour réinitialiser la zone de saisie s'il y a au moins 1 caractère de présent dans la zone strSearch
+     */
+    $("#strSearch").keyup(function () {
     let searchValue = $(this).val().toLowerCase();
 
     $("#liste li").filter(function () {
-      $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
     });
 
     if ($(this).val().length < 1) {
-      $("#resetList").fadeOut(150, function () {
+        $("#resetList").fadeOut(150, function () {
         $("#resetList").hide();
-      });
+        });
     } else {
-      $("#resetList").fadeIn(150, function () {
+        $("#resetList").fadeIn(150, function () {
         $("#resetList").show();
-      });
+        });
     }
-  });
+    });
 
   showFavedWines();
 });
@@ -568,6 +602,9 @@ if ($("#strSearch").val().length === 0) {
   });
 }
 
+/**
+ * Réinitialise la zone strSearch lors d'un click sur l'icone (X)
+ */
 $("#resetList").click(function () {
   showReset = false;
   resetSearch();
@@ -577,15 +614,15 @@ $("#resetList").click(function () {
   });
 });
 
+// Appel de la fonction searchWine lors d'un click sur le bouton Rechercher
 $("#recherche").click(searchWine);
 
 function searchWine() {
-  /** La fonction se charge de trouver et afficher les noms de vins a partir d'une chaine de caracteres, ou un nombre
-   *  La fonction recupere le texte entre par l'user dans l'input "strSearch"
-   *  La fonction cherche le vin correspondant a l'input dans l'API
-   *  S'il y en a au moins une, elle affiche le ou les resultats
-   *  Si l'user clique sur "Rechercher", showReset devient true, ce qui affichera un bouton pour reset la liste
-   **/
+  /**
+   * La fonction récupère l'input de l'utilisateur dans la zone strSearch
+   * Si l'input est un nombre, la fonction communiquera avec l'API pour rechercher le vin ayant ce nombre comme ID
+   * Si l'input est une chaîne de caractère, la fonction cherchera la region correspondante à l'input
+   */
   let queryArr = [];
   showReset = true;
   let strSearch = $("#strSearch").val().trim();
@@ -635,6 +672,10 @@ function searchWine() {
   }
 }
 
+/**
+ * Tableau hardcoded des utilisateurs
+ * Aucune requête de disponible pour récupérer les infos des utilisateurs présents dans l'API Caviste
+ */
 let hardCodedUsers = [
   {
     username: "nathan",
@@ -652,21 +693,24 @@ let hardCodedUsers = [
 
 $("#btnLogIn").click(logIn);
 
+// Appel de la fonction logIn lorsque la touche enter est activée
 $("#frmSignUp").keypress(function (event) {
-  // 13 = keyPress Enter
+  // key 13 = key Enter
   if (event.which == "13") {
     logIn();
   }
 });
 
+/**
+ * Fonction logIn
+ * Vérifie si les données entrées dans le formulaire de connexion correspondent aux users hardcodés dans le tableau hardCodedUsers
+ * 
+ */
 function logIn() {
   if (!sessionStorage.length) {
     if ($("#login").val() !== "" && $("#mdp").val() !== "") {
       if (
-        hardCodedUsers.find(
-          (element) => element.username == $("#login").val()
-        ) !== undefined
-      ) {
+        hardCodedUsers.find((element) => element.username == $("#login").val()) !== undefined) {
         sessionStorage.setItem("username", $("#login").val());
         sessionStorage.setItem("pwd", $("#mdp").val());
 
@@ -676,7 +720,7 @@ function logIn() {
         $("#iconSignOut").css("display", "block");
 
         userLikes(); // Retrieves liked wines from user
-        showFavedWines();
+        showFavedWines(); 
       } else {
         alert("Utilisateur inconnu !");
       }
@@ -690,6 +734,11 @@ function logIn() {
 
 $("#iconSignOut").click(signOut);
 
+
+/**
+ * Déconnecte l'utilisateur 
+ * Supprime ses identifiants dans sessionStorage
+ */
 function signOut() {
   //If session exists
   if (sessionStorage.length) {
@@ -1096,8 +1145,8 @@ $("#btnUpload").click(function () {
     sessionStorage["username"] !== undefined &&
     sessionStorage["pwd"] !== undefined
   ) {
-    let username =  sessionStorage.getItem('username');
-    let password =  sessionStorage.getItem('pwd');
+    let username = sessionStorage.getItem("username");
+    let password = sessionStorage.getItem("pwd");
     let btoaHash = btoa(username + ":" + password);
 
     let idWine = document.getElementById("idVin").value;
@@ -1153,38 +1202,45 @@ function getPics() {
       if (data.length >= 1) {
         data.forEach((pic) => {
           arrPics.push(pic);
-		});
-
-		// ensures slick hasn't already been initialized
-		if(!($('#carousel').hasClass('slick-initialized slick-slider')) ) {
-			if(arrPics.length > 0) {
-				for (let i = 0; i < arrPics.length; i++) {
-					let img =
-					'<img class="added" src=' +
-					urlUploads +
-					arrPics[i].url +
-					" id=" +
-					arrPics[i].id +
-					">";
-					$(".slickC").append(img);
-				}
-		
-				$(".slickC").slick({
-					dots: false,
-					arrows: true,
-					autoplay: true,
-					autoplaySpeed: 3000,
-				});
-			}
-		}
+        });
+        // slick-slide slick-slide slick-current slick-active
+            // ensures slick hasn't already been initialized
+        if (!$("#carousel").hasClass("slick-initialized slick-slider")) {
+        
+            if (arrPics.length > 0) {
+                for (let i = 0; i < arrPics.length; i++) {
+                let img =
+                    "<img class='added' src=" +
+                    urlUploads +
+                    arrPics[i].url +
+                    " id=" +
+                    arrPics[i].id +
+                    ">";
+                $(".slickC").append(img);
+                }
+    
+                $(".slickC").slick({
+                dots: false,
+                arrows: true,
+                autoplay: false,
+                });
+            }
+        } else {
+            $(".slickC").slick("unslick");
+            $(".added").remove();
+            
+            getPics();
+        }
+        
       } else {
-		if ($('#carousel').hasClass('slick-initialized slick-slider')) {
-			$(".slickC").slick("destroy");
-			$(".added").remove();
-		}
-	  }
+            if ($("#carousel").hasClass("slick-initialized slick-slider")) {
+                $(".slickC").slick("destroy");
+                $(".added").remove();
+            }
+        }
     });
 }
+
 
 // img delete
 function deletePic(idPic) {
@@ -1192,8 +1248,8 @@ function deletePic(idPic) {
     sessionStorage["username"] !== undefined &&
     sessionStorage["pwd"] !== undefined
   ) {
-    let username =  sessionStorage.getItem('username');
-    let password =  sessionStorage.getItem('pwd');
+    let username = sessionStorage.getItem("username");
+    let password = sessionStorage.getItem("pwd");
     let btoaHash = btoa(username + ":" + password);
     let idVin = $("#idVin").val();
     fetch(url + "/" + idVin + "/pictures/" + idPic, {
