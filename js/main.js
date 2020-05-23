@@ -1163,6 +1163,7 @@ $("#btnUpload").click(function () {
     xhr.onload = function () {
       if (this.status === 200) {
         alert("Upload réussi !");
+        lblFile.innerHTML = "<i class='fas fa-upload'></i>&nbsp;Ajouter une photo";
       } else {
         alert(
           "Vous avez atteint le nombre de photo maximal pour ce vin (max 3 ajouts possibles)"
@@ -1206,7 +1207,6 @@ function getPics() {
         // slick-slide slick-slide slick-current slick-active
             // ensures slick hasn't already been initialized
         if (!$("#carousel").hasClass("slick-initialized slick-slider")) {
-        
             if (arrPics.length > 0) {
                 for (let i = 0; i < arrPics.length; i++) {
                 let img =
@@ -1228,7 +1228,6 @@ function getPics() {
         } else {
             $(".slickC").slick("unslick");
             $(".added").remove();
-            
             getPics();
         }
         
@@ -1237,6 +1236,7 @@ function getPics() {
                 $(".slickC").slick("destroy");
                 $(".added").remove();
             }
+           
         }
     });
 }
@@ -1268,3 +1268,10 @@ function deletePic(idPic) {
     alert("Vous devez être identifié(e) !");
   }
 }
+$('#iconDelete').click(function(){
+  let picDeleted = document.getElementsByClassName('added slick-slide slick-current slick-active')[0].id;
+  confirm("Etes-vous sûr de vouloir supprimer cette photo ?");
+  if(confirm){
+    deletePic(picDeleted);
+  }
+});
