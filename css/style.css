@@ -166,19 +166,19 @@ header nav {
     background: #333;
 }
 
-#tooltip[data-popper-placement^='top']>#arrow {
+.popTooltip [data-popper-placement^='top']>#arrow {
     bottom: -4px;
 }
 
-#tooltip[data-popper-placement^='bottom']>#arrow {
+.popTooltip[data-popper-placement^='bottom']>#arrow {
     top: -4px;
 }
 
-#tooltip[data-popper-placement^='left']>#arrow {
+.popTooltip[data-popper-placement^='left']>#arrow {
     right: -4px;
 }
 
-#tooltip[data-popper-placement^='right']>#arrow {
+.popTooltip[data-popper-placement^='right']>#arrow {
     left: -4px;
 }
 
@@ -201,22 +201,6 @@ header nav {
     border-radius: 4px;
 }
 
-#btnSearchTooltip[data-popper-placement^='top']>#arrow {
-    bottom: -4px;
-}
-
-#btnSearchTooltip[data-popper-placement^='bottom']>#arrow {
-    top: -4px;
-}
-
-#btnSearchTooltip[data-popper-placement^='left']>#arrow {
-    right: -4px;
-}
-
-#btnSearchTooltip[data-popper-placement^='right']>#arrow {
-    left: -4px;
-}
-
 
 /* Popper select Pays */
 
@@ -235,22 +219,6 @@ header nav {
     padding: 4px 8px;
     font-size: 13px;
     border-radius: 4px;
-}
-
-#paysTooltip[data-popper-placement^='top']>#arrow {
-    bottom: -4px;
-}
-
-#paysTooltip[data-popper-placement^='bottom']>#arrow {
-    top: -4px;
-}
-
-#paysTooltip[data-popper-placement^='left']>#arrow {
-    right: -4px;
-}
-
-#paysTooltip[data-popper-placement^='right']>#arrow {
-    left: -4px;
 }
 
 
@@ -272,23 +240,6 @@ header nav {
     border-radius: 4px;
 }
 
-#sortTooltip[data-popper-placement^='top']>#arrow {
-    bottom: -4px;
-}
-
-#sortTooltip[data-popper-placement^='bottom']>#arrow {
-    top: -4px;
-}
-
-#sortTooltip[data-popper-placement^='left']>#arrow {
-    right: -4px;
-}
-
-#sortTooltip[data-popper-placement^='right']>#arrow {
-    left: -4px;
-}
-
-
 /* Popper Charts */
 
 #tooltipChart {
@@ -308,21 +259,6 @@ header nav {
     border-radius: 4px;
 }
 
-#tooltipChart[data-popper-placement^='top']>#arrowChart {
-    bottom: -4px;
-}
-
-#tooltipChart[data-popper-placement^='bottom']>#arrowChart {
-    top: -4px;
-}
-
-#tooltipChart[data-popper-placement^='left']>#arrowChart {
-    right: -4px;
-}
-
-#tooltipChart[data-popper-placement^='right']>#arrowChart {
-    left: -4px;
-}
 
 #resetList {
     position: absolute;
@@ -376,7 +312,6 @@ header nav {
     height: 52px;
 }
 
-
 /* Bouton Reset liste */
 
 #reset {
@@ -391,7 +326,7 @@ header nav {
 #liste li:hover {
     background: rgb(219, 217, 217);
     transition: 0.1s;
-    cursor: default;
+    cursor: pointer;
 }
 
 
