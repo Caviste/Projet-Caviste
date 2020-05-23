@@ -380,7 +380,15 @@ function showFavedWines() {
     let arrFavourite = [];
     if (sessionStorage.length) {
         let requestFav = new XMLHttpRequest();
-        requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines", true);
+        let userId = 0;
+        
+        for (let i = 0; i < hardCodedUsers.length; i++) {
+            if (hardCodedUsers[i].username === sessionStorage["username"]) {
+                userId = hardCodedUsers[i].id;
+            }
+        }
+    
+        requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/" + userId + "/likes/wines", true);
 
         requestFav.onload = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -389,7 +397,7 @@ function showFavedWines() {
                 replyFav.forEach((vinFav) => {
                     arrFavourite.push(vinFav);
                 });
-
+                console.log(arrFavourite);
                 let strFav = "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
                 for (let i = 0; i < arrFavourite.length; i++) {
                     strFav +=
@@ -412,6 +420,7 @@ function showFavedWines() {
             alert("Une erreur est survenue durant la communication avec l'API !");
         }
         requestFav.send();
+        
     } else {
         let strFav = "<span id='mustLogIn'>Veuillez vous connecter pour consulter vos vins pr&eacute;f&eacute;r&eacute;s</span>";
         document.getElementById("favourite").innerHTML = strFav;
