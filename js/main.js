@@ -1,4 +1,3 @@
-// Wiki
 sessionStorage.clear();
 const url = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines"; // URL de l'API
 const restCountriesURL = "https://restcountries.eu/rest/v2/name/"; // URL API RESTCountries
@@ -1206,6 +1205,7 @@ function getPics() {
             data.forEach((pic) => {
                 arrPics.push(pic);
             });
+            toDelete(arrPics);
 
             //S'assure que slick n'a pas déjà été initialisé
             if (!$("#carousel").hasClass("slick-initialized slick-slider")) {
@@ -1282,3 +1282,7 @@ $('#iconDelete').click(function(){
         deletePic(picToDelete);
     }
 });
+
+function toDelete(arr) {
+    console.log(arr);
+}
