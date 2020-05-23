@@ -32,7 +32,7 @@ for (let i = 0; i < options.length; i++) {
  * Ajoute une majuscule au début de la string
  * @param {string} str La chaine de caractère à modifier
  * @return {string} La chaine de caractère modifiée
- * */ 
+ */ 
 function ucFirst(str) {
   if (!str) return str;
   return str[0].toUpperCase() + str.slice(1);
@@ -55,7 +55,7 @@ $("#strSearch").keypress(function (event) {
  * Affichage de la liste de vin
  * Crée une liste de vin et l'incorpore dans le document
  * @param {Array} arr Le tableau contenant des vins
- *  */ 
+ */ 
 function showListWine(arr) {
   let str = "";
 
@@ -91,8 +91,7 @@ function showListWine(arr) {
 /**
  * Affiche les détails du vin cliqué dans les inputs dédiés pour
  * @param {number} index L'index (id) du vin
- * 
- *  */ 
+ */ 
 function showDetails(index) {
   wineClicked = true;
   let vin = vinData.find((element) => element.id == index); // Retrouve le vin dans l'array vinData grâce à son id
@@ -179,9 +178,7 @@ function showDetails(index) {
   getPics();
 }
 
-/**
- * Modifie l'apparence du bouton Like si l'user a déjà aimé ce vin
- */
+// Modifie l'apparence du bouton Like si l'user a déjà aimé ce vin
 function checkLiked() {
   if (sessionStorage.length) {
     // Checks if user has already liked the wine
@@ -198,7 +195,7 @@ function checkLiked() {
 /**
  * Récupère le nombre de Like d'un vin
  * Affiche ce nombre dans le bouton nbLike
- * @param {number} idVin L'index du vin
+ * @param {number} idVin L'id du vin
  */
 function fetchNbLikes(idVin) {
   fetch(url + "/" + idVin + "/likes-count")
@@ -216,7 +213,7 @@ function fetchNbLikes(idVin) {
  * Récupère les commentaires du vin en appelant l'API Caviste
  * Affiche ces commentaires dans le le div tabs
  * Ajoute des boutons à chaque commentaire pour modifier et/ou supprimer ce commentaire
- * @param {number} idVin L'index du vin 
+ * @param {number} idVin L'id du vin 
  */
 function fetchComments(idVin) {
 
@@ -230,7 +227,8 @@ function fetchComments(idVin) {
       let reply = JSON.parse(this.response);
       reply.forEach((comment) => {
         arrComment.push(comment);
-      });
+	  });
+	  
       let str = "";
 
       for (let i = 0; i < arrComment.length; i++) {
@@ -277,12 +275,13 @@ $("#iconAdd").click(function () {
     let addComment = prompt("Entrez un commentaire !");
 
     if (addComment === null) {
-      return;
+      return; // Arrête l'execution si l'user n'a rien écrit
     }
 
-    let username = sessionStorage["username"];
-    let password = sessionStorage["pwd"];
-    let btoaHash = btoa(username + ":" + password);
+	let username =  sessionStorage.getItem('username');
+    let password =  sessionStorage.getItem('pwd');
+	let btoaHash = btoa(username + ":" + password);
+	
     let idWine = $("#idVin").val();
     let toSend = { content: addComment };
     toSend = JSON.stringify(toSend);
@@ -307,13 +306,19 @@ $("#iconAdd").click(function () {
   }
 });
 
+/**
+ * Modifie un commentaire
+ * L'user doit être authentifié pour modifier le commentaire
+ * @param {number} idComment L'id du commentaire
+ * @param {number} idWine L'id du vin
+ */
 function modifyComment(idComment, idWine) {
   if (
     sessionStorage["username"] !== undefined &&
     sessionStorage["pwd"] !== undefined
   ) {
-    let username = sessionStorage["username"];
-    let password = sessionStorage["pwd"];
+    let username =  sessionStorage.getItem('username');
+    let password =  sessionStorage.getItem('pwd');
     let btoaHash = btoa(username + ":" + password);
 
     let modifiedComment = prompt("Entrez un nouveau commentaire");
@@ -336,18 +341,22 @@ function modifyComment(idComment, idWine) {
   }
 }
 
+/**
+ * Supprime un commentaire
+ * L'user doit être authentifié pour supprimer le commentaire
+ * @param {number} idComment L'id du commentaire
+ * @param {number} idWine L'id du vin
+ */
 function deleteComment(idComment, idWine) {
   if (
     sessionStorage["username"] !== undefined &&
     sessionStorage["pwd"] !== undefined
   ) {
-    let username = sessionStorage["username"];
-    let password = sessionStorage["pwd"];
+    let username =  sessionStorage.getItem('username');
+    let password =  sessionStorage.getItem('pwd');
     let btoaHash = btoa(username + ":" + password);
 
-    let deleteConfirm = confirm(
-      "Voulez-vous vraiment supprimer ce commentaire ?"
-    );
+    let deleteConfirm = confirm("Voulez-vous vraiment supprimer ce commentaire ?");
     if (deleteConfirm) {
       $.ajax({
         url: url + "/" + idWine + "/comments/" + idComment,
@@ -368,16 +377,15 @@ function deleteComment(idComment, idWine) {
   }
 }
 
-/*Affichage des vins préférés */
+/**
+ * 
+ */
 function showFavedWines() {
   let arrFavourite = [];
   if (sessionStorage.length) {
+
     let requestFav = new XMLHttpRequest();
-    requestFav.open(
-      "GET",
-      "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines",
-      true
-    );
+    requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines", true);
 
     requestFav.onload = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -422,8 +430,8 @@ $("#likeButton").click(function () {
     sessionStorage["pwd"] !== undefined
   ) {
     if (wineClicked) {
-      let username = sessionStorage["username"];
-      let password = sessionStorage["pwd"];
+		let username =  sessionStorage.getItem('username');
+		let password =  sessionStorage.getItem('pwd');
       let btoaHash = btoa(username + ":" + password);
       let wineId = $("#idVin").val();
       let like = false;
@@ -1088,8 +1096,8 @@ $("#btnUpload").click(function () {
     sessionStorage["username"] !== undefined &&
     sessionStorage["pwd"] !== undefined
   ) {
-    let username = sessionStorage["username"];
-    let password = sessionStorage["pwd"];
+    let username =  sessionStorage.getItem('username');
+    let password =  sessionStorage.getItem('pwd');
     let btoaHash = btoa(username + ":" + password);
 
     let idWine = document.getElementById("idVin").value;
@@ -1147,23 +1155,25 @@ function getPics() {
           arrPics.push(pic);
         });
 
-        for (let i = 0; i < arrPics.length; i++) {
-          let img =
-            '<img class="added" src=' +
-            urlUploads +
-            arrPics[i].url +
-            " id=" +
-            arrPics[i].id +
-            ">";
-          $(".slickC").append(img);
-        }
-
-        $(".slickC").slick({
-          dots: false,
-          arrows: true,
-          autoplay: true,
-          autoplaySpeed: 3000,
-        });
+		if(arrPics.length > 0) {
+			for (let i = 0; i < arrPics.length; i++) {
+				let img =
+				  '<img class="added" src=' +
+				  urlUploads +
+				  arrPics[i].url +
+				  " id=" +
+				  arrPics[i].id +
+				  ">";
+				$(".slickC").append(img);
+			  }
+	  
+			  $(".slickC").slick({
+				dots: false,
+				arrows: true,
+				autoplay: true,
+				autoplaySpeed: 3000,
+			  });
+		}
       } else {
         $(".slickC").slick("unslick");
         $(".added").remove();
@@ -1177,8 +1187,8 @@ function deletePic(idPic) {
     sessionStorage["username"] !== undefined &&
     sessionStorage["pwd"] !== undefined
   ) {
-    let username = sessionStorage["username"];
-    let password = sessionStorage["pwd"];
+    let username =  sessionStorage.getItem('username');
+    let password =  sessionStorage.getItem('pwd');
     let btoaHash = btoa(username + ":" + password);
     let idVin = $("#idVin").val();
     fetch(url + "/" + idVin + "/pictures/" + idPic, {
