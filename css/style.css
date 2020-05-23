@@ -334,6 +334,8 @@ header nav {
 
 /* Taille img drapeau */
 img#countryFlagsImg {
+	position: absolute;
+	margin-left:5px;
 	width: 50px;
 }
 
@@ -731,7 +733,6 @@ img#countryFlagsImg {
 		margin-top: 7px;
 		margin-left: 0px;
 	}
-
 	#mainPay,
 	#mainRaisinss {
 		min-width: 350px;
@@ -751,7 +752,8 @@ img#countryFlagsImg {
 		margin-left:235px !important;
 	}
 	img#countryFlagsImg {
-		margin-left: 198px !important;
+		position:absolute;
+		margin-left: 5px !important;
 	}
 	#container img{
 		width:auto;
