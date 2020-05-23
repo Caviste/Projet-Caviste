@@ -15,6 +15,8 @@
     <link href="./lib/fontawesome-free-5.13.0-web/css/all.min.css" rel="stylesheet">
     <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
     <script src="node_modules/chart.js/dist/Chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./node_modules/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="./node_modules/slick-carousel/slick/slick-theme.css"/>
 </head>
 
 <body>
@@ -119,7 +121,7 @@
 
             <!-- Formulaire Vin + Img -->
             <div class="col">
-                <form id="FormAfficher" action="#" method="post">
+                <form id="FormAfficher" action="#" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div id="stylediv" class="col-11 col-md-6 col-lg-6 col-xl-7">
 
@@ -152,10 +154,12 @@
 
                             <!-- Pays -->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="pays">Pays :</label>
+                                <label class="col-md-4 control-label" for="pays">Pays : 
+                                    <img id="countryFlagsImg" style="display: none;height: 20px; width: 20px;">
+                                </label>
                                 <div class="col-10 col-md-12">
                                     <input id="pays" name="pays" type="text" placeholder="Pays"
-                                        class="form-control input-md">
+                                    class="form-control input-md">
                                 </div>
                             </div>
 
@@ -219,16 +223,27 @@
 
                         <div class="col-md-5 col-lg-5 col-xl-4">
                             <div id="container">
-                                <img class="styled" src="./pics/block_nine.jpg" id="image" alt="wine">
-                                <img id="countryFlagsImg" alt="Pays du vin">
+                                <div class="slickC">
+                                    <div id="singleElement">
+                                        <img class="styled" src="./pics/block_nine.jpg" id="image" alt="wine">
+                                        
+                                    </div>
                                 </div>
-                                <input type="hidden" id="hiddenWineId" name="hiddenWineId">
-
-                                <input type="file" id="inpFile" class="inputfile">
+                            </div>
+                        </form>
+                        <form id="frmUpload" action="#" method="post" enctype="multipart/form-data">
                                 <div class="divBtns">
-                                    <label id="lblFile" for="inpFile"><i class="fas fa-upload"></i>&nbsp;Ajouter une photo</label>
-                                    <button type="submit" id="btnUpload"><i class="fas fa-paper-plane"></i></button>
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="200000">
+                                    <input type="file" id="inpFile" class="inputfile" accept=".jpeg, .jpg">
+                                    <label id="lblFile" for="inpFile">
+                                        <i class="fas fa-upload"></i>
+                                        &nbsp;Ajouter une photo
+                                    </label>
+                                    <button type="submit" id="btnUpload">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
                                 </div>
+                        </form>
                                 <div class="divBtns">
                                     <button id="likeButton" name="likes" type="button" class="btn btn-danger">
                                         <i class="fas fa-heart" id="iconLike"> Like Wine</i>
@@ -240,7 +255,7 @@
                                 <textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
                         </div>
                     </div>
-                </form>
+                
             </div>
 
         </div>
@@ -299,6 +314,12 @@
     <script src="./js/main.js"></script>
     
     <script src="./node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    
+
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- Slick Carousel-->
+    <script src="./node_modules/slick-carousel/slick/slick.min.js"></script>
+
 </body>
 
 </html>

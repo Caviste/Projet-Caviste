@@ -118,7 +118,7 @@ function showDetails(index) {
       "src",
       "https://www.countryflags.io/" + codeCountry + "/flat/32.png"
     );
-    $("#countryFlagsImg").css("display", "block");
+	$("#countryFlagsImg").css("display", "inline-block");
   }
 
   $("#description").text("" + vin.description + "");
@@ -174,6 +174,7 @@ function showDetails(index) {
   checkLiked();
   fetchNbLikes(vin.id);
   fetchComments(vin.id);
+  getPics();
 }
 
 function checkLiked() {
@@ -514,6 +515,7 @@ $(document).ready(function () {
   });
 
   showFavedWines();
+
 });
 
 if ($("#strSearch").val().length === 0) {
@@ -1043,31 +1045,46 @@ inpFile.addEventListener('change',function(){
 })
 // img upload 
 // runs once
-// needs : 
-let frm = document.getElementById('FormAfficher');
+// needs : ext verif
 
-frm.addEventListener('submit', e => {
-  e.preventDefault();
+$('#btnUpload').click(function() {
+	event.preventDefault();
+  let frm = document.forms['FormAfficher'];
+  console.log(frm);
   if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
     let username = sessionStorage["username"];
     let password = sessionStorage["pwd"];
-    let btoaHash = btoa(username + ":" + password);
+	let btoaHash = btoa(username + ":" + password);
 
-    let file = document.querySelector('input[type="file"]');
-    let data = new FormData();
-    data.append('file', file.files[0]);
 
-    fetch(url + '/' + $('#idVin').val() + '/pictures', {
-      method : "POST",
-      body : data,
-      headers : new Headers({
-        'Authorization': 'Basic ' + btoaHash,
-      })
-    }).then(function() {
-      alert('Image uploadée!');
-    }).catch(function() {
-      console.log("error");
-    });
+	let idWine = document.getElementById('idVin').value;
+	const frm = document.forms["frmUpload"];
+	const upload = new FormData();
+
+	let pictureSelect = document.getElementById('inpFile');
+
+	let picturesList = pictureSelect.files[0];
+
+	upload.append("userfile", picturesList);
+	const xhr = new XMLHttpRequest();
+
+	xhr.onload = function () {
+		if (this.status === 200) {
+			alert("Upload réussi !");
+		} else {
+			alert("Vous avez atteint le nombre de photo maximal pour ce vin (max 3 ajouts possibles)");
+		}
+	}
+
+	xhr.onerror = function () {
+		if (this.status === 404) {
+			alert("Une erreur est survenue, la photo n'a pu être uploader");
+		}
+	};
+
+	xhr.open("POST", url +'/' + idWine + '/pictures', true);
+	xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
+	xhr.send(upload);
   } else {
     alert('Vous devez être identifié(e) !');
   }
@@ -1075,9 +1092,11 @@ frm.addEventListener('submit', e => {
 
 // img get
 function getPics() {
+  let urlUploads = "http://cruth.phpnet.org/epfc/caviste/public/uploads/";
   let arrPics = [];
   let id = $('#idVin').val();
-  fetch(url + '/' + 9 + '/pictures', {
+  
+  fetch(url + '/' + id + '/pictures', {
     method: 'GET',
     headers : new Headers ({
       'Authorization' : 'Basic ' + btoa('nathan:epfc'),
@@ -1085,11 +1104,34 @@ function getPics() {
   })
   .then((res) => res.json())
   .then((data) => {
-    data.forEach((pic) => {
-      arrPics.push(pic); // idPic, user_id, wine_id
-    })
+	console.log(data);
+	if (data.length > 0) {
+		data.forEach((pic) => {
+			arrPics.push(pic);
+		});
+
+		if (arrPics.length > 0) {
+			for (let i = 0; i < arrPics.length; i++) {
+				let img = '<img class="added" src=' + urlUploads + arrPics[i].url + ' id=' + arrPics[i].id + '>';
+				$('.slickC').append(img);
+			}
+			$('.slickC').slick({ //onload ok -> click wines bugs -> unslick when wine click and reinit slider
+				dots: false,
+				arrows: true,
+				autoplay: true,
+				autoplaySpeed: 3000
+			  }); // ok
+		}
+	} else {
+		$('.slickC').slick('unslick');
+		$('.added').remove();
+	}
+
+	console.log(arrPics); // ok
+
   });
 }
+
 
 // img delete
 function deletePic(idPic) {
@@ -1107,6 +1149,7 @@ function deletePic(idPic) {
   .then((res) => res.json())
   .then((data) => {
     console.log(data);
+    getPics();
   })
   } else {
     alert('Vous devez être identifié(e) !');
