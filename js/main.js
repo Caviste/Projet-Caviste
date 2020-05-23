@@ -28,7 +28,11 @@ for (let i = 0; i < options.length; i++) {
   options[i].selected = options[i].defaultSelected;
 }
 
-// Ajoute une majuscule au début de la string
+/**
+ * Ajoute une majuscule au début de la string
+ * @param {string} str La chaine de caractère à modifier
+ * @return {string} La chaine de caractère modifiée
+ * */ 
 function ucFirst(str) {
   if (!str) return str;
   return str[0].toUpperCase() + str.slice(1);
@@ -41,27 +45,27 @@ function resetSearch() {
 
 // Empêche la redirection en appuyant sur Enter
 $("#strSearch").keypress(function (event) {
-  // 13 = keyPress Enter
+  // key 13 = key Enter
   if (event.which == "13") {
     event.preventDefault();
   }
 });
 
-// Affichage de la liste de vin
+/**
+ * Affichage de la liste de vin
+ * Crée une liste de vin et l'incorpore dans le document
+ * @param {Array} arr Le tableau contenant des vins
+ *  */ 
 function showListWine(arr) {
   let str = "";
+
   for (let i = 0; i < arr.length; i++) {
-    str +=
-      '<li class="list-group-item" id=' +
-      arr[i].id +
-      ">" +
-      arr[i].name +
-      "</li>";
+    str += '<li class="list-group-item" id=' + arr[i].id + ">" + arr[i].name + "</li>";
   }
 
   document.getElementById("liste").innerHTML = str;
 
-  // Affiche un bouton de Reset
+  // Affiche un bouton de Reset pour réinitialiser la liste de vin
   if (showReset) {
     str +=
       '<button id="reset" type="button" class="btn btn-danger">R&eacute;initialiser la liste</button>';
@@ -77,29 +81,28 @@ function showListWine(arr) {
   showReset = false; // Réinitialisation à false pour ne plus afficher le bouton
 
   for (let i = 0; i < arr.length; i++) {
-    document
-      .getElementById("liste")
-      .getElementsByTagName("li")
-      [i].addEventListener("click", function () {
-        showDetails(arr[i].id);
-      });
+	document.getElementById("liste")
+		.getElementsByTagName("li")[i].addEventListener("click", function () {
+        	showDetails(arr[i].id);
+      	});
   }
 }
 
-// Affiche les détails du vin cliqué
+/**
+ * Affiche les détails du vin cliqué dans les inputs dédiés pour
+ * @param {number} index L'index (id) du vin
+ * 
+ *  */ 
 function showDetails(index) {
   wineClicked = true;
-  let vin = vinData.find((element) => element.id == index);
+  let vin = vinData.find((element) => element.id == index); // Retrouve le vin dans l'array vinData grâce à son id
   $("#idVin").val(vin.id);
   $("#nomVin").val(vin.name);
   $("#raisins").val(vin.grapes);
   $("#pays").val(vin.country);
   $("#region").val(vin.region);
   $("#year").val(vin.year);
-  $("#image").attr(
-    "src",
-    "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture
-  );
+  $("#image").attr("src", "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture);
   $("#hiddenWineId").val(vin.id);
 
   //Use RESTCOUNTRIES API;
@@ -111,14 +114,15 @@ function showDetails(index) {
     .then((data) => initialize(data))
     .catch((error) => console.log("Erreur: ", error));
 
+	/**
+	 * Affichage dynamique du pays du vin
+	 * @param {object} countriesData  
+	 */
   function initialize(countriesData) {
     let countries = countriesData;
     codeCountry = countries[0].alpha2Code;
-    $("#countryFlagsImg").attr(
-      "src",
-      "https://www.countryflags.io/" + codeCountry + "/flat/32.png"
-    );
-	$("#countryFlagsImg").css("display", "inline-block");
+    $("#countryFlagsImg").attr("src", "https://www.countryflags.io/" + codeCountry + "/flat/32.png");
+    $("#countryFlagsImg").css("display", "inline-block");
   }
 
   $("#description").text("" + vin.description + "");
@@ -137,9 +141,7 @@ function showDetails(index) {
 
     if (extra["promo"] !== undefined) {
       let promoVin = parseFloat(extra.promo);
-      $("#prix").val(
-        parseFloat(vin.price) - parseFloat(vin.price) * promoVin + " €"
-      );
+      $("#prix").val(parseFloat(vin.price) - parseFloat(vin.price) * promoVin + " €");
     } else {
       if (vin.price === "0") {
         $("#prix").text("Info indisponible");
@@ -177,8 +179,11 @@ function showDetails(index) {
   getPics();
 }
 
+/**
+ * Modifie l'apparence du bouton Like si l'user a déjà aimé ce vin
+ */
 function checkLiked() {
-  if(sessionStorage.length) { // if connected 
+  if (sessionStorage.length) {
     // Checks if user has already liked the wine
     if (arrLikedWines.indexOf($("#idVin").val()) !== -1) {
       $("#likeButton").attr("class", "btn btn-success");
@@ -190,6 +195,11 @@ function checkLiked() {
   }
 }
 
+/**
+ * Récupère le nombre de Like d'un vin
+ * Affiche ce nombre dans le bouton nbLike
+ * @param {number} idVin L'index du vin
+ */
 function fetchNbLikes(idVin) {
   fetch(url + "/" + idVin + "/likes-count")
     .then((res) => res.json())
@@ -202,12 +212,18 @@ function fetchNbLikes(idVin) {
     });
 }
 
+/**
+ * Récupère les commentaires du vin en appelant l'API Caviste
+ * Affiche ces commentaires dans le le div tabs
+ * Ajoute des boutons à chaque commentaire pour modifier et/ou supprimer ce commentaire
+ * @param {number} idVin L'index du vin 
+ */
 function fetchComments(idVin) {
-  /*Affichage des commentaires */
+
   let arrComment = [];
 
   let request = new XMLHttpRequest();
-  request.open( "GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/" + idVin + "/comments", true);
+  request.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/" + idVin + "/comments", true);
 
   request.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -232,7 +248,8 @@ function fetchComments(idVin) {
           "," +
           arrComment[i]["wine_id"] +
           ")'></i><br></div>";
-      }
+	  }
+	  
       $("#tabs").css("display", "block");
 
       if (str == []) {
@@ -253,13 +270,16 @@ function fetchComments(idVin) {
 }
 
 $("#iconAdd").click(function () {
-  if ( sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+  if (
+    sessionStorage["username"] !== undefined &&
+    sessionStorage["pwd"] !== undefined
+  ) {
     let addComment = prompt("Entrez un commentaire !");
-    
+
     if (addComment === null) {
       return;
     }
-    
+
     let username = sessionStorage["username"];
     let password = sessionStorage["pwd"];
     let btoaHash = btoa(username + ":" + password);
@@ -288,7 +308,10 @@ $("#iconAdd").click(function () {
 });
 
 function modifyComment(idComment, idWine) {
-  if ( sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+  if (
+    sessionStorage["username"] !== undefined &&
+    sessionStorage["pwd"] !== undefined
+  ) {
     let username = sessionStorage["username"];
     let password = sessionStorage["pwd"];
     let btoaHash = btoa(username + ":" + password);
@@ -314,7 +337,10 @@ function modifyComment(idComment, idWine) {
 }
 
 function deleteComment(idComment, idWine) {
-  if ( sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined ) {
+  if (
+    sessionStorage["username"] !== undefined &&
+    sessionStorage["pwd"] !== undefined
+  ) {
     let username = sessionStorage["username"];
     let password = sessionStorage["pwd"];
     let btoaHash = btoa(username + ":" + password);
@@ -347,17 +373,22 @@ function showFavedWines() {
   let arrFavourite = [];
   if (sessionStorage.length) {
     let requestFav = new XMLHttpRequest();
-    requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines", true);
-  
+    requestFav.open(
+      "GET",
+      "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/1/likes/wines",
+      true
+    );
+
     requestFav.onload = function () {
       if (this.readyState == 4 && this.status == 200) {
         let replyFav = JSON.parse(this.response);
-  
+
         replyFav.forEach((vinFav) => {
           arrFavourite.push(vinFav);
         });
-  
-        let strFav = "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
+
+        let strFav =
+          "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
         for (let i = 0; i < arrFavourite.length; i++) {
           strFav +=
             "<tr>" +
@@ -379,16 +410,17 @@ function showFavedWines() {
     };
     requestFav.send();
   } else {
-    let strFav = "<span id='mustLogIn'>Veuillez vous connecter pour consulter vos vins pr&eacute;f&eacute;r&eacute;s</span>";
-    document.getElementById('favourite').innerHTML = strFav;
+    let strFav =
+      "<span id='mustLogIn'>Veuillez vous connecter pour consulter vos vins pr&eacute;f&eacute;r&eacute;s</span>";
+    document.getElementById("favourite").innerHTML = strFav;
   }
 }
 
-
-
-
 $("#likeButton").click(function () {
-  if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+  if (
+    sessionStorage["username"] !== undefined &&
+    sessionStorage["pwd"] !== undefined
+  ) {
     if (wineClicked) {
       let username = sessionStorage["username"];
       let password = sessionStorage["pwd"];
@@ -440,7 +472,8 @@ selectCountries.empty();
 selectCountries.append('<option selected="true" disabled>Pays</option>');
 selectCountries.prop("selectedIndex", 0);
 
-let countryUrl = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/countries";
+let countryUrl =
+  "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/countries";
 
 $.getJSON(countryUrl, function (data) {
   $.each(data, function (key, info) {
@@ -460,7 +493,11 @@ $("#filtrer").click(function () {
   let sortMethod = $("#selectMethods option:selected").text().toLowerCase();
 
   let xmlReq = new XMLHttpRequest();
-  xmlReq.open("GET", url + "?key=country&val=" + pays + "&sort=" + sortMethod, true);
+  xmlReq.open(
+    "GET",
+    url + "?key=country&val=" + pays + "&sort=" + sortMethod,
+    true
+  );
 
   xmlReq.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -515,7 +552,6 @@ $(document).ready(function () {
   });
 
   showFavedWines();
-
 });
 
 if ($("#strSearch").val().length === 0) {
@@ -616,22 +652,26 @@ $("#frmSignUp").keypress(function (event) {
 });
 
 function logIn() {
-  if(!sessionStorage.length) {
+  if (!sessionStorage.length) {
     if ($("#login").val() !== "" && $("#mdp").val() !== "") {
-        if (hardCodedUsers.find((element) => element.username == $('#login').val()) !== undefined) {
-          sessionStorage.setItem("username", $("#login").val());
-          sessionStorage.setItem("pwd", $("#mdp").val());
+      if (
+        hardCodedUsers.find(
+          (element) => element.username == $("#login").val()
+        ) !== undefined
+      ) {
+        sessionStorage.setItem("username", $("#login").val());
+        sessionStorage.setItem("pwd", $("#mdp").val());
 
-          // Ferme le formulaire logIn & affiche l'icone signOut
-          $("#frmBack").css("display","none");
-          $("#iconLogin").css("display","none");
-          $("#iconSignOut").css("display","block");
+        // Ferme le formulaire logIn & affiche l'icone signOut
+        $("#frmBack").css("display", "none");
+        $("#iconLogin").css("display", "none");
+        $("#iconSignOut").css("display", "block");
 
-          userLikes(); // Retrieves liked wines from user
-          showFavedWines();
-        } else {
-          alert('Utilisateur inconnu !');
-        }
+        userLikes(); // Retrieves liked wines from user
+        showFavedWines();
+      } else {
+        alert("Utilisateur inconnu !");
+      }
     } else {
       alert("Les identifiants ne peuvent pas être vides !");
     }
@@ -644,12 +684,11 @@ $("#iconSignOut").click(signOut);
 
 function signOut() {
   //If session exists
-  if(sessionStorage.length) {
-
+  if (sessionStorage.length) {
     sessionStorage.clear();
-    
-    $("#iconLogin").css("display","block");
-    $("#iconSignOut").css("display","none");
+
+    $("#iconLogin").css("display", "block");
+    $("#iconSignOut").css("display", "none");
 
     alert("Vous vous êtes bien déconnecté(e).");
 
@@ -668,7 +707,8 @@ function resetBtnLike() {
 function userLikes() {
   let userId = 0;
 
-  let urlLike = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users";
+  let urlLike =
+    "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users";
 
   for (let i = 0; i < hardCodedUsers.length; i++) {
     if (hardCodedUsers[i].username === sessionStorage["username"]) {
@@ -792,9 +832,6 @@ $("#divStat").click(function () {
     },
   });
 
-
-
-
   // Bouton Close Graph Pays
   $("#closePays").click(function () {
     $("#mainPays").css("display", "none");
@@ -895,7 +932,6 @@ $("#divStat").click(function () {
     },
   });
 
-
   // Bouton Close Graph Pays
   $("#closeRaisins").click(function () {
     $("#mainRaisins").css("display", "none");
@@ -911,7 +947,7 @@ window.onscroll = function () {
 };
 
 function scrollFunction() {
-  if ((document.body.scrollTop > 20) || (document.documentElement.scrollTop > 20)) {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";
@@ -924,7 +960,7 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
-if (($(window).width() === 768) || ($(window).width() === 834)) {
+if ($(window).width() === 768 || $(window).width() === 834) {
   $("#message").css("display", "block");
   $("#closeMessage").click(function () {
     $("#message").css("display", "none");
@@ -1013,7 +1049,6 @@ function showComments() {
 }
 
 function showFavourite() {
-  
   document.getElementById("tabComments").className = "nav-link";
   document.getElementById("tabFavourite").className = "nav-link active";
   $("#favourite").css("display", "block");
@@ -1029,129 +1064,136 @@ tabFavourite.click(function () {
   showFavourite();
 });
 
-$('#iconLogin').click(function(){
-  $('#frmBack').css("display","block");
-  $('#iconLogin').css("display","none");
+$("#iconLogin").click(function () {
+  $("#frmBack").css("display", "block");
+  $("#iconLogin").css("display", "none");
 });
-$('#btnClose').click(function(){
-  $('#frmBack').css("display","none");
-  $('#iconLogin').css("display","block");
+$("#btnClose").click(function () {
+  $("#frmBack").css("display", "none");
+  $("#iconLogin").css("display", "block");
 });
 
-let inpFile = document.getElementById('inpFile');
-inpFile.addEventListener('change',function(){
-  let lblFile = document.getElementById('lblFile');
+let inpFile = document.getElementById("inpFile");
+inpFile.addEventListener("change", function () {
+  let lblFile = document.getElementById("lblFile");
   lblFile.innerHTML = inpFile.files[0].name;
-})
-// img upload 
-// runs once
-// needs : ext verif
+});
 
-$('#btnUpload').click(function() {
-	event.preventDefault();
-  let frm = document.forms['FormAfficher'];
+// img upload
+$("#btnUpload").click(function () {
+  event.preventDefault();
+  let frm = document.forms["FormAfficher"];
   console.log(frm);
-  if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
+  if (
+    sessionStorage["username"] !== undefined &&
+    sessionStorage["pwd"] !== undefined
+  ) {
     let username = sessionStorage["username"];
     let password = sessionStorage["pwd"];
-	let btoaHash = btoa(username + ":" + password);
+    let btoaHash = btoa(username + ":" + password);
 
+    let idWine = document.getElementById("idVin").value;
+    const frm = document.forms["frmUpload"];
+    const upload = new FormData();
 
-	let idWine = document.getElementById('idVin').value;
-	const frm = document.forms["frmUpload"];
-	const upload = new FormData();
+    let pictureSelect = document.getElementById("inpFile");
 
-	let pictureSelect = document.getElementById('inpFile');
+    let picturesList = pictureSelect.files[0];
 
-	let picturesList = pictureSelect.files[0];
+    upload.append("userfile", picturesList);
+    const xhr = new XMLHttpRequest();
 
-	upload.append("userfile", picturesList);
-	const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      if (this.status === 200) {
+        alert("Upload réussi !");
+      } else {
+        alert(
+          "Vous avez atteint le nombre de photo maximal pour ce vin (max 3 ajouts possibles)"
+        );
+      }
+    };
 
-	xhr.onload = function () {
-		if (this.status === 200) {
-			alert("Upload réussi !");
-		} else {
-			alert("Vous avez atteint le nombre de photo maximal pour ce vin (max 3 ajouts possibles)");
-		}
-	}
+    xhr.onerror = function () {
+      if (this.status === 404) {
+        alert("Une erreur est survenue, la photo n'a pu être uploader");
+      }
+    };
 
-	xhr.onerror = function () {
-		if (this.status === 404) {
-			alert("Une erreur est survenue, la photo n'a pu être uploader");
-		}
-	};
-
-	xhr.open("POST", url +'/' + idWine + '/pictures', true);
-	xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
-	xhr.send(upload);
+    xhr.open("POST", url + "/" + idWine + "/pictures", true);
+    xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
+    xhr.send(upload);
   } else {
-    alert('Vous devez être identifié(e) !');
+    alert("Vous devez être identifié(e) !");
   }
-})
+});
 
 // img get
 function getPics() {
   let urlUploads = "http://cruth.phpnet.org/epfc/caviste/public/uploads/";
   let arrPics = [];
-  let id = $('#idVin').val();
-  
-  fetch(url + '/' + id + '/pictures', {
-    method: 'GET',
-    headers : new Headers ({
-      'Authorization' : 'Basic ' + btoa('nathan:epfc'),
-    })
+  let id = $("#idVin").val();
+
+  fetch(url + "/" + id + "/pictures", {
+    method: "GET",
+    headers: new Headers({
+      Authorization: "Basic " + btoa("nathan:epfc"),
+    }),
   })
-  .then((res) => res.json())
-  .then((data) => {
-	console.log(data);
-	if (data.length > 0) {
-		data.forEach((pic) => {
-			arrPics.push(pic);
-		});
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      if (data.length > 0) {
+        data.forEach((pic) => {
+          arrPics.push(pic);
+        });
 
-		if (arrPics.length > 0) {
-			for (let i = 0; i < arrPics.length; i++) {
-				let img = '<img class="added" src=' + urlUploads + arrPics[i].url + ' id=' + arrPics[i].id + '>';
-				$('.slickC').append(img);
-			}
-			$('.slickC').slick({ //onload ok -> click wines bugs -> unslick when wine click and reinit slider
-				dots: false,
-				arrows: true,
-				autoplay: true,
-				autoplaySpeed: 3000
-			  }); // ok
-		}
-	} else {
-		$('.slickC').slick('unslick');
-		$('.added').remove();
-	}
+        for (let i = 0; i < arrPics.length; i++) {
+          let img =
+            '<img class="added" src=' +
+            urlUploads +
+            arrPics[i].url +
+            " id=" +
+            arrPics[i].id +
+            ">";
+          $(".slickC").append(img);
+        }
 
-	console.log(arrPics); // ok
-
-  });
+        $(".slickC").slick({
+          dots: false,
+          arrows: true,
+          autoplay: true,
+          autoplaySpeed: 3000,
+        });
+      } else {
+        $(".slickC").slick("unslick");
+        $(".added").remove();
+      }
+    });
 }
-
 
 // img delete
 function deletePic(idPic) {
-  if (sessionStorage["username"] !== undefined && sessionStorage["pwd"] !== undefined) {
-  let username = sessionStorage["username"];
-  let password = sessionStorage["pwd"];
-  let btoaHash = btoa(username + ":" + password);
-  let idVin = $('#idVin').val();
-  fetch(url + '/' + 9 + '/pictures/' + idPic, {
-    method : 'DELETE',
-    headers : new Headers ({
-      'Authorization': 'Basic ' + btoaHash,
+  if (
+    sessionStorage["username"] !== undefined &&
+    sessionStorage["pwd"] !== undefined
+  ) {
+    let username = sessionStorage["username"];
+    let password = sessionStorage["pwd"];
+    let btoaHash = btoa(username + ":" + password);
+    let idVin = $("#idVin").val();
+    fetch(url + "/" + idVin + "/pictures/" + idPic, {
+      method: "DELETE",
+      headers: new Headers({
+        Authorization: "Basic " + btoaHash,
+      }),
     })
-  })
-  .then((res) => res.json())
-  .then((data) => {
-    console.log(data);
-    getPics();
-  })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success === true) {
+          getPics();
+        }
+      });
   } else {
-    alert('Vous devez être identifié(e) !');
+    alert("Vous devez être identifié(e) !");
   }
 }
