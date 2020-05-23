@@ -184,6 +184,7 @@ function showDetails(index) {
     fetchNbLikes(vin.id);
     fetchComments(vin.id);
     getPics();
+ 
 }
 
 // Modifie l'apparence du bouton Like si l'user a déjà aimé ce vin
@@ -1188,17 +1189,23 @@ $("#btnUpload").click(function () {
         alert("Vous devez être identifié(e) !");
     }
 });
+let arrPics = [];
 
 // Récupèration des images supplémentaires d'un vin
 function getPics() {
+  let username = sessionStorage.getItem("username");
+  let password = sessionStorage.getItem("pwd");
+  let btoaHash = btoa(username + ":" + password);
+
     let urlUploads = "http://cruth.phpnet.org/epfc/caviste/public/uploads/";
-    let arrPics = [];
+    arrPics = [];
+   
     let id = $("#idVin").val();
 
     fetch(url + "/" + id + "/pictures", {
         method: "GET",
         headers: new Headers({
-            Authorization: "Basic " + btoa("nathan:epfc"),
+            Authorization: "Basic " + btoaHash,
         }),
     })
     .then((res) => res.json())
@@ -1207,7 +1214,6 @@ function getPics() {
             data.forEach((pic) => {
                 arrPics.push(pic);
             });
-
             //S'assure que slick n'a pas déjà été initialisé
             if (!$("#carousel").hasClass("slick-initialized slick-slider")) {
                 if (arrPics.length > 0) {
@@ -1273,7 +1279,7 @@ function deletePic(idPic) {
         alert("Vous devez être identifié(e) !");
     }
 }
-
+/*
 $('#iconDelete').click(function(){
     let picToDelete = document.getElementsByClassName('added slick-slide slick-current slick-active')[0].id;
 
@@ -1282,4 +1288,18 @@ $('#iconDelete').click(function(){
     if(confirm){
         deletePic(picToDelete);
     }
+});
+*/
+$('#iconDelete').click(function(){
+
+  if(arrPics.length>=1){
+    let resp = prompt("Quelle photo voulez-vous supprimer? (Ecrivez un chiffre entre 1 et " + arrPics.length + ".");
+    let wineD = arrPics[resp-1];
+    confirm('Voulez-vous vraiment supprimer cette photo?');
+    if(confirm){ 
+      console.log(wineD.id);
+      deletePic(wineD.id); 
+    }
+  }
+
 });
