@@ -182,6 +182,7 @@ function showDetails(index) {
     fetchNbLikes(vin.id);
     fetchComments(vin.id);
     getPics();
+ 
 }
 
 // Modifie l'apparence du bouton Like si l'user a déjà aimé ce vin
@@ -1188,60 +1189,74 @@ $("#btnUpload").click(function () {
 });
 
 // Récupèration des images supplémentaires d'un vin
+let arrPics = [];
+$('#iconDelete').hide();
 function getPics() {
-    let urlUploads = "http://cruth.phpnet.org/epfc/caviste/public/uploads/";
-    let arrPics = [];
-    let id = $("#idVin").val();
+	if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
+		let username = sessionStorage.getItem("username");
+		let password = sessionStorage.getItem("pwd");
+		let btoaHash = btoa(username + ":" + password);
 
-    fetch(url + "/" + id + "/pictures", {
-        method: "GET",
-        headers: new Headers({
-            Authorization: "Basic " + btoa("nathan:epfc"),
-        }),
-    })
-    .then((res) => res.json())
-    .then((data) => {
-        if (data.length >= 1) {
-            data.forEach((pic) => {
-                arrPics.push(pic);
-            });
-            toDelete(arrPics);
+		let urlUploads = "http://cruth.phpnet.org/epfc/caviste/public/uploads/";
+		arrPics = [];
+	
+		let id = $("#idVin").val();
 
-            //S'assure que slick n'a pas déjà été initialisé
-            if (!$("#carousel").hasClass("slick-initialized slick-slider")) {
-                if (arrPics.length > 0) {
-                    for (let i = 0; i < arrPics.length; i++) {
-                        let img =
-                            "<img class='added' src=" +
-                            urlUploads +
-                            arrPics[i].url +
-                            " id=" +
-                            arrPics[i].id +
-                            ">";
+		fetch(url + "/" + id + "/pictures", {
+			method: "GET",
+			headers: new Headers({
+				Authorization: "Basic " + btoaHash,
+			}),
+		})
+		.then((res) => res.json())
+		.then((data) => {
+			if (data.length >= 1) {
+				data.forEach((pic) => {
+					arrPics.push(pic);
+				});
 
-                        $(".slickC").append(img);
-                    }
-        
-                    $(".slickC").slick({
-                        dots: false,
-                        arrows: true,
-                        autoplay: false,
-                    });
-                }
-            } else {
-                $(".slickC").slick("unslick");
-                $(".added").remove();
-                getPics();
-            }
-            
-        } else {
-            // Si le vin n'a aucune photo supplémentaire, détruit le carousel et supprime les éventuelles photos en trop
-            if ($("#carousel").hasClass("slick-initialized slick-slider")) {
-                $(".slickC").slick("destroy");
-                $(".added").remove();
-            }
-        }
-    });
+				//S'assure que slick n'a pas déjà été initialisé
+				if (!$("#carousel").hasClass("slick-initialized slick-slider")) {
+					if (arrPics.length > 0) {
+
+						$('#iconDelete').show();
+
+						for (let i = 0; i < arrPics.length; i++) {
+							let img =
+								"<img class='added' src=" +
+								urlUploads +
+								arrPics[i].url +
+								" id=" +
+								arrPics[i].id +
+								">";
+
+							$(".slickC").append(img);
+						}
+			
+						$(".slickC").slick({
+							dots: false,
+							arrows: true,
+							autoplay: false,
+						});
+					} else {
+						// Cache l'icone de suppréssion s'il n'y a aucune photo supplémentaire
+						$('#iconDelete').hide();
+					}
+				} else {
+					$(".slickC").slick("unslick");
+					$(".added").remove();
+					getPics();
+				}
+				
+			} else {
+				// Si le vin n'a aucune photo supplémentaire, détruit le carousel et supprime les éventuelles photos en trop
+				if ($("#carousel").hasClass("slick-initialized slick-slider")) {
+					$(".slickC").slick("destroy");
+					$(".added").remove();
+				}
+			}
+		});
+	}
 }
 
 /**
@@ -1273,16 +1288,35 @@ function deletePic(idPic) {
     }
 }
 
+
+
 $('#iconDelete').click(function(){
-    let picToDelete = document.getElementsByClassName('added slick-slide slick-current slick-active')[0].id;
+	if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
+		let picToDelete = 0;
+		if(arrPics.length>=1){
+			let resp = prompt("Quelle photo voulez-vous supprimer? (Ecrivez un chiffre entre 1 et " + arrPics.length + ".)");
+			if (resp > arrPics.length || resp < 1 ) {
+				alert('Aucune photo correspondante');
+			} else {
+				picToDelete = arrPics[resp-1];
+				confirm('Voulez-vous vraiment supprimer cette photo?');
 
-    confirm("Etes-vous sûr de vouloir supprimer cette photo ?");
-    
-    if(confirm){
-        deletePic(picToDelete);
-    }
+				if (confirm) { 
+					deletePic(picToDelete.id); 
+				}
+			}
+
+		} else if (arrPics.length === 1) {
+			picToDelete = arrPics[0];
+			confirm('Voulez-vous vraiment supprimer cette photo?');
+
+			if (confirm) {
+				deletePic(picToDelete.id);
+			}
+		} else {
+			alert('Aucune photo à supprimer !');
+		}
+	} else {
+		alert('Vous devez être connecté pour supprimer une image !');
+	}
 });
-
-function toDelete(arr) {
-    console.log(arr);
-}
