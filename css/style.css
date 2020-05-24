@@ -325,22 +325,22 @@ header nav {
 	height: 315px;
 }
 
-#container #countryFlagsImg {
-	display: none;
+#countryFlagsImg {
 	position: absolute;
-	top: 5px;
-	margin-left: 215px;
-}
-
-/* Taille img drapeau */
-img#countryFlagsImg {
-	position: absolute;
-	margin-left:5px;
+	left:60px;
 	width: 50px;
+	top: 2px;
 }
 
 .divBtns {
 	width: 280px;
+}
+
+#iconDelete{
+    position : absolute;
+    margin-left:250px;
+	bottom: 15px;
+	cursor: pointer;
 }
 
 #inpFile {
@@ -363,10 +363,6 @@ img#countryFlagsImg {
 	width: 78%;
 }
 
-#lblFile:hover {
-	cursor: pointer;
-}
-
 #btnUpload {
 	width: 20%;
 }
@@ -375,6 +371,7 @@ img#countryFlagsImg {
 #btnUpload:hover {
 	background-color: #a7222d;
 	border-color: #a7222d;
+	cursor: pointer;
 	transition: 0.3s;
 }
 
@@ -784,9 +781,4 @@ footer {
 	border-radius: 50px;
 }
 
-#iconDelete{
-    position : absolute;
-    margin-left:250px;
-	bottom: 15px;
-	cursor: pointer;
-}
+
