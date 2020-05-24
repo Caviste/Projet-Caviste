@@ -505,11 +505,18 @@ header nav {
 /*  Iphone 5SE */
 
 @media all and (min-width:150px) and (max-width:320px) {
-
-	*,
+	#millesime{
+		width:100px;
+	}
+	#logo{
+		width: 70px;
+	}
+	#body{
+		padding-right:-20px;
+	}
 	::after,
 	::before {
-		box-sizing: content-box;
+		box-sizing: content-box !important;
 	}
 
 	#btnScroll {
@@ -542,8 +549,7 @@ header nav {
 	}
 
 	#ChartGraph {
-		width: 120px;
-		height: 25px;
+		height: 30px;
 	}
 
 	#resetList {
@@ -577,6 +583,10 @@ header nav {
 }
 
 @media all and (min-width:321px) and (max-width:375px) {
+
+	#millesime{
+		width:150px;
+	}
 	#btnScroll {
 		display: none !important;
 	}
@@ -609,7 +619,6 @@ header nav {
 
 	#ChartGraph {
 		width: 120px;
-		height: 25px;
 	}
 
 	#resetList {
