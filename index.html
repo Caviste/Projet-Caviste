@@ -2,319 +2,335 @@
 <html lang="fr">
 
 <head>
-	<title>Millesime</title>
+    <title>Millesime</title>
 
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" type="text/css" href="./lib/bootstrap-4.4.1-dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
-	<link href="./lib/fontawesome-free-5.13.0-web/css/all.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="./node_modules/slick-carousel/slick/slick.css" />
-	<link rel="stylesheet" type="text/css" href="./node_modules/slick-carousel/slick/slick-theme.css" />
-	<script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
-	<script src="node_modules/chart.js/dist/Chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
+    <link href="./lib/fontawesome-free-5.13.0-web/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./node_modules/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="./node_modules/slick-carousel/slick/slick-theme.css" />
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
-	<div id="message">
-		<span>Pour une meilleure exp&eacute;rience sur notre site, faites pivoter votre &eacute;cran en paysage !</span>
-		<i id="closeMessage" class="fa fa-times fa-2x"></i>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<header>
-					<nav class="navbar navbar-dark">
-						<div id="logoBrand">
-							<a class="navbar-brand" href="#">
-								<img id="logo" src="./img/logo-wine.png" alt="logo">
-								<img id="millesime" src="./img/millesime.png" alt="logo">
-							</a>
-						</div>
+    <div id="message">
+        <span>Pour une meilleure exp&eacute;rience sur notre site, faites pivoter votre &eacute;cran en paysage !</span>
+        <i id="closeMessage" class="fa fa-times fa-2x"></i>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <header>
+                    <nav class="navbar navbar-dark">
+                        <div id="logoBrand">
+                            <a class="navbar-brand" href="#">
+                                <img id="logo" src="./img/logo-wine.png" alt="logo">
+                                <img id="millesime" src="./img/millesime.png" alt="logo">
+                            </a>
+                        </div>
 
-						<div id="frmBack" class="frmBack">
-							<form id="frmSignUp" name="login" method="post">
-								<input placeholder="Login" type="text" name="login" id="login"
-									class="input-group input-group-sm ">
-								<input placeholder="Mot de passe" type="password" name="mdp" id="mdp"
-									class="input-group input-group-sm">
-								<button type="button" id="btnLogIn" class="btn btn-secondary">Login</button>
-								<button type="button" id="btnClose" class="btn btn-light">Close</button>
-							</form>
-						</div>
+                        <div id="frmBack" class="frmBack">
+                            <form id="frmSignUp" name="login" method="post">
+                                <input placeholder="Login" type="text" name="login" id="login" class="input-group input-group-sm ">
+                                <input placeholder="Mot de passe" type="password" name="mdp" id="mdp" class="input-group input-group-sm">
+
+                                <button type="button" id="btnLogIn" class="btn btn-secondary">Login</button>
+                                <button type="button" id="btnClose" class="btn btn-light">Close</button>
+                            </form>
+                        </div>
+
+                        <img src="img/sign-in.png" title="Sign-Up" id="iconLogin" width="25" height="25">
+                        <img src="img/sign-out.png" title="Sign-Out" id="iconSignOut" width="25" height="25">
+                    </nav>
+                </header>
+
+                <!-- Boutons Rechercher / Ajouter / Trier -->
+                <div id="SearchAddSort">
+                    <form action="#" method="get" class="form-inline">
+
+                        <div id="search">
+                            <input placeholder="Tappez un nom de vin" type="text" name="recherche" id="strSearch" class="form-control mr-2">
+
+                            <i id="resetList" class="fa fa-times fa-1x"></i>
+
+                            <div class="popTooltip" id="tooltip" role="tooltip">
+                                Cherchez un vin
+                                <div class="arrow" data-popper-arrow></div>
+                            </div>
+                        </div>
+
+                        <div id="btnSearch">
+                            <button id="recherche" name="recherche" type="button" class="btn btn-success mr-1">
+                                <i class="fas fa-search"></i> 
+                                Rechercher
+                            </button>
+
+                            <div class="popTooltip" id="btnSearchTooltip" role="tooltip">
+                                Cliquez pour rechercher
+                                <div class="arrow" data-popper-arrow></div>
+                            </div>
+                        </div>
+
+                        <!-- Select Pays -->
+                        <div id="selectPays">
+                            <select class="btn btn-light" name="selectCountries" id="selectCountries">
+                            </select>
+
+                            <div class="popTooltip" id="paysTooltip" role="tooltip">
+                                Pays d'origine
+                                <div class="arrow" data-popper-arrow></div>
+                            </div>
+                        </div>
+
+                        <!-- Select Methodes Tri -->
+                        <div id="triMethods">
+                            <select class="btn btn-light" name="selectMethods" id="selectMethods">
+                                <option selected disabled>Tri</option>
+                                <option value="0">Year</option>
+                                <option value="1">Name</option>
+                                <option value="2">Grapes</option>
+                            </select>
+
+                            <div class="popTooltip" id="sortTooltip" role="tooltip">
+                                Trier par
+                                <div class="arrow" data-popper-arrow></div>
+                            </div>
+                        </div>
+                        
+                        <button id="filtrer" class="btn btn-light">Filtrer</button>
+
+                        <div id="divStat">
+                            <a href="#cadrePays" id="ChartGraph" class="btn btn-primary">
+                                <img width="20" height="20" src="./img/icone-stat.png" alt="ChartIcone">
+                                Statistiques
+                            </a>
+
+                            <div class="popTooltip" id="tooltipChart" role="tooltip">
+                                Voir nos statistiques
+                                <div class="arrow" data-popper-arrow></div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Liste Vins -->
+        <div class="row">
+            <div class="col-12 col-sm-12 col-lg-1 mt-3" id="liste">
+                <ul id="listeVin" class="list-group">
+                </ul>
+            </div>
+
+            <!-- Formulaire Vin + Img -->
+            <div class="col">
+                <form id="formAfficher" action="#" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div id="stylediv" class="col-11 col-md-6 col-lg-6 col-xl-7">
+
+                            <!-- Id Vin -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="idVin">ID :</label>
+                                <div class=" col-10 col-md-4">
+                                    <input id="idVin" name="vin" type="text" placeholder="ID" class="form-control input-md">
+                                </div>
+                            </div>
+
+                            <!-- Nom Vin -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="nomVin">Nom :</label>
+                                <div class="col-10 col-md-12">
+                                    <input id="nomVin" name="nom" type="text" placeholder="nom" class="form-control input-md">
+                                </div>
+                            </div>
+
+                            <!-- Raisins -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="raisins">Raisins :</label>
+                                <div class="col-10 col-md-12">
+                                    <input id="raisins" name="raisins" type="text" placeholder="Raisins" class="form-control input-md">
+                                </div>
+                            </div>
+
+                            <!-- Pays -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="pays">Pays :
+                                    <img alt="drapeau" src="#" id="countryFlagsImg" />
+                                </label>
+
+                                <div class="col-10 col-md-12">
+                                    <input id="pays" name="pays" type="text" placeholder="Pays" class="form-control input-md">
+                                </div>
+                            </div>
+
+                            <!-- Region -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="region">R&eacute;gion :</label>
+                                <div class="col-10 col-md-12">
+                                    <input id="region" name="region" type="text" placeholder="Region" class="form-control input-md">
+                                </div>
+                            </div>
+
+                            <!-- Annee -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="year">Ann&eacute;e :</label>
+                                <div class="col-10 col-md-12">
+                                    <input id="year" name="annee" type="number" placeholder="Ann&eacute;e" class="form-control input-md">
+                                </div>
+                            </div>
+
+                            <!-- Couleur -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="pays">Couleur :</label>
+                                <div class="col-10 col-md-12">
+                                    <input id="couleur" name="couleur" type="text" placeholder="Couleur" class="form-control input-md">
+                                </div>
+                            </div>
+
+                            <!-- Capacité -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="pays">Capacit&eacute; :</label>
+                                <div class="col-10 col-md-12">
+                                    <input id="capacite" name="capacite" type="text" placeholder="Capacit&eacute; (L)" class="form-control input-md">
+                                </div>
+                            </div>
+
+                            <!-- Bio -->
+                            <div id="extras" class="hide">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Bio :</label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optradio" id="bioTrue">Oui&nbsp;
+                                    </label>
+
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optradio" id="bioFalse">Non
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Prix -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="pays">Prix :</label>
+
+                                <div class="col-10 col-md-12">
+                                    <input id="prix" name="prix" type="text" placeholder="Prix" class="form-control input-md">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 col-lg-5 col-xl-4">
+                            <div id="container">
+                                <div id="carousel" class="slickC">
+                                    <div id="singleElement">
+                                        <img class="styled" src="./pics/block_nine.jpg" id="image" alt="wine">
+                                    </div>
+                                </div>
+                                <i id="iconDelete" class="far fa-trash-alt"></i>
+                            </div>
+
+                            <div class="divBtns">
+                                <input type="hidden" name="MAX_FILE_SIZE" value="200000">
+
+                                <input type="file" id="inpFile" class="inputfile" accept=".jpeg, .jpg">
+
+                                <label id="lblFile" for="inpFile">
+                                    <i class="fas fa-upload"></i>
+                                    &nbsp;Ajouter une photo
+                                </label>
+
+                                <button type="submit" id="btnUpload">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            <div class="divBtns">
+                                <button id="likeButton" name="likes" type="button" class="btn btn-danger">
+                                    <i class="fas fa-heart" id="iconLike"> Like Wine</i>
+                                </button>
+
+                                <button id="btnNbLikes" name="btnNbLikes" type="button" class="btn btn-info">
+                                    <i class="far fa-heart" id="nbLike"></i>
+                                </button>
+                            </div>
+                            <textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <div id="tabs">
+                <ul id="containerAdd" class="nav nav-tabs">
+                    <li>
+                        <i id="iconAdd" class="fas fa-1x fa-plus" title="Ajouter un commentaire"></i>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="tabComments" class="nav-link active" href="#tabs">Commentaires</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="tabFavourite" class="nav-link" href="#tabs">Vos vins pr&eacute;f&eacute;r&eacute;s</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="comments">
+            </div>
+
+            <div id="favourite">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" id="mainPays">
+                <i id="closePays" class="fa fa-times fa-1x"></i>
+                <canvas id="cadrePays"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" id="mainRaisins">
+                <i id="closeRaisins" class="fa fa-times fa-1x"></i>
+                <canvas id="cadreRaisins"></canvas>
+            </div>
+        </div>
+
+        <div>
+            <button id="btnScroll" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+            <footer>&copy; EPFC, Nathan, Radad</footer>
+        </div>
+
+    </div>
 
 
-						<img src="img/sign-in.png" title="Sign-Up" id="iconLogin" width="25" height="25">
 
-						<img src="img/sign-out.png" title="Sign-Out" id="iconSignOut" width="25" height="25">
-					</nav>
-				</header>
-
-				<!-- Boutons Rechercher / Ajouter / Trier -->
-				<div id="SearchAddSort">
-					<form action="#" method="get" class="form-inline">
-
-						<div id="searchBtnReset">
-							<input placeholder="Tappez un nom de vin" type="text" name="recherche" id="strSearch"
-								class="form-control mr-2">
-							<i id="resetList" class="fa fa-times fa-1x"></i>
-							<div class="popTooltip" id="tooltip" role="tooltip">Cherchez un vin
-								<div class="arrow" data-popper-arrow></div>
-							</div>
-						</div>
-
-						<div id="btnSearch">
-							<button id="recherche" name="recherche" type="button" class="btn btn-success mr-1">
-								<i class="fas fa-search"></i> Rechercher</button>
-							<div class="popTooltip" id="btnSearchTooltip" role="tooltip">Cliquez pour rechercher
-								<div class="arrow" data-popper-arrow></div>
-							</div>
-						</div>
-
-						<div id="selectPays">
-							<select class="btn btn-light" name="selectCountries" id="selectCountries">
-							</select>
-							<div class="popTooltip" id="paysTooltip" role="tooltip">Pays d'origine
-								<div class="arrow" data-popper-arrow></div>
-							</div>
-						</div>
-
-
-						<div id="triMethods">
-							<select class="btn btn-light" name="selectMethods" id="selectMethods">
-								<option selected disabled>Tri</option>
-								<option value="0">Year</option>
-								<option value="1">Name</option>
-								<option value="2">Grapes</option>
-							</select>
-							<div class="popTooltip" id="sortTooltip" role="tooltip">Trier par
-								<div class="arrow" data-popper-arrow></div>
-							</div>
-						</div>
-						<button id="filtrer" class="btn btn-light">Filtrer</button>
-
-						<div id="divStat">
-							<a href="#cadrePays" id="ChartGraph" class="btn btn-primary"><img width="20" height="20"
-									src="./img/icone-stat.png" alt="ChartIcone"> statistiques</a>
-							<div class="popTooltip" id="tooltipChart" role="tooltip">Voir nos statistiques
-								<div class="arrow" data-popper-arrow></div>
-							</div>
-
-						</div>
-
-					</form>
-				</div>
-
-			</div>
-		</div>
-
-		<!-- Liste Vins -->
-		<div class="row">
-			<div class="col-12 col-sm-12 col-lg-1 mt-3" id="liste">
-				<ul id="listeVin" class="list-group">
-				</ul>
-			</div>
-
-			<!-- Formulaire Vin + Img -->
-			<div class="col">
-				<form id="FormAfficher" action="#" method="post" enctype="multipart/form-data">
-					<div class="row">
-						<div id="stylediv" class="col-11 col-md-6 col-lg-6 col-xl-7">
-
-							<!-- id -->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="idVin">ID :</label>
-								<div class=" col-10 col-md-4">
-									<input id="idVin" name="vin" type="text" placeholder="ID"
-										class="form-control input-md">
-								</div>
-							</div>
-
-							<!-- Nom Vin -->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="nomVin">Nom :</label>
-								<div class="col-10 col-md-12">
-									<input id="nomVin" name="nom" type="text" placeholder="nom"
-										class="form-control input-md">
-								</div>
-							</div>
-
-							<!-- Raisins -->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="raisins">Raisins :</label>
-								<div class="col-10 col-md-12">
-									<input id="raisins" name="raisins" type="text" placeholder="Raisins"
-										class="form-control input-md">
-								</div>
-							</div>
-
-							<!-- Pays -->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="pays">Pays :
-									<img alt="drapeau" src="#" id="countryFlagsImg" />
-								</label>
-								<div class="col-10 col-md-12">
-									<input id="pays" name="pays" type="text" placeholder="Pays"
-										class="form-control input-md">
-								</div>
-							</div>
-
-							<!-- Region -->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="region">R&eacute;gion :</label>
-								<div class="col-10 col-md-12">
-									<input id="region" name="region" type="text" placeholder="Region"
-										class="form-control input-md">
-								</div>
-							</div>
-
-							<!-- Annee -->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="year">Ann&eacute;e :</label>
-								<div class="col-10 col-md-12">
-									<input id="year" name="annee" type="number" placeholder="Ann&eacute;e"
-										class="form-control input-md">
-								</div>
-							</div>
-
-							<!-- Couleur -->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="pays">Couleur :</label>
-								<div class="col-10 col-md-12">
-									<input id="couleur" name="couleur" type="text" placeholder="Couleur"
-										class="form-control input-md">
-								</div>
-							</div>
-
-							<!-- Capacitï¿½ -->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="pays">Capacit&eacute; :</label>
-								<div class="col-10 col-md-12">
-									<input id="capacite" name="capacite" type="text" placeholder="Capacit&eacute; (L)"
-										class="form-control input-md">
-								</div>
-							</div>
-
-							<!-- Bio -->
-							<div id="extras" class="hide">
-								<div class="form-group">
-									<label class="col-md-4 control-label">Bio :</label>
-									<label class="radio-inline">
-										<input type="radio" name="optradio" id="bioTrue">Oui&nbsp;
-									</label>
-									<label class="radio-inline">
-										<input type="radio" name="optradio" id="bioFalse">Non
-									</label>
-								</div>
-							</div>
-							<!-- Prix -->
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="pays">Prix :</label>
-								<div class="col-10 col-md-12">
-									<input id="prix" name="prix" type="text" placeholder="Prix"
-										class="form-control input-md">
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-5 col-lg-5 col-xl-4">
-								<div id="container">
-									<div id="carousel" class="slickC">
-										<div id="singleElement">
-											<img class="styled" src="./pics/block_nine.jpg" id="image" alt="wine">
-
-										</div>
-									</div>
-									<i id="iconDelete" class="far fa-trash-alt"></i>
-								</div>
-							
-								<div class="divBtns">
-									<input type="hidden" name="MAX_FILE_SIZE" value="200000">
-									<input type="file" id="inpFile" class="inputfile" accept=".jpeg, .jpg">
-									<label id="lblFile" for="inpFile">
-										<i class="fas fa-upload"></i>
-										&nbsp;Ajouter une photo
-									</label>
-									<button type="submit" id="btnUpload">
-										<i class="fas fa-paper-plane"></i>
-									</button>
-								</div>
-							<div class="divBtns">
-								<button id="likeButton" name="likes" type="button" class="btn btn-danger">
-									<i class="fas fa-heart" id="iconLike"> Like Wine</i>
-								</button>
-								<button id="btnNbLikes" name="btnNbLikes" type="button" class="btn btn-info">
-									<i class="far fa-heart" id="nbLike"></i>
-								</button>
-							</div>
-							<textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
-						</div>
-
-					</div>
-				</form>
-			</div>
-		</div>
-
-		<div>
-			<div id="tabs">
-				<ul id="containerAdd" class="nav nav-tabs">
-					<li><i id="iconAdd" class="fas fa-1x fa-plus" title="Ajouter un commentaire"></i></li>
-					<li class="nav-item">
-						<a id="tabComments" class="nav-link active" href="#tabs">Commentaires</a>
-					</li>
-					<li class="nav-item">
-						<a id="tabFavourite" class="nav-link" href="#tabs">Vos vins pr&eacute;f&eacute;r&eacute;s</a>
-					</li>
-				</ul>
-			</div>
-	
-			<div id="comments">
-			</div>
-			
-			<div id="favourite">
-			</div>
-		</div>
-	
-		<div class="row">
-			<div class="col" id="mainPays">
-				<i id="closePays" class="fa fa-times fa-1x"></i>
-				<canvas id="cadrePays"></canvas>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col" id="mainRaisins">
-				<i id="closeRaisins" class="fa fa-times fa-1x"></i>
-				<canvas id="cadreRaisins"></canvas>
-			</div>
-		</div>
-		
-		<div>
-		<button id="btnScroll" title="Go to top"><i class="fas fa-arrow-up"></i></button>
-		<footer>&copy; EPFC, Nathan, Radad</footer>
-		</div>
-		
-	</div>
-
-	
-
-	<!-- jQuery -->
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    
+
     <!-- Slick Carousel-->
     <script src="./node_modules/slick-carousel/slick/slick.min.js"></script>
 
-	<!-- Bootstrap -->
+    <!-- Bootstrap -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    
+
     <!-- Main Script -->
-	<script src="./js/main.js"></script>
+    <script src="./js/main.js"></script>
 
     <!-- Popper -->
-	<script src="./node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script src="./node_modules/@popperjs/core/dist/umd/popper.js"></script>
+
+    <script src="node_modules/chart.js/dist/Chart.min.js"></script>
 
 </body>
 

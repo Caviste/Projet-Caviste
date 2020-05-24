@@ -1,14 +1,31 @@
-sessionStorage.clear();
-const url = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines"; // URL de l'API
-const restCountriesURL = "https://restcountries.eu/rest/v2/name/"; // URL API RESTCountries
+/**
+ * Millésime, site de type "Single Page Application"
+ * Client de l'API Caviste ©EPFC
+ * 
+ * @version 1.0
+ * @author N. Deltour <nathandeltour2@gmail.com>
+ * @author R. El Jaidi Akaarir
+ */
+
 let showReset = false;
 let wineClicked = false;
 let wineLiked = false;
 let vinData = [];
 let arrLikedWines = [];
+let arrPics = [];
+
+const url = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines"; // URL de l'API
+const restCountriesURL = "https://restcountries.eu/rest/v2/name/"; // URL API RESTCountries
+const urlUser = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/"; // URL des utilisateurs
+const countryUrl = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/countries"; // URL des pays
+const urlUploads = "http://cruth.phpnet.org/epfc/caviste/public/uploads/"; // Url des photos uploadées
+// Purge les données de sessions
+if (sessionStorage.length) {
+	sessionStorage.clear();
+}
 
 // Récuperation des données de l'API
-fetch("https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines")
+fetch(url)
 .then((response) => response.json())
 .then(function (data) {
     for (let prop in data) {
@@ -53,7 +70,7 @@ $("#strSearch").keypress(function (event) {
 /**
  * Affichage de la liste de vin
  * Crée une liste de vin et l'incorpore dans le document
- * @param {Array} arr Le tableau contenant des vins
+ * @param {Array} arr Un tableau contenant des objets
  */
 function showListWine(arr) {
     let str = "";
@@ -98,7 +115,6 @@ function showListWine(arr) {
  * Affiche les détails du vin cliqué dans les inputs dédiés pour
  * @param {number} index L'index (id) du vin
  */
-
 function showDetails(index) {
     wineClicked = true;
     let vin = vinData.find((element) => element.id == index); // Retrouve le vin dans l'array vinData grâce à son id
@@ -110,22 +126,22 @@ function showDetails(index) {
     $("#year").val(vin.year);
     $("#image").attr("src", "http://cruth.phpnet.org/epfc/caviste/public/pics/" + vin.picture);
 
-    //Use RESTCOUNTRIES API;
+    // Utilisation de RESTCOUNTRIES API;
     let codeCountry;
     fetch(restCountriesURL + vin.country)
     .then(function (res) {
-    return res.json();
+    	return res.json();
     })
     .then((data) => initialize(data))
     .catch((error) => console.log("Erreur: ", error));
 
     /**
      * Affichage dynamique du pays du vin
-     * @param {object} countriesData
+     * @param {object} countriesData Les informations d'un pays
      */
     function initialize(countriesData) {
         let countries = countriesData;
-        codeCountry = countries[0].alpha2Code;
+        codeCountry = countries[0].alpha2Code; // Récupération de l'alpha2Code du pays (i.e BE, FR, ...)
         $("#countryFlagsImg").attr("src", "https://www.countryflags.io/" + codeCountry + "/flat/32.png");
         $("#countryFlagsImg").css("display", "inline-block");
     }
@@ -177,12 +193,11 @@ function showDetails(index) {
         $("#capacite").val("Info indisponible");
     }
 
-    showComments();
-    checkLiked();
-    fetchNbLikes(vin.id);
-    fetchComments(vin.id);
-    getPics();
- 
+	showComments();
+	checkLiked();
+	fetchNbLikes(vin.id);
+	fetchComments(vin.id);
+	getPics();
 }
 
 // Modifie l'apparence du bouton Like si l'user a déjà aimé ce vin
@@ -226,7 +241,7 @@ function fetchComments(idVin) {
     let arrComment = [];
 
     let request = new XMLHttpRequest();
-    request.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/" + idVin + "/comments", true);
+    request.open("GET", url + '/' + idVin + "/comments", true);
 
     request.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -237,6 +252,10 @@ function fetchComments(idVin) {
 
             let str = "";
 
+			/**
+			 * Création des commentaires 
+			 * Ajoute une icone modifyComment & deleteComment pour chaque commentaire
+			 */
             for (let i = 0; i < arrComment.length; i++) {
                 str +=
                 "<div class='containerComment'><strong>User " +
@@ -244,12 +263,10 @@ function fetchComments(idVin) {
                 "</strong><br><p>Commentaire: " +
                 arrComment[i].content +
                 "</p><i id ='iconEdit' class='far fa-edit' onclick='modifyComment(" +
-                arrComment[i]["id"] +
-                "," +
+                arrComment[i]["id"] + "," +
                 arrComment[i]["wine_id"] +
                 ")'></i><i id='iconDlt' class='far fa-trash-alt' onclick='deleteComment(" +
-                arrComment[i]["id"] +
-                "," +
+                arrComment[i]["id"] + "," +
                 arrComment[i]["wine_id"] +
                 ")'></i><br></div>";
             }
@@ -278,12 +295,10 @@ $("#iconAdd").click(function () {
         let addComment = prompt("Entrez un commentaire !");
 
         if (addComment === null) {
-            return; // Arrête l'execution si l'user n'a rien écrit
+            return; // Arrête l'execution de la fonction si l'user n'a rien écrit
         }
 
-        let username = sessionStorage.getItem("username");
-        let password = sessionStorage.getItem("pwd");
-        let btoaHash = btoa(username + ":" + password);
+        let hash = getBtoaHash();
 
         let idWine = $("#idVin").val();
         let toSend = { content: addComment };
@@ -301,7 +316,7 @@ $("#iconAdd").click(function () {
 
         xhr.open("POST", url + "/" + idWine + "/comments", true);
 
-        xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
+        xhr.setRequestHeader("Authorization", "Basic " + hash);
         xhr.send(toSend);
     } else {
         alert("Veuillez vous identifier !");
@@ -316,9 +331,7 @@ $("#iconAdd").click(function () {
  */
 function modifyComment(idComment, idWine) {
     if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
-        let username = sessionStorage.getItem("username");
-        let password = sessionStorage.getItem("pwd");
-        let btoaHash = btoa(username + ":" + password);
+        let hash = getBtoaHash();
 
         let modifiedComment = prompt("Entrez un nouveau commentaire");
 
@@ -332,7 +345,7 @@ function modifyComment(idComment, idWine) {
         };
 
         xhr.open("PUT", url + "/" + idWine + "/comments/" + idComment, true);
-        xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
+        xhr.setRequestHeader("Authorization", "Basic " + hash);
 
         xhr.send(toSend);
     } else {
@@ -348,9 +361,7 @@ function modifyComment(idComment, idWine) {
  */
 function deleteComment(idComment, idWine) {
     if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
-        let username = sessionStorage.getItem("username");
-        let password = sessionStorage.getItem("pwd");
-        let btoaHash = btoa(username + ":" + password);
+        let hash = getBtoaHash();
 
         let deleteConfirm = confirm("Voulez-vous vraiment supprimer ce commentaire ?");
         
@@ -361,7 +372,7 @@ function deleteComment(idComment, idWine) {
                 contentType: "application/json",
                 async: true,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
+                    xhr.setRequestHeader("Authorization", "Basic " + hash);
                 },
                 success: function () {
                     fetchComments(idWine);
@@ -374,12 +385,16 @@ function deleteComment(idComment, idWine) {
     }
 }
 
-// Affiche les vins favoris de l'utilisateur
+/**
+ * Récupère et affiche les vins favoris de l'utilisateur
+ * L'utilisateur doit être connecté pour consulter ses vins favoris
+ */
 function showFavedWines() {
     let arrFavourite = [];
     if (sessionStorage.length) {
-        let requestFav = new XMLHttpRequest();
+		
         let userId = 0;
+        let requestFav = new XMLHttpRequest();
 
         for (let i = 0; i < hardCodedUsers.length; i++) {
             if (hardCodedUsers[i].username === sessionStorage["username"]) {
@@ -387,7 +402,7 @@ function showFavedWines() {
             }
         }
     
-        requestFav.open("GET", "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/" + userId + "/likes/wines", true);
+        requestFav.open("GET", urlUser + userId + "/likes/wines", true);
 
         requestFav.onload = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -397,6 +412,7 @@ function showFavedWines() {
                     arrFavourite.push(vinFav);
                 });
 
+				// Création et affichage des vins favoris de l'utilisateur sous forme de tableau
                 let strFav = "<table class='table'><thead><tr><th scope='col'>Nom</th><th scope='col'>Pays</th><th scope='col'>Région</th></tr></thead><tbody>";
                 for (let i = 0; i < arrFavourite.length; i++) {
                     strFav +=
@@ -435,9 +451,7 @@ function showFavedWines() {
 $("#likeButton").click(function () {
     if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
         if (wineClicked) {
-            let username = sessionStorage.getItem("username");
-            let password = sessionStorage.getItem("pwd");
-            let btoaHash = btoa(username + ":" + password);
+           let hash = getBtoaHash();
             let wineId = $("#idVin").val();
             let liked = false;
 
@@ -469,7 +483,7 @@ $("#likeButton").click(function () {
             }
 
             xhr.open("PUT", url + "/" + wineId + "/like", true);
-            xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
+            xhr.setRequestHeader("Authorization", "Basic " + hash);
             xhr.send(toSend);
         } else {
             alert("Choisissez un vin avant de l'aimer !");
@@ -485,8 +499,6 @@ selectCountries.empty();
 selectCountries.append('<option selected="true" disabled>Pays</option>');
 selectCountries.prop("selectedIndex", 0);
 
-let countryUrl = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/countries";
-
 $.getJSON(countryUrl, function (data) {
     $.each(data, function (key, info) {
         selectCountries.append($("<option></option>").attr("value", key).text(info["country"]));
@@ -497,7 +509,6 @@ $.getJSON(countryUrl, function (data) {
  * Filtrage de vins en fonction des choix de l'utilisateur
  * L'utilisateur choisit un pays et un option de tri
  * Les vins affichés seront ceux qui répondent à ces critères
- * 
  */
 $("#filtrer").click(function () {
     event.preventDefault();
@@ -543,7 +554,7 @@ $(document).ready(function () {
     /**
      * Filtrage dynamique de la liste des vins
      * Le filtrage s'effectue automatiquement lors de la présence d'un caractère dans la zone strSearch
-     * Le filtrage ne s'effectue qu'avec des lettres et ne filtre que les noms qui correspondent à la chaine de caractères.
+     * Le filtrage ne s'effectue qu'avec des lettres et ne filtre que les noms qui correspondent à la chaine de caractères
      * Un icone s'affiche pour réinitialiser la zone de saisie s'il y a au moins 1 caractère de présent dans la zone strSearch
      */
     $("#strSearch").keyup(function () {
@@ -564,7 +575,11 @@ $(document).ready(function () {
         }
     });
 
-    showFavedWines();
+	showFavedWines();
+	
+	// Cache les divs des graphiques
+	$("#mainPays").hide();
+	$("#mainRaisins").hide();
 });
 
 if ($("#strSearch").val().length === 0) {
@@ -573,9 +588,7 @@ if ($("#strSearch").val().length === 0) {
     });
 }
 
-/**
- * Réinitialise la zone strSearch lors d'un click sur l'icone (X)
- */
+// Réinitialise la zone strSearch lors d'un click sur l'icone (X)
 $("#resetList").click(function () {
     showReset = false;
     resetSearch();
@@ -649,18 +662,18 @@ function searchWine() {
  * Aucune requête de disponible pour récupérer les infos des utilisateurs présents dans l'API Caviste
  */
 let hardCodedUsers = [
+	{
+		username: "ced",
+		id: 1,
+	},
     {
-        username: "nathan",
-        id: 24,
-    },
-    {
-        username: "radad",
+		username: "radad",
         id: 3,
     },
-    {
-        username: "ced",
-        id: 1,
-    },
+	{
+		username: "nathan",
+		id: 24,
+	},
 ];
 
 $("#btnLogIn").click(logIn);
@@ -674,9 +687,8 @@ $("#frmSignUp").keypress(function (event) {
 });
 
 /**
- * Fonction logIn
  * Vérifie si les données entrées dans le formulaire de connexion correspondent aux users hardcodés dans le tableau hardCodedUsers
- * 
+ * Si c'est le cas, enregistre ses identifiants dans les données de session
  */
 function logIn() {
     if (!sessionStorage.length) {
@@ -703,11 +715,23 @@ function logIn() {
     }
 }
 
+/**
+ * Code les identifiants de l'utilisateur en base 64
+ * @return {string} Les identifiants crypté en base 64
+ */
+function getBtoaHash() {
+	let username = sessionStorage.getItem("username");
+	let password = sessionStorage.getItem("pwd");
+	let btoaHash = btoa(username + ":" + password);
+
+	return btoaHash;
+}
+
 $("#iconSignOut").click(signOut);
 
 /**
  * Déconnecte l'utilisateur 
- * Supprime ses identifiants dans sessionStorage
+ * Supprime ses identifiants de sessionStorage
  */
 function signOut() {
   //If session exists
@@ -726,15 +750,15 @@ function signOut() {
     }
 }
 
+// Réinitialise l'affichage du bouton Luke
 function resetBtnLike() {
     $("#iconLike").text(" Like Wine");
     $("#likeButton").attr("class", "btn btn-danger");
 }
 
+// Récupère les vins aimés par l'utilisateur
 function userLikes() {
     let userId = 0;
-
-    let urlLike = "http://cruth.phpnet.org/epfc/caviste/public/index.php/api/users";
 
     for (let i = 0; i < hardCodedUsers.length; i++) {
         if (hardCodedUsers[i].username === sessionStorage["username"]) {
@@ -758,7 +782,7 @@ function userLikes() {
         }
     };
 
-    xhr.open("GET", urlLike + "/" + userId + "/likes/wines", true);
+    xhr.open("GET", urlUser + userId + "/likes/wines", true);
     xhr.send();
 }
 
@@ -769,13 +793,9 @@ function userLikes() {
  * Graphique 2 : Nombre de vins par raisins
  */
 
-// Cache les divs des graphiques
-$("#mainPays").hide();
-$("#mainRaisins").hide();
-
 // Affiche les deux graphiques après un click sur le bouton "Statistiques"
 $("#divStat").click(function () {
-    /* Chart pays */
+    /* Graphique 'Pays' */
     $("#mainPays").animate({}, 5000, function () {
         $("#mainPays").show();
         $("#closePays").show();
@@ -823,50 +843,44 @@ $("#divStat").click(function () {
     let myChart = new Chart(ctx, {
         type: "pie",
         data: {
-        labels: myData.labels,
-        datasets: [
-            {
-            label: "Nombre de vins",
-            data: myData.data,
-            backgroundColor: [
-                // Pick colors
-                "rgba(244, 67, 54, 0.4)",
-                "rgba(102, 187, 106, 0.4)",
-                "rgba(255, 167, 38, 0.4)",
-                "rgba(3, 169, 244,0.4)",
-                "rgba(244, 143, 177, 0.4)",
-            ],
-            borderColor: [
-                // Pick colors
-                "rgb(244, 67, 54)",
-                "rgb(139, 195, 74)",
-                "rgb(255, 167, 38)",
-                "rgb(3, 169, 244)",
-                "rgb(244, 143, 177)",
-            ],
-            borderWidth: 2,
-            },
-        ],
+			labels: myData.labels,
+			datasets: [{
+				label: "Nombre de vins",
+				data: myData.data,
+				backgroundColor: [
+					"rgba(244, 67, 54, 0.4)",
+					"rgba(102, 187, 106, 0.4)",
+					"rgba(255, 167, 38, 0.4)",
+					"rgba(3, 169, 244,0.4)",
+					"rgba(244, 143, 177, 0.4)",
+				],
+				borderColor: [
+					"rgb(244, 67, 54)",
+					"rgb(139, 195, 74)",
+					"rgb(255, 167, 38)",
+					"rgb(3, 169, 244)",
+					"rgb(244, 143, 177)",
+				],
+				borderWidth: 2,
+			}],
         },
         options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        title: {
-            display: true,
-            text: "Nombre des vins par pays",
-            fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-            padding: 10,
-            fontSize: 20,
-            scales: {
-            yAxes: [
-                {
-                ticks: {
-                    beginAtZero: true,
-                },
-                },
-            ],
-            },
-        },
+			maintainAspectRatio: false,
+			responsive: true,
+			title: {
+				display: true,
+				text: "Nombre des vins par pays",
+				fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+				padding: 10,
+				fontSize: 20,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true,
+						},
+					}],
+				},
+			},
         },
     });
 
@@ -875,7 +889,7 @@ $("#divStat").click(function () {
         $("#mainPays").css("display", "none");
     });
 
-    // Graphique Raisins
+    // Graphique 'Raisins'
     $("#mainRaisins").animate({}, 5000, function () {
         $("#mainRaisins").show();
     });
@@ -925,34 +939,34 @@ $("#divStat").click(function () {
     let myChartR = new Chart(ctxRaisins, {
         type: "pie",
         data: {
-        labels: myDataR.labels,
-        datasets: [{
-            label: "Nombre de raisins",
-            data: myDataR.data,
-            backgroundColor: [
-                "rgba(244, 67, 54, 0.4)",
-                "rgba(102, 187, 106, 0.4)",
-                "rgba(255, 167, 38, 0.4)",
-                "rgba(3, 169, 244,0.4)",
-                "rgba(244, 143, 177, 0.4)",
-                "rgba(51, 70, 255, 0.4)",
-                "rgba(255, 51, 51, 0.4)",
-                "rgba(255, 212, 51, 0.4)",
-                "rgba(51, 255, 255 , 0.4)",
-            ],
-            borderColor: [
-                "rgb(244, 67, 54)",
-                "rgb(139, 195, 74)",
-                "rgb(255, 167, 38)",
-                "rgb(3, 169, 244)",
-                "rgb(244, 143, 177)",
-                "rgb(51, 70, 255)",
-                "rgb(255, 51, 51)",
-                "rgb(255, 212, 51)",
-                "rgb(51, 255, 255 )",
-            ],
-            borderWidth: 2,
-        }],
+			labels: myDataR.labels,
+			datasets: [{
+				label: "Nombre de raisins",
+				data: myDataR.data,
+				backgroundColor: [
+					"rgba(244, 67, 54, 0.4)",
+					"rgba(102, 187, 106, 0.4)",
+					"rgba(255, 167, 38, 0.4)",
+					"rgba(3, 169, 244,0.4)",
+					"rgba(244, 143, 177, 0.4)",
+					"rgba(51, 70, 255, 0.4)",
+					"rgba(255, 51, 51, 0.4)",
+					"rgba(255, 212, 51, 0.4)",
+					"rgba(51, 255, 255 , 0.4)",
+				],
+				borderColor: [
+					"rgb(244, 67, 54)",
+					"rgb(139, 195, 74)",
+					"rgb(255, 167, 38)",
+					"rgb(3, 169, 244)",
+					"rgb(244, 143, 177)",
+					"rgb(51, 70, 255)",
+					"rgb(255, 51, 51)",
+					"rgb(255, 212, 51)",
+					"rgb(51, 255, 255 )",
+				],
+				borderWidth: 2,
+			}],
         },
         options: {
             maintainAspectRatio: false,
@@ -964,13 +978,11 @@ $("#divStat").click(function () {
                 padding: 10,
                 fontSize: 20,
                 scales: {
-                yAxes: [
-                    {
-                    ticks: {
-                        beginAtZero: true,
-                    },
-                    },
-                ],
+					yAxes: [{
+						ticks: {
+							beginAtZero: true,
+						},
+					}],
                 },
             },
         },
@@ -1047,28 +1059,26 @@ let popperInstance = null;
 
 /**
  * @param {element} selector Element de la page 
- * @param {element} message Element de la page qui sera affiché en tant que tooltip
- * @param {string} position Position du tooltip 
+ * @param {element} message Element de la page qui sera affiché en tant qu'info-bulle
+ * @param {string} position Position de l'info-bulle 
  */
 function showPopper(selector, message, position) {
     function create() {
         popperInstance = Popper.createPopper(selector, message, {
-        modifiers: [
-            {
+        modifiers: [{
             name: "offset",
             options: {
                 offset: [0, 8],
             },
-            },
-        ],
+		}],
         placement: position,
         });
     }
 
     function destroy() {
         if (popperInstance) {
-        popperInstance.destroy();
-        popperInstance = null;
+        	popperInstance.destroy();
+        	popperInstance = null;
         }
     }
 
@@ -1089,9 +1099,9 @@ function showPopper(selector, message, position) {
         selector.addEventListener(event, show);
     });
 
-  hideEvents.forEach((event) => {
-    selector.addEventListener(event, hide);
-  });
+	hideEvents.forEach((event) => {
+		selector.addEventListener(event, hide);
+	});
 }
 
     
@@ -1129,6 +1139,7 @@ $("#iconLogin").click(function () {
     $("#frmBack").css("display", "block");
     $("#iconLogin").css("display", "none");
 });
+
 $("#btnClose").click(function () {
     $("#frmBack").css("display", "none");
     $("#iconLogin").css("display", "block");
@@ -1144,25 +1155,25 @@ inpFile.addEventListener("change", function () {
 
 // Upload d'une image de vin
 $("#btnUpload").click(function () {
+
     // Empêche le rechargement de la page lors d'un click sur le bouton btnUpload
     event.preventDefault();
 
-    let frm = document.forms["FormAfficher"];
+    
 
     if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
-        let username = sessionStorage.getItem("username");
-        let password = sessionStorage.getItem("pwd");
-        let btoaHash = btoa(username + ":" + password);
+        let hash = getBtoaHash();
 
         let idWine = document.getElementById("idVin").value;
-        const frm = document.forms["frmUpload"];
+		let frm = document.forms["formAfficher"];
         const upload = new FormData();
 
         let imgUser = document.getElementById("inpFile");
 
         let imgToUpload = imgUser.files[0];
 
-        upload.append("userfile", imgToUpload);
+		upload.append("userfile", imgToUpload);
+		
         const xhr = new XMLHttpRequest();
 
         xhr.onload = function () {
@@ -1181,7 +1192,7 @@ $("#btnUpload").click(function () {
         }
 
         xhr.open("POST", url + "/" + idWine + "/pictures", true);
-        xhr.setRequestHeader("Authorization", "Basic " + btoaHash);
+        xhr.setRequestHeader("Authorization", "Basic " + hash);
         xhr.send(upload);
     } else {
         alert("Vous devez être identifié(e) !");
@@ -1189,15 +1200,11 @@ $("#btnUpload").click(function () {
 });
 
 // Récupèration des images supplémentaires d'un vin
-let arrPics = [];
 $('#iconDelete').hide();
 function getPics() {
 	if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
-		let username = sessionStorage.getItem("username");
-		let password = sessionStorage.getItem("pwd");
-		let btoaHash = btoa(username + ":" + password);
+		let hash = getBtoaHash();
 
-		let urlUploads = "http://cruth.phpnet.org/epfc/caviste/public/uploads/";
 		arrPics = [];
 	
 		let id = $("#idVin").val();
@@ -1205,7 +1212,7 @@ function getPics() {
 		fetch(url + "/" + id + "/pictures", {
 			method: "GET",
 			headers: new Headers({
-				Authorization: "Basic " + btoaHash,
+				Authorization: "Basic " + hash,
 			}),
 		})
 		.then((res) => res.json())
@@ -1218,7 +1225,6 @@ function getPics() {
 				//S'assure que slick n'a pas déjà été initialisé
 				if (!$("#carousel").hasClass("slick-initialized slick-slider")) {
 					if (arrPics.length > 0) {
-
 						$('#iconDelete').show();
 
 						for (let i = 0; i < arrPics.length; i++) {
@@ -1266,15 +1272,13 @@ function getPics() {
  */
 function deletePic(idPic) {
     if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
-        let username = sessionStorage.getItem("username");
-        let password = sessionStorage.getItem("pwd");
-        let btoaHash = btoa(username + ":" + password);
+		let hash = getBtoaHash();
         let idVin = $("#idVin").val();
 
         fetch(url + "/" + idVin + "/pictures/" + idPic, {
             method: "DELETE",
             headers: new Headers({
-                Authorization: "Basic " + btoaHash,
+                Authorization: "Basic " + hash,
             }),
         })
         .then((res) => res.json())

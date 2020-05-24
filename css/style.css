@@ -26,8 +26,7 @@ body {
 }
 
 
-/* Icone message */
-
+/* Icone Fermer Message */
 #closeMessage {
 	position: absolute;
 	top: 10px;
@@ -35,18 +34,14 @@ body {
 	z-index: 2;
 }
 
-
 /* Header */
-
 header nav {
 	background-color: rgba(29, 27, 27, 0.8);
 	border-radius: 10px;
 	margin-bottom: 10px;
 }
 
-
 /* Logo */
-
 #logo {
 	height: 100px;
 	width: 100px;
@@ -58,12 +53,13 @@ header nav {
 	width: 170px;
 }
 
+/* Logo & BrandName survolés */
 #logoBrand:hover {
-	transform: translateX(4px);
-	transition: 0.2s ease-in-out;
+	transform: translateX(3px);
+	transition: 0.2s;
 }
 
-
+/* Formulaire de connexion */
 #frmBack {
 	display: none;
 	border-radius: 7px;
@@ -75,6 +71,7 @@ header nav {
 	animation: gradient 12s ease infinite;
 }
 
+/* Animation gradient Formulaire Connexion */
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -90,36 +87,37 @@ header nav {
 }
 
 /* Input LogIn et Mot de passe */
-
 #login,
 #mdp {
 	border-radius: 3px;
 	border-style: none;
 	margin-bottom: 8px;
-
 }
 
+/* Boutons logIn & Close Formulaire Connexion */
 #btnLogIn,
 #btnClose {
 	width: 49%;
 }
 
+/* Icone signOut */
 #iconSignOut {
 	display: none;
 }
 
+/* Icones  logIn & signOut */
 #iconLogin,
 #iconSignOut {
 	cursor: pointer;
 }
 
 /* Logo Millesime */
-
 #millesime {
 	margin-right: 50px;
 }
 
-#searchBtnReset {
+/* Zone saisie search */
+#search {
 	position: relative;
 }
 
@@ -132,6 +130,7 @@ header nav {
 	border-width: 2px;
 }
 
+/* Zone strSearch cliquée */
 #strSearch:focus {
 	-webkit-box-shadow: none;
 	box-shadow: none;
@@ -166,10 +165,11 @@ header nav {
 	color: white;
 	font-weight: bold;
 	padding: 4px 8px;
-	font-size: 13px;
-	border-radius: 4px;
+	font-size: 14px;
+    border-radius: 4px;
 }
 
+/* Popper Arrows Placement */
 .popTooltip [data-popper-placement^='top']>.arrow {
 	bottom: -4px;
 }
@@ -186,7 +186,7 @@ header nav {
 	left: -4px;
 }
 
-/* Icone reset liste */
+/* Icone Reset Liste */
 #resetList {
 	position: absolute;
 	display: none;
@@ -207,7 +207,7 @@ header nav {
 	margin-right: 10px;
 }
 
-/* Bouton statistiques */
+/* Bouton Statistiques */
 #ChartGraph {
 	background-color: rgb(135, 35, 31);
 	border: 1px solid rgb(135, 35, 31);
@@ -215,9 +215,11 @@ header nav {
 	margin-top: 0px;
 }
 
+/* Bouton Statistiques survolé */
 #ChartGraph:hover {
 	background-color: rgb(107, 15, 12);
-	border: 1px solid rgb(107, 15, 12);
+    border: 1px solid rgb(107, 15, 12);
+    transition: 0.3s;
 }
 
 /* Liste de vins */
@@ -240,14 +242,14 @@ header nav {
 	width: 270px;
 }
 
-/* Changement de couleur Vin survolï¿½ */
+/* Changement de couleur Vin Survolé dans liste */
 #liste li:hover {
 	background: rgb(219, 217, 217);
 	transition: 0.1s;
 	cursor: pointer;
 }
 
-/* Formulaire info vin + img */
+/* Formulaire Info Vin + Img */
 #stylediv {
 	z-index: 1;
 	position: relative;
@@ -268,18 +270,25 @@ header nav {
 	cursor: not-allowed;
 }
 
-/*labels info vin input */
+/* Drapeau Pays */
+#countryFlagsImg {
+	display: none;
+	left: 60px;
+	top: 2px;
+}
+
+/* Labels Info Vin Input */
 #stylediv input {
 	pointer-events: none;
 }
 
-/* Labels info vin */
+/* Labels Info Vin */
 #stylediv label {
 	color: white;
 	margin: 0px;
 }
 
-/* visibilitï¿½ bio*/
+/* Visibilité bio*/
 .hide {
 	visibility: hidden;
 	height: 0px;
@@ -313,7 +322,6 @@ header nav {
 	width: 280px;
 }
 
-
 /* Image Vin */
 .styled {
 	margin-top: 16px;
@@ -325,16 +333,11 @@ header nav {
 	height: 315px;
 }
 
-#countryFlagsImg {
-	display: none;
-	left: 60px;
-	top: 2px;
-}
-
 .divBtns {
 	width: 280px;
 }
 
+/* Icone Delete Commentaire */
 #iconDelete{
     position : absolute;
     margin-left:250px;
@@ -342,10 +345,12 @@ header nav {
 	cursor: pointer;
 }
 
+/* Input File */
 #inpFile {
 	display: none;
 }
 
+/* Texte Input File & btn Submit */
 #lblFile,
 #btnUpload {
 	color: white;
@@ -358,10 +363,12 @@ header nav {
 	text-align: center;
 }
 
+/* Texte Input File */
 #lblFile {
 	width: 78%;
 }
 
+/* Bouton Submit */
 #btnUpload {
 	width: 20%;
 }
@@ -374,19 +381,19 @@ header nav {
 	transition: 0.3s;
 }
 
-/* bouton Like */
+/* Texte Bouton Like */
 #likeButton {
 	color: #fff;
 	width: 49%;
 }
 
+/* Texte Bouton Nb Likes */
 #btnNbLikes {
 	color: #fff;
 	width: 49%;
 }
 
 /* Textarea */
-
 #description {
 	width: 280px;
 	height: 220px;
@@ -425,8 +432,7 @@ header nav {
 	min-height: 300px;
 }
 
-/* Bouton Close Chart Pays */
-
+/* Bouton Close Graphique Pays */
 #closePays,
 #closeRaisins {
 	position: absolute;
@@ -438,9 +444,7 @@ header nav {
 	cursor: pointer;
 }
 
-
 /*Section commentaire et notes */
-
 #tabs {
 	display: none;
 	position: relative;
@@ -452,7 +456,7 @@ header nav {
 }
 
 
-/* notes et commentaires */
+/* Commentaires et vins Favoris */
 #favourite,
 #comments {
 	background-color: #fff;
@@ -464,7 +468,7 @@ header nav {
 	overflow-y: auto;
 }
 
-/*Icone ajouter commentaire */
+/* Icone Ajouter Commentaire */
 #iconAdd {
 	display: block;
 	padding: 5px;
@@ -474,6 +478,7 @@ header nav {
 	cursor: pointer;
 }
 
+/* Container Ajout Commentaire */
 #containerAdd {
 	position: relative;
 }
@@ -503,7 +508,6 @@ header nav {
 
 /* css pour les telephones et tablettes */
 /*  Iphone 5SE */
-
 @media all and (min-width:150px) and (max-width:320px) {
 	#millesime{
 		width:100px;
@@ -513,7 +517,8 @@ header nav {
 	}
 	#body{
 		padding-right:-20px;
-	}
+    }
+    
 	::after,
 	::before {
 		box-sizing: content-box !important;
@@ -583,10 +588,10 @@ header nav {
 }
 
 @media all and (min-width:321px) and (max-width:375px) {
-
 	#millesime{
 		width:150px;
-	}
+    }
+    
 	#btnScroll {
 		display: none !important;
 	}
@@ -763,21 +768,21 @@ header nav {
 	}
 	img#countryFlagsImg {
 		position:absolute;
-		margin-left: 5px !important;
+        margin-left: 5px !important;
+        transform: translateY(-5px);
 	}
 	#container img{
 		width:auto;
 	}
 }
 
-
 /* Texte Footer */
-
 footer {
 	color: white;
 	font-size: 13px;
 }
 
+/* Bouton Scroll */
 #btnScroll {
 	display: none;
 	position: fixed;
@@ -793,5 +798,3 @@ footer {
 	padding: 15px;
 	border-radius: 50px;
 }
-
-
