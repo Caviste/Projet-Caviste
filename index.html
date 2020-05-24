@@ -47,9 +47,9 @@
 						</div>
 
 
-						<img src="img/sign-in.png" title="Sign-Up" id="iconLogin" width="25" height="25"></i>
+						<img src="img/sign-in.png" title="Sign-Up" id="iconLogin" width="25" height="25">
 
-						<img src="img/sign-out.png" title="Sign-Out" id="iconSignOut" width="25" height="25"></i>
+						<img src="img/sign-out.png" title="Sign-Out" id="iconSignOut" width="25" height="25">
 					</nav>
 				</header>
 
@@ -154,7 +154,7 @@
 							<!-- Pays -->
 							<div class="form-group">
 								<label class="col-md-4 control-label" for="pays">Pays :
-									<img id="countryFlagsImg" style="display: none;height: 20px; width: 20px;">
+									<img alt="drapeau" src="#" id="countryFlagsImg" />
 								</label>
 								<div class="col-10 col-md-12">
 									<input id="pays" name="pays" type="text" placeholder="Pays"
@@ -221,82 +221,84 @@
 						</div>
 
 						<div class="col-md-5 col-lg-5 col-xl-4">
-							<div id="container">
-								<div id="carousel" class="slickC">
-									<div id="singleElement">
-										<img class="styled" src="./pics/block_nine.jpg" id="image" alt="wine">
+								<div id="container">
+									<div id="carousel" class="slickC">
+										<div id="singleElement">
+											<img class="styled" src="./pics/block_nine.jpg" id="image" alt="wine">
 
+										</div>
 									</div>
+									<i id="iconDelete" class="far fa-trash-alt"></i>
 								</div>
-								<i id="iconDelete"class="far fa-trash-alt"></i>
+							
+								<div class="divBtns">
+									<input type="hidden" name="MAX_FILE_SIZE" value="200000">
+									<input type="file" id="inpFile" class="inputfile" accept=".jpeg, .jpg">
+									<label id="lblFile" for="inpFile">
+										<i class="fas fa-upload"></i>
+										&nbsp;Ajouter une photo
+									</label>
+									<button type="submit" id="btnUpload">
+										<i class="fas fa-paper-plane"></i>
+									</button>
+								</div>
+							<div class="divBtns">
+								<button id="likeButton" name="likes" type="button" class="btn btn-danger">
+									<i class="fas fa-heart" id="iconLike"> Like Wine</i>
+								</button>
+								<button id="btnNbLikes" name="btnNbLikes" type="button" class="btn btn-info">
+									<i class="far fa-heart" id="nbLike"></i>
+								</button>
 							</div>
-				</form>
-				<form id="frmUpload" action="#" method="post" enctype="multipart/form-data">
-					<div class="divBtns">
-						<input type="hidden" name="MAX_FILE_SIZE" value="200000">
-						<input type="file" id="inpFile" class="inputfile" accept=".jpeg, .jpg">
-						<label id="lblFile" for="inpFile">
-							<i class="fas fa-upload"></i>
-							&nbsp;Ajouter une photo
-						</label>
-						<button type="submit" id="btnUpload">
-							<i class="fas fa-paper-plane"></i>
-						</button>
+							<textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
+						</div>
+
 					</div>
 				</form>
-				<div class="divBtns">
-					<button id="likeButton" name="likes" type="button" class="btn btn-danger">
-						<i class="fas fa-heart" id="iconLike"> Like Wine</i>
-					</button>
-					<button id="btnNbLikes" name="btnNbLikes" type="button" class="btn btn-info">
-						<i class="far fa-heart" id="nbLike"></i>
-					</button>
-				</div>
-				<textarea id="description" rows="11" cols="23" placeholder="Description"></textarea>
 			</div>
 		</div>
 
+		<div>
+			<div id="tabs">
+				<ul id="containerAdd" class="nav nav-tabs">
+					<li><i id="iconAdd" class="fas fa-1x fa-plus" title="Ajouter un commentaire"></i></li>
+					<li class="nav-item">
+						<a id="tabComments" class="nav-link active" href="#tabs">Commentaires</a>
+					</li>
+					<li class="nav-item">
+						<a id="tabFavourite" class="nav-link" href="#tabs">Vos vins pr&eacute;f&eacute;r&eacute;s</a>
+					</li>
+				</ul>
+			</div>
+	
+			<div id="comments">
+			</div>
+			
+			<div id="favourite">
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="col" id="mainPays">
+				<i id="closePays" class="fa fa-times fa-1x"></i>
+				<canvas id="cadrePays"></canvas>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col" id="mainRaisins">
+				<i id="closeRaisins" class="fa fa-times fa-1x"></i>
+				<canvas id="cadreRaisins"></canvas>
+			</div>
+		</div>
+		
+		<div>
+		<button id="btnScroll" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+		<footer>&copy; EPFC, Nathan, Radad</footer>
+		</div>
+		
 	</div>
 
-	</div>
-	<div>
-		<div id="tabs">
-			<ul id="containerAdd" class="nav nav-tabs">
-				<i id="iconAdd" class="fas fa-1x fa-plus" title="Ajouter un commentaire"></i>
-				<li class="nav-item">
-					<a id="tabComments" class="nav-link active" href="#tabs">Commentaires</a>
-				</li>
-				<li class="nav-item">
-					<a id="tabFavourite" class="nav-link" href="#tabs">Vos vins pr&eacute;f&eacute;r&eacute;s</a>
-				</li>
-			</ul>
-		</div>
-
-		<div id="comments">
-        </div>
-        
-		<div id="favourite">
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col" id="mainPays">
-			<i id="closePays" class="fa fa-times fa-1x"></i>
-			<canvas id="cadrePays"></canvas>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col" id="mainRaisins">
-			<i id="closeRaisins" class="fa fa-times fa-1x"></i>
-			<canvas id="cadreRaisins"></canvas>
-		</div>
-    </div>
-    
-    <div>
-	<button id="btnScroll" title="Go to top"><i class="fas fa-arrow-up"></i></button>
-	<footer>&copy; EPFC, Nathan, Radad</footer>
-
-	</div>
+	
 
 	<!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>

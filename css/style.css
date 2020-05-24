@@ -326,9 +326,8 @@ header nav {
 }
 
 #countryFlagsImg {
-	position: absolute;
-	left:60px;
-	width: 50px;
+	display: none;
+	left: 60px;
 	top: 2px;
 }
 
@@ -542,7 +541,7 @@ header nav {
 		margin-left: 16px;
 	}
 
-	#a:ChartGraph {
+	#ChartGraph {
 		width: 120px;
 		height: 25px;
 	}
@@ -556,7 +555,12 @@ header nav {
 	#filtrer {
 		margin-left: 0px;
 	}
-
+	#inpFile{
+		width: 21%;
+	}
+	#btnUpload{
+		width: 70%;
+	}
 	#likeButton,
 	#btnNbLikes {
 		width: 40%;
@@ -603,7 +607,7 @@ header nav {
 		margin-left: 16px;
 	}
 
-	#a:ChartGraph {
+	#ChartGraph {
 		width: 120px;
 		height: 25px;
 	}
