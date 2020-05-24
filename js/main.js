@@ -1288,8 +1288,12 @@ function deletePic(idPic) {
     }
 }
 
-
-
+/**
+ * Sélection de l'image à supprimer
+ * L'utilisateur authentifié sera demandé de choisir un nombre 
+ * Ce nombre réfère à une image supplémentaire
+ * S'il confirme son choix, la fonction deletePic() est appelée pour envoyer la requête vers l'API
+ */
 $('#iconDelete').click(function(){
 	if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
 		let picToDelete = 0;
