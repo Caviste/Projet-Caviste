@@ -48,7 +48,6 @@ for (let i = 0; i < options.length; i++) {
  * @param {string} str La chaine de caractère à modifier
  * @return {string} La chaine de caractère modifiée
  */
-
 function ucFirst(str) {
     if (!str) return str;
     return str[0].toUpperCase() + str.slice(1);
@@ -290,6 +289,10 @@ function fetchComments(idVin) {
     request.send();
 }
 
+/**
+ * Ajout d'un commentaire par le biais d'un click sur l'icone iconAdd (+)
+ * L'utilisateur doit être identifié pour pouvoir ajouter un commentaire
+ */
 $("#iconAdd").click(function () {
     if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
         let addComment = prompt("Entrez un commentaire !");
@@ -493,7 +496,7 @@ $("#likeButton").click(function () {
     }
 });
 
-// Remplis le select selectCountries avec les pays référencés par l'API Caviste
+// Remplit le select selectCountries avec les pays référencés par l'API Caviste
 let selectCountries = $("#selectCountries");
 selectCountries.empty();
 selectCountries.append('<option selected="true" disabled>Pays</option>');
@@ -583,6 +586,7 @@ $(document).ready(function () {
 	$("#mainRaisins").hide();
 });
 
+// Cache l'icone resetList (X) lorsqu'il n'y a aucun caractère dans la zone strSearch
 if ($("#strSearch").val().length === 0) {
     $("#resetList").fadeOut(150, function () {
 		$("#resetList").hide();
@@ -677,8 +681,6 @@ let hardCodedUsers = [
 	},
 ];
 
-$("#btnLogIn").click(logIn);
-
 // Appel de la fonction logIn lorsque la touche enter est activée
 $("#frmSignUp").keypress(function (event) {
     // key 13 = key Enter
@@ -687,6 +689,19 @@ $("#frmSignUp").keypress(function (event) {
     }
 });
 
+// Affichage du formulaire de connexion lors d'un click sur l'icone iconLogin
+$("#iconLogin").click(function () {
+    $("#frmBack").css("display", "block");
+    $("#iconLogin").css("display", "none");
+});
+
+// Fermeture du formulaire de connexion lors d'un click sur le bouton btnClose
+$("#btnClose").click(function () {
+    $("#frmBack").css("display", "none");
+    $("#iconLogin").css("display", "block");
+});
+
+$("#btnLogIn").click(logIn);
 /**
  * Vérifie si les données entrées dans le formulaire de connexion correspondent aux users hardcodés dans le tableau hardCodedUsers
  * Si c'est le cas, enregistre ses identifiants dans les données de session
@@ -1014,7 +1029,7 @@ function scroll() {
     }
 }
 
-// When the user clicks on the button, scroll to the top of the document
+// Remonte vers le haut de la page lorsque l'utilisateur clique sur le bouton btnScroll
 function scrollToTop() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
@@ -1066,13 +1081,13 @@ let popperInstance = null;
 function showPopper(selector, message, position) {
     function create() {
         popperInstance = Popper.createPopper(selector, message, {
-        modifiers: [{
-            name: "offset",
-            options: {
-                offset: [0, 8],
-            },
-		}],
-        placement: position,
+            modifiers: [{
+                name: "offset",
+                options: {
+                    offset: [0, 8],
+                },
+            }],
+            placement: position,
         });
     }
 
@@ -1136,16 +1151,6 @@ tabFavourite.click(function () {
     showFavourite();
 });
 
-$("#iconLogin").click(function () {
-    $("#frmBack").css("display", "block");
-    $("#iconLogin").css("display", "none");
-});
-
-$("#btnClose").click(function () {
-    $("#frmBack").css("display", "none");
-    $("#iconLogin").css("display", "block");
-});
-
 // Récupère le fichier séléctionné par l'utilisateur
 let inpFile = document.getElementById("inpFile");
 
@@ -1156,11 +1161,8 @@ inpFile.addEventListener("change", function () {
 
 // Upload d'une image de vin
 $("#btnUpload").click(function () {
-
     // Empêche le rechargement de la page lors d'un click sur le bouton btnUpload
     event.preventDefault();
-
-    
 
     if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
         let hash = getBtoaHash();
@@ -1182,7 +1184,7 @@ $("#btnUpload").click(function () {
                 alert("Upload réussi !");
                 lblFile.innerHTML = "<i class='fas fa-upload'></i>&nbsp;Ajouter une photo";
             } else {
-                alert("Vous avez atteint le nombre de photo maximal pour ce vin (max 3 ajouts possibles");
+                alert("Vous avez atteint le nombre de photo maximal pour ce vin ! (max. 3 photos)");
             }
         }
 
@@ -1200,8 +1202,10 @@ $("#btnUpload").click(function () {
     }
 });
 
-// Récupèration des images supplémentaires d'un vin
+// Cache l'icone iconDelete
 $('#iconDelete').hide();
+
+// Récupèration des images supplémentaires d'un vin
 function getPics() {
 	if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
 		let hash = getBtoaHash();
@@ -1296,8 +1300,8 @@ function deletePic(idPic) {
 /**
  * Sélection de l'image à supprimer
  * L'utilisateur authentifié sera demandé de choisir un nombre 
- * Ce nombre réfère à une image supplémentaire
- * S'il confirme son choix, la fonction deletePic() est appelée pour envoyer la requête vers l'API
+ * Ce nombre réfère à une image supplémentaire d'un vin uploadée sur le serveur de l'API Caviste
+ * S'il confirme son choix, la fonction deletePic() est appelée pour envoyer la requête vers l'API Caviste
  */
 $('#iconDelete').click(function(){
 	if ( (sessionStorage["username"] !== undefined) && (sessionStorage["pwd"] !== undefined) ) {
@@ -1308,7 +1312,7 @@ $('#iconDelete').click(function(){
 				alert('Aucune photo correspondante');
 			} else {
 				picToDelete = arrPics[resp-1];
-				confirm('Voulez-vous vraiment supprimer cette photo?');
+				confirm('Voulez-vous vraiment supprimer cette photo ?');
 
 				if (confirm) { 
 					deletePic(picToDelete.id); 
@@ -1317,7 +1321,7 @@ $('#iconDelete').click(function(){
 
 		} else if (arrPics.length === 1) {
 			picToDelete = arrPics[0];
-			confirm('Voulez-vous vraiment supprimer cette photo?');
+			confirm('Voulez-vous vraiment supprimer cette photo ?');
 
 			if (confirm) {
 				deletePic(picToDelete.id);
