@@ -769,7 +769,7 @@ header nav {
 	img#countryFlagsImg {
 		position:absolute;
         margin-left: 5px !important;
-        transform: translateY(-5px);
+        transform: translateY(-10px);
 	}
 	#container img{
 		width:auto;
