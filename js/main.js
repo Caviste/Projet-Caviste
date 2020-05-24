@@ -38,7 +38,7 @@ fetch(url)
 });
 
 // Reset le choix de tri
-var options = document.querySelectorAll("#trier option");
+var options = document.querySelectorAll("#selectMethods option");
 for (let i = 0; i < options.length; i++) {
     options[i].selected = options[i].defaultSelected;
 }
@@ -576,7 +576,8 @@ $(document).ready(function () {
     });
 
 	showFavedWines();
-	
+	resetSearch();
+
 	// Cache les divs des graphiques
 	$("#mainPays").hide();
 	$("#mainRaisins").hide();
@@ -584,7 +585,7 @@ $(document).ready(function () {
 
 if ($("#strSearch").val().length === 0) {
     $("#resetList").fadeOut(150, function () {
-        $("#resetList").hide();
+		$("#resetList").hide();
     });
 }
 
